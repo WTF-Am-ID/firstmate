@@ -1,0 +1,136 @@
+
+BASELINE without tasks-axi discovery
+FM_TEST_ONLY=test_open_captain_call_bounds_stale_churn bash -c command() { if [ "$#" -eq 2 ] && [ "$1" = -v ] && [ "$2" = tasks-axi ]; then return 1; fi; builtin command "$@"; }; export -f command; bash bin/fm-test-run.sh "$1" nm4205 tests/nm4205-baseline.test.sh
+FM_TEST_BEGIN 2026-10-27T23:50:29Z tests/nm4205-baseline.test.sh family=unclassified expected_gate_skip=none
+skip: tasks-axi not found (captain-hold stale bound)
+fm-test-run: gate skip: tests/nm4205-baseline.test.sh: tasks-axi not found (captain-hold stale bound)
+FM_TEST_END 2026-10-27T23:50:29Z tests/nm4205-baseline.test.sh exit=0 duration_ms=375 gate_skip=true
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=1 duration_ms=452
+FM_TEST_SUMMARY_FAMILY family=unclassified count=1 duration_ms=375 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/nm4205-baseline.test.sh duration_ms=375
+EXIT_STATUS=0
+
+BASELINE without tasks-axi discovery
+FM_TEST_ONLY=test_stale_churn_without_a_captain_call_still_alarms bash -c command() { if [ "$#" -eq 2 ] && [ "$1" = -v ] && [ "$2" = tasks-axi ]; then return 1; fi; builtin command "$@"; }; export -f command; bash bin/fm-test-run.sh "$1" nm4205 tests/nm4205-baseline.test.sh
+FM_TEST_BEGIN 2026-10-27T23:50:29Z tests/nm4205-baseline.test.sh family=unclassified expected_gate_skip=none
+skip: tasks-axi not found (unheld stale alarm)
+fm-test-run: gate skip: tests/nm4205-baseline.test.sh: tasks-axi not found (unheld stale alarm)
+FM_TEST_END 2026-10-27T23:50:30Z tests/nm4205-baseline.test.sh exit=0 duration_ms=368 gate_skip=true
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=1 duration_ms=446
+FM_TEST_SUMMARY_FAMILY family=unclassified count=1 duration_ms=368 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/nm4205-baseline.test.sh duration_ms=368
+EXIT_STATUS=0
+
+BASELINE without tasks-axi discovery
+FM_TEST_ONLY=test_failed_wake_append_does_not_arm_the_captain_hold_throttle bash -c command() { if [ "$#" -eq 2 ] && [ "$1" = -v ] && [ "$2" = tasks-axi ]; then return 1; fi; builtin command "$@"; }; export -f command; bash bin/fm-test-run.sh "$1" nm4205 tests/nm4205-baseline.test.sh
+FM_TEST_BEGIN 2026-10-27T23:50:30Z tests/nm4205-baseline.test.sh family=unclassified expected_gate_skip=none
+skip: tasks-axi not found (failed wake append)
+fm-test-run: gate skip: tests/nm4205-baseline.test.sh: tasks-axi not found (failed wake append)
+FM_TEST_END 2026-10-27T23:50:30Z tests/nm4205-baseline.test.sh exit=0 duration_ms=374 gate_skip=true
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=1 duration_ms=451
+FM_TEST_SUMMARY_FAMILY family=unclassified count=1 duration_ms=374 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/nm4205-baseline.test.sh duration_ms=374
+EXIT_STATUS=0
+
+BASELINE without tasks-axi discovery
+FM_TEST_ONLY=test_reheld_captain_call_starts_its_own_resurface_window bash -c command() { if [ "$#" -eq 2 ] && [ "$1" = -v ] && [ "$2" = tasks-axi ]; then return 1; fi; builtin command "$@"; }; export -f command; bash bin/fm-test-run.sh "$1" nm4205 tests/nm4205-baseline.test.sh
+FM_TEST_BEGIN 2026-10-27T23:50:30Z tests/nm4205-baseline.test.sh family=unclassified expected_gate_skip=none
+skip: tasks-axi not found (re-held captain call)
+fm-test-run: gate skip: tests/nm4205-baseline.test.sh: tasks-axi not found (re-held captain call)
+FM_TEST_END 2026-10-27T23:50:31Z tests/nm4205-baseline.test.sh exit=0 duration_ms=366 gate_skip=true
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=1 duration_ms=443
+FM_TEST_SUMMARY_FAMILY family=unclassified count=1 duration_ms=366 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/nm4205-baseline.test.sh duration_ms=366
+EXIT_STATUS=0
+
+CANDIDATE without tasks-axi discovery
+FM_TEST_ONLY=test_open_captain_call_bounds_stale_churn bash -c command() { if [ "$#" -eq 2 ] && [ "$1" = -v ] && [ "$2" = tasks-axi ]; then return 1; fi; builtin command "$@"; }; export -f command; bash bin/fm-test-run.sh "$1" nm4205 tests/fm-watch-triage-pause.test.sh
+FM_TEST_BEGIN 2026-10-27T23:50:31Z tests/fm-watch-triage-pause.test.sh family=watcher-wake-lock expected_gate_skip=none
+not ok - tasks-axi is required (captain-hold stale bound)
+FM_TEST_END 2026-10-27T23:50:31Z tests/fm-watch-triage-pause.test.sh exit=1 duration_ms=364 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=440
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=364 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage-pause.test.sh duration_ms=364
+EXIT_STATUS=1
+
+CANDIDATE without tasks-axi discovery
+FM_TEST_ONLY=test_stale_churn_without_a_captain_call_still_alarms bash -c command() { if [ "$#" -eq 2 ] && [ "$1" = -v ] && [ "$2" = tasks-axi ]; then return 1; fi; builtin command "$@"; }; export -f command; bash bin/fm-test-run.sh "$1" nm4205 tests/fm-watch-triage-pause.test.sh
+FM_TEST_BEGIN 2026-10-27T23:50:31Z tests/fm-watch-triage-pause.test.sh family=watcher-wake-lock expected_gate_skip=none
+not ok - tasks-axi is required (unheld stale alarm)
+FM_TEST_END 2026-10-27T23:50:32Z tests/fm-watch-triage-pause.test.sh exit=1 duration_ms=368 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=443
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=368 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage-pause.test.sh duration_ms=368
+EXIT_STATUS=1
+
+CANDIDATE without tasks-axi discovery
+FM_TEST_ONLY=test_failed_wake_append_does_not_arm_the_captain_hold_throttle bash -c command() { if [ "$#" -eq 2 ] && [ "$1" = -v ] && [ "$2" = tasks-axi ]; then return 1; fi; builtin command "$@"; }; export -f command; bash bin/fm-test-run.sh "$1" nm4205 tests/fm-watch-triage-pause.test.sh
+FM_TEST_BEGIN 2026-10-27T23:50:32Z tests/fm-watch-triage-pause.test.sh family=watcher-wake-lock expected_gate_skip=none
+not ok - tasks-axi is required (failed wake append)
+FM_TEST_END 2026-10-27T23:50:32Z tests/fm-watch-triage-pause.test.sh exit=1 duration_ms=370 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=446
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=370 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage-pause.test.sh duration_ms=370
+EXIT_STATUS=1
+
+CANDIDATE without tasks-axi discovery
+FM_TEST_ONLY=test_reheld_captain_call_starts_its_own_resurface_window bash -c command() { if [ "$#" -eq 2 ] && [ "$1" = -v ] && [ "$2" = tasks-axi ]; then return 1; fi; builtin command "$@"; }; export -f command; bash bin/fm-test-run.sh "$1" nm4205 tests/fm-watch-triage-pause.test.sh
+FM_TEST_BEGIN 2026-10-27T23:50:32Z tests/fm-watch-triage-pause.test.sh family=watcher-wake-lock expected_gate_skip=none
+not ok - tasks-axi is required (re-held captain call)
+FM_TEST_END 2026-10-27T23:50:33Z tests/fm-watch-triage-pause.test.sh exit=1 duration_ms=385 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=467
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=385 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage-pause.test.sh duration_ms=385
+EXIT_STATUS=1
+
+CANDIDATE with installed tasks-axi
+FM_TEST_ONLY=test_required_captain_hold_tests_fail_without_tasks_axi bash bin/fm-test-run.sh tests/fm-watch-triage-pause.test.sh
+FM_TEST_BEGIN 2026-10-27T23:50:33Z tests/fm-watch-triage-pause.test.sh family=watcher-wake-lock expected_gate_skip=none
+ok - all four required captain-hold tests fail when tasks-axi is unavailable
+FM_TEST_END 2026-10-27T23:50:35Z tests/fm-watch-triage-pause.test.sh exit=0 duration_ms=1715 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=1792
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=1715 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage-pause.test.sh duration_ms=1715
+EXIT_STATUS=0
+
+CANDIDATE with installed tasks-axi
+FM_TEST_ONLY=test_open_captain_call_bounds_stale_churn bash bin/fm-test-run.sh tests/fm-watch-triage-pause.test.sh
+FM_TEST_BEGIN 2026-10-27T23:50:35Z tests/fm-watch-triage-pause.test.sh family=watcher-wake-lock expected_gate_skip=none
+ok - work under an open captain call surfaces once, absorbs pane churn, then re-surfaces when the window elapses
+FM_TEST_END 2026-10-27T23:51:41Z tests/fm-watch-triage-pause.test.sh exit=0 duration_ms=66181 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=66263
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=66181 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage-pause.test.sh duration_ms=66181
+EXIT_STATUS=0
+
+CANDIDATE with installed tasks-axi
+FM_TEST_ONLY=test_stale_churn_without_a_captain_call_still_alarms bash bin/fm-test-run.sh tests/fm-watch-triage-pause.test.sh
+FM_TEST_BEGIN 2026-10-27T23:51:41Z tests/fm-watch-triage-pause.test.sh family=watcher-wake-lock expected_gate_skip=none
+ok - a stale window with no open captain call keeps alarming on every new hash
+FM_TEST_END 2026-10-27T23:52:19Z tests/fm-watch-triage-pause.test.sh exit=0 duration_ms=38058 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=38140
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=38058 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage-pause.test.sh duration_ms=38058
+EXIT_STATUS=0
+
+CANDIDATE with installed tasks-axi
+FM_TEST_ONLY=test_failed_wake_append_does_not_arm_the_captain_hold_throttle bash bin/fm-test-run.sh tests/fm-watch-triage-pause.test.sh
+FM_TEST_BEGIN 2026-10-27T23:52:19Z tests/fm-watch-triage-pause.test.sh family=watcher-wake-lock expected_gate_skip=none
+ok - a wake that never reached the durable queue arms no re-surface throttle
+FM_TEST_END 2026-10-27T23:52:32Z tests/fm-watch-triage-pause.test.sh exit=0 duration_ms=12552 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=12630
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=12552 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage-pause.test.sh duration_ms=12552
+EXIT_STATUS=0
+
+CANDIDATE with installed tasks-axi
+FM_TEST_ONLY=test_reheld_captain_call_starts_its_own_resurface_window bash bin/fm-test-run.sh tests/fm-watch-triage-pause.test.sh
+FM_TEST_BEGIN 2026-10-27T23:52:32Z tests/fm-watch-triage-pause.test.sh family=watcher-wake-lock expected_gate_skip=none
+ok - a released-then-re-held task is a distinct captain call whose first sight still alarms
+FM_TEST_END 2026-10-27T23:52:57Z tests/fm-watch-triage-pause.test.sh exit=0 duration_ms=25169 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=25246
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=25169 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage-pause.test.sh duration_ms=25169
+EXIT_STATUS=0
+
+VERIFICATION_ERRORS=[]
