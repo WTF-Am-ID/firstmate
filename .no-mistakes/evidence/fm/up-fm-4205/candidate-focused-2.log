@@ -1,0 +1,10 @@
+$ FM_TEST_ONLY=test_stale_churn_without_a_captain_call_still_alarms /bin/bash bin/fm-test-run.sh tests/fm-watch-triage.test.sh
+PATH=/opt/homebrew/Caskroom/codex/0.164.0/codex-path:/Users/daddy/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/usr/local/MacGPG2/bin:/Users/daddy/.codex/tmp/arg0-macos/codex-arg0ufbrDu:/opt/homebrew/Caskroom/codex/0.164.0/codex-path:/Users/daddy/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/daddy/go/bin:/Users/daddy/.cargo/bin:/Users/daddy/bin:/usr/local/sbin:/Users/daddy/.local/bin
+FM_TEST_BEGIN 2026-10-27T23:25:05Z tests/fm-watch-triage.test.sh family=watcher-wake-lock expected_gate_skip=none
+ok - a stale window with no open captain call keeps alarming on every new hash
+FM_TEST_END 2026-10-27T23:25:41Z tests/fm-watch-triage.test.sh exit=0 duration_ms=36244 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=36319
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=36244 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage.test.sh duration_ms=36244
+
+exit=0

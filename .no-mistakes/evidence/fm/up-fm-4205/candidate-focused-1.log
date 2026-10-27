@@ -1,0 +1,10 @@
+$ FM_TEST_ONLY=test_open_captain_call_bounds_stale_churn /bin/bash bin/fm-test-run.sh tests/fm-watch-triage.test.sh
+PATH=/opt/homebrew/Caskroom/codex/0.164.0/codex-path:/Users/daddy/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/usr/local/MacGPG2/bin:/Users/daddy/.codex/tmp/arg0-macos/codex-arg0ufbrDu:/opt/homebrew/Caskroom/codex/0.164.0/codex-path:/Users/daddy/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/daddy/go/bin:/Users/daddy/.cargo/bin:/Users/daddy/bin:/usr/local/sbin:/Users/daddy/.local/bin
+FM_TEST_BEGIN 2026-10-27T23:24:01Z tests/fm-watch-triage.test.sh family=watcher-wake-lock expected_gate_skip=none
+ok - work under an open captain call surfaces once, absorbs pane churn, then re-surfaces when the window elapses
+FM_TEST_END 2026-10-27T23:25:05Z tests/fm-watch-triage.test.sh exit=0 duration_ms=63879 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=63954
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=63879 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage.test.sh duration_ms=63879
+
+exit=0

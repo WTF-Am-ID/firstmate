@@ -1,0 +1,5 @@
+$ FM_TEST_ONLY=test_reheld_captain_call_starts_its_own_resurface_window /bin/bash .test-4205/baseline/tests/fm-watch-triage.test.sh
+PATH=/usr/bin:/bin:/usr/sbin:/sbin
+skip: tasks-axi not found (re-held captain call)
+
+exit=0

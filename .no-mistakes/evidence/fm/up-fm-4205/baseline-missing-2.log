@@ -1,0 +1,5 @@
+$ FM_TEST_ONLY=test_stale_churn_without_a_captain_call_still_alarms /bin/bash .test-4205/baseline/tests/fm-watch-triage.test.sh
+PATH=/usr/bin:/bin:/usr/sbin:/sbin
+skip: tasks-axi not found (unheld stale alarm)
+
+exit=0

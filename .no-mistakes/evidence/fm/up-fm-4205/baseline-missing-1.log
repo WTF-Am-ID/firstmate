@@ -1,0 +1,5 @@
+$ FM_TEST_ONLY=test_open_captain_call_bounds_stale_churn /bin/bash .test-4205/baseline/tests/fm-watch-triage.test.sh
+PATH=/usr/bin:/bin:/usr/sbin:/sbin
+skip: tasks-axi not found (captain-hold stale bound)
+
+exit=0
