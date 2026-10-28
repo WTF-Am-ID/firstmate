@@ -5945,6 +5945,194 @@ test_status_archive_nested_secondmate_children() {
   pass "forced secondmate retirement preserves two descendant levels and refuses linked child directories"
 }
 
+add_review_branch_delete_failure() {
+  cat > "$1/fakebin/git" <<'SH'
+#!/usr/bin/env bash
+case_dir=$(cd "$(dirname "$0")/.." && pwd)
+if [ -e "$case_dir/forbid-slot" ] && [ "${1:-}" = -C ] \
+   && [ "${2:-}" = "$case_dir/pool/1/project" ]; then
+  # Existing pool classification needs only Git identity to locate the claim.
+  # Keep that precondition working, then reject branch/content operations.
+  if [ "${3:-} ${4:-} ${5:-}" = 'rev-parse --path-format=absolute --git-common-dir' ]; then
+    exec "${REAL_GIT_FOR_TEST:?}" "$@"
+  fi
+  printf 'slot read: %s\n' "$*" >> "$case_dir/slot-reads"
+  exit 99
+fi
+case " $* " in
+  *' branch -D '*)
+    if [ ! -e "$case_dir/allow-delete" ]; then
+      echo 'synthetic deletion failure' >&2
+      exit 1
+    fi ;;
+esac
+exec "${REAL_GIT_FOR_TEST:?}" "$@"
+SH
+  chmod +x "$1/fakebin/git"
+}
+
+test_task_branch_review_regressions() {
+  local case_dir rc first_rc replay_rc project_head task_head problems=0
+  local ref=refs/heads/fm/task-x1
+
+  # A failed deletion must remain a refusal after the original copy vanishes.
+  case_dir=$(make_case branch-review-missing)
+  write_meta "$case_dir" local-only ship
+  printf 'branch=fm/task-x1\n' >> "$case_dir/state/task-x1.meta"
+  add_review_branch_delete_failure "$case_dir"
+  first_rc=0
+  FM_HOME="$case_dir" run_teardown "$case_dir" --force \
+    > "$case_dir/first-out" 2> "$case_dir/first-err" || first_rc=$?
+  [ "$first_rc" -ne 0 ] || fail "missing retry fixture did not reach a deletion refusal"
+  git -C "$case_dir/project" worktree remove --force "$case_dir/wt"
+  rc=0
+  FM_HOME="$case_dir" run_teardown "$case_dir" --force \
+    > "$case_dir/retry-out" 2> "$case_dir/retry-err" || rc=$?
+  if [ "$rc" -eq 0 ] || [ ! -f "$case_dir/state/task-x1.meta" ]; then
+    printf 'red F1: missing-copy retry retired unresolved branch cleanup\n' >&2
+    problems=$((problems + 1))
+  fi
+  git -C "$case_dir/project" show-ref --verify --quiet "$ref" \
+    || fail "missing retry fixture lost the retained ref"
+  if [ "$rc" -ne 0 ] && [ -f "$case_dir/state/task-x1.meta" ]; then
+    touch "$case_dir/allow-delete"
+    FM_HOME="$case_dir" run_teardown "$case_dir" --force \
+      > "$case_dir/final-out" 2> "$case_dir/final-err" \
+      || fail "missing-copy retry could not finish after deletion became available"
+    ! git -C "$case_dir/project" show-ref --verify --quiet "$ref" \
+      || fail "missing-copy retry reported success with the task ref retained"
+  fi
+
+  # A reassigned slot belongs to its new holder. Retry via the captured shared
+  # Git directory without querying or modifying the slot itself.
+  case_dir=$(make_case branch-review-reassigned)
+  mkdir -p "$case_dir/pool/1"
+  git -C "$case_dir/project" worktree move "$case_dir/wt" "$case_dir/pool/1/project"
+  printf '{"worktrees":[{"name":"1","path":"%s"}]}\n' \
+    "$case_dir/pool/1/project" > "$case_dir/pool/treehouse-state.json"
+  write_meta "$case_dir" local-only ship "$case_dir/pool/1/project"
+  printf 'branch=fm/task-x1\n' >> "$case_dir/state/task-x1.meta"
+  add_review_branch_delete_failure "$case_dir"
+  rc=0
+  FM_HOME="$case_dir" run_teardown "$case_dir" --force \
+    > "$case_dir/first-out" 2> "$case_dir/first-err" || rc=$?
+  [ "$rc" -ne 0 ] || fail "reassigned fixture did not reach a deletion refusal"
+  printf 'task=new-holder\nhome=%s\n' "$case_dir" > "$case_dir/pool/1/.fm-slot-owner"
+  cp "$case_dir/pool/1/.fm-slot-owner" "$case_dir/claim-before"
+  printf 'new holder work\n' > "$case_dir/pool/1/project/sentinel"
+  touch "$case_dir/forbid-slot"
+  rc=0
+  FM_HOME="$case_dir" run_teardown "$case_dir" --force \
+    > "$case_dir/retry-out" 2> "$case_dir/retry-err" || rc=$?
+  if [ "$rc" -eq 0 ] || [ ! -f "$case_dir/state/task-x1.meta" ]; then
+    printf 'red F1: reassigned-copy retry retired unresolved branch cleanup\n' >&2
+    problems=$((problems + 1))
+  else
+    touch "$case_dir/allow-delete"
+    FM_HOME="$case_dir" run_teardown "$case_dir" --force \
+      > "$case_dir/final-out" 2> "$case_dir/final-err" \
+      || fail "reassigned-copy retry could not finish through the captured Git directory"
+    ! git -C "$case_dir/project" show-ref --verify --quiet "$ref" \
+      || fail "reassigned-copy retry retained the task ref after success"
+  fi
+  [ ! -s "$case_dir/slot-reads" ] || fail "reassigned-copy retry queried the new holder's worktree: $(cat "$case_dir/slot-reads")"
+  cmp -s "$case_dir/claim-before" "$case_dir/pool/1/.fm-slot-owner" \
+    || fail "reassigned-copy retry changed the new holder's claim"
+  assert_contains "$(cat "$case_dir/pool/1/project/sentinel")" 'new holder work' \
+    "reassigned-copy retry changed the new holder's work"
+
+  # Exercise startup's public replay entry point with a real automatic backlog.
+  case_dir=$(make_case branch-review-replay)
+  write_meta "$case_dir" local-only ship
+  printf 'branch=fm/task-x1\n' >> "$case_dir/state/task-x1.meta"
+  seed_backlog_in_flight "$case_dir"
+  add_review_branch_delete_failure "$case_dir"
+  rc=0
+  FM_HOME="$case_dir" run_teardown "$case_dir" --force \
+    > "$case_dir/first-out" 2> "$case_dir/first-err" || rc=$?
+  [ "$rc" -ne 0 ] || fail "replay fixture did not reach a deletion refusal"
+  replay_rc=0
+  FM_HOME="$case_dir" FM_ROOT_OVERRIDE="$ROOT" \
+  FM_STATE_OVERRIDE="$case_dir/state" FM_DATA_OVERRIDE="$case_dir/data" \
+  FM_CONFIG_OVERRIDE="$case_dir/config" bash -c '
+    . "$1/bin/fm-tasks-axi-lib.sh"
+    . "$1/bin/fm-backlog-transition-lib.sh"
+    fm_backlog_close_marker_replay "$2/state" "$2/state/task-x1.backlog-close" "$2/data"
+  ' _ "$ROOT" "$case_dir" > "$case_dir/replay-out" 2> "$case_dir/replay-err" || replay_rc=$?
+  if [ "$replay_rc" -eq 0 ] || [ ! -f "$case_dir/state/task-x1.meta" ] \
+     || [ ! -f "$case_dir/state/task-x1.backlog-close" ] \
+     || [ "$(backlog_row_state "$case_dir")" != in_flight ]; then
+    printf 'red F2: startup replay retired unresolved cleanup or its backlog intent\n' >&2
+    problems=$((problems + 1))
+  fi
+  if [ "$replay_rc" -ne 0 ] && [ -f "$case_dir/state/task-x1.meta" ]; then
+    replay_rc=0
+    FM_HOME="$case_dir" FM_ROOT_OVERRIDE="$ROOT" \
+    FM_STATE_OVERRIDE="$case_dir/state" FM_DATA_OVERRIDE="$case_dir/data" \
+    FM_CONFIG_OVERRIDE="$case_dir/config" bash -c '
+      . "$1/bin/fm-tasks-axi-lib.sh"
+      . "$1/bin/fm-backlog-transition-lib.sh"
+      fm_backlog_meta_spawn_gen "$2/state/task-x1.meta" "$2/state" || exit 77
+      fm_backlog_close_marker_write "$2/state" task-x1 "$2/data" "$FM_BACKLOG_META_SPAWN_GEN" \
+        --retain --branch-cleanup-pending || exit 77
+      fm_backlog_close_marker_replay "$2/state" "$2/state/task-x1.backlog-close" "$2/data"
+    ' _ "$ROOT" "$case_dir" > "$case_dir/retain-out" 2> "$case_dir/retain-err" || replay_rc=$?
+    expect_code 1 "$replay_rc" "retention replay must refuse unresolved branch cleanup"
+    assert_present "$case_dir/state/task-x1.meta" "retention replay erased retry metadata"
+    grep -Fxq 'mode=retain' "$case_dir/state/task-x1.backlog-close" \
+      || fail "pending retention intent was lost"
+    sed 's/^spawn_gen=.*/spawn_gen=teardown-replacement/' "$case_dir/state/task-x1.meta" \
+      > "$case_dir/replacement.meta"
+    mv "$case_dir/replacement.meta" "$case_dir/state/task-x1.meta"
+    cp "$case_dir/state/task-x1.meta" "$case_dir/new-meta-before"
+    FM_HOME="$case_dir" FM_ROOT_OVERRIDE="$ROOT" \
+    FM_STATE_OVERRIDE="$case_dir/state" FM_DATA_OVERRIDE="$case_dir/data" \
+    FM_CONFIG_OVERRIDE="$case_dir/config" bash -c '
+      . "$1/bin/fm-tasks-axi-lib.sh"
+      . "$1/bin/fm-backlog-transition-lib.sh"
+      fm_backlog_close_marker_replay "$2/state" "$2/state/task-x1.backlog-close" "$2/data"
+    ' _ "$ROOT" "$case_dir" > "$case_dir/stale-out" 2> "$case_dir/stale-err" \
+      || fail "pending branch cleanup weakened stale-generation recovery"
+    cmp -s "$case_dir/new-meta-before" "$case_dir/state/task-x1.meta" \
+      || fail "stale completion changed the replacement incarnation"
+    assert_absent "$case_dir/state/task-x1.backlog-close" "stale completion marker was not retired"
+    [ "$(backlog_row_state "$case_dir")" = in_flight ] \
+      || fail "stale completion changed the replacement backlog row"
+  fi
+
+  # Separate Git namespaces may carry the same branch name. A fresh lock
+  # forces cleanup through the existing return retry before final deletion.
+  case_dir=$(make_case branch-review-standalone)
+  git -C "$case_dir/project" worktree remove --force "$case_dir/wt"
+  git clone -q "$case_dir/origin.git" "$case_dir/wt"
+  git -C "$case_dir/wt" checkout -q -b fm/task-x1
+  write_meta "$case_dir" local-only ship
+  printf 'branch=fm/task-x1\n' >> "$case_dir/state/task-x1.meta"
+  wt_commit "$case_dir" 'standalone task work'
+  project_head=$(git -C "$case_dir/project" rev-parse "$ref")
+  task_head=$(git -C "$case_dir/wt" rev-parse "$ref")
+  git -C "$case_dir/wt" update-ref refs/no-mistakes/recover/standalone "$task_head"
+  add_transient_lock_treehouse "$case_dir"
+  add_lsof_no_holder "$case_dir"
+  : > "$(git_index_lock_path "$case_dir/wt")"
+  : > "$case_dir/treehouse-attempts"
+  rc=0
+  FM_HOME="$case_dir" TREEHOUSE_ATTEMPT_FILE="$case_dir/treehouse-attempts" \
+  FM_TREEHOUSE_RETURN_LOCK_RETRIES=2 FM_TREEHOUSE_RETURN_LOCK_RETRY_WAIT_SECS=0 \
+  FM_STALE_WORKTREE_LOCK_AGE_SECS=3600 run_teardown "$case_dir" --force \
+    > "$case_dir/stdout" 2> "$case_dir/stderr" || rc=$?
+  if [ "$rc" -ne 0 ] \
+     || [ "$(git -C "$case_dir/project" rev-parse "$ref" 2>/dev/null || true)" != "$project_head" ] \
+     || git -C "$case_dir/wt" show-ref --verify --quiet "$ref"; then
+    printf 'red F3: standalone cleanup used the project repository instead of the task repository\n' >&2
+    problems=$((problems + 1))
+  fi
+  [ "$(git -C "$case_dir/wt" rev-parse refs/no-mistakes/recover/standalone)" = "$task_head" ] \
+    || fail "standalone cleanup erased a recovery ref"
+  [ "$problems" -eq 0 ] || fail "$problems branch cleanup review regressions remain"
+  pass "missing-copy retries, startup replay, and standalone Git namespaces preserve task-ref cleanup guarantees"
+}
+
 # Exercise the real teardown entry point with real refs and fake pool commands.
 # No running backend or shared worktree pool is touched.
 test_task_branch_cleanup_outcomes() {
@@ -6024,6 +6212,7 @@ SH
 
 test_hidden_untracked_work_refuses_before_return
 test_content_fallback_git_capability_boundary
+test_task_branch_review_regressions
 test_task_branch_cleanup_outcomes
 test_status_archive_opt_in
 test_record_export_config_absent_never_reads_the_exporter
