@@ -1,0 +1,14 @@
+Actual CLI responses from the lifecycle-flow traced attempt. This attempt later failed waiting for an auto-handled result; the normal untraced rerun passed. Line numbers refer to lifecycle-flow.log.
+
+12108: + out='error[process-cleanup-failed]: ownerless extension readiness process group cannot be proved gone'
+12123: + out='error[process-cleanup-failed]: ownerless extension readiness process group cannot be proved gone'
+12146: + out='error[process-cleanup-failed]: extension invocation readiness identity is invalid'
+12158: + out='error[process-cleanup-failed]: ownerless extension readiness process group cannot be proved gone'
+12171: + out='error[process-cleanup-failed]: extension invocation readiness is not one private host-owned file'
+12184: + out='error[process-cleanup-failed]: extension invocation readiness is not one private host-owned file'
+12196: + orphan_cleaned='cleaned-invocations: 1'
+13898: + orphan_reconcile='reconciled: published=0 started=0 stopped=0 uncertain=2 failed=0'
+14919: + orphan_reconcile='reconciled: published=0 started=0 stopped=0 uncertain=2 failed=0'
+16886: + orphan_reconcile='reconciled: published=0 started=2 stopped=0 uncertain=0 failed=0'
+17499: not ok - recovered source orphan-first never handled its private result
+17648: FM_TEST_END 2026-10-28T17:48:51Z tests/fm-extension-binding.test.sh exit=1 duration_ms=54425 gate_skip=false
