@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # Perform the approved local merge for a local-only ship task: fast-forward the
-# project's default branch to the crewmate's immutable ship branch recorded in
-# state/<task-id>.meta ("fm/<id>" for records created before that field existed).
+# project's default branch to local_done_head= in state/<task-id>.meta,
+# recorded when the done report was accepted by bin/fm-dod-lib.sh. Missing or
+# malformed heads refuse, including legacy tasks: report readiness again before
+# approval. The recorded ship branch must still point at that exact commit.
 #
 # This is firstmate's merge gate-action (the captain's merge authority applied
 # locally instead of via a GitHub PR). It is the one sanctioned exception to hard
@@ -26,6 +28,8 @@ STATE="${FM_STATE_OVERRIDE:-$FM_HOME/state}"
 . "$SCRIPT_DIR/fm-pr-lib.sh"
 # shellcheck source=bin/fm-backlog-transition-lib.sh
 . "$SCRIPT_DIR/fm-backlog-transition-lib.sh"
+# shellcheck source=bin/fm-dod-lib.sh
+. "$SCRIPT_DIR/fm-dod-lib.sh"
 if [ "$#" -ne 1 ] || ! fm_pr_task_id_valid "$1"; then
   echo "error: invalid local merge request" >&2
   exit 2
@@ -57,14 +61,22 @@ if ! fm_backlog_meta_spawn_gen_optional "$META" "$STATE"; then
   exit 1
 fi
 MERGE_EXPECTED_SPAWN_GEN=$FM_BACKLOG_META_SPAWN_GEN
+MERGE_EXPECTED_HEAD=$(fm_dod_local_done_head "$META") || {
+  echo "error: missing or malformed local done head for task $ID; report readiness before approval" >&2
+  exit 1
+}
 
 MERGE_CONTROL_LOCK=
+MERGE_META_LOCK=
 merge_control_cleanup() {
+  [ -z "$MERGE_META_LOCK" ] || fm_lock_release "$MERGE_META_LOCK" || true
   [ -z "$MERGE_CONTROL_LOCK" ] || fm_lock_release "$MERGE_CONTROL_LOCK" || true
 }
 trap merge_control_cleanup EXIT
 MERGE_CONTROL_LOCK="$STATE/.control-$ID.lock"
 fm_lock_acquire_wait "$MERGE_CONTROL_LOCK"
+MERGE_META_LOCK=$(fm_meta_lock_path "$META")
+fm_lock_acquire_wait "$MERGE_META_LOCK"
 if ! fm_backlog_meta_spawn_gen_optional "$META" "$STATE"; then
   echo "error: task $ID changed while waiting to merge; refusing: $FM_BACKLOG_TRANSITION_ERROR" >&2
   exit 1
@@ -73,6 +85,14 @@ if [ "$FM_BACKLOG_META_SPAWN_GEN" != "$MERGE_EXPECTED_SPAWN_GEN" ]; then
   echo "error: task $ID changed incarnation while waiting to merge; refusing" >&2
   exit 1
 fi
+MERGE_HEAD=$(fm_dod_local_done_head "$META") || {
+  echo "error: missing or malformed local done head for task $ID" >&2
+  exit 1
+}
+[ "$MERGE_HEAD" = "$MERGE_EXPECTED_HEAD" ] || {
+  echo "error: task $ID local done head changed while waiting to merge; refusing" >&2
+  exit 1
+}
 
 PROJ=$(grep '^project=' "$META" | cut -d= -f2-)
 MODE=$(grep '^mode=' "$META" | cut -d= -f2- || true)
@@ -100,7 +120,10 @@ if ! git check-ref-format --branch "$BRANCH" >/dev/null 2>&1; then
   echo "error: task $ID has an invalid recorded ship branch '$BRANCH'" >&2
   exit 1
 fi
-git -C "$PROJ" rev-parse --verify --quiet "refs/heads/$BRANCH" >/dev/null || { echo "error: branch $BRANCH does not exist in $PROJ" >&2; exit 1; }
+local_head_matches() {
+  [ "$(git -C "$PROJ" rev-parse --verify --quiet "refs/heads/$BRANCH^{commit}")" = "$MERGE_HEAD" ]
+}
+local_head_matches || { echo "error: branch $BRANCH differs from the recorded local done head; refusing" >&2; exit 1; }
 
 DEFAULT=$(default_branch) || { echo "error: cannot determine default branch for $PROJ; expected origin/HEAD, main, or master" >&2; exit 1; }
 
@@ -114,7 +137,7 @@ if [ -n "$(git -C "$PROJ" status --porcelain 2>/dev/null | head -1)" ]; then
 fi
 
 # Clean fast-forward only: DEFAULT must be an ancestor of BRANCH.
-if ! git -C "$PROJ" merge-base --is-ancestor "$DEFAULT" "$BRANCH"; then
+if ! git -C "$PROJ" merge-base --is-ancestor "$DEFAULT" "$MERGE_HEAD"; then
   echo "REFUSED: $BRANCH is not a fast-forward of $DEFAULT (it has diverged)." >&2
   echo "Have the crewmate rebase $BRANCH onto $DEFAULT, then retry." >&2
   exit 1
@@ -135,8 +158,16 @@ case "$hold_status" in
     exit 1
     ;;
 esac
+# Recheck after the approval read. The literal commit operand below also closes
+# the final branch-move race: Git can never resolve a later worker tip here.
+if [ "$(fm_dod_local_done_head "$META")" != "$MERGE_HEAD" ] || ! local_head_matches; then
+  echo "error: local done head or branch changed during approval check; refusing" >&2
+  exit 1
+fi
 merge_status=0
-git -C "$PROJ" merge --ff-only "$BRANCH" >/dev/null || merge_status=$?
+git -C "$PROJ" merge --ff-only "$MERGE_HEAD" >/dev/null || merge_status=$?
+fm_lock_release "$MERGE_META_LOCK" || true
+MERGE_META_LOCK=
 fm_lock_release "$MERGE_CONTROL_LOCK" || true
 MERGE_CONTROL_LOCK=
 [ "$merge_status" -eq 0 ] || exit "$merge_status"
