@@ -1,0 +1,11 @@
+Candidate revision: 51256e979c002a2bb14c96960e809cdfbd9ee427
+Worktree: /Users/daddy/.no-mistakes-upstream-codex/worktrees/39a4e6ae17a6/01M615JP9ECJ1FADMS6ZYZ9FQX
+Commands: FM_TEST_ONLY=<selector> FM_TEST_SKIP_ORPHAN_REAP=1 TMPDIR="$PWD/.test-3621/tmp" bin/fm-test-run.sh tests/fm-watch-triage.test.sh
+Trace repeats prepend: env SHELLOPTS=xtrace
+Selectors:
+test_heartbeat_backstop_surfaces_unsurfaced_status
+test_heartbeat_backstop_surfaces_a_masked_status
+test_heartbeat_no_change_absorbed
+test_afk_heartbeat_preserves_idle_accounting
+All eight commands exited 0. The watcher is the actual bin/fm-watch.sh process, with fixture status files and fake backend reads. No harness CLI or live fleet session was used.
+A proposed custom evidence driver was refused by the command guard for indirect command execution and was not retried. Baseline reproduction was not run. No lint or full-suite commands were run.
