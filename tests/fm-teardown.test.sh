@@ -6002,8 +6002,8 @@ SH
           ! grep -q 'teardown task-x1 complete' "$case_dir/stdout" \
             || fail "branch-$backend-$scenario: failure reported complete"
           assert_present "$case_dir/state/task-x1.meta" "failure must preserve retry metadata"
-          ! grep -Eq '(^return |^worktree rm )' "$case_dir/backend.log" 2>/dev/null \
-            || fail "branch-$backend-$scenario: released worktree after failed ref cleanup"
+          grep -q '^return ' "$case_dir/backend.log" \
+            || fail "branch-$backend-$scenario: ref verification pre-empted the return retry path"
           if [ "$scenario" = legacy-retry ]; then
             FM_BRANCH_CASE="$case_dir" FM_BRANCH_FAILURE='' \
               run_teardown "$case_dir" --force > "$case_dir/retry-out" 2> "$case_dir/retry-err" \

@@ -6,7 +6,7 @@
 # since secondmates are not backlog items), then refresh/prune the project's
 # clone for PR-based ship tasks.
 # Local task-branch cleanup must prove the recorded refs/heads/ ref absent
-# before returning/removing its worktree. A detach, delete, or verification
+# before declaring cleanup complete. A detach, delete, or verification
 # failure names the retained ref and preserves task metadata for retry, even
 # under --force. Legacy branch identity is saved in state/<id>.teardown-branch,
 # bound to the metadata hash, until cleanup completes, without changing record
@@ -3861,19 +3861,19 @@ if [ "$BACKEND" = t3code ]; then
     endpoint_close_refusal "$ID" t3code "$T" 0 || exit 1
   }
 fi
-# Both worktree providers use the same local-ref postcondition. Keep the task
-# record and isolated copy until Git proves cleanup succeeded, so a failed
-# delete can be retried even though HEAD was already detached.
+# Both providers use the same local-ref postcondition. The ordinary return's
+# existing lock retry runs before verification; capture only identity before it.
+# Retain the task record until Git proves branch cleanup succeeded.
 teardown_task_branch() {
   local branch current ref rc identity="$STATE/$ID.teardown-branch" meta_hash tmp
   branch=$(fm_meta_get "$META" branch)
   current=$(git -C "$WT" symbolic-ref --quiet --short HEAD 2>/dev/null) || current=
   if [ -z "$branch" ]; then
-    meta_hash=$(git -C "$WT" hash-object --no-filters -- "$META") || return 1
+    meta_hash=$(git -C "$PROJ" hash-object --no-filters -- "$META") || return 1
     if [ -e "$identity" ] || [ -L "$identity" ]; then
       if [ ! -f "$identity" ] || [ -L "$identity" ] \
          || [ "$(fm_meta_get "$identity" meta_hash)" != "$meta_hash" ]; then
-        echo "error: cannot verify legacy branch retry identity $identity for $ID; preserving worktree and task records" >&2
+        echo "error: cannot verify legacy branch retry identity $identity for $ID; preserving task records" >&2
         return 1
       fi
       branch=$(fm_meta_get "$identity" branch)
@@ -3881,13 +3881,13 @@ teardown_task_branch() {
       branch=$current
     fi
     if [ -z "$branch" ]; then
-      echo "error: cannot identify the task branch for $ID: HEAD is detached or unreadable and metadata has no branch; preserving worktree and task records for reconciliation" >&2
+      echo "error: cannot identify the task branch for $ID: HEAD is detached or unreadable and metadata has no branch; preserving task records for reconciliation" >&2
       return 1
     fi
   fi
   ref="refs/heads/$branch"
   git check-ref-format "$ref" >/dev/null 2>&1 || {
-    echo "error: invalid task ref $ref for $ID; preserving worktree and task records" >&2
+    echo "error: invalid task ref $ref for $ID; preserving task records" >&2
     return 1
   }
   if [ -n "${meta_hash:-}" ] && [ ! -e "$identity" ]; then
@@ -3897,36 +3897,30 @@ teardown_task_branch() {
     if ! printf 'meta_hash=%s\nbranch=%s\n' "$meta_hash" "$branch" > "$tmp" \
        || ! mv -f -- "$tmp" "$identity"; then
       rm -f -- "$tmp"
-      echo "error: cannot save retry identity for $ref; preserving worktree and task records" >&2
+      echo "error: cannot save retry identity for $ref; preserving task records" >&2
       return 1
     fi
   fi
-  if git -C "$WT" show-ref --verify --quiet "$ref"; then
+  if [ "${1:-}" = capture ]; then
     if [ -n "$current" ] && [ "$current" != "$branch" ]; then
-      echo "error: retained ref $ref for $ID: worktree is on $current; preserving worktree and task records for reconciliation" >&2
+      echo "error: retained ref $ref for $ID: worktree is on $current; preserving task records for reconciliation" >&2
       return 1
     fi
+    return 0
+  fi
+  if git -C "$PROJ" show-ref --verify --quiet "$ref"; then
     if [ "$current" = "$branch" ]; then
-      if worktree_safety_blocked_by_lock "task branch cleanup"; then
-        cleanup_stale_lock_for_safety_check "$WT" || {
-          echo "error: retained ref $ref for $ID: git lock prevents detaching; preserving worktree and task records for retry" >&2
-          return 1
-        }
-        if [ "$FORCE" != --force ] && [ "$KIND" != scout ]; then
-          validate_worktree_teardown_safety || return 1
-        fi
-      fi
       git -C "$WT" checkout --detach -q || {
-        echo "error: retained ref $ref for $ID: detach failed; preserving worktree and task records for retry" >&2
+        echo "error: retained ref $ref for $ID: detach failed; preserving task records for retry" >&2
         return 1
       }
     fi
-    git -C "$WT" branch -D -- "$branch" >/dev/null || {
-      echo "error: retained ref $ref for $ID: branch deletion failed; preserving worktree and task records for retry" >&2
+    git -C "$PROJ" branch -D -- "$branch" >/dev/null || {
+      echo "error: retained ref $ref for $ID: branch deletion failed; preserving task records for retry" >&2
       return 1
     }
-    if git -C "$WT" show-ref --verify --quiet "$ref"; then
-      echo "error: retained ref $ref for $ID after branch deletion; preserving worktree and task records for retry" >&2
+    if git -C "$PROJ" show-ref --verify --quiet "$ref"; then
+      echo "error: retained ref $ref for $ID after branch deletion; preserving task records for retry" >&2
       return 1
     else
       rc=$?
@@ -3935,7 +3929,7 @@ teardown_task_branch() {
     rc=$?
   fi
   if [ "$rc" -ne 1 ]; then
-    echo "error: cannot verify task ref $ref absent for $ID; preserving worktree and task records for retry" >&2
+    echo "error: cannot verify task ref $ref absent for $ID; preserving task records for retry" >&2
     return 1
   fi
   echo "task branch $ref is absent (staging and recovery refs unchanged)"
@@ -3961,7 +3955,15 @@ if [ "$BACKEND" = orca ] && [ "$KIND" != secondmate ]; then
 elif [ "$KIND" != secondmate ] && ! teardown_owns_worktree; then
   :
 elif [ -d "$WT" ] && [ "$KIND" != secondmate ]; then
-  teardown_task_branch || exit 1
+  teardown_task_branch capture || exit 1
+  # Preserve the existing best-effort attempt: a transient lock must still
+  # reach teardown_treehouse_return's retry rather than refusing here.
+  branch=$(git -C "$WT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo HEAD)
+  if [ "$branch" != "HEAD" ]; then
+    if git -C "$WT" checkout --detach -q 2>/dev/null; then
+      git -C "$WT" branch -D "$branch" >/dev/null 2>&1 || true
+    fi
+  fi
   # Remove our hook and environment files so a reused pool worktree cannot fire
   # signals for a dead task or hand a t3code env block or channel statement to
   # its next holder.
@@ -3987,6 +3989,10 @@ elif [ -d "$WT" ] && [ "$KIND" != secondmate ]; then
   fm_treehouse_pool_slot "$PROJ" "$WT" && wt_pool_slot=1
   teardown_treehouse_return "$WT" "$PROJ" "worktree" "$post_lock_cleanup_check" || {
     echo "error: treehouse return failed for worktree $WT; teardown aborted" >&2
+    exit 1
+  }
+  teardown_task_branch || {
+    fm_treehouse_slot_owner_release "$WT" "$ID"
     exit 1
   }
   [ "$wt_pool_slot" = 0 ] || teardown_note_dirty_return "$WT"
