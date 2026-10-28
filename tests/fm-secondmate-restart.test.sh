@@ -31,6 +31,8 @@ set -u
 . "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 # shellcheck source=tests/t3-fake-lib.sh
 . "$(dirname "${BASH_SOURCE[0]}")/t3-fake-lib.sh"
+# shellcheck source=bin/fm-pending-reply-lib.sh
+. "$ROOT/bin/fm-pending-reply-lib.sh"
 
 RESTART="$ROOT/bin/fm-secondmate-restart.sh"
 
@@ -420,6 +422,106 @@ test_progress_waits_for_done() {
   assert_present "$dir/fake/progress-waited" "progress or a stale done released the gate before waiting"
   assert_persist_result "$dir" 'done' "$out" "$rc"
   pass "T2e progress waits for a done with the request's own correlation"
+}
+
+# Consume replies through the real remote ingest or local watcher before restart
+# polling resumes. The local mate writes its own same-basename status file, so
+# the watcher also exercises the ordinary restatement repair path.
+arm_shared_consumer() {  # <case-dir> <local|remote> <terminal-verb|working>
+  local dir=$1 consumer=$2 verb=$3
+  printf '%s' "$ROOT" > "$dir/fake/repo"
+  printf '%s' "$consumer" > "$dir/fake/consumer"
+  printf '%s' "$verb" > "$dir/fake/shared-verb"
+  cat > "$dir/fake/on-doorbell" <<'SH'
+#!/usr/bin/env bash
+set -eu
+D=$FM_FAKE_DIR
+[ ! -e "$D/shared-consumed" ] || exit 0
+: > "$D/shared-consumed"
+dir=${D%/fake}
+root=$(cat "$D/repo")
+home="$dir/home"
+state="$home/state"
+. "$root/bin/fm-pending-reply-lib.sh"
+if [ -f "$D/request-corr" ]; then
+  corr=$(cat "$D/request-corr")
+else
+  corr=$(grep -hoE 'corr=[0-9a-f]{16}' "$state/sm1.inbox"/*.msg | head -1 | cut -d= -f2)
+fi
+rec=$(fm_pending_reply_path "$state" "$corr")
+printf '%s' "$corr" > "$D/request-corr"
+# The mate has received the doorbell; reconcile confirmed delivery before the
+# shared consumers run, rather than testing their undelivered early return.
+fm_pending_reply_mark_delivered "$state" "$corr"
+consumer=$(cat "$D/consumer")
+consume_reply() {
+  local verb=$1 source offset prefix
+  if [ "$consumer" = local ]; then
+    printf '%s [corr=%s]: persistence reply\n' "$verb" "$corr" >> "$dir/sm1-home/state/sm1.status"
+    fm_pending_reply_tick_one "$state" "$corr" unknown "$dir/sm1-home"
+  else
+    mkdir -p "$dir/remote/state"
+    source="$dir/remote/state/parent-replies.status"
+    [ -f "$source" ] || : > "$source"
+    offset=$(LC_ALL=C wc -c < "$source" | tr -d '[:space:]')
+    if command -v shasum >/dev/null 2>&1; then
+      prefix=$(shasum -a 256 "$source" | awk '{print $1}')
+    else
+      prefix=$(sha256sum "$source" | awk '{print $1}')
+    fi
+    printf '%s [corr=%s]: persistence reply\n' "$verb" "$corr" >> "$source"
+    FM_HOME="$dir/remote" bash "$root/bin/fm-remote-delta-read.sh" \
+      state/parent-replies.status "$offset" "$prefix" 0 > "$dir/shared.result"
+    FM_HOME="$home" FM_STATE_OVERRIDE="$state" FM_DATA_OVERRIDE="$home/data" \
+      bash "$root/bin/fm-procevent-remote-reply.sh" ingest sm1 "$dir/shared.result"
+  fi
+}
+consume_reply working
+fm_pending_reply_get "$rec" phase > "$D/phase-after-progress"
+verb=$(cat "$D/shared-verb")
+if [ "$verb" != working ]; then
+  consume_reply "$verb"
+  fm_pending_reply_get "$rec" phase > "$D/phase-after-terminal"
+fi
+SH
+  chmod +x "$dir/fake/on-doorbell"
+}
+
+test_shared_consumers_preserve_persist_expectation() {
+  local dir consumer verb out rc rec corr
+  for consumer in remote local; do
+    for verb in working 'done' blocked failed needs-decision; do
+      dir=$(new_case "shared-$consumer-$verb")
+      add_local_mate "$dir" sm1
+      arm_shared_consumer "$dir" "$consumer" "$verb"
+      out=$(FM_TEST_PERSIST_WAIT=0 run_restart "$dir" sm1); rc=$?
+      assert_equals awaiting_report "$(cat "$dir/fake/phase-after-progress")" \
+        "$consumer progress must not settle the persist request before restart polls"
+      corr=$(cat "$dir/fake/request-corr")
+      rec=$(fm_pending_reply_path "$dir/home/state" "$corr")
+      assert_equals secondmate-restart-persist "$(fm_pending_reply_get "$rec" request_kind)" \
+        "the real restart must tag its request before any shared consumer sees it"
+      if [ "$verb" != working ]; then
+        assert_equals resolved "$(cat "$dir/fake/phase-after-terminal")" \
+          "$consumer must settle $verb after progress"
+      fi
+      assert_persist_result "$dir" "$verb" "$out" "$rc"
+    done
+
+    # Ordinary requests retain their existing acknowledgement policy.
+    dir=$(new_case "ordinary-$consumer")
+    add_local_mate "$dir" sm1
+    arm_shared_consumer "$dir" "$consumer" working
+    corr=$(fm_pending_reply_create "$dir/home" "$dir/home/state" sm1 "ordinary request")
+    fm_pending_reply_mark_delivered "$dir/home/state" "$corr"
+    printf '%s' "$corr" > "$dir/fake/request-corr"
+    FM_HOME="$dir/home" FM_FAKE_DIR="$dir/fake" PATH="$dir/fakebin:$PATH" \
+      bash "$dir/fake/on-doorbell" > "$dir/ordinary.out" 2>&1 \
+      || fail "$consumer ordinary shared consumer failed: $(cat "$dir/ordinary.out")"
+    assert_equals resolved "$(cat "$dir/fake/phase-after-progress")" \
+      "$consumer must keep resolving progress for ordinary request kinds"
+  done
+  pass "T2f remote ingest and local watcher preserve progress-only persist expectations"
 }
 
 # --- T3: a runtime that cannot prove a restart never gets one ----------------
@@ -1049,6 +1151,7 @@ test_persist_precedes_restart
 test_arrived_answer_precedes_deadline_check
 test_persist_reply_verbs
 test_progress_waits_for_done
+test_shared_consumers_preserve_persist_expectation
 test_answer_between_resolution_and_timeout_wins
 test_unprovable_runtime_falls_back
 test_unknown_mate_is_accounted_for
