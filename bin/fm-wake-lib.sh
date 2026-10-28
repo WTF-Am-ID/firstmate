@@ -2130,7 +2130,7 @@ fm_autoarm_midturn_healthy() {  # <state-dir> [grace]
 # 1 when the micro-mutex is contended, the mandatory identity cannot be
 # computed, or the write failed.
 fm_autoarm_claim_next() {  # <state-dir> [grace]
-  local state=$1 grace=${2:-${FM_GUARD_GRACE:-300}} lock epoch pid gen identity session_id lock_pid lock_identity tmp
+  local state=$1 grace=${2:-${FM_GUARD_GRACE:-300}} lock epoch pid gen identity session_id lock_pid lock_identity tmp interrupted_identity
   lock="$state/.claude-autoarm.lock"
   epoch="$state/.claude-autoarm-epoch"
   FM_AUTOARM_MY_GEN=
@@ -2152,6 +2152,16 @@ fm_autoarm_claim_next() {  # <state-dir> [grace]
   if fm_autoarm_claim_open "$state" "$grace"; then
     fm_lock_release "$lock"
     return 2
+  fi
+  # Only interrupted hooks bind their notice to a session. A new lock holder
+  # retires that episode before its first claim, so a teardown cannot consume
+  # the replacement's real failure notice. Empty legacy markers stay unchanged.
+  interrupted_identity=$(sed -n 's/^session_identity=//p' "$state/.claude-autoarm-failure-notified" 2>/dev/null || true)
+  if [ -n "$interrupted_identity" ] && [ -n "$lock_identity" ] && [ "$interrupted_identity" != "$lock_identity" ]; then
+    if ! fm_failure_episode_reset "$state"; then
+      fm_lock_release "$lock"
+      return 1
+    fi
   fi
   gen=$(_fm_autoarm_epoch_field "$epoch" epoch 2>/dev/null || true)
   case "$gen" in
@@ -2182,10 +2192,12 @@ fm_autoarm_claim_next() {  # <state-dir> [grace]
 # owned critical section (the once-per-episode failure notice). A marker failure
 # refuses the commit even though its terminal ledger entry remains; marker-first
 # ordering could permanently suppress a notice whose ledger write never won.
+# The optional interrupted-session identity is checked under the hold and written
+# into the marker, allowing claim_next to retire it when the lock holder changes.
 # Returns 0 committed, 2 refused (superseded or required-marker failure), and 1
 # unable (bounded contention or ledger-write failure).
-fm_autoarm_write_owned() {  # <state-dir> <gen> <outcome> [marker-file] [session-pid] [recovery-generation]
-  local state=$1 gen=$2 outcome=$3 marker=${4:-} session=${5:-} recovery=${6:-} lock epoch pid identity tmp i
+fm_autoarm_write_owned() {  # <state-dir> <gen> <outcome> [marker-file] [session-pid] [recovery-generation] [interrupted-session-identity]
+  local state=$1 gen=$2 outcome=$3 marker=${4:-} session=${5:-} recovery=${6:-} marker_identity=${7:-} lock epoch pid identity tmp i lock_pid current
   lock="$state/.claude-autoarm.lock"
   epoch="$state/.claude-autoarm-epoch"
   pid=${BASHPID:-$$}
@@ -2201,6 +2213,15 @@ fm_autoarm_write_owned() {  # <state-dir> <gen> <outcome> [marker-file] [session
     return 2
   fi
   identity=$FM_AUTOARM_IDENTITY
+  if [ -n "$marker_identity" ]; then
+    _fm_wake_require_session_lock
+    lock_pid=$(sed -n '1p' "$state/.lock" 2>/dev/null || true)
+    current=$(fm_session_pid_identity "$lock_pid" 2>/dev/null || true)
+    if [ "$marker_identity" != "$current" ]; then
+      fm_lock_release "$lock"
+      return 2
+    fi
+  fi
   tmp="$epoch.tmp.$pid"
   if ! {
       printf 'epoch=%s owner_pid=%s outcome=%s updated_at=%s' \
@@ -2214,7 +2235,7 @@ fm_autoarm_write_owned() {  # <state-dir> <gen> <outcome> [marker-file] [session
     fm_lock_release "$lock"
     return 1
   fi
-  if [ -n "$marker" ] && ! : > "$marker" 2>/dev/null; then
+  if [ -n "$marker" ] && ! printf '%s' "${marker_identity:+session_identity=$marker_identity}" > "$marker" 2>/dev/null; then
     fm_lock_release "$lock"
     return 2
   fi

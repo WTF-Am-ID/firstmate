@@ -253,7 +253,13 @@ RUN_AUTOARM_BG_PID=
 run_autoarm_bg() {
   local dir=$1 out=$2
   printf '%s\n' '{"session_id":"sess-autoarm","stop_hook_active":false}' \
-    | FM_HOME="$dir" "$FAKE_CLAUDE" -c '
+    | FM_HOME="$dir" python3 -c '
+import os, signal, sys
+# Noninteractive bash backgrounds inherit ignored SIGINT. Restore the host
+# signal disposition before exec so the fixture can exercise the INT trap too.
+signal.signal(signal.SIGINT, signal.SIG_DFL)
+os.execv(sys.argv[1], sys.argv[1:])
+' "$FAKE_CLAUDE" -c '
         printf "%s\n" "$$" > "$FM_HOME/state/.lock"
         "$FM_HOME/bin/fm-claude-stop-autoarm.sh"
       ' > "$out" 2>&1 &
@@ -852,6 +858,57 @@ test_term_mid_arm_commits_failure_and_rewakes() {
   assert_contains "$(cat "$out")" "firstmate watcher auto-arm INTERRUPTED" \
     "TERM mid-arm omitted the rewake failure banner"
   pass "auto-arm: TERM mid-arm commits a durable failure and exits 2 for rewake"
+}
+
+# Session teardown can signal the hook before its harness dies. The replacement
+# must retire that notice rather than spend its own first real failure silently.
+test_replacement_retires_interrupted_session_episode() {
+  local signal dir out hook_pid i status replacement
+  for signal in HUP TERM INT; do
+    dir=$(make_primary_dir "$TMP_ROOT/replaced-$signal")
+    : > "$dir/state/task.meta"
+    write_arm_fixture "$dir" blocking-actionable
+    out="$dir/state/interrupted.out"
+    run_autoarm_bg "$dir" "$out"
+    hook_pid=
+    i=0
+    while [ "$i" -lt 100 ]; do
+      hook_pid=$(epoch_field "$dir" owner_pid)
+      [ -n "$hook_pid" ] && [ -e "$dir/state/arm-ran" ] && break
+      sleep 0.02
+      i=$((i + 1))
+    done
+    [ -n "$hook_pid" ] && [ -e "$dir/state/arm-ran" ] || fail "$signal hook did not park"
+    kill -"$signal" "$hook_pid" || fail "could not signal $signal hook"
+    status=0
+    wait "$RUN_AUTOARM_BG_PID" || status=$?
+    expect_code 2 "$status" "$signal in a live session must retain timeout recovery"
+    assert_contains "$(cat "$out")" 'auto-arm INTERRUPTED' "$signal omitted its current-session notice"
+    assert_present "$dir/state/.claude-autoarm-failure-notified" "$signal lost its durable notice"
+
+    write_arm_fixture "$dir" actionable
+    replacement=$(printf '%s\n' '{"session_id":"replacement"}' \
+      | FM_HOME="$dir" "$FAKE_CLAUDE" -c '
+          printf "%s\n" "$$" > "$FM_HOME/state/.lock"
+          "$FM_HOME/bin/fm-claude-stop-autoarm.sh"; rc=$?
+          . "$FM_HOME/bin/fm-wake-lib.sh"
+          fm_autoarm_midturn_healthy "$FM_HOME/state" || exit 11
+          exit "$rc"
+        ' 2>&1); status=$?
+    expect_code 2 "$status" "$signal replacement inherited a phantom mid-turn failure"
+    assert_absent "$dir/state/.claude-autoarm-failure-notified" "$signal replacement retained the old notice"
+    [ "$(epoch_outcome "$dir")" = rewake ] || fail "$signal replacement retained the old failure"
+
+    # Its first real failure must still notify and retain bounded retries.
+    write_arm_fixture "$dir" failed
+    replacement=$(run_autoarm "$dir" 2>/dev/null); status=$?
+    expect_code 2 "$status" "$signal replacement must report its real failure"
+    assert_contains "$replacement" 'automatic supervision mechanism is broken' \
+      "$signal replacement inherited the previous session's consumed notice"
+    [ "$(epoch_outcome "$dir")" = failed ] || fail "$signal replacement suppressed its first failure"
+    [ "$(wc -l < "$dir/state/arm-ran" | tr -d ' ')" -eq 4 ] || fail "$signal replacement lost bounded retries"
+  done
+  pass "auto-arm: HUP, TERM and INT episodes do not consume the replacement session's notice"
 }
 
 # --- abandoned single-flight claim recovery (legacy shim) ----------------------
@@ -2020,6 +2077,7 @@ test_arms_for_x_mode_poll_need_without_inflight
 test_arms_for_registered_custom_check_without_inflight
 test_single_flight_admits_exactly_one_owner
 test_term_mid_arm_commits_failure_and_rewakes
+test_replacement_retires_interrupted_session_episode
 test_abandoned_owner_claim_is_reclaimed_and_rearms
 test_abandoned_claim_reclaim_reaps_dead_steal_without_nesting
 test_arming_claim_with_fresh_beacon_is_never_reclaimed
