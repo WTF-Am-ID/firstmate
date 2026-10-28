@@ -11,7 +11,8 @@
 #   or config write. Capabilities reports sources.<type>.supported; validation
 #   checks the candidate declaration and reports supported (boolean). Invalid
 #   declarations exit 2. Support checks executable availability, not access to
-#   a particular credential; an installer must require supported=true before
+#   a particular credential. An empty declaration requires no adapter and is
+#   supported. An installer must require supported=true before
 #   writing its target config. See docs/configuration.md for the schema.
 #
 # Opt-in gate: FM_DISPATCH_PROVIDER and FM_DISPATCH_MODEL select the provider
@@ -69,11 +70,12 @@
 #   clear     -> pass the profile line to fm-spawn.sh unless you state a reason to override
 #   ambiguous -> confidence below the floor; decide as today from the probabilities
 #   escalate  -> the rule requires captain approval, no candidate is rankable, or a genuine tie
-#   error     -> API, network, response, or quota-axi failure; decide as today
+#   error     -> declared credential source, API, network, response, or quota-axi failure; decide as today
 #   Every outcome exits 0 so an intake is never blocked by this tool.
 #   Exit 2 only for a usage or configuration error (unreadable brief, an
-#   existing unreadable rules file, malformed rules, missing jq, an unknown
-#   provider, or OpenRouter without a model), which is actionable, never
+#   existing unreadable rules or credential-source file, malformed rules or
+#   credential-source declarations, missing jq, an unknown provider, or
+#   OpenRouter without a model), which is actionable, never
 #   selected around.
 #
 # Environment:

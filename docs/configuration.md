@@ -1813,7 +1813,7 @@ Rules come only from the effective home's `config/crew-dispatch.json`; `FM_CONFI
 
 This optional, gitignored JSON object maps provider IDs to credential-source declarations in that same effective config directory.
 No credential values belong in it.
-The first source adapter is `macos-keychain`, with a required non-empty `service` and an optional non-empty `account` identifying a generic password.
+The first source adapter is `macos-keychain`, with a required `service` and an optional `account` identifying a generic password, each containing at least one non-whitespace character.
 Provider IDs use lowercase letters, digits, and internal single hyphens.
 Each entry accepts only `type`, `service`, and `account`, and its string values cannot contain control characters.
 
@@ -1826,14 +1826,13 @@ Each entry accepts only `type`, `service`, and `account`, and its string values 
 
 Only the selected provider's source is retrieved, and only when its environment and `.env` keys are absent.
 An absent file or absent provider entry retains the off behavior.
-When source lookup is needed, an invalid declaration is an actionable configuration error with exit 2.
+When source lookup is needed, validation checks every entry, including unselected providers, and an invalid declaration is an actionable configuration error with exit 2.
 A declared source that cannot run, cannot retrieve a non-empty single-line key, or returns a failure produces a sanitized structured `status: error` with exit 0 and no network or quota call.
 It never silently becomes off.
-The key remains private to the resolver and reaches HTTP only through the existing file-descriptor header transport.
 
 The script's capability and candidate-validation modes let an installer inspect adapter support before writing target config, without retrieving credentials, reading `.env`, or making a network call.
 Their exact flags and JSON output are owned by the script header and `--help`.
-Validation checks the supplied candidate file without modifying it, and reports unsupported when the adapter executable is absent.
+Validation checks the supplied candidate file without modifying it, and reports unsupported for a non-empty candidate when the adapter executable is absent.
 Support means the adapter executable is available, not that a particular credential is accessible.
 
 ```sh
@@ -1917,12 +1916,12 @@ No qualifying option, or two equally probable qualifying options, produces `ambi
 | `clear` | A `profile:` line ready for `fm-spawn.sh`. |
 | `ambiguous` | Confidence below the floor with no runner-up taken. |
 | `escalate` | An approval-gated rule, unverifiable rule floor, nothing rankable, or a genuine tie. |
-| `error` | API, network, malformed response metadata, rendering, or quota-axi failure. |
+| `error` | Declared credential source unavailable as described above, or API, network, malformed response metadata, rendering, or quota-axi failure. |
 
 Every result above exits 0.
 
 - Response probabilities must contain exactly every offered choice, use numeric values from 0 through 1, and sum to approximately 1 within 0.01.
-- Only a usage or configuration error exits 2: an unreadable brief, an existing but unreadable or malformed canonical rules file, a missing `jq`, an unknown provider, or an OpenRouter provider without a model, each reported and never selected around.
+- Only a usage or configuration error exits 2: an unreadable brief, an existing but unreadable or malformed canonical rules file, an invalid credential-source declaration as described above, a missing `jq`, an unknown provider, or an OpenRouter provider without a model, each reported and never selected around.
 - Missing `curl` is a normal structured `error` outcome with exit 0 so firstmate uses today's routing.
 
 **Firstmate retains the dispatch decision**
@@ -3148,10 +3147,10 @@ FMX_RELAY_URL=https://myfirstmate.io   # optional Relay endpoint override, mainl
 FMX_ENV_FILE=           # optional alternate .env file for direct Relay client invocations; bootstrap still checks $FM_HOME/.env
 FMX_DRY_RUN=            # truthy previews Relay replies and dismissals to state/x-outbox/ without posting or requiring a token
 FMX_X_REPLY_MAX_CHARS=280   # X reply per-message split budget; values below 50 clamp to 50
-FM_DISPATCH_PROVIDER=   # typesafe or openrouter; absent preserves the original typesafe key gate ("Typed dispatch resolution")
+FM_DISPATCH_PROVIDER=   # provider selection; see "Typed dispatch resolution"
 FM_DISPATCH_MODEL=      # explicit model for the selected provider; required for openrouter
-TYPESAFE_API_KEY=       # typesafe dispatch key, from the environment or .env
-OPENROUTER_API_KEY=     # OpenRouter dispatch key, from the environment or .env
+TYPESAFE_API_KEY=       # optional typesafe key; credential precedence is owned by "Typed dispatch resolution"
+OPENROUTER_API_KEY=     # optional OpenRouter key; see "Typed dispatch resolution"
 FMX_DISCORD_REPLY_MAX_CHARS=1900   # Discord reply per-message split budget; values below 50 clamp to 50, values above 2000 reset to 1900
 FMX_X_THREAD_MAX=25     # maximum messages in one auto-split reply thread
 FMX_FOLLOWUP_MAX_AGE_SECS=604800   # local window for posting Relay completion follow-ups (7 days)
