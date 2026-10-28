@@ -1,0 +1,7 @@
+PASS Capability and candidate inspection finish without reading a FIFO .env or changing candidate/home config; absent executable reports unsupported
+PASS Absent, empty, and other-provider declarations stay off for both provider selections; OpenRouter key alone does not select OpenRouter
+PASS Malformed configuration and both trailing-newline provider IDs return actionable exit 2 in candidate validation and both runtime selections
+PASS Missing credential adapter produces sanitized structured error rather than off for either provider
+PASS Different effective home and config directory cannot consume the original declaration
+Trailing-newline defect reproduced on previous revision 4649545 for both provider IDs and both modes.
+Disposable files removed.

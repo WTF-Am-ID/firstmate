@@ -1,0 +1,687 @@
+{
+  "revision": "67b83bf66c6662bdf153adf9db5f2639cf7fd0ac",
+  "method": "Public CLI using disposable homes and installed jq/bash. No substitute product, credential retrieval, HTTP request, or model session.",
+  "blocked_probe": "Additional loopback HTTP probe rejected before execution by PreToolUse: System service modification not allowed. No retry or bypass.",
+  "calls": [
+    {
+      "label": "inspect adapter availability",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "--credential-capabilities"
+      ],
+      "environment_overrides": {
+        "PATH": "/opt/homebrew/Caskroom/codex/0.165.0/codex-path:/Users/daddy/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/usr/local/MacGPG2/bin:/Users/daddy/.codex/tmp/arg0-macos/codex-arg0K78OPw:/opt/homebrew/Caskroom/codex/0.165.0/codex-path:/Users/daddy/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/daddy/go/bin:/Users/daddy/.cargo/bin:/Users/daddy/bin:/usr/local/sbin:/Users/daddy/.local/bin"
+      },
+      "exit": 0,
+      "stdout": "{\"sources\":{\"macos-keychain\":{\"supported\":true}}}\n",
+      "stderr": ""
+    },
+    {
+      "label": "validate supplied candidate without writing home",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "--validate-credential-sources",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/candidate.json"
+      ],
+      "environment_overrides": {
+        "PATH": "/opt/homebrew/Caskroom/codex/0.165.0/codex-path:/Users/daddy/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/usr/local/MacGPG2/bin:/Users/daddy/.codex/tmp/arg0-macos/codex-arg0K78OPw:/opt/homebrew/Caskroom/codex/0.165.0/codex-path:/Users/daddy/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/daddy/go/bin:/Users/daddy/.cargo/bin:/Users/daddy/bin:/usr/local/sbin:/Users/daddy/.local/bin"
+      },
+      "exit": 0,
+      "stdout": "{\"supported\":true}\n",
+      "stderr": ""
+    },
+    {
+      "label": "inspect adapter availability",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "--credential-capabilities"
+      ],
+      "environment_overrides": {
+        "PATH": "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/restricted-bin"
+      },
+      "exit": 0,
+      "stdout": "{\"sources\":{\"macos-keychain\":{\"supported\":false}}}\n",
+      "stderr": ""
+    },
+    {
+      "label": "validate supplied candidate without writing home",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "--validate-credential-sources",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/candidate.json"
+      ],
+      "environment_overrides": {
+        "PATH": "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/restricted-bin"
+      },
+      "exit": 0,
+      "stdout": "{\"supported\":false}\n",
+      "stderr": ""
+    },
+    {
+      "label": "typesafe absent declaration remains off",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "typesafe",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 0,
+      "stdout": "",
+      "stderr": "dispatch-resolve: off (TYPESAFE_API_KEY absent from the environment and /Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/.env)\n"
+    },
+    {
+      "label": "typesafe empty declaration remains off",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "typesafe",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 0,
+      "stdout": "",
+      "stderr": "dispatch-resolve: off (TYPESAFE_API_KEY absent from the environment and /Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/.env)\n"
+    },
+    {
+      "label": "typesafe other provider declaration stays off",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "typesafe",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 0,
+      "stdout": "",
+      "stderr": "dispatch-resolve: off (TYPESAFE_API_KEY absent from the environment and /Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/.env)\n"
+    },
+    {
+      "label": "openrouter absent declaration remains off",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "openrouter",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 0,
+      "stdout": "",
+      "stderr": "dispatch-resolve: off (OPENROUTER_API_KEY absent from the environment and /Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/.env)\n"
+    },
+    {
+      "label": "openrouter empty declaration remains off",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "openrouter",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 0,
+      "stdout": "",
+      "stderr": "dispatch-resolve: off (OPENROUTER_API_KEY absent from the environment and /Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/.env)\n"
+    },
+    {
+      "label": "openrouter other provider declaration stays off",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "openrouter",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 0,
+      "stdout": "",
+      "stderr": "dispatch-resolve: off (OPENROUTER_API_KEY absent from the environment and /Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/.env)\n"
+    },
+    {
+      "label": "OpenRouter key alone does not opt into that provider",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "OPENROUTER_API_KEY": "synthetic-unused"
+      },
+      "exit": 0,
+      "stdout": "",
+      "stderr": "dispatch-resolve: off (TYPESAFE_API_KEY absent from the environment and /Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/.env)\n"
+    },
+    {
+      "label": "invalid declaration 0 candidate",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "--validate-credential-sources",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/config/dispatch-credential-sources.json"
+      ],
+      "environment_overrides": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 0 Typesafe runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "typesafe"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 0 OpenRouter runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "openrouter",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 1 candidate",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "--validate-credential-sources",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/config/dispatch-credential-sources.json"
+      ],
+      "environment_overrides": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 1 Typesafe runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "typesafe"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 1 OpenRouter runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "openrouter",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 2 candidate",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "--validate-credential-sources",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/config/dispatch-credential-sources.json"
+      ],
+      "environment_overrides": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 2 Typesafe runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "typesafe"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 2 OpenRouter runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "openrouter",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 3 candidate",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "--validate-credential-sources",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/config/dispatch-credential-sources.json"
+      ],
+      "environment_overrides": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 3 Typesafe runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "typesafe"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 3 OpenRouter runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "openrouter",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 4 candidate",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "--validate-credential-sources",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/config/dispatch-credential-sources.json"
+      ],
+      "environment_overrides": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 4 Typesafe runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "typesafe"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 4 OpenRouter runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "openrouter",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 5 candidate",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "--validate-credential-sources",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/config/dispatch-credential-sources.json"
+      ],
+      "environment_overrides": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 5 Typesafe runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "typesafe"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 5 OpenRouter runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "openrouter",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 6 candidate",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "--validate-credential-sources",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/config/dispatch-credential-sources.json"
+      ],
+      "environment_overrides": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 6 Typesafe runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "typesafe"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 6 OpenRouter runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "openrouter",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 7 candidate",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "--validate-credential-sources",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/config/dispatch-credential-sources.json"
+      ],
+      "environment_overrides": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 7 Typesafe runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "typesafe"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "invalid declaration 7 OpenRouter runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "openrouter",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "error: invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account\n"
+    },
+    {
+      "label": "typesafe unavailable credential adapter",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "typesafe",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 0,
+      "stdout": "dispatch-resolve:\n  status: error\n  reason: credential source unavailable for typesafe\n",
+      "stderr": "dispatch-resolve: error (credential source unavailable for typesafe)\n"
+    },
+    {
+      "label": "openrouter unavailable credential adapter",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "openrouter",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 0,
+      "stdout": "dispatch-resolve:\n  status: error\n  reason: credential source unavailable for openrouter\n",
+      "stderr": "dispatch-resolve: error (credential source unavailable for openrouter)\n"
+    },
+    {
+      "label": "different effective home does not consume original declaration",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_HOME": "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/other-home"
+      },
+      "exit": 0,
+      "stdout": "",
+      "stderr": "dispatch-resolve: off (TYPESAFE_API_KEY absent from the environment and /Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/other-home/.env)\n"
+    },
+    {
+      "label": "different effective config does not consume original declaration",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_CONFIG_OVERRIDE": "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/other-config"
+      },
+      "exit": 0,
+      "stdout": "",
+      "stderr": "dispatch-resolve: off (TYPESAFE_API_KEY absent from the environment and /Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/.env)\n"
+    },
+    {
+      "label": "previous revision typesafe trailing newline candidate",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/old-bin/fm-dispatch-resolve.sh",
+        "--validate-credential-sources",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/config/dispatch-credential-sources.json"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "typesafe",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 0,
+      "stdout": "{\"supported\":false}\n",
+      "stderr": ""
+    },
+    {
+      "label": "previous revision typesafe trailing newline runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/old-bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "typesafe",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 0,
+      "stdout": "",
+      "stderr": "dispatch-resolve: off (TYPESAFE_API_KEY absent from the environment and /Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/.env)\n"
+    },
+    {
+      "label": "previous revision openrouter trailing newline candidate",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/old-bin/fm-dispatch-resolve.sh",
+        "--validate-credential-sources",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/config/dispatch-credential-sources.json"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "openrouter",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 0,
+      "stdout": "{\"supported\":false}\n",
+      "stderr": ""
+    },
+    {
+      "label": "previous revision openrouter trailing newline runtime",
+      "argv": [
+        "/bin/bash",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/old-bin/fm-dispatch-resolve.sh",
+        "/Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/brief.md"
+      ],
+      "environment_overrides": {
+        "FM_DISPATCH_PROVIDER": "openrouter",
+        "FM_DISPATCH_MODEL": "local-fixture"
+      },
+      "exit": 0,
+      "stdout": "",
+      "stderr": "dispatch-resolve: off (OPENROUTER_API_KEY absent from the environment and /Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/.env)\n"
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "Capability and candidate inspection finish without reading a FIFO .env or changing candidate/home config; absent executable reports unsupported",
+      "result": "pass",
+      "live": true
+    },
+    {
+      "name": "Absent, empty, and other-provider declarations stay off for both provider selections; OpenRouter key alone does not select OpenRouter",
+      "result": "pass",
+      "live": true
+    },
+    {
+      "name": "Malformed configuration and both trailing-newline provider IDs return actionable exit 2 in candidate validation and both runtime selections",
+      "result": "pass",
+      "live": true
+    },
+    {
+      "name": "Missing credential adapter produces sanitized structured error rather than off for either provider",
+      "result": "pass",
+      "live": true
+    },
+    {
+      "name": "Different effective home and config directory cannot consume the original declaration",
+      "result": "pass",
+      "live": true
+    }
+  ],
+  "before_fix": [
+    {
+      "revision": "4649545",
+      "provider": "typesafe",
+      "mode": "candidate",
+      "exit": 0,
+      "stdout": "{\"supported\":false}\n",
+      "stderr": ""
+    },
+    {
+      "revision": "4649545",
+      "provider": "typesafe",
+      "mode": "runtime",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "dispatch-resolve: off (TYPESAFE_API_KEY absent from the environment and /Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/.env)\n"
+    },
+    {
+      "revision": "4649545",
+      "provider": "openrouter",
+      "mode": "candidate",
+      "exit": 0,
+      "stdout": "{\"supported\":false}\n",
+      "stderr": ""
+    },
+    {
+      "revision": "4649545",
+      "provider": "openrouter",
+      "mode": "runtime",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "dispatch-resolve: off (OPENROUTER_API_KEY absent from the environment and /Users/daddy/.no-mistakes-upstream-codex/worktrees/9066d21ebecf/01M61JWEHWWZ60S7EJW3NAMFQ7/.resolver-cli-probe-ieq9x4rm/home/.env)\n"
+    }
+  ],
+  "scratch_removed": true
+}
