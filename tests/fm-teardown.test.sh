@@ -6220,7 +6220,7 @@ test_task_branch_identity_replay() {
       write_meta "$case_dir" local-only ship
       printf 'branch=fm/task-x1\n' >> "$case_dir/state/task-x1.meta"
       seed_backlog_in_flight "$case_dir"
-      expected_state=done
+      expected_state='done'
       if [ "$mode" = retain ]; then
         tasks-axi hold task-x1 --kind captain --reason 'fixture decision' \
           --file "$case_dir/data/backlog.md" >/dev/null
