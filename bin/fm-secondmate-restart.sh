@@ -28,13 +28,13 @@
 #      every instruction update cost far more than the reload it is paying for.
 #      All requests go out before any restart, so a slow mate delays only its own
 #      restart instead of serializing the fleet behind it.
-#   B. RESTART. Only after that mate's own correlated done answer lands on the parent
-#      channel. The gate is that answer, never a wall clock, so a mate that is
-#      mid-turn queues the request behind that turn; the bound below exists to
-#      end the wait, not to authorize a restart without the answer. A timeout
-#      deliberately leaves that unanswered expectation open: it is a genuine
-#      open loop owned by the ordinary pending-reply recovery ladder, not state
-#      this restart pass may close.
+#   B. RESTART. Only the mate's own correlated done on the parent channel permits
+#      restart, including done text listing deliberately untouched work.
+#      Correlated blocked, failed, and needs-decision settle the request and nudge.
+#      Progress keeps waiting, including through shared pending-reply consumers.
+#      Arrival and deadline rechecks use the same policy. A mid-turn mate queues
+#      the request behind that turn. Timeout leaves the expectation open for
+#      ordinary pending-reply recovery and never authorizes a restart.
 #
 # A mate whose persist answer did not confirm success or whose runtime cannot prove a
 # restart gets the ordinary re-read nudge and is reported as a nudge, never as a

@@ -35,6 +35,10 @@
 #   parent_status=          absolute path of parent state/<task_id>.status
 #   parent_status_scan_signature=
 #   request_summary=        short sanitized summary (no secrets by design)
+#   request_kind=           optional resolution policy; absent or empty keeps
+#                           ordinary acknowledgement behavior; the reply policy
+#                           for secondmate-restart-persist is owned by the
+#                           bin/fm-secondmate-restart.sh header
 #   created_epoch=          when the expectation was created
 #   delivered_epoch=        when the marked request was confirmed delivered
 #                           (empty until delivery; delivery never resolves)
@@ -598,6 +602,7 @@ fm_pending_reply_discard_undelivered() {  # <state-dir> <corr_id>
 
 # 0 if a status line is a correlated acknowledgement for <corr_id>.
 # Accepts short status replies and status lines that point at a document.
+# Request-kind filtering follows the policy owner named in the record schema.
 # Unrelated verbs without the token never match. Stale/wrong corr never match.
 # The parent's own pending-reply-missed escalation line must not self-resolve:
 # it names the request with pending-reply-id= rather than corr=.
