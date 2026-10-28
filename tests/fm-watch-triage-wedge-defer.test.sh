@@ -761,10 +761,11 @@ test_wedge_threshold_worker_wait_is_off_until_armed() {
 # than on stdout, because fail() exits the shell it runs in and a command
 # substitution would swallow a setup failure here.
 run_malformed_wait_record_round() {  # <name> <evidence-body>
-  local name=$1 body=$2 dir state out
+  local name=$1 body=$2 dir state out key
   dir=$(make_case "$name"); state="$dir/state"
   printf 'working: validation under way\n' > "$state/wedge.status"
-  printf '%s\n' "$(( $(date +%s) - 600 ))" > "$state/.stale-since-test_fm-wedge"
+  key=$(watch_window_key test:fm-wedge)
+  printf '%s\n' "$(( $(date +%s) - 600 ))" > "$state/.stale-since-$key"
 
   out="$dir/defer.out"
   FM_STATE_OVERRIDE="$state" FM_STALE_ESCALATE_SECS=1 FM_PAUSE_RESURFACE_SECS=999 \
@@ -778,10 +779,10 @@ run_malformed_wait_record_round() {  # <name> <evidence-body>
       # child shell has none of.
       fm_backend_agent_state() { printf alive; }
       eval "wedge_wait_evidence() { $2 ; }"
-      wedge_timer_check "test:fm-wedge" "$FM_STATE_OVERRIDE/.stale-since-test_fm-wedge" \
-        "non-terminal stale" "$FM_STATE_OVERRIDE/.wedge-escalations-test_fm-wedge" wedge \
+      wedge_timer_check "test:fm-wedge" "$FM_STATE_OVERRIDE/.stale-since-$3" \
+        "non-terminal stale" "$FM_STATE_OVERRIDE/.wedge-escalations-$3" wedge \
         malformed-record-pane
-    ' _ "$WATCH" "$body" > "$out" 2>&1 \
+    ' _ "$WATCH" "$body" "$key" > "$out" 2>&1 \
     || fail "the wedge timer failed on a malformed wait record ($name): $(cat "$out")"
   MALFORMED_STATE=$state
 }
@@ -792,7 +793,7 @@ assert_malformed_record_kept_the_ladder() {  # <state> <what>
     || fail "$what did not keep the unchanged ladder: $(cat "$state/.wake-queue" 2>/dev/null)"
   grep -F 'rechecked on a long cadence not a wedge' "$state/.wake-queue" >/dev/null \
     && fail "$what was deferred on a record that is not what it claims: $(cat "$state/.wake-queue")"
-  [ "$(cat "$state/.wedge-escalations-test_fm-wedge" 2>/dev/null || echo 0)" -eq 1 ] \
+  [ "$(cat "$state/.wedge-escalations-$(watch_window_key test:fm-wedge)" 2>/dev/null || echo 0)" -eq 1 ] \
     || fail "$what did not count its escalation"
 }
 

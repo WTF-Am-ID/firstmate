@@ -1052,7 +1052,7 @@ unknown_alive_stale_case() {  # <evidence: status|worktree|none>
     [ "$evidence" != worktree ] || printf 'recovered\n' > "$dir/wt/src/recovered.c"
   fi
   printf '%s' "$(seen_sig "$state/codexunknown.status")" > "$state/.seen-codexunknown_status"
-  key=$(printf '%s' "$window" | tr ':/. ' '____')
+  key=$(watch_window_key "$window")
   printf '%s' "$(hash_text 'unreadable long Codex turn')" > "$state/.hash-$key"
   printf '1\n' > "$state/.count-$key"
   export FM_FAKE_CREW_STATE='state: unknown · source: pane · harness state unavailable (unknown codex-unverified)'
@@ -4693,7 +4693,7 @@ test_afk_paused_changed_pane_hands_off_plain_stale() {
   else touch -m -d "@$back" "$statusf"; fi
   sig=$(seen_sig "$statusf"); printf '%s' "$sig" > "$state/.seen-afk-held_status"
   date '+%s' > "$state/.afk"
-  key=$(printf '%s' "$window" | tr '.:/' '___')
+  key=$(watch_window_key "$window")
 
   # Deliberately do not seed .hash-*: this is the changed-pane path that used to
   # call handle_paused_stale before AFK's one-shot daemon handoff.
