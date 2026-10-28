@@ -40,15 +40,13 @@
 #     waits on inside this hook-owned process tree (never a fire-and-forget
 #     shell &); Claude owns the process group, so its timeout/session teardown
 #     kills arm and watcher together, and the hook TERMs the arm with itself.
-#     HUP, TERM, and INT are translated through the ordinary durable failure
-#     handoff instead of leaving the generation frozen at arming. Claude does
-#     not deliver the exit 2 of a hook it terminated at the configured timeout
+#     HUP, TERM, and INT follow the session-aware interruption contract in
+#     docs/turnend-guard.md. Claude does not deliver the exit 2 of a hook it
+#     terminated at the configured timeout
 #     as a rewake (measured on Claude Code 2.1.278 and 2.1.281,
 #     docs/verification/supervision.md), so a park that outlives that timeout
-#     records the failure durably without waking an idle primary. Interrupted
-#     notices carry the producing session-lock identity, so the replacement's
-#     first generation retires that episode instead of inheriting its notice.
-#     Nothing shortens a quiet park, because no-change heartbeats are absorbed without
+#     records the failure durably without waking an idle primary. Nothing
+#     shortens a quiet park, because no-change heartbeats are absorbed without
 #     closing the arm.
 #   - Handling successor: Pi, omp, and OpenCode start the next arm before they
 #     deliver an actionable wake, so the fleet stays covered while the model
