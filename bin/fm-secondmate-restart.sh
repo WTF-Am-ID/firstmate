@@ -202,26 +202,19 @@ launch_restart() {  # <array-index>
   restart_active_count=$((restart_active_count + 1))
 }
 
-# Persistence has a narrower success contract than ordinary reply tracking.
-# Snapshot only the asked mate's parent channel and ignore progress, even if
-# another pending-reply consumer has already settled the generic expectation.
 resolve_persist_reply() {  # <array-index>
-  local i=$1 rec status_file status_lines line verb
+  local i=$1 rec status_file status_lines line request_kind
   PERSIST_VERB=
   rec=$(fm_pending_reply_path "$STATE" "${CORR[i]}")
+  request_kind=$(fm_pending_reply_get "$rec" request_kind)
   status_file=$(fm_pending_reply_get "$rec" parent_status)
   [ -f "$status_file" ] || return 1
   status_lines=$(cat "$status_file") || return 1
   while IFS= read -r line; do
-    fm_pending_reply_line_resolves "$line" "${CORR[i]}" || continue
-    verb=${line%%[[:space:]:]*}
-    case "$verb" in
-      done|blocked|failed|needs-decision)
-        fm_pending_reply_try_resolve "$STATE" "${CORR[i]}" || return 1
-        PERSIST_VERB=$verb
-        return 0
-        ;;
-    esac
+    fm_pending_reply_line_resolves "$line" "${CORR[i]}" "$request_kind" || continue
+    fm_pending_reply_try_resolve "$STATE" "${CORR[i]}" || return 1
+    PERSIST_VERB=${line%%[[:space:]:]*}
+    return 0
   done <<< "$status_lines"
   return 1
 }
@@ -342,7 +335,7 @@ while [ "$i" -lt "${#IDS[@]}" ]; do
   fi
 
   if ! corr=$(fm_pending_reply_create "$FM_HOME" "$STATE" "$id" \
-    "$FM_SECONDMATE_PERSIST_REQUEST"); then
+    "$FM_SECONDMATE_PERSIST_REQUEST" secondmate-restart-persist); then
     REASON[i]="its answer about the open work cannot be tracked, so a clean reload could not be proven"
     i=$((i + 1))
     continue
