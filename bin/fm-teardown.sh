@@ -72,6 +72,8 @@
 # local-only projects additionally accept work merged into the local default
 # branch (firstmate performs that merge after configured approval) as a fallback
 # for the common case where there is no remote at all.
+# Safety is proved again after task processes are reaped, before branch deletion
+# or worktree return; a refusal also clears the prepared backlog close for retry.
 # Scout tasks (kind=scout in meta) carve out of that check: their worktree is
 # declared scratch and the report at data/<task-id>/report.md is the work
 # product. Teardown proceeds only once the report exists and the shared
@@ -3804,6 +3806,22 @@ if [ "$KIND" != secondmate ] && teardown_owns_worktree; then
   reap_task_worktree_processes worktree "$WT" "$TASK_TMP"
 elif [ "$KIND" != secondmate ]; then
   reap_task_worktree_processes tasktmp "$TASK_TMP"
+fi
+
+# A worker can write after the first proof, including while its run is concluded
+# or its processes exit. Inspect the stopped copy before dropping its branch or
+# returning it on either backend path. A prepared close must not let startup
+# replay erase the retained task after this refusal.
+if teardown_owns_worktree && [ -d "$WT" ] && [ "$FORCE" != "--force" ]; then
+  if ! validate_worktree_teardown_safety; then
+    if [ "$BACKLOG_CLOSED" = 1 ]; then
+      fm_backlog_close_marker_clear "$STATE" "$ID" || {
+        echo "error: could not clear the refused teardown's pending backlog close ($FM_BACKLOG_TRANSITION_ERROR); retaining task records" >&2
+        exit 1
+      }
+    fi
+    exit 1
+  fi
 fi
 if [ "$KIND" = ship ] && teardown_owns_worktree && [ -e "$CONFIG/pipeline-spend" ]; then
   FM_HOME="$FM_HOME" FM_STATE_OVERRIDE="$STATE" FM_DATA_OVERRIDE="$DATA" FM_CONFIG_OVERRIDE="$CONFIG" \
