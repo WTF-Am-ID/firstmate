@@ -2630,7 +2630,7 @@ EOF
     reason="check: open decision overdue: $due_task key=$due_key age=$((now - due_opened))s"
     fm_wake_append check "open-decision:$due_task:$due_key" "$reason" || return 1
     rows=$(printf '%s' "$rows" | awk -F '\t' -v OFS='\t' -v task="$due_task" -v key="$due_key" \
-      -v now="$now" -v delay="$due_delay" '{ if ($1 == task && $2 == key) { $4=now; $5=delay } print }') || return 1
+      -v now="$now" -v delay="$due_delay" '{ if (($1 "") == (task "") && ($2 "") == (key "")) { $4=now; $5=delay } print }') || return 1
     OPEN_DECISION_REMINDER=$reason
   fi
   tmp=$(mktemp "$STATE/.open-decision-reminders.XXXXXX") || return 1

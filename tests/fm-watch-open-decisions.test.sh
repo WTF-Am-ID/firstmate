@@ -68,6 +68,42 @@ test_oldest_and_backoff() {
   pass "oldest key surfaces once, and independent per-key backoff doubles up to its cap"
 }
 
+assert_distinct_reminder_identities() {  # <older-task> <older-key> <newer-task> <newer-key>
+  local older_task=$1 older_key=$2 newer_task=$3 newer_key=$4 now count=0
+  reset_case
+  touch "$CONFIG/open-decision-reminders"
+  printf 'needs-decision [at=1000] [key=%s]: choose\n' "$older_key" > "$STATE/$older_task.status"
+  printf 'blocked [at=1050] [key=%s]: help\n' "$newer_key" >> "$STATE/$newer_task.status"
+  for now in 1200 1300 1500 1900 2300; do
+    if [ "$count" -gt 0 ]; then
+      open_decision_reminder_tick "$((now - 1))"
+      [ "$(count_wakes)" = "$count" ] || fail "numeric-looking identity repeated before its backoff"
+    fi
+    open_decision_reminder_tick "$now"
+    count=$((count + 1))
+    [ "$(count_wakes)" = "$count" ] || fail "older numeric-looking identity did not become due"
+    [ "$OPEN_DECISION_REMINDER" = "check: open decision overdue: $older_task key=$older_key age=$((now - 1000))s" ] \
+      || fail "older numeric-looking identity was not selected: $OPEN_DECISION_REMINDER"
+    open_decision_reminder_tick "$((now + 1))"
+    count=$((count + 1))
+    [ "$(count_wakes)" = "$count" ] || fail "distinct numeric-looking identity inherited another identity's backoff"
+    [ "$OPEN_DECISION_REMINDER" = "check: open decision overdue: $newer_task key=$newer_key age=$((now + 1 - 1050))s" ] \
+      || fail "newer numeric-looking identity was not selected: $OPEN_DECISION_REMINDER"
+    open_decision_reminder_tick "$((now + 1))"
+    [ "$(count_wakes)" = "$count" ] || fail "numeric-looking identity repeated without waiting"
+  done
+}
+
+test_numeric_keys_are_distinct() {
+  assert_distinct_reminder_identities worker 1 worker 01
+  pass "keys 1 and 01 receive separate reminders and retain independent bounded backoff"
+}
+
+test_numeric_tasks_are_distinct() {
+  assert_distinct_reminder_identities 1 api 01 api
+  pass "tasks 1 and 01 receive separate reminders and retain independent bounded backoff"
+}
+
 test_resolution_and_reopen() {
   reset_case
   touch "$CONFIG/open-decision-reminders"
@@ -176,6 +212,7 @@ test_watcher_loop() {
   pass "the actual watcher wakes and exits on an overdue key without any recorded pane"
 }
 
-fm_test_run test_disabled test_oldest_and_backoff test_resolution_and_reopen \
+fm_test_run test_disabled test_oldest_and_backoff test_numeric_keys_are_distinct \
+  test_numeric_tasks_are_distinct test_resolution_and_reopen \
   test_wait_exemptions test_unknown_times_and_keyless test_timed_fold_is_incremental \
   test_invalid_settings test_timed_cursor_retirement test_watcher_loop
