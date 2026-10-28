@@ -179,6 +179,7 @@ FM_HOME="${FM_HOME:-${FM_ROOT_OVERRIDE:-$FM_ROOT}}"
 
 # shellcheck source=bin/fm-backend.sh
 . "$FM_DAEMON_DIR/fm-backend.sh"
+# shellcheck source=bin/fm-watch-key-lib.sh
 . "$FM_DAEMON_DIR/fm-watch-key-lib.sh"
 
 # Canonical construction and parsing for every Firstmate operational input.
