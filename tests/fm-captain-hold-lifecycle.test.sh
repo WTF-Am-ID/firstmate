@@ -3886,7 +3886,8 @@ SH
   local_release="$local_home/local-validation-release"
   cat > "$local_home/fakebin/git" <<'SH'
 #!/usr/bin/env bash
-if [ "$*" = "-C ${FM_TEST_RACE_REPO:-} rev-parse --short main" ]; then
+if [ "${1:-}" = -C ] && [ "${2:-}" = "${FM_TEST_RACE_REPO:-}" ] \
+    && [ "${3:-}" = merge-base ] && [ "${4:-}" = --is-ancestor ]; then
   output=$("$FM_TEST_REAL_GIT" "$@") || exit $?
   : > "$FM_TEST_RACE_READY"
   while [ ! -e "$FM_TEST_RACE_RELEASE" ]; do sleep 0.01; done

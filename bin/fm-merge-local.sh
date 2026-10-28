@@ -2,21 +2,23 @@
 # Perform the approved local merge for a local-only ship task: fast-forward the
 # project's default branch to local_done_head= in state/<task-id>.meta,
 # recorded when the done report was accepted by bin/fm-dod-lib.sh. Missing or
-# malformed heads refuse, including legacy tasks: report readiness again before
-# approval. The recorded ship branch must still point at that exact commit.
+# malformed heads refuse. Legacy tasks with no head must report readiness again
+# before approval. The recorded ship branch must still point at that exact commit.
 #
 # This is firstmate's merge gate-action (the captain's merge authority applied
 # locally instead of via a GitHub PR). It is the one sanctioned exception to hard
 # rule #1 "never run state-changing git in projects/", and it is narrow: it only
 # runs for mode=local-only tasks, only after the captain approves (or yolo=on
-# auto-approves), and only as a clean fast-forward - it refuses a diverged branch
-# and tells you to have the crewmate rebase. See AGENTS.md prime directives,
+# auto-approves), and only as a clean fast-forward. A diverged branch needs a
+# rebase and a new task/approval record under bin/fm-dod-lib.sh's head-latching
+# contract before landing. See AGENTS.md prime directives,
 # project management, and task lifecycle.
 # The task's existing per-task control lock serializes the captain-hold check
 # through that fast-forward. A still-held or unreadable row refuses before the
 # merge, so a captain approval must be recorded as an `answer --release` before
 # this entrypoint is invoked. The lock ends when the fast-forward returns;
 # docs/captain-hold-lifecycle.md owns the accepted merge-to-cleanup residual.
+# tests/fm-merge-local.test.sh covers pinned-head landing and race refusals.
 # Usage: fm-merge-local.sh <task-id>
 set -eu
 
