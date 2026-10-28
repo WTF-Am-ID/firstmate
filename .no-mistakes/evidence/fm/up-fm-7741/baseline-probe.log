@@ -1,0 +1,13 @@
+baseline revision 2ba4c455f5c22d467707a8791f3207f3f179668a
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-baseline-ngpdwju3/baseline-home FM_OPEN_DECISION_OVERDUE_SECS=2 /bin/bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-baseline-ngpdwju3/baseline/bin/fm-watch.sh
+After 4s: watcher alive, no reminder or durable wake despite overdue keyed decision. Reported failure reproduced.
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-baseline-ngpdwju3/baseline/bin/fm-wake-lib.sh: line 617: 17262 Terminated: 15          sleep "$POLL"
+
+candidate revision 87dd6f7296e6487371a0174e8ed019078e5583b8
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-baseline-ngpdwju3/candidate-home FM_OPEN_DECISION_OVERDUE_SECS=2 /bin/bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/bin/fm-watch.sh
+stdout=check: open decision overdue: worker key=api age=101s
+stderr=exit=0
+DURABLE QUEUE
+1793154802	1	check	open-decision:worker:api	check: open decision overdue: worker key=api age=101s
+Baseline missed reminder; candidate emitted reminder for equivalent durable input.
+Removed disposable baseline code copy and both lab homes.

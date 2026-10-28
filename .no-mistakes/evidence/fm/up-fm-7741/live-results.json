@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Default-off silence and live opt-in",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Threshold, oldest selection and bounded backoff across watcher restarts",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Resolution stops reminders and reopening starts fresh",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Paused waits, captain transfers and invalid timestamps remain silent",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Real captain-held backlog suppresses reminders until release",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Invalid reminder settings fail closed",
+    "result": "pass",
+    "live": true
+  }
+]

@@ -1,0 +1,255 @@
+
+SCENARIO Default-off silence and live opt-in
+$ /bin/bash bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/default-off
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/default-off
+exit=0
+$ /bin/bash -c . bin/fm-wake-lib.sh; fm_wake_status_mark_current "$FM_HOME/state" "$FM_HOME/state/$1.status" mark worker
+exit=0
+STATUS worker 'needs-decision [at=1793154631] [key=api]: choose\n'
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/default-off FM_OPEN_DECISION_OVERDUE_SECS=2 FM_OPEN_DECISION_BACKOFF_MAX_SECS=8 /bin/bash bin/fm-watch.sh
+Watcher remained alive for 3s; no durable wake queued
+WATCHER stdout=check: open decision overdue: worker key=api age=103s
+stderr=exit=0
+DURABLE QUEUE
+1793154735	1	check	open-decision:worker:api	check: open decision overdue: worker key=api age=103s
+
+PERSISTED BACKOFF
+worker	api	1793154631	1793154734	2
+RESULT pass
+
+SCENARIO Threshold, oldest selection and bounded backoff across watcher restarts
+$ /bin/bash bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/threshold-backoff
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/threshold-backoff
+exit=0
+$ /bin/bash -c . bin/fm-wake-lib.sh; fm_wake_status_mark_current "$FM_HOME/state" "$FM_HOME/state/$1.status" mark z-old
+exit=0
+STATUS z-old 'needs-decision [at=1793154735] [key=older]: choose\nworking: ongoing work\n'
+$ /bin/bash -c . bin/fm-wake-lib.sh; fm_wake_status_mark_current "$FM_HOME/state" "$FM_HOME/state/$1.status" mark a-new
+exit=0
+STATUS a-new 'blocked [at=1793154736] [key=newer]: help\n'
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/threshold-backoff FM_OPEN_DECISION_OVERDUE_SECS=4 FM_OPEN_DECISION_BACKOFF_MAX_SECS=12 /bin/bash bin/fm-watch.sh
+Watcher remained alive for 1s; no durable wake queued
+WATCHER stdout=check: open decision overdue: z-old key=older age=4s
+stderr=exit=0
+DURABLE QUEUE
+1793154739	1	check	open-decision:z-old:older	check: open decision overdue: z-old key=older age=4s
+
+PERSISTED BACKOFF
+a-new	newer	1793154736	0	4
+z-old	older	1793154735	1793154739	4
+$ /bin/bash bin/fm-wake-drain.sh
+1793154739	1	check	open-decision:z-old:older	check: open decision overdue: z-old key=older age=4s
+OPEN DECISIONS (still open, folded from the durable status logs - not just the latest line):
+a-new [key=newer] blocked: help
+z-old [key=older] needs-decision: choose
+OPEN DECISIONS: close one by answering it: bin/fm-send.sh <task> --resolve-key <key> '<answer>'
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 74365.1793154739.3oPS84
+exit=0
+$ /bin/bash bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 74365.1793154739.3oPS84
+exit=0
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/threshold-backoff FM_OPEN_DECISION_OVERDUE_SECS=4 FM_OPEN_DECISION_BACKOFF_MAX_SECS=12 /bin/bash bin/fm-watch.sh
+WATCHER stdout=check: open decision overdue: a-new key=newer age=5s
+stderr=exit=0
+DURABLE QUEUE
+1793154741	2	check	open-decision:a-new:newer	check: open decision overdue: a-new key=newer age=5s
+
+PERSISTED BACKOFF
+a-new	newer	1793154736	1793154741	4
+z-old	older	1793154735	1793154739	4
+$ /bin/bash bin/fm-wake-drain.sh
+1793154741	2	check	open-decision:a-new:newer	check: open decision overdue: a-new key=newer age=5s
+OPEN DECISIONS (still open, folded from the durable status logs - not just the latest line):
+a-new [key=newer] blocked: help
+z-old [key=older] needs-decision: choose
+OPEN DECISIONS: close one by answering it: bin/fm-send.sh <task> --resolve-key <key> '<answer>'
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 77073.1793154741.39stll
+exit=0
+$ /bin/bash bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 77073.1793154741.39stll
+exit=0
+$ /bin/bash -c . bin/fm-wake-lib.sh; fm_wake_status_mark_current "$FM_HOME/state" "$FM_HOME/state/$1.status" mark a-new
+exit=0
+STATUS a-new 'resolved [at=1793154743] [key=newer]: answered\n'
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/threshold-backoff FM_OPEN_DECISION_OVERDUE_SECS=4 FM_OPEN_DECISION_BACKOFF_MAX_SECS=12 /bin/bash bin/fm-watch.sh
+WATCHER stdout=check: open decision overdue: z-old key=older age=8s
+stderr=exit=0
+DURABLE QUEUE
+1793154744	3	check	open-decision:z-old:older	check: open decision overdue: z-old key=older age=8s
+
+PERSISTED BACKOFF
+z-old	older	1793154735	1793154743	8
+Wall-clock repeat interval >= 4s; next delay=8s
+$ /bin/bash bin/fm-wake-drain.sh
+1793154744	3	check	open-decision:z-old:older	check: open decision overdue: z-old key=older age=8s
+OPEN DECISIONS (still open, folded from the durable status logs - not just the latest line):
+z-old [key=older] needs-decision: choose
+OPEN DECISIONS: close one by answering it: bin/fm-send.sh <task> --resolve-key <key> '<answer>'
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 3 --recovery-generation 78663.1793154744.e6htiC
+exit=0
+$ /bin/bash bin/fm-wake-drain.sh --ack-through 3 --recovery-generation 78663.1793154744.e6htiC
+exit=0
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/threshold-backoff FM_OPEN_DECISION_OVERDUE_SECS=4 FM_OPEN_DECISION_BACKOFF_MAX_SECS=12 /bin/bash bin/fm-watch.sh
+WATCHER stdout=check: open decision overdue: z-old key=older age=16s
+stderr=exit=0
+DURABLE QUEUE
+1793154752	4	check	open-decision:z-old:older	check: open decision overdue: z-old key=older age=16s
+
+PERSISTED BACKOFF
+z-old	older	1793154735	1793154751	12
+Wall-clock repeat interval >= 8s; next delay=12s
+$ /bin/bash bin/fm-wake-drain.sh
+1793154752	4	check	open-decision:z-old:older	check: open decision overdue: z-old key=older age=16s
+OPEN DECISIONS (still open, folded from the durable status logs - not just the latest line):
+z-old [key=older] needs-decision: choose
+OPEN DECISIONS: close one by answering it: bin/fm-send.sh <task> --resolve-key <key> '<answer>'
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 82123.1793154752.xjZqEx
+exit=0
+$ /bin/bash bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 82123.1793154752.xjZqEx
+exit=0
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/threshold-backoff FM_OPEN_DECISION_OVERDUE_SECS=4 FM_OPEN_DECISION_BACKOFF_MAX_SECS=12 /bin/bash bin/fm-watch.sh
+WATCHER stdout=check: open decision overdue: z-old key=older age=28s
+stderr=exit=0
+DURABLE QUEUE
+1793154763	5	check	open-decision:z-old:older	check: open decision overdue: z-old key=older age=28s
+
+PERSISTED BACKOFF
+z-old	older	1793154735	1793154763	12
+Wall-clock repeat interval >= 12s; next delay=12s
+$ /bin/bash bin/fm-wake-drain.sh
+1793154763	5	check	open-decision:z-old:older	check: open decision overdue: z-old key=older age=28s
+OPEN DECISIONS (still open, folded from the durable status logs - not just the latest line):
+z-old [key=older] needs-decision: choose
+OPEN DECISIONS: close one by answering it: bin/fm-send.sh <task> --resolve-key <key> '<answer>'
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 5 --recovery-generation 87715.1793154763.G0hOXn
+exit=0
+$ /bin/bash bin/fm-wake-drain.sh --ack-through 5 --recovery-generation 87715.1793154763.G0hOXn
+exit=0
+RESULT pass
+
+SCENARIO Resolution stops reminders and reopening starts fresh
+$ /bin/bash bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/resolve-reopen
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/resolve-reopen
+exit=0
+$ /bin/bash -c . bin/fm-wake-lib.sh; fm_wake_status_mark_current "$FM_HOME/state" "$FM_HOME/state/$1.status" mark worker
+exit=0
+STATUS worker 'blocked [at=1793154665] [key=api]: help\n'
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/resolve-reopen FM_OPEN_DECISION_OVERDUE_SECS=2 FM_OPEN_DECISION_BACKOFF_MAX_SECS=8 /bin/bash bin/fm-watch.sh
+WATCHER stdout=check: open decision overdue: worker key=api age=100s
+stderr=exit=0
+DURABLE QUEUE
+1793154765	1	check	open-decision:worker:api	check: open decision overdue: worker key=api age=100s
+
+PERSISTED BACKOFF
+worker	api	1793154665	1793154765	2
+$ /bin/bash bin/fm-wake-drain.sh
+1793154765	1	check	open-decision:worker:api	check: open decision overdue: worker key=api age=100s
+OPEN DECISIONS (still open, folded from the durable status logs - not just the latest line):
+worker [key=api] blocked: help
+OPEN DECISIONS: close one by answering it: bin/fm-send.sh <task> --resolve-key <key> '<answer>'
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 94711.1793154765.MSpbgu
+exit=0
+$ /bin/bash bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 94711.1793154765.MSpbgu
+exit=0
+$ /bin/bash -c . bin/fm-wake-lib.sh; fm_wake_status_mark_current "$FM_HOME/state" "$FM_HOME/state/$1.status" mark worker
+exit=0
+STATUS worker 'resolved [at=1793154767] [key=api]: answered\n'
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/resolve-reopen FM_OPEN_DECISION_OVERDUE_SECS=2 FM_OPEN_DECISION_BACKOFF_MAX_SECS=8 /bin/bash bin/fm-watch.sh
+Watcher remained alive for 3s; no durable wake queued
+$ /bin/bash -c . bin/fm-wake-lib.sh; fm_wake_status_mark_current "$FM_HOME/state" "$FM_HOME/state/$1.status" mark worker
+exit=0
+STATUS worker 'needs-decision [at=1793154770] [key=api]: new episode\n'
+WATCHER stdout=check: open decision overdue: worker key=api age=3s
+stderr=exit=0
+DURABLE QUEUE
+1793154773	2	check	open-decision:worker:api	check: open decision overdue: worker key=api age=3s
+
+PERSISTED BACKOFF
+worker	api	1793154770	1793154773	2
+RESULT pass
+
+SCENARIO Paused waits, captain transfers and invalid timestamps remain silent
+$ /bin/bash bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/paused-transferred-unknown
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/paused-transferred-unknown
+exit=0
+$ /bin/bash -c . bin/fm-wake-lib.sh; fm_wake_status_mark_current "$FM_HOME/state" "$FM_HOME/state/$1.status" mark paused
+exit=0
+STATUS paused 'needs-decision [at=1793154673] [key=api]: choose\npaused [at=1793154674]: external wait\n'
+$ /bin/bash -c . bin/fm-wake-lib.sh; fm_wake_status_mark_current "$FM_HOME/state" "$FM_HOME/state/$1.status" mark transferred
+exit=0
+STATUS transferred 'blocked [at=1793154673] [key=api]: help\ncaptain-held [at=1793154674] [key=api]: handed to captain\n'
+$ /bin/bash -c . bin/fm-wake-lib.sh; fm_wake_status_mark_current "$FM_HOME/state" "$FM_HOME/state/$1.status" mark unknown
+exit=0
+STATUS unknown 'needs-decision [key=missing]: unstamped\nblocked [at=bad] [key=invalid]: bad time\nblocked [at=1]: keyless\n'
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/paused-transferred-unknown FM_OPEN_DECISION_OVERDUE_SECS=2 FM_OPEN_DECISION_BACKOFF_MAX_SECS=8 /bin/bash bin/fm-watch.sh
+Watcher remained alive for 3s; no durable wake queued
+$ /bin/bash -c . bin/fm-wake-lib.sh; fm_wake_status_mark_current "$FM_HOME/state" "$FM_HOME/state/$1.status" mark paused
+exit=0
+STATUS paused 'working [at=1793154777]: resumed\n'
+WATCHER stdout=check: open decision overdue: paused key=api age=104s
+stderr=exit=0
+DURABLE QUEUE
+1793154778	1	check	open-decision:paused:api	check: open decision overdue: paused key=api age=104s
+
+PERSISTED BACKOFF
+paused	api	1793154673	1793154777	2
+RESULT pass
+
+SCENARIO Real captain-held backlog suppresses reminders until release
+$ /bin/bash bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/captain-backlog
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/captain-backlog
+exit=0
+$ /bin/bash bin/fm-captain-hold.sh hold worker --title Disposable decision --reason Owner must decide
+worker
+exit=0
+$ /bin/bash bin/fm-captain-hold.sh open worker --identity
+2026-10-28T02:32:58Z#0
+exit=0
+HELD BACKLOG
+## In flight
+
+## Queued
+- [ ] worker - Disposable decision (repo: firstmate) (kind: captain) (since 2026-10-27) (hold: fm-hold-v1:T3duZXIgbXVzdCBkZWNpZGU=) (hold-kind: captain)
+  Captain hold set: 2026-10-28T02:32:58Z
+## Done
+
+$ /bin/bash -c . bin/fm-wake-lib.sh; fm_wake_status_mark_current "$FM_HOME/state" "$FM_HOME/state/$1.status" mark worker
+exit=0
+STATUS worker 'needs-decision [at=1793154680] [key=api]: choose\nworking: unrelated progress\n'
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/captain-backlog FM_OPEN_DECISION_OVERDUE_SECS=2 FM_OPEN_DECISION_BACKOFF_MAX_SECS=8 /bin/bash bin/fm-watch.sh
+Watcher remained alive for 3s; no durable wake queued
+$ /bin/bash bin/fm-captain-hold.sh answer worker --decision-file /Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/captain-backlog/decision.txt --release
+released: worker
+exit=0
+WATCHER stdout=check: open decision overdue: worker key=api age=104s
+stderr=exit=0
+DURABLE QUEUE
+1793154785	1	check	open-decision:worker:api	check: open decision overdue: worker key=api age=104s
+
+PERSISTED BACKOFF
+worker	api	1793154680	1793154784	2
+RESULT pass
+
+SCENARIO Invalid reminder settings fail closed
+$ /bin/bash bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/invalid-settings
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/invalid-settings
+exit=0
+$ /bin/bash -c . bin/fm-wake-lib.sh; fm_wake_status_mark_current "$FM_HOME/state" "$FM_HOME/state/$1.status" mark worker
+exit=0
+STATUS worker 'blocked [at=1793154685] [key=api]: help\n'
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/invalid-settings FM_OPEN_DECISION_OVERDUE_SECS=0 FM_OPEN_DECISION_BACKOFF_MAX_SECS=8 /bin/bash bin/fm-watch.sh
+INVALID 0/8 stdout= stderr=watcher: invalid open-decision reminder settings
+watcher: open-decision reminder check failed
+ exit=1
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/invalid-settings FM_OPEN_DECISION_OVERDUE_SECS=2 FM_OPEN_DECISION_BACKOFF_MAX_SECS=1 /bin/bash bin/fm-watch.sh
+INVALID 2/1 stdout= stderr=watcher: open-decision backoff cap is below threshold
+watcher: open-decision reminder check failed
+ exit=1
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/invalid-settings FM_OPEN_DECISION_OVERDUE_SECS=02 FM_OPEN_DECISION_BACKOFF_MAX_SECS=8 /bin/bash bin/fm-watch.sh
+INVALID 02/8 stdout= stderr=watcher: invalid open-decision reminder settings
+watcher: open-decision reminder check failed
+ exit=1
+$ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw/invalid-settings FM_OPEN_DECISION_OVERDUE_SECS=2 FM_OPEN_DECISION_BACKOFF_MAX_SECS=bad /bin/bash bin/fm-watch.sh
+INVALID 2/bad stdout= stderr=watcher: invalid open-decision reminder settings
+watcher: open-decision reminder check failed
+ exit=1
+RESULT pass
+Removed disposable lab homes: /Users/daddy/.no-mistakes-upstream-codex/worktrees/7e32a66a3759/01M6059VFKV9G8RK8QBEAVXX33/.local-test-7741-1fgh9bcw
