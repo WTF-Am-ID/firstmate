@@ -208,17 +208,18 @@ fm_run_timed() {  # <seconds> <command...>
       fm_run_external_timeout "$timeout_path" "$seconds" "$@"
       ;;
     perl)
-      local saved_traps runner_pid='' interrupted='' runner_rc
+      local saved_traps runner_pid='' interrupted='' runner_rc monitor_was_on=0
       saved_traps=$(trap -p INT HUP TERM)
       # wait on an asynchronous runner so Bash handles a process-directed signal
       # immediately instead of deferring the trap until a foreground Perl exits.
       trap 'interrupted=INT; [ -z "$runner_pid" ] || kill -INT "$runner_pid" 2>/dev/null || true' INT
       trap 'interrupted=HUP; [ -z "$runner_pid" ] || kill -HUP "$runner_pid" 2>/dev/null || true' HUP
       trap 'interrupted=TERM; [ -z "$runner_pid" ] || kill -TERM "$runner_pid" 2>/dev/null || true' TERM
+      case $- in *m*) monitor_was_on=1 ;; esac
+      set -m
       perl -MPOSIX=WNOHANG,setpgid -MTime::HiRes=time -e '
         my $bound = shift;
         my ($signal, $kill_at, $result) = (0, 0, 0);
-        my $parent = getppid();
         for my $entry ([HUP => 1], [INT => 2], [TERM => 15]) {
           my ($name, $number) = @$entry;
           $SIG{$name} = sub { $signal ||= $number };
@@ -235,8 +236,8 @@ fm_run_timed() {  # <seconds> <command...>
         setpgid($pid, $pid);
         my $deadline = time + $bound;
         while (1) {
-          if (!$kill_at && ($signal || getppid() != $parent || time >= $deadline)) {
-            $result = $signal ? 128 + $signal : getppid() != $parent ? 143 : 124;
+          if (!$kill_at && ($signal || time >= $deadline)) {
+            $result = $signal ? 128 + $signal : 124;
             $kill_at = time + 0.2;
             kill "TERM", -$pid;
           }
@@ -256,6 +257,7 @@ fm_run_timed() {  # <seconds> <command...>
         }
       ' -- "$seconds" "$@" <&0 &
       runner_pid=$!
+      [ "$monitor_was_on" -eq 1 ] || set +m
       [ -z "$interrupted" ] || kill -"$interrupted" "$runner_pid" 2>/dev/null || true
       while :; do
         if wait "$runner_pid"; then runner_rc=0; else runner_rc=$?; fi

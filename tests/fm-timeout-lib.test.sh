@@ -531,36 +531,142 @@ test_run_timed_perl_interrupt_cleanup() {
   pass "fm_run_timed perl reaps owned groups and preserves caller signal dispositions on INT/HUP/TERM and timeout"
 }
 
+test_run_timed_perl_startup_interrupt_cleanup() {
+  local startup_bin real_perl signal target monitor
+  startup_bin="$TMP_ROOT/perl-startup-bin"
+  real_perl=$(command -v perl)
+  mkdir -p "$startup_bin"
+  ln -s "$(command -v bash)" "$startup_bin/bash"
+  printf '#!%s\n' "$real_perl" > "$startup_bin/perl"
+  cat >> "$startup_bin/perl" <<'PERL'
+use strict;
+use warnings;
+use Time::HiRes qw(sleep);
+my $dir = $ENV{FM_TIMEOUT_STARTUP_DIR};
+if (!-e "$dir/runner") {
+  open my $f, ">", "$dir/runner" or die $!;
+  print $f "$$\n";
+  close $f;
+  sleep 300;
+}
+exec $ENV{FM_TIMEOUT_STARTUP_PERL}, @ARGV;
+die "exec: $!";
+PERL
+  chmod +x "$startup_bin/perl"
+  for monitor in off on; do
+    for signal in INT HUP TERM; do
+      for target in caller group; do
+        "$real_perl" -MPOSIX=setpgid,WNOHANG -MTime::HiRes=time,sleep -MIO::Select -e '
+          my ($root, $bin, $dir, $signal, $target, $monitor, $real_perl) = @ARGV;
+          mkdir $dir or die "mkdir: $!";
+          pipe(my $output, my $writer) or die "pipe: $!";
+          my $caller = fork;
+          die "fork: $!" unless defined $caller;
+          if (!$caller) {
+            close $output;
+            setpgid(0, 0) == 0 or die "setpgid: $!";
+            $SIG{$_} = "DEFAULT" for qw(INT HUP TERM);
+            open STDOUT, ">&", $writer or die "stdout: $!";
+            close $writer;
+            @ENV{qw(PATH FM_TIMEOUT_STARTUP_DIR FM_TIMEOUT_STARTUP_PERL)} = ($bin, $dir, $real_perl);
+            exec "/bin/bash", "-c", q{
+              . "$1/bin/fm-timeout-lib.sh"
+              [ "$4" != on ] || set -m
+              before=$-
+              trap "printf \"handled $3\\n\"" "$3"
+              fm_run_timed 30 bash -c '\''printf launched > "$1"'\'' _ "$2/command"
+              rc=$?
+              [ "$-" = "$before" ] || exit 98
+              exit "$rc"
+            }, "_", $root, $dir, $signal, $monitor;
+            die "exec: $!";
+          }
+          close $writer;
+          setpgid($caller, $caller);
+          my ($runner, $status, $eof);
+          my $captured = "";
+          eval {
+            my $ready_by = time + 5;
+            until (-s "$dir/runner") {
+              die "runner not ready" if time >= $ready_by;
+              sleep 0.01;
+            }
+            open my $f, "<", "$dir/runner" or die $!;
+            $runner = <$f>;
+            chomp $runner;
+            die "invalid runner pid" unless $runner =~ /^\d+$/ && $runner > 1;
+            kill $signal, ($target eq "group" ? -$caller : $caller) or die "signal: $!";
+            my $end = time + 5;
+            my $select = IO::Select->new($output);
+            until (defined $status && $eof) {
+              if (!defined $status && waitpid($caller, WNOHANG) == $caller) { $status = $? }
+              if (!$eof && $select->can_read(0.01)) {
+                my $n = sysread $output, my $buf, 4096;
+                die "read: $!" unless defined $n;
+                $captured .= $buf;
+                $eof = 1 if !$n;
+              }
+              die "startup interrupt exceeded cleanup bound" if time >= $end;
+            }
+            die "command launched despite startup interrupt" if -e "$dir/command";
+            my %number = (HUP => 1, INT => 2, TERM => 15);
+            my $rc = ($status & 127) ? 128 + ($status & 127) : $status >> 8;
+            die "incorrect status $rc" unless $rc == 128 + $number{$signal};
+            die "caller handler not preserved: $captured" unless $captured eq "handled $signal\n";
+            die "runner survived startup interrupt" if kill(0, $runner) || kill(0, -$runner);
+          };
+          my $error = $@;
+          if ($runner) {
+            kill "KILL", -$runner;
+            kill "KILL", $runner;
+          }
+          kill "KILL", -$caller;
+          waitpid $caller, 0 unless defined $status;
+          die "$signal to $target with monitor $monitor: $error" if $error;
+        ' "$ROOT" "$startup_bin" "$TMP_ROOT/startup-$monitor-$signal-$target" "$signal" "$target" "$monitor" "$real_perl" \
+          || fail "fm_run_timed perl startup $signal to $target with monitor $monitor"
+      done
+    done
+  done
+  pass "fm_run_timed perl cancels before handler installation and preserves caller job control and signal handlers"
+}
+
 test_run_timed_perl_preserves_completion_and_caller_traps() {
-  local out rc status
-  for status in 0 7 137 143; do
-    rc=0
-    out=$(PATH=$PERL_ONLY /bin/bash -c '
-      . "$1/bin/fm-timeout-lib.sh"
-      trap ": original INT" INT
-      trap ": original HUP" HUP
-      trap ": original TERM" TERM
-      before=$(trap -p INT HUP TERM)
-      fm_run_timed 5 bash -c '\''
-        read -r line
-        echo "$line"
-        case $1 in
-          137) kill -KILL $$ ;;
-          143) kill -TERM $$ ;;
-          *) exit "$1" ;;
-        esac
-      '\'' _ "$2"
-      rc=$?
-      [ "$(trap -p INT HUP TERM)" = "$before" ] || exit 99
-      exit "$rc"
-    ' _ "$ROOT" "$status" <<< input 2>/dev/null) || rc=$?
-    [ "$rc" -eq "$status" ] || fail "Perl completion status $status became $rc"
-    [ "$out" = input ] || fail "Perl completion lost stdin or stdout: $out"
+  local out rc status monitor
+  for monitor in off on; do
+    for status in 0 7 137 143; do
+      rc=0
+      out=$(PATH=$PERL_ONLY /bin/bash -c '
+        . "$1/bin/fm-timeout-lib.sh"
+        [ "$3" != on ] || set -m
+        before_options=$-
+        trap ": original INT" INT
+        trap ": original HUP" HUP
+        trap ": original TERM" TERM
+        before=$(trap -p INT HUP TERM)
+        fm_run_timed 5 bash -c '\''
+          read -r line
+          echo "$line"
+          case $1 in
+            137) kill -KILL $$ ;;
+            143) kill -TERM $$ ;;
+            *) exit "$1" ;;
+          esac
+        '\'' _ "$2"
+        rc=$?
+        [ "$-" = "$before_options" ] || exit 98
+        [ "$(trap -p INT HUP TERM)" = "$before" ] || exit 99
+        exit "$rc"
+      ' _ "$ROOT" "$status" "$monitor" <<< input 2>/dev/null) || rc=$?
+      [ "$rc" -eq "$status" ] || fail "Perl completion status $status became $rc"
+      [ "$out" = input ] || fail "Perl completion lost stdin or stdout: $out"
+    done
   done
   pass "fm_run_timed perl preserves stdin, output, completion statuses and caller traps"
 }
 
 test_run_timed_perl_interrupt_cleanup
+test_run_timed_perl_startup_interrupt_cleanup
 test_run_timed_perl_preserves_completion_and_caller_traps
 test_passes_the_command_status_and_output_through
 test_system_bash_preserves_completion_and_signal_statuses
