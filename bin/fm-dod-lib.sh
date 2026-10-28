@@ -745,21 +745,26 @@ fm_dod_local_done_head() {  # <meta>
 
 # Latch the head before reporting readiness, not at landing time. Snapshot
 # callers may supply captured meta; compare it with the live record under the
-# existing control/meta locks before publishing to the live owner only.
-fm_dod_pin_local_done_head() (  # <state> <id> <meta> <sha> <captured-meta>
-  local state=$1 id=$2 meta=$3 sha=$4 captured=$5 script_dir live control lock tmp='' pinned
+# existing control/meta locks before publishing to the live owner only. A caller
+# already holding the live meta lock passes meta-locked and retains its locks.
+fm_dod_pin_local_done_head() (  # <state> <id> <meta> <sha> <captured-meta> [meta-locked]
+  local state=$1 id=$2 meta=$3 sha=$4 captured=$5 script_dir live control='' lock='' tmp='' pinned
   script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-  # shellcheck source=bin/fm-wake-lib.sh
+  # These lazy imports are canonical lint roots. Keep their subshell-local
+  # initializers out of ShellCheck's analysis of the sourcing caller's globals.
+  # shellcheck source=/dev/null
   . "$script_dir/fm-wake-lib.sh"
-  # shellcheck source=bin/fm-backlog-transition-lib.sh
+  # shellcheck source=/dev/null
   . "$script_dir/fm-backlog-transition-lib.sh"
   live="$state/$id.meta"
-  control="$state/.control-$id.lock"
-  lock=$(fm_meta_lock_path "$live") || return 1
-  fm_lock_try_acquire "$control" || return 1
-  trap 'fm_lock_release "$control" || true' EXIT
-  fm_lock_try_acquire "$lock" || return 1
-  trap '[ -z "$tmp" ] || rm -f -- "$tmp"; fm_lock_release "$lock" || true; fm_lock_release "$control" || true' EXIT
+  if [ "${6:-}" != meta-locked ]; then
+    control="$state/.control-$id.lock"
+    lock=$(fm_meta_lock_path "$live") || return 1
+    fm_lock_try_acquire "$control" || return 1
+    trap 'fm_lock_release "$control" || true' EXIT
+    fm_lock_try_acquire "$lock" || return 1
+  fi
+  trap '[ -z "$tmp" ] || rm -f -- "$tmp"; [ -z "$lock" ] || fm_lock_release "$lock" || true; [ -z "$control" ] || fm_lock_release "$control" || true' EXIT
   fm_backlog_record_present "$live" 'local readiness metadata' "$state" || return 1
   cmp -s "$meta" "$live" || return 1
   [ "$(cat "$live")" = "$captured" ] || return 1
@@ -891,7 +896,7 @@ fm_dod_named_head_reachable_outside_worktree() {  # <worktree> <project> <mode> 
 # output. <state> <id> <meta> supply pr=,
 # pr_head=, and the merge-notified marker; <meta> may be a captured copy
 # (bin/fm-fleet-snapshot.sh), so the marker is read from <state>.
-fm_dod_accept_ship_done() {  # <kind> <mode> <worktree> <project> <line> [<state> <id> <meta>]
+fm_dod_accept_ship_done() {  # <kind> <mode> <worktree> <project> <line> [<state> <id> <meta> [meta-locked]]
   local kind=$1 mode=$2 wt=$3 project=$4 line=$5 state=${6:-} id=${7:-} meta=${8:-} url sha gerrit captured=''
   fm_dod_should_gate_ship_done "$kind" "$mode" "$line" || return 0
   if [ "$mode" = local-only ] && [ -n "$meta" ]; then
@@ -942,7 +947,7 @@ fm_dod_accept_ship_done() {  # <kind> <mode> <worktree> <project> <line> [<state
   if fm_dod_named_head_reachable_outside_worktree "$wt" "$project" "$mode" "$sha"; then
     if [ "$mode" = local-only ] && [ -n "$meta" ]; then
       if [ -z "$state" ] || [ -z "$id" ] \
-        || ! fm_dod_pin_local_done_head "$state" "$id" "$meta" "$sha" "$captured"; then
+        || ! fm_dod_pin_local_done_head "$state" "$id" "$meta" "$sha" "$captured" "${9:-}"; then
         printf '%s\n' "local-only done head could not be recorded or differs from the recorded head; revised work requires a new task/approval record"
         return 1
       fi

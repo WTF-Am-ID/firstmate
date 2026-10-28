@@ -18,6 +18,8 @@
 # merge, so a captain approval must be recorded as an `answer --release` before
 # this entrypoint is invoked. The lock ends when the fast-forward returns;
 # docs/captain-hold-lifecycle.md owns the accepted merge-to-cleanup residual.
+# A per-checkout lock in the project's Git directory serializes different
+# tasks across the checks, checkout update, ref transaction, and rollback.
 # tests/fm-merge-local.test.sh covers pinned-head landing and race refusals.
 # Usage: fm-merge-local.sh <task-id>
 set -eu
@@ -70,7 +72,9 @@ MERGE_EXPECTED_HEAD=$(fm_dod_local_done_head "$META") || {
 
 MERGE_CONTROL_LOCK=
 MERGE_META_LOCK=
+MERGE_PROJECT_LOCK=
 merge_control_cleanup() {
+  [ -z "$MERGE_PROJECT_LOCK" ] || fm_lock_release "$MERGE_PROJECT_LOCK" || true
   [ -z "$MERGE_META_LOCK" ] || fm_lock_release "$MERGE_META_LOCK" || true
   [ -z "$MERGE_CONTROL_LOCK" ] || fm_lock_release "$MERGE_CONTROL_LOCK" || true
 }
@@ -125,6 +129,12 @@ fi
 local_head_matches() {
   [ "$(git -C "$PROJ" rev-parse --verify --quiet "refs/heads/$BRANCH^{commit}")" = "$MERGE_HEAD" ]
 }
+project_git_dir=$(git -C "$PROJ" rev-parse --absolute-git-dir) || {
+  echo "error: cannot determine the project checkout's Git directory" >&2
+  exit 1
+}
+MERGE_PROJECT_LOCK="$project_git_dir/fm-local-landing.lock"
+fm_lock_acquire_wait "$MERGE_PROJECT_LOCK"
 local_head_matches || { echo "error: branch $BRANCH differs from the recorded local done head; refusing" >&2; exit 1; }
 
 DEFAULT=$(default_branch) || { echo "error: cannot determine default branch for $PROJ; expected origin/HEAD, main, or master" >&2; exit 1; }
@@ -191,6 +201,8 @@ fm_lock_release "$MERGE_CONTROL_LOCK" || true
 MERGE_CONTROL_LOCK=
 [ "$merge_status" -eq 0 ] || exit "$merge_status"
 after=$(git -C "$PROJ" rev-parse --short "$DEFAULT")
+fm_lock_release "$MERGE_PROJECT_LOCK" || true
+MERGE_PROJECT_LOCK=
 # Opt-in fleet activity ledger (docs/fleet-ledger.md); off costs one file test.
 [ ! -e "${FM_CONFIG_OVERRIDE:-$FM_HOME/config}/fleet-ledger" ] || FM_HOME=$FM_HOME FM_STATE_OVERRIDE=$STATE "$SCRIPT_DIR/fm-fleet-ledger.sh" merged "$ID" local || true
 echo "merged $BRANCH into local $DEFAULT ($before -> $after) in $PROJ"

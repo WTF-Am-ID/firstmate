@@ -36,8 +36,10 @@ record_done() {
 }
 
 land() {
+  local task=local-task
+  [ "$#" -eq 0 ] || task=$1
   FM_ROOT_OVERRIDE="$HOME_DIR" FM_HOME="$HOME_DIR" FM_STATE_OVERRIDE="$HOME_DIR/state" \
-    bash "${MERGE_SCRIPT:-$ROOT/bin/fm-merge-local.sh}" local-task
+    bash "${MERGE_SCRIPT:-$ROOT/bin/fm-merge-local.sh}" "$task"
 }
 
 assert_refused() {
@@ -163,7 +165,148 @@ test_snapshot_cannot_pin_a_replacement_task() {
   pass 'captured metadata cannot pin a replacement task generation'
 }
 
-fm_test_run test_branch_advance_does_not_change_approval \
+test_done_recording_preserves_caller_locks() {
+  local caller
+  for caller in ledger teardown; do
+    make_case "locked-$caller"
+    (
+      local FM_HOME="$HOME_DIR" FM_STATE_OVERRIDE="$HOME_DIR/state"
+      # shellcheck source=bin/fm-wake-lib.sh
+      . "$ROOT/bin/fm-wake-lib.sh"
+      local lock control='' owner
+      lock=$(fm_meta_lock_path "$META") || exit 1
+      if [ "$caller" = teardown ]; then
+        control="$HOME_DIR/state/.control-local-task.lock"
+        fm_lock_try_acquire "$control" || exit 1
+      fi
+      fm_lock_try_acquire "$lock" || exit 1
+      fm_current_pid owner || exit 1
+      trap 'fm_lock_release "$lock"; [ -z "$control" ] || fm_lock_release "$control"' EXIT
+      FM_HOME="$HOME_DIR" fm_dod_accept_ship_done ship local-only "$WT" "$PROJ" \
+        'done: ready' "$HOME_DIR/state" local-task "$META" meta-locked || exit 1
+      [ "$(fm_dod_local_done_head "$META")" = "$X" ] || exit 1
+      FM_HOME="$HOME_DIR" fm_dod_accept_ship_done ship local-only "$WT" "$PROJ" \
+        'done: ready again' "$HOME_DIR/state" local-task "$META" meta-locked || exit 1
+      git -C "$WT" commit -q --allow-empty -m Y || exit 1
+      if FM_HOME="$HOME_DIR" fm_dod_accept_ship_done ship local-only "$WT" "$PROJ" \
+        'done: changed' "$HOME_DIR/state" local-task "$META" meta-locked >/dev/null; then
+        exit 1
+      fi
+      [ "$(fm_dod_local_done_head "$META")" = "$X" ] || exit 1
+      [ "$(cat "$lock/pid")" = "$owner" ] || exit 1
+      [ -z "$control" ] || [ "$(cat "$control/pid")" = "$owner" ] || exit 1
+    ) || fail "$caller: done recording failed or changed the caller's locks"
+  done
+  pass 'ledger and teardown record the first done head without reacquiring or releasing caller locks'
+}
+
+test_two_tasks_cannot_undo_a_same_tree_landing() {
+  local real_git real_sleep other first_pid second_pid first_rc=0 second_rc=0 i project_lock
+  make_case same-tree
+  record_done || fail 'first task readiness was not accepted'
+  other=$(printf 'second task\n' | git -C "$PROJ" commit-tree "$X^{tree}" -p "$BASE")
+  git -C "$PROJ" update-ref refs/heads/fm/other-task "$other"
+  printf 'kind=ship\nmode=local-only\nbranch=fm/other-task\nproject=%s\nspawn_gen=fixture-2\nlocal_done_head=%s\n' \
+    "$PROJ" "$other" > "$HOME_DIR/state/other-task.meta"
+  [ "$other" != "$X" ] || fail 'same-tree commits were not distinct'
+  [ "$(git -C "$PROJ" rev-parse "$other^{tree}")" = "$(git -C "$PROJ" rev-parse "$X^{tree}")" ] \
+    || fail 'the two approved commits have different trees'
+  real_git=$(command -v git)
+  real_sleep=$(command -v sleep)
+  project_lock="$(git -C "$PROJ" rev-parse --absolute-git-dir)/fm-local-landing.lock"
+  mkdir -p "$CASE/fakebin"
+  cat > "$CASE/fakebin/git" <<'SH'
+#!/usr/bin/env bash
+wait_for() {
+  local i=0
+  while [ ! -f "$RACE_DIR/$1" ] && [ "$i" -lt 600 ]; do
+    sleep 0.1
+    i=$((i + 1))
+  done
+  [ -f "$RACE_DIR/$1" ]
+}
+case "$*" in
+  *' read-tree -m -u '*)
+    if [ ! -f "$RACE_DIR/$RACE_ROLE.staged" ]; then
+      : > "$RACE_DIR/$RACE_ROLE.ready"
+      if [ "$RACE_ROLE" = first ]; then
+        wait_for release-first || exit 90
+      else
+        wait_for first.staged || exit 91
+      fi
+      "$REAL_GIT" "$@" || exit $?
+      : > "$RACE_DIR/$RACE_ROLE.staged"
+      exit 0
+    fi
+    ;;
+  *' update-ref '*' --stdin')
+    if [ "$RACE_ROLE" = first ]; then
+      if [ -f "$RACE_DIR/second.ready" ]; then
+        wait_for second.staged || exit 92
+      fi
+    else
+      wait_for first.updated || exit 93
+    fi
+    "$REAL_GIT" "$@" || exit $?
+    : > "$RACE_DIR/$RACE_ROLE.updated"
+    exit 0
+    ;;
+esac
+exec "$REAL_GIT" "$@"
+SH
+  cat > "$CASE/fakebin/sleep" <<'SH'
+#!/usr/bin/env bash
+if [ "$RACE_ROLE" = second ] && [ -d "$RACE_PROJECT_LOCK" ] \
+  && [ -d "$RACE_CONTROL_LOCK" ] && [ ! -f "$RACE_DIR/second.ready" ]; then
+  : > "$RACE_DIR/second.waiting"
+fi
+exec "$REAL_SLEEP" "$@"
+SH
+  chmod +x "$CASE/fakebin/git" "$CASE/fakebin/sleep"
+  (
+    first_pid='' second_pid=''
+    trap ': > "$CASE/release-first"; [ -z "$first_pid" ] || { kill "$first_pid" 2>/dev/null || true; wait "$first_pid" 2>/dev/null || true; }; [ -z "$second_pid" ] || { kill "$second_pid" 2>/dev/null || true; wait "$second_pid" 2>/dev/null || true; }' EXIT
+    PATH="$CASE/fakebin:$PATH" REAL_GIT="$real_git" REAL_SLEEP="$real_sleep" RACE_DIR="$CASE" RACE_ROLE=first \
+      RACE_PROJECT_LOCK="$project_lock" RACE_CONTROL_LOCK="$HOME_DIR/state/.control-other-task.lock" \
+      land > "$CASE/first.out" 2>&1 &
+    first_pid=$!
+    i=0
+    while [ ! -f "$CASE/first.ready" ] && [ "$i" -lt 300 ]; do sleep 0.1; i=$((i + 1)); done
+    [ -f "$CASE/first.ready" ] || fail 'first landing never reached its checkout update'
+    PATH="$CASE/fakebin:$PATH" REAL_GIT="$real_git" REAL_SLEEP="$real_sleep" RACE_DIR="$CASE" RACE_ROLE=second \
+      RACE_PROJECT_LOCK="$project_lock" RACE_CONTROL_LOCK="$HOME_DIR/state/.control-other-task.lock" \
+      land other-task > "$CASE/second.out" 2>&1 &
+    second_pid=$!
+    i=0
+    while [ "$i" -lt 300 ]; do
+      [ ! -f "$CASE/second.ready" ] || break
+      if [ -f "$CASE/second.waiting" ]; then
+        [ -d "$project_lock" ] || fail 'the contended project lock disappeared'
+        kill -0 "$second_pid" 2>/dev/null || fail 'second landing exited before contending'
+        break
+      fi
+      sleep 0.1
+      i=$((i + 1))
+    done
+    [ "$i" -lt 300 ] || fail 'second landing neither prepared nor contended for the checkout'
+    : > "$CASE/release-first"
+    wait "$first_pid" || first_rc=$?
+    wait "$second_pid" || second_rc=$?
+    first_pid='' second_pid=''
+    [ "$first_rc" -eq 0 ] || fail "first landing failed: $(cat "$CASE/first.out")"
+    [ "$second_rc" -ne 0 ] || fail "second landing unexpectedly succeeded: $(cat "$CASE/second.out")"
+    [ -f "$CASE/first.updated" ] || fail 'the first ref transaction did not run'
+    if [ -f "$CASE/second.ready" ]; then
+      [ -f "$CASE/second.staged" ] || fail 'the competing checkout was never staged'
+    fi
+    [ "$(git -C "$PROJ" rev-parse HEAD)" = "$X" ] || fail 'the competing task moved the landed head'
+    [ "$(cat "$PROJ/approved.txt")" = 'approved X' ] || fail 'the competing task reverted the landed files'
+    [ -z "$(git -C "$PROJ" status --porcelain)" ] || fail 'the competing task dirtied the landed checkout'
+  ) || fail 'two-task same-tree landing corrupted the first result'
+  pass 'two approved tasks with the same tree cannot roll back a successful landing'
+}
+
+fm_test_run test_two_tasks_cannot_undo_a_same_tree_landing test_branch_advance_does_not_change_approval \
   test_missing_and_malformed_head_refuse test_change_after_hold_check_refuses \
   test_diverged_default_refuses test_change_during_approval_check_refuses \
-  test_snapshot_cannot_pin_a_replacement_task
+  test_snapshot_cannot_pin_a_replacement_task test_done_recording_preserves_caller_locks
