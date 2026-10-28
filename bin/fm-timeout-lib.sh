@@ -217,7 +217,7 @@ fm_run_timed() {  # <seconds> <command...>
       trap 'interrupted=TERM; [ -z "$runner_pid" ] || kill -TERM "$runner_pid" 2>/dev/null || true' TERM
       case $- in *m*) monitor_was_on=1 ;; esac
       set -m
-      perl -MPOSIX=WNOHANG,setpgid -MTime::HiRes=time -e '
+      perl -MPOSIX=WNOHANG,setpgid -MTime::HiRes=clock_gettime,CLOCK_MONOTONIC -e '
         my $bound = shift;
         my ($signal, $kill_at, $result) = (0, 0, 0);
         for my $entry ([HUP => 1], [INT => 2], [TERM => 15]) {
@@ -234,11 +234,11 @@ fm_run_timed() {  # <seconds> <command...>
         }
         # Both sides establish the group before the parent can signal it.
         setpgid($pid, $pid);
-        my $deadline = time + $bound;
+        my $deadline = clock_gettime(CLOCK_MONOTONIC) + $bound;
         while (1) {
-          if (!$kill_at && ($signal || time >= $deadline)) {
+          if (!$kill_at && ($signal || clock_gettime(CLOCK_MONOTONIC) >= $deadline)) {
             $result = $signal ? 128 + $signal : 124;
-            $kill_at = time + 0.2;
+            $kill_at = clock_gettime(CLOCK_MONOTONIC) + 0.2;
             kill "TERM", -$pid;
           }
           my $done = waitpid $pid, WNOHANG;
@@ -248,7 +248,7 @@ fm_run_timed() {  # <seconds> <command...>
             exit($kill_at ? $result : ($status & 127) ? 128 + ($status & 127) : $status >> 8);
           }
           exit 127 if $done == -1;
-          if ($kill_at && time >= $kill_at) {
+          if ($kill_at && clock_gettime(CLOCK_MONOTONIC) >= $kill_at) {
             kill "KILL", -$pid;
             waitpid $pid, 0;
             exit $result;
@@ -267,6 +267,11 @@ fm_run_timed() {  # <seconds> <command...>
       trap - INT HUP TERM
       eval "$saved_traps"
       [ -z "$interrupted" ] || kill -s "$interrupted" "$(exec perl -e 'print getppid()')"
+      case "$interrupted" in
+        INT) return 130 ;;
+        HUP) return 129 ;;
+        TERM) return 143 ;;
+      esac
       return "$runner_rc"
       ;;
     bash) fm_run_bash_timeout "$seconds" "$@" ;;

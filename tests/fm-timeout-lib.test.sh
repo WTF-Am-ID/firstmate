@@ -665,6 +665,161 @@ test_run_timed_perl_preserves_completion_and_caller_traps() {
   pass "fm_run_timed perl preserves stdin, output, completion statuses and caller traps"
 }
 
+run_timed_edge_fixture() {
+  local mode=$1 signal=$2 dir real_perl
+  dir="$TMP_ROOT/edge-$mode-$signal"
+  real_perl=$(command -v perl)
+  mkdir -p "$dir"
+  cat > "$dir/TimeoutClockFixture.pm" <<'PERL'
+package TimeoutClockFixture;
+use Time::HiRes ();
+my $dir = $ENV{FM_TIMEOUT_CLOCK_DIR};
+my $mode = $ENV{FM_TIMEOUT_CLOCK_MODE};
+my $monotonic = \&Time::HiRes::clock_gettime;
+if (!-e "$dir/runner") {
+  open my $f, ">", "$dir/runner" or die $!;
+  print $f "$$\n";
+  close $f;
+}
+if ($mode eq "jump") {
+  my $reads = 0;
+  no warnings 'redefine';
+  *Time::HiRes::time = sub { return $reads++ ? -1e12 : 1e12 };
+  *main::time = \&Time::HiRes::time;
+}
+my $held = 0;
+*CORE::GLOBAL::kill = sub {
+  my ($signal, @pids) = @_;
+  my $sent = CORE::kill($signal, @pids);
+  if ($mode eq "grace" && $signal eq "TERM" && !$held) {
+    $held = 1;
+    my $received = 0;
+    for my $name (qw(INT HUP TERM)) {
+      my $handler = $SIG{$name};
+      die "fixture requires an installed signal handler" unless ref($handler) eq "CODE";
+      $SIG{$name} = sub { $handler->(@_); $received = 1 };
+    }
+    open my $f, ">", "$dir/grace" or die $!;
+    print $f "TERM delivered\n";
+    close $f;
+    my $end = $monotonic->(Time::HiRes::CLOCK_MONOTONIC()) + 10;
+    until ($received) {
+      die "fixture received no interrupt" if $monotonic->(Time::HiRes::CLOCK_MONOTONIC()) >= $end;
+      select undef, undef, undef, 0.01;
+    }
+  }
+  return $sent;
+};
+1;
+PERL
+  "$real_perl" -MPOSIX=setpgid,WNOHANG -MTime::HiRes=clock_gettime,CLOCK_MONOTONIC,sleep -MIO::Select -e '
+    my ($root, $path, $dir, $mode, $signal) = @ARGV;
+    pipe(my $output, my $writer) or die "pipe: $!";
+    my $caller = fork;
+    die "fork: $!" unless defined $caller;
+    if (!$caller) {
+      close $output;
+      setpgid(0, 0) == 0 or die "setpgid: $!";
+      $SIG{$_} = "DEFAULT" for qw(INT HUP TERM);
+      open STDOUT, ">&", $writer or die "stdout: $!";
+      close $writer;
+      open STDERR, ">", "$dir/stderr" or die $!;
+      @ENV{qw(PATH PERL5LIB PERL5OPT FM_TIMEOUT_CLOCK_DIR FM_TIMEOUT_CLOCK_MODE)}
+        = ($path, $dir, "-MTimeoutClockFixture", $dir, $mode);
+      exec "/bin/bash", "-c", q{
+        unset FM_TIMEOUT_MECHANISM_OVERRIDE
+        . "$1/bin/fm-timeout-lib.sh"
+        trap ":" INT HUP TERM
+        rc=0
+        fm_run_timed 1 bash -c '\''
+          trap "" INT HUP TERM
+          printf "%s\n" "$$" > "$1/command"
+          exec sleep 300
+        '\'' _ "$2" || rc=$?
+        printf "result %s\n" "$rc"
+        exit "$rc"
+      }, "_", $root, $dir;
+      die "exec: $!";
+    }
+    close $writer;
+    setpgid($caller, $caller);
+    my ($runner, $command, $status, $eof);
+    my $captured = "";
+    sub read_pid {
+      my $path = shift;
+      open my $f, "<", $path or die $!;
+      my $pid = <$f>;
+      chomp $pid;
+      die "invalid fixture pid" unless $pid =~ /^\d+$/ && $pid > 1;
+      return $pid;
+    }
+    eval {
+      my $ready_by = clock_gettime(CLOCK_MONOTONIC) + 10;
+      for my $entry ([runner => \$runner], [command => \$command]) {
+        my ($name, $pid) = @$entry;
+        until (-s "$dir/$name") {
+          die "fixture not ready: $name" if clock_gettime(CLOCK_MONOTONIC) >= $ready_by;
+          sleep 0.01;
+        }
+        $$pid = read_pid("$dir/$name");
+      }
+      if ($mode eq "grace") {
+        until (-s "$dir/grace") {
+          die "timeout cleanup did not start" if clock_gettime(CLOCK_MONOTONIC) >= $ready_by;
+          sleep 0.01;
+        }
+        kill $signal, $caller or die "signal: $!";
+      }
+      my $end = clock_gettime(CLOCK_MONOTONIC) + 5;
+      my $select = IO::Select->new($output);
+      until (defined $status && $eof) {
+        if (!defined $status && waitpid($caller, WNOHANG) == $caller) { $status = $? }
+        if (!$eof && $select->can_read(0.01)) {
+          my $n = sysread $output, my $buf, 4096;
+          die "read: $!" unless defined $n;
+          $captured .= $buf;
+          $eof = 1 if !$n;
+        }
+        die "caller or stdout exceeded the bound" if clock_gettime(CLOCK_MONOTONIC) >= $end;
+      }
+      my %number = (HUP => 1, INT => 2, TERM => 15);
+      my $expected = $mode eq "jump" ? 124 : 128 + $number{$signal};
+      my $rc = ($status & 127) ? 128 + ($status & 127) : $status >> 8;
+      die "expected status $expected, got $rc" unless $rc == $expected;
+      die "incorrect caller output: $captured" unless $captured eq "result $expected\n";
+      while (kill(0, $command) || kill(0, -$command) || kill(0, $runner)) {
+        die "owned process or group survived" if clock_gettime(CLOCK_MONOTONIC) >= $end;
+        sleep 0.01;
+      }
+    };
+    my $error = $@;
+    if ($error) {
+      $command ||= eval { read_pid("$dir/command") } || 0;
+      $runner ||= eval { read_pid("$dir/runner") } || 0;
+      kill "KILL", -$command if $command;
+      kill "KILL", -$runner if $runner;
+      kill "KILL", -$caller;
+      waitpid $caller, 0 unless defined $status;
+      die "$mode/$signal: $error";
+    }
+  ' "$ROOT" "$PERL_ONLY" "$dir" "$mode" "$signal"
+}
+
+test_run_timed_perl_interrupt_wins_during_timeout_cleanup() {
+  local signal
+  for signal in INT HUP TERM; do
+    run_timed_edge_fixture grace "$signal" || fail "Perl $signal during timeout cleanup lost its status"
+  done
+  pass "fm_run_timed perl preserves interruption status during timeout cleanup"
+}
+
+test_run_timed_perl_timeout_ignores_wall_clock_changes() {
+  run_timed_edge_fixture jump TERM || fail "Perl timeout moved with a wall-clock jump"
+  pass "fm_run_timed perl bounds its deadline and cleanup despite wall-clock changes"
+}
+
+test_run_timed_perl_interrupt_wins_during_timeout_cleanup
+test_run_timed_perl_timeout_ignores_wall_clock_changes
 test_run_timed_perl_interrupt_cleanup
 test_run_timed_perl_startup_interrupt_cleanup
 test_run_timed_perl_preserves_completion_and_caller_traps
