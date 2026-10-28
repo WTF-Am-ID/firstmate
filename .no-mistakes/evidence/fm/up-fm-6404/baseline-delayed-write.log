@@ -1,0 +1,24 @@
+$ bash -c printf() { if [ "$1" = "OMEGA\nbeta\n" ]; then sleep 0.5; fi; builtin printf "$@"; }; export -f printf; bash bin/fm-test-run.sh tests/fm-remote-delta-read.test.sh
+FM_TEST_BEGIN 2026-10-28T12:00:55Z tests/fm-remote-delta-read.test.sh family=unclassified expected_gate_skip=none
+ok - an appended line produces a delta with exact offsets, hashes, and payload
+ok - an unchanged log costs one stat per poll and exits 75 at the window
+ok - the capture and hashing path runs exactly once a real change lands
+ok - a shrunk log breaks continuity as truncated with the remaining hash
+not ok - the same-size rewrite was not named prefix-changed (missing: 'reason=prefix-changed')
+--- output ---
+schema=fm-remote-delta.v1
+status=continuity-broken
+path=state/replies.status
+from_offset=11
+to_offset=0
+from_prefix_sha256=e49c81e2d2f84e259d40e2fb8192f3bcd198b355184845d76d8f58807d0d78ee
+to_prefix_sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+payload_sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+payload_bytes=0
+reason=truncated
+FM_TEST_END 2026-10-28T12:01:03Z tests/fm-remote-delta-read.test.sh exit=1 duration_ms=7848 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=8100
+FM_TEST_SUMMARY_FAMILY family=unclassified count=1 duration_ms=7848 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-remote-delta-read.test.sh duration_ms=7848
+
+exit=1

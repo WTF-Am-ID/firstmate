@@ -1,0 +1,68 @@
+[
+  {
+    "label": "focused-2",
+    "exit": 0,
+    "expected": 0,
+    "elapsed": 12.181,
+    "command": [
+      "bash",
+      "bin/fm-test-run.sh",
+      "tests/fm-remote-delta-read.test.sh"
+    ]
+  },
+  {
+    "label": "focused-3",
+    "exit": 0,
+    "expected": 0,
+    "elapsed": 10.033,
+    "command": [
+      "bash",
+      "bin/fm-test-run.sh",
+      "tests/fm-remote-delta-read.test.sh"
+    ]
+  },
+  {
+    "label": "candidate-delayed-write",
+    "exit": 0,
+    "expected": 0,
+    "elapsed": 12.445,
+    "command": [
+      "bash",
+      "-c",
+      "printf() { if [ \"$1\" = \"OMEGA\\nbeta\\n\" ]; then sleep 0.5; fi; builtin printf \"$@\"; }; export -f printf; bash bin/fm-test-run.sh tests/fm-remote-delta-read.test.sh"
+    ]
+  },
+  {
+    "label": "baseline-delayed-write",
+    "exit": 1,
+    "expected": 1,
+    "elapsed": 8.192,
+    "command": [
+      "bash",
+      "-c",
+      "printf() { if [ \"$1\" = \"OMEGA\\nbeta\\n\" ]; then sleep 0.5; fi; builtin printf \"$@\"; }; export -f printf; bash bin/fm-test-run.sh tests/fm-remote-delta-read.test.sh"
+    ]
+  },
+  {
+    "label": "mutation-prefix",
+    "exit": 1,
+    "expected": 1,
+    "elapsed": 16.552,
+    "command": [
+      "bash",
+      "bin/fm-test-run.sh",
+      "tests/fm-remote-delta-read.test.sh"
+    ]
+  },
+  {
+    "label": "mutation-stat",
+    "exit": 1,
+    "expected": 1,
+    "elapsed": 16.089,
+    "command": [
+      "bash",
+      "bin/fm-test-run.sh",
+      "tests/fm-remote-delta-read.test.sh"
+    ]
+  }
+]

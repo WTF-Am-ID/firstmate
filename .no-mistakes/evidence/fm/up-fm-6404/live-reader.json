@@ -1,0 +1,36 @@
+[
+  {
+    "scenario": "later-epoch-rewrite",
+    "before": {
+      "device": 16777234,
+      "inode": 586256422,
+      "size": 11,
+      "mtime_ns": 1793188818771602885
+    },
+    "after": {
+      "device": 16777234,
+      "inode": 586256422,
+      "size": 11,
+      "mtime_ns": 1793188820771602885
+    },
+    "exit": 0,
+    "stdout": "schema=fm-remote-delta.v1\nstatus=continuity-broken\npath=state/replies.status\nfrom_offset=11\nto_offset=11\nfrom_prefix_sha256=e49c81e2d2f84e259d40e2fb8192f3bcd198b355184845d76d8f58807d0d78ee\nto_prefix_sha256=105574d777006ec9bddf92f16dae3a0b7aaec1a3161e63033aa041014ec15223\npayload_sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\npayload_bytes=0\nreason=prefix-changed\n\n"
+  },
+  {
+    "scenario": "actual-truncation",
+    "before": {
+      "device": 16777234,
+      "inode": 586256422,
+      "size": 11,
+      "mtime_ns": 1793188819814973652
+    },
+    "after": {
+      "device": 16777234,
+      "inode": 586256422,
+      "size": 2,
+      "mtime_ns": 1793188821814973652
+    },
+    "exit": 0,
+    "stdout": "schema=fm-remote-delta.v1\nstatus=continuity-broken\npath=state/replies.status\nfrom_offset=11\nto_offset=2\nfrom_prefix_sha256=e49c81e2d2f84e259d40e2fb8192f3bcd198b355184845d76d8f58807d0d78ee\nto_prefix_sha256=87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7\npayload_sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\npayload_bytes=0\nreason=truncated\n\n"
+  }
+]

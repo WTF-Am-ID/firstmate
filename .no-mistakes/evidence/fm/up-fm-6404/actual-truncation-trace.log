@@ -1,0 +1,215 @@
++ set -eu
++ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home
++ MAX_BYTES=65536
++ POLL_SECONDS=0.05
++ '[' 4 -ge 3 ']'
++ '[' 4 -le 4 ']'
++ REL=state/replies.status
++ OFFSET=11
++ PREFIX=e49c81e2d2f84e259d40e2fb8192f3bcd198b355184845d76d8f58807d0d78ee
++ WAIT=10
++ case "$OFFSET" in
++ case "$PREFIX" in
++ '[' 64 -eq 64 ']'
+++ printf %s e49c81e2d2f84e259d40e2fb8192f3bcd198b355184845d76d8f58807d0d78ee
+++ tr A-F a-f
++ PREFIX=e49c81e2d2f84e259d40e2fb8192f3bcd198b355184845d76d8f58807d0d78ee
++ case "$WAIT" in
++ '[' 10 -le 300 ']'
++ case "$MAX_BYTES" in
++ '[' 65536 -le 1048576 ']'
+++ resolve_log state/replies.status
+++ local rel=state/replies.status home_real parent_real parent base path
+++ case "$rel" in
+++ case "/$rel/" in
+++ case "$rel" in
++++ CDPATH=
++++ cd -- /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home
++++ pwd -P
+++ home_real=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home
++++ dirname state/replies.status
+++ parent=state
++++ basename state/replies.status
+++ base=replies.status
++++ CDPATH=
++++ cd -- /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state
++++ pwd -P
+++ parent_real=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state
+++ case "$parent_real" in
+++ path=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status
+++ '[' -e /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status ']'
+++ '[' -f /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status ']'
+++ '[' '!' -L /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status ']'
+++ printf '%s\n' /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status
++ LOG=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status
+++ mktemp -d /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.XXXXXX
++ TMP=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa
++ trap 'rm -rf -- "$TMP"' EXIT
++ trap 'exit 75' TERM
++ :
+++ sha256_file /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/empty
+++ command -v shasum
+++ shasum -a 256 /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/empty
+++ awk '{print $1}'
++ EMPTY_HASH=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
++ stat -c %s /
++ DELTA_KEY_GNU_STAT=0
++ START=0
++ LAST_KEY=
++ :
++ '[' -e /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status ']'
++ '[' -f /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status ']'
++ '[' '!' -L /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status ']'
++ delta_log_key /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status
++ local rest mtime ctime
++ '[' 0 = 1 ']'
+++ stat -f %z:%Fm:%Fc:%i:%d /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status
++ KEY=11:1793188819.814973652:1793188819.814973652:586256422:16777234
++ rest=1793188819.814973652:1793188819.814973652:586256422:16777234
++ mtime=1793188819.814973652
++ rest=1793188819.814973652:586256422:16777234
++ ctime=1793188819.814973652
++ delta_subsecond 1793188819.814973652
++ case "$1" in
++ case "$1" in
++ delta_subsecond 1793188819.814973652
++ case "$1" in
++ case "$1" in
++ '[' -z 11:1793188819.814973652:1793188819.814973652:586256422:16777234 ']'
++ '[' 11:1793188819.814973652:1793188819.814973652:586256422:16777234 '!=' '' ']'
++ snapshot_log /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/source /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/size
++ local file=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status destination=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/source size_file=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/size parent base actual_parent
+++ dirname /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status
++ parent=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state
+++ basename /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status
++ base=replies.status
++ CDPATH=
++ cd -- /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state
+++ pwd -P
++ actual_parent=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state
++ '[' /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state = /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state ']'
++ perl -MFcntl=:DEFAULT -e '
+      my ($path, $destination, $size_file, $offset, $max_bytes) = @ARGV;
+      sysopen(my $source, $path, O_RDONLY | O_NOFOLLOW) or exit 1;
+      my @stat = stat $source or exit 1;
+      exit 1 unless -f _;
+      my $size = $stat[7];
+      exit 1 unless $size =~ /\A\d+\z/;
+      my $limit = $size;
+      my $bound = $offset + $max_bytes;
+      $limit = $bound if $limit > $bound;
+      open(my $output, ">", $destination) or exit 1;
+      binmode $source;
+      binmode $output;
+      my $remaining = $limit;
+      while ($remaining > 0) {
+        my $wanted = $remaining > 65536 ? 65536 : $remaining;
+        my $read = read($source, my $buffer, $wanted);
+        exit 1 unless defined $read && $read > 0;
+        print {$output} $buffer or exit 1;
+        $remaining -= $read;
+      }
+      close $output or exit 1;
+      open(my $size_output, ">", $size_file) or exit 1;
+      print {$size_output} "$size\n" or exit 1;
+      close $size_output or exit 1;
+    ' replies.status /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/source /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/size 11 65536
++ LAST_KEY=11:1793188819.814973652:1793188819.814973652:586256422:16777234
++ IFS=
++ read -r SIZE
++ '[' 11 -lt 11 ']'
++ copy_prefix /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/source 11 /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/prefix
++ '[' 11 -eq 0 ']'
++ head -c 11 /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/source
+++ sha256_file /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/prefix
+++ command -v shasum
+++ shasum -a 256 /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/prefix
+++ awk '{print $1}'
++ ACTUAL=e49c81e2d2f84e259d40e2fb8192f3bcd198b355184845d76d8f58807d0d78ee
++ '[' e49c81e2d2f84e259d40e2fb8192f3bcd198b355184845d76d8f58807d0d78ee '!=' e49c81e2d2f84e259d40e2fb8192f3bcd198b355184845d76d8f58807d0d78ee ']'
++ '[' 11 -gt 11 ']'
++ '[' 0 -lt 10 ']'
++ sleep 0.05
++ :
++ '[' -e /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status ']'
++ '[' -f /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status ']'
++ '[' '!' -L /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status ']'
++ delta_log_key /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status
++ local rest mtime ctime
++ '[' 0 = 1 ']'
+++ stat -f %z:%Fm:%Fc:%i:%d /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status
++ KEY=2:1793188821.814973652:1793188820.627599341:586256422:16777234
++ rest=1793188821.814973652:1793188820.627599341:586256422:16777234
++ mtime=1793188821.814973652
++ rest=1793188820.627599341:586256422:16777234
++ ctime=1793188820.627599341
++ delta_subsecond 1793188821.814973652
++ case "$1" in
++ case "$1" in
++ delta_subsecond 1793188820.627599341
++ case "$1" in
++ case "$1" in
++ '[' -z 2:1793188821.814973652:1793188820.627599341:586256422:16777234 ']'
++ '[' 2:1793188821.814973652:1793188820.627599341:586256422:16777234 '!=' 11:1793188819.814973652:1793188819.814973652:586256422:16777234 ']'
++ snapshot_log /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/source /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/size
++ local file=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status destination=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/source size_file=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/size parent base actual_parent
+++ dirname /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status
++ parent=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state
+++ basename /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state/replies.status
++ base=replies.status
++ CDPATH=
++ cd -- /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state
+++ pwd -P
++ actual_parent=/Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state
++ '[' /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state = /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/live-home/state ']'
++ perl -MFcntl=:DEFAULT -e '
+      my ($path, $destination, $size_file, $offset, $max_bytes) = @ARGV;
+      sysopen(my $source, $path, O_RDONLY | O_NOFOLLOW) or exit 1;
+      my @stat = stat $source or exit 1;
+      exit 1 unless -f _;
+      my $size = $stat[7];
+      exit 1 unless $size =~ /\A\d+\z/;
+      my $limit = $size;
+      my $bound = $offset + $max_bytes;
+      $limit = $bound if $limit > $bound;
+      open(my $output, ">", $destination) or exit 1;
+      binmode $source;
+      binmode $output;
+      my $remaining = $limit;
+      while ($remaining > 0) {
+        my $wanted = $remaining > 65536 ? 65536 : $remaining;
+        my $read = read($source, my $buffer, $wanted);
+        exit 1 unless defined $read && $read > 0;
+        print {$output} $buffer or exit 1;
+        $remaining -= $read;
+      }
+      close $output or exit 1;
+      open(my $size_output, ">", $size_file) or exit 1;
+      print {$size_output} "$size\n" or exit 1;
+      close $size_output or exit 1;
+    ' replies.status /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/source /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/size 11 65536
++ LAST_KEY=2:1793188821.814973652:1793188820.627599341:586256422:16777234
++ IFS=
++ read -r SIZE
++ '[' 2 -lt 11 ']'
++ copy_prefix /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/source 2 /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/prefix
++ '[' 2 -eq 0 ']'
++ head -c 2 /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/source
+++ sha256_file /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/prefix
+++ command -v shasum
+++ shasum -a 256 /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa/prefix
+++ awk '{print $1}'
++ ACTUAL=87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7
++ emit_break truncated 2 87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7
++ printf 'schema=fm-remote-delta.v1\n'
++ printf 'status=continuity-broken\n'
++ printf 'path=%s\n' state/replies.status
++ printf 'from_offset=%s\n' 11
++ printf 'to_offset=%s\n' 2
++ printf 'from_prefix_sha256=%s\n' e49c81e2d2f84e259d40e2fb8192f3bcd198b355184845d76d8f58807d0d78ee
++ printf 'to_prefix_sha256=%s\n' 87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7
++ printf 'payload_sha256=%s\n' e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
++ printf 'payload_bytes=0\n'
++ printf 'reason=%s\n\n' truncated
++ exit 0
++ rm -rf -- /Users/daddy/.no-mistakes-upstream-codex/worktrees/73f03113346d/01M615WTZE3WNR5PSRP781NQD7/.test-6404/tmp/fm-remote-delta.J34nNa
