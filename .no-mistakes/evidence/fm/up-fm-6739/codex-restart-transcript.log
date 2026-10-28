@@ -1,0 +1,35 @@
+
+=== real Codex endpoint; reply=blocked ===
+request corr=dbc63888203e88da delivered_epoch=1793206836
+nudged: sm1: its persist reply was blocked, so its conversation was not spent
+summary: 0 of 1 restarted, 1 nudged, 0 unreached
+exit=3 phase=resolved pane_command=codex
+blocked [corr=dbc63888203e88da]: records persisted; deliberately untouched unrelated work
+
+=== real Codex endpoint; reply=failed ===
+request corr=051e01ff3fc188fe delivered_epoch=1793206839
+nudged: sm1: its persist reply was failed, so its conversation was not spent
+summary: 0 of 1 restarted, 1 nudged, 0 unreached
+exit=3 phase=resolved pane_command=codex
+failed [corr=051e01ff3fc188fe]: records persisted; deliberately untouched unrelated work
+
+=== real Codex endpoint; reply=needs-decision ===
+request corr=319898c7d083bde9 delivered_epoch=1793206843
+nudged: sm1: its persist reply was needs-decision, so its conversation was not spent
+summary: 0 of 1 restarted, 1 nudged, 0 unreached
+exit=3 phase=resolved pane_command=codex
+needs-decision [corr=319898c7d083bde9]: records persisted; deliberately untouched unrelated work
+
+=== real Codex endpoint; reply=working ===
+request corr=45e303cca9538c27 delivered_epoch=1793206847
+nudged: sm1: it did not confirm within 8s that its open work is written down, so its conversation was not spent
+summary: 0 of 1 restarted, 1 nudged, 0 unreached
+exit=3 phase=awaiting_report pane_command=codex
+working [corr=45e303cca9538c27]: records persisted; deliberately untouched unrelated work
+
+=== real Codex endpoint; reply=done ===
+request corr=2c36ea239b704b9e delivered_epoch=1793206858
+unreached: sm1: the restart outcome is unknown: fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/daddy/.no-mistakes-upstream-codex/worktrees/962db3b45911/01M61PGDRGTGA86B0DW6YQ7TCN/.nm-test-tmp/codex.Kb4h8O/home
+summary: 0 of 1 restarted, 0 nudged, 1 unreached
+exit=3 phase=resolved pane_command=codex
+done [corr=2c36ea239b704b9e]: records persisted; deliberately untouched unrelated work

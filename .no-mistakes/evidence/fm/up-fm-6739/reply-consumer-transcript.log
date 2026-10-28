@@ -1,0 +1,46 @@
+local-done progress: corr=8e1bd373f3797fec phase=awaiting_report expected=awaiting_report
+local-blocked progress: corr=e33401266bd20098 phase=awaiting_report expected=awaiting_report
+local-failed progress: corr=97da3cb1d34dee86 phase=awaiting_report expected=awaiting_report
+local-needs-decision progress: corr=d80730da89565a1f phase=awaiting_report expected=awaiting_report
+local-timeout progress: corr=3149988a095d019d phase=awaiting_report expected=awaiting_report
+local-ordinary progress: corr=32d2dc3f9f3c0ec1 phase=resolved expected=resolved
+local-done terminal: corr=8e1bd373f3797fec phase=resolved
+done [corr=8e1bd373f3797fec]: persisted open work; deliberately left unrelated work alone
+local-blocked terminal: corr=e33401266bd20098 phase=resolved
+blocked [corr=e33401266bd20098]: persisted open work; deliberately left unrelated work alone
+local-failed terminal: corr=97da3cb1d34dee86 phase=resolved
+failed [corr=97da3cb1d34dee86]: persisted open work; deliberately left unrelated work alone
+local-needs-decision terminal: corr=d80730da89565a1f phase=resolved
+needs-decision [corr=d80730da89565a1f]: persisted open work; deliberately left unrelated work alone
+progress-only after watcher cycles: corr=3149988a095d019d phase=awaiting_report
+ingested: remote-done appended=1 offset=122
+remote-done working: corr=495f05cb5dffe04b phase=awaiting_report expected=awaiting_report
+ingested: remote-done appended=1 offset=241
+remote-done done: corr=495f05cb5dffe04b phase=resolved expected=resolved
+working [corr=495f05cb5dffe04b] [at=1793206704]: open records written; unrelated work deliberately untouched (via-helper)
+done [corr=495f05cb5dffe04b] [at=1793206705]: open records written; unrelated work deliberately untouched (via-helper)
+ingested: remote-blocked appended=1 offset=122
+remote-blocked working: corr=ef1cacace7c879b3 phase=awaiting_report expected=awaiting_report
+ingested: remote-blocked appended=1 offset=244
+remote-blocked blocked: corr=ef1cacace7c879b3 phase=resolved expected=resolved
+working [corr=ef1cacace7c879b3] [at=1793206706]: open records written; unrelated work deliberately untouched (via-helper)
+blocked [corr=ef1cacace7c879b3] [at=1793206707]: open records written; unrelated work deliberately untouched (via-helper)
+ingested: remote-failed appended=1 offset=122
+remote-failed working: corr=5eac15dc3a6793c0 phase=awaiting_report expected=awaiting_report
+ingested: remote-failed appended=1 offset=243
+remote-failed failed: corr=5eac15dc3a6793c0 phase=resolved expected=resolved
+working [corr=5eac15dc3a6793c0] [at=1793206708]: open records written; unrelated work deliberately untouched (via-helper)
+failed [corr=5eac15dc3a6793c0] [at=1793206709]: open records written; unrelated work deliberately untouched (via-helper)
+ingested: remote-needs-decision appended=1 offset=122
+remote-needs-decision working: corr=47edad72f208cd5b phase=awaiting_report expected=awaiting_report
+ingested: remote-needs-decision appended=1 offset=251
+remote-needs-decision needs-decision: corr=47edad72f208cd5b phase=resolved expected=resolved
+working [corr=47edad72f208cd5b] [at=1793206710]: open records written; unrelated work deliberately untouched (via-helper)
+needs-decision [corr=47edad72f208cd5b] [at=1793206711]: open records written; unrelated work deliberately untouched (via-helper)
+ingested: remote-progress-only appended=1 offset=122
+remote-progress-only working: corr=e2e463afc4662afb phase=awaiting_report expected=awaiting_report
+working [corr=e2e463afc4662afb] [at=1793206711]: open records written; unrelated work deliberately untouched (via-helper)
+ingested: remote-ordinary appended=1 offset=122
+remote-ordinary working: corr=78e4a824fe2f5632 phase=resolved expected=resolved
+working [corr=78e4a824fe2f5632] [at=1793206712]: open records written; unrelated work deliberately untouched (via-helper)
+probe complete; disposable homes removed on exit

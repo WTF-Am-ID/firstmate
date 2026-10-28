@@ -1,0 +1,300 @@
+FM_TEST_BEGIN 2026-10-28T16:56:07Z tests/fm-secondmate-restart.test.sh family=secondmate expected_gate_skip=none
+ok - T1 persist is a gate, and asks for open records and task status only
+ok - T2 the mate persists before anything is stopped
+ok - T2b an arrived persist answer is resolved before timeout
+ok - T2d only a terminal done reply permits restart
+ok - T2e progress waits for a done with the request's own correlation
+ok - T2f remote ingest and local watcher preserve progress-only persist expectations
+ok - T2c a reply between the preliminary scan and timeout decision wins
+ok - T3 a runtime that cannot prove a restart falls back to the re-read message
+ok - T4 every named mate is accounted for, including one this home does not know
+ok - T5 a refused restart leaves the mate running and reports an unknown outcome
+ok - T8 a local restart re-resolves this home's pin and reports the runtime that came up
+ok - native Ultra survives local restart and the remote restart transport
+ok - T6 a remote mate restarts through the host-local control plane over the fm-on hop
+ok - T6a a remote mate with a per-mate override restarts onto that override, not the default pin
+ok - T6b a remote mate with no override line still restarts onto the default pin
+ok - T6d a legacy pin file still restarts the mate onto its first line
+ok - T6c an unreadable per-mate pin falls back to the re-read path with its agent left running
+ok - T7 an unreachable host is reported honestly instead of claimed as reloaded
+ok - T9 the persist gate retains its explicitly allocated correlation
+ok - T10 pending persist answers are polled as one fleet
+ok - T11 post-stop restart failure is never misreported as a nudge
+ok - T12 relaunch waits do not block fleet persistence polling
+ok - T13 a dead restart worker cannot hang the parent
+ok - T14 a result published during reaping is honored
+ok - T15 an already-current live mate is named by the update pass and genuinely restarted
+ok - T16 an already-current mate with an unprovable runtime keeps the honest nudge path
+ok - T17 a T3 mate is routed to the re-read message by both passes, never restarted
+# all fm-secondmate-restart tests passed
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks/pre-rebase: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks/pre-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks/pre-auto-gc: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks/pre-merge-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks/post-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks/sendemail-validate: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks/applypatch-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks/prepare-commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks/post-checkout: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks/post-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks/post-rewrite: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks/commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks/pre-push: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks/post-merge: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks/pre-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state/sm2.git-hooks: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home/state: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236/home: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/concurrent-waits-31236: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks/pre-rebase: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks/pre-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks/pre-auto-gc: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks/pre-merge-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks/post-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks/sendemail-validate: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks/applypatch-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks/prepare-commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks/post-checkout: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks/post-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks/post-rewrite: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks/commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks/pre-push: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks/post-merge: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks/pre-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state/sm1.git-hooks: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home/state: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167/home: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/post-stop-18167: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks/pre-rebase: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks/pre-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks/pre-auto-gc: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks/pre-merge-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks/post-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks/sendemail-validate: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks/applypatch-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks/prepare-commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks/post-checkout: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks/post-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks/post-rewrite: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks/commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks/pre-push: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks/post-merge: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks/pre-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state/sm1.git-hooks: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home/state: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576/home: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/reply-done-19576: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks/pre-rebase: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks/pre-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks/pre-auto-gc: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks/pre-merge-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks/post-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks/sendemail-validate: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks/applypatch-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks/prepare-commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks/post-checkout: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks/post-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks/post-rewrite: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks/commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks/pre-push: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks/post-merge: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks/pre-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state/sm1.git-hooks: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home/state: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869/home: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/order-31869: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks/pre-rebase: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks/pre-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks/pre-auto-gc: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks/pre-merge-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks/post-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks/sendemail-validate: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks/applypatch-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks/prepare-commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks/post-checkout: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks/post-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks/post-rewrite: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks/commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks/pre-push: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks/post-merge: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks/pre-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state/sm1.git-hooks: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home/state: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780/home: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/answer-at-timeout-decision-6780: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks/pre-rebase: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks/pre-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks/pre-auto-gc: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks/pre-merge-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks/post-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks/sendemail-validate: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks/applypatch-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks/prepare-commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks/post-checkout: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks/post-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks/post-rewrite: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks/commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks/pre-push: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks/post-merge: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks/pre-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state/sm2.git-hooks: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home/state: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324/home: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/relaunch-polling-9324: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks/pre-rebase: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks/pre-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks/pre-auto-gc: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks/pre-merge-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks/post-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks/sendemail-validate: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks/applypatch-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks/prepare-commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks/post-checkout: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks/post-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks/post-rewrite: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks/commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks/pre-push: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks/post-merge: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks/pre-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state/sm1.git-hooks: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home/state: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970/home: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/native-local-6970: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks/pre-rebase: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks/pre-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks/pre-auto-gc: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks/pre-merge-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks/post-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks/sendemail-validate: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks/applypatch-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks/prepare-commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks/post-checkout: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks/post-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks/post-rewrite: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks/commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks/pre-push: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks/post-merge: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks/pre-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state/sm1.git-hooks: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home/state: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757/home: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/pin-7757: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks/pre-rebase: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks/pre-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks/pre-auto-gc: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks/pre-merge-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks/post-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks/sendemail-validate: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks/applypatch-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks/prepare-commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks/post-checkout: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks/post-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks/post-rewrite: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks/commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks/pre-push: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks/post-merge: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks/pre-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state/sm1.git-hooks: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home/state: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099/home: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/progress-then-done-12099: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks/pre-rebase: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks/pre-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks/pre-auto-gc: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks/pre-merge-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks/post-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks/sendemail-validate: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks/applypatch-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks/prepare-commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks/post-checkout: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks/post-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks/post-rewrite: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks/commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks/pre-push: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks/post-merge: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks/pre-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state/sm1.git-hooks: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home/state: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147/home: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/unknown-32147: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks/pre-rebase: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks/pre-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks/pre-auto-gc: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks/pre-merge-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks/post-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks/sendemail-validate: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks/applypatch-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks/prepare-commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks/post-checkout: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks/post-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks/post-rewrite: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks/commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks/pre-push: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks/post-merge: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks/pre-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state/sm1.git-hooks: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home/state: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832/home: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-local-done-25832: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks/pre-rebase: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks/pre-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks/pre-auto-gc: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks/pre-merge-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks/post-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks/sendemail-validate: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks/applypatch-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks/prepare-commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks/post-checkout: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks/post-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks/post-rewrite: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks/commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks/pre-push: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks/post-merge: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks/pre-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state/sm1.git-hooks: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home/state: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684/home: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/shared-remote-done-8684: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks/pre-rebase: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks/pre-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks/pre-auto-gc: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks/pre-merge-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks/post-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks/sendemail-validate: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks/applypatch-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks/prepare-commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks/post-checkout: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks/post-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks/post-rewrite: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks/commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks/pre-push: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks/post-merge: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks/pre-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state/sm1.git-hooks: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home/state: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787/home: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/arrived-at-bound-11787: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks/pre-rebase: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks/pre-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks/pre-auto-gc: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks/pre-merge-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks/post-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks/sendemail-validate: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks/applypatch-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks/prepare-commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks/post-checkout: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks/post-applypatch: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks/post-rewrite: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks/commit-msg: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks/pre-push: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks/post-merge: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks/pre-commit: Permission denied
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state/sm1.git-hooks: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home/state: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565/home: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U/already-current-12565: Directory not empty
+rm: /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-secondmate-restart.Couc5U: Directory not empty
+FM_TEST_END 2026-10-28T16:58:55Z tests/fm-secondmate-restart.test.sh exit=0 duration_ms=168094 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=168173
+FM_TEST_SUMMARY_FAMILY family=secondmate count=1 duration_ms=168094 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-secondmate-restart.test.sh duration_ms=168094
