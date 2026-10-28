@@ -241,8 +241,8 @@ fm_task_inbox_write() {  # <state-dir> <task-id> <text> [delivery-mode]
 }
 
 # Durably enqueue one steer at most once: when a record with the exact same
-# body already exists - unhandled or already acknowledged in handled/ - no new
-# record is written and the existing record's path is printed instead.
+# body and delivery mode already exists, unhandled or acknowledged in handled/,
+# no new record is written and the existing record's path is printed instead.
 # This is the enqueue primitive for a transport that can fail with completion
 # unknown (the remote steer leg over ssh): the caller's safe recovery is to run
 # the same enqueue again, and this dedup is what makes the re-run land on the
