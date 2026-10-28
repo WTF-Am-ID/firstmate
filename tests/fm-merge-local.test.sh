@@ -269,6 +269,7 @@ SH
     PATH="$CASE/fakebin:$PATH" REAL_GIT="$real_git" REAL_SLEEP="$real_sleep" RACE_DIR="$CASE" RACE_ROLE=first \
       RACE_PROJECT_LOCK="$project_lock" RACE_CONTROL_LOCK="$HOME_DIR/state/.control-other-task.lock" \
       land > "$CASE/first.out" 2>&1 &
+    # shellcheck disable=SC2031 # The background PID is captured immediately in this shell.
     first_pid=$!
     i=0
     while [ ! -f "$CASE/first.ready" ] && [ "$i" -lt 300 ]; do sleep 0.1; i=$((i + 1)); done
@@ -276,6 +277,7 @@ SH
     PATH="$CASE/fakebin:$PATH" REAL_GIT="$real_git" REAL_SLEEP="$real_sleep" RACE_DIR="$CASE" RACE_ROLE=second \
       RACE_PROJECT_LOCK="$project_lock" RACE_CONTROL_LOCK="$HOME_DIR/state/.control-other-task.lock" \
       land other-task > "$CASE/second.out" 2>&1 &
+    # shellcheck disable=SC2031 # The background PID is captured immediately in this shell.
     second_pid=$!
     i=0
     while [ "$i" -lt 300 ]; do
