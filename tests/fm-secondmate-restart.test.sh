@@ -96,7 +96,9 @@ case "${1:-}" in
             corr=$(cat "$inbox"/*.msg 2>/dev/null \
               | grep -oE 'corr=[0-9a-f]{16}' | head -1)
             if [ -n "$corr" ]; then
-              printf 'done [%s]: open records written down\n' "$corr" \
+              verb=done
+              [ ! -f "$D/answer-verb" ] || verb=$(cat "$D/answer-verb")
+              printf '%s [%s]: open records written down; deliberately left unrelated work alone\n' "$verb" "$corr" \
                 >> "$(cat "$D/answer-status")"
             fi
           fi
@@ -131,7 +133,15 @@ SH
 #!/usr/bin/env bash
 case "${1:-}" in
   ''|*[!0-9]*) ;;
-  *) /bin/sleep 0.01 ;;
+  *)
+    if [ -f "$FM_FAKE_DIR/finish-progress" ] && [ ! -e "$FM_FAKE_DIR/progress-waited" ]; then
+      : > "$FM_FAKE_DIR/progress-waited"
+      status=$(cat "$FM_FAKE_DIR/answer-status")
+      corr=$(grep -oE 'corr=[0-9a-f]{16}' "$status" | tail -1)
+      printf 'done [%s]: open records written down\n' "$corr" >> "$status"
+    fi
+    /bin/sleep 0.01
+    ;;
 esac
 exit 0
 SH
@@ -330,39 +340,86 @@ test_arrived_answer_precedes_deadline_check() {
 
 # --- T2c: an answer arriving between resolution and timeout wins -------------
 test_answer_between_resolution_and_timeout_wins() {
-  local dir out rc
+  local dir out rc verb
+  for verb in 'done' blocked failed needs-decision working; do
   dir=$(new_case answer-at-timeout-decision)
   add_local_mate "$dir" sm1
+  printf '%s' "$verb" > "$dir/fake/answer-verb"
 
   # Delay the modelled answer until the first resolution attempt has completed
-  # its unsuccessful status scan. The real pending-reply machinery publishes
-  # that scan signature with mv; this wrapper appends the correlated answer only
-  # after that publication, reproducing the boundary race deterministically.
-  cat > "$dir/fakebin/mv" <<'SH'
+  # its unsuccessful status snapshot. The wrapper appends the correlated answer
+  # after returning that snapshot, reproducing the boundary race deterministically.
+  : > "$dir/home/state/sm1.status"
+  cat > "$dir/fakebin/cat" <<'SH'
 #!/usr/bin/env bash
 set -u
-/bin/mv "$@" || exit $?
-target=${!#}
+/bin/cat "$@" || exit $?
+target=${1:-}
 case "$target" in
-  "${FM_FAKE_DIR%/fake}"/home/state/pending-replies/*)
-    if [ ! -e "$FM_FAKE_DIR/answer-after-scan" ] \
-      && grep -q '^parent_status_scan_signature=.' "$target"; then
+  "${FM_FAKE_DIR%/fake}"/home/state/sm1.status)
+    if [ ! -e "$FM_FAKE_DIR/answer-after-scan" ]; then
       : > "$FM_FAKE_DIR/answer-after-scan"
-      corr=${target##*/}
-      status=$(sed -n 's/^parent_status=//p' "$target")
-      printf 'done [corr=%s]: open records written down\n' "$corr" >> "$status"
+      corr=$(grep -h '^corr_id=' "${FM_FAKE_DIR%/fake}"/home/state/pending-replies/* | head -1 | cut -d= -f2)
+      verb=$(/bin/cat "$FM_FAKE_DIR/answer-verb")
+      printf '%s [corr=%s]: open records written down; deliberately left unrelated work alone\n' "$verb" "$corr" >> "$target"
     fi
     ;;
 esac
 SH
-  chmod +x "$dir/fakebin/mv"
+  chmod +x "$dir/fakebin/cat"
 
   out=$(FM_TEST_PERSIST_WAIT=0 run_restart "$dir" sm1); rc=$?
 
-  expect_code 0 "$rc" "an answer already on disk at the timeout decision must release the gate"$'\n'"$out"
-  assert_contains "$out" "restarted: sm1" "the reply that raced the timeout was ignored"
-  assert_not_contains "$out" "nudged: sm1" "a confirmed mate must not take the timeout fallback"
+  assert_present "$dir/fake/answer-after-scan" "the deadline-recheck fixture did not deliver its reply"
+  assert_persist_result "$dir" "$verb" "$out" "$rc"
+  done
   pass "T2c a reply between the preliminary scan and timeout decision wins"
+}
+
+# Classify the observable result and durable expectation for one correlated reply.
+assert_persist_result() {  # <case-dir> <verb> <output> <exit-code>
+  local dir=$1 verb=$2 out=$3 rc=$4 phase=resolved
+  if [ "$verb" = 'done' ]; then
+    expect_code 0 "$rc" "done must authorize restart"$'\n'"$out"
+    assert_contains "$out" "summary: 1 of 1 restarted, 0 nudged, 0 unreached" "done must count as restarted"
+    assert_grep '/exit' "$dir/fake/literal" "done must restart the mate"
+  else
+    expect_code 3 "$rc" "$verb must fall back"$'\n'"$out"
+    assert_contains "$out" "summary: 0 of 1 restarted, 1 nudged, 0 unreached" "$verb must count as nudged"
+    assert_no_grep '/exit' "$dir/fake/literal" "$verb must not stop the mate"
+    assert_absent "$dir/home/state/sm1.control-relaunch" "$verb must not open a lifecycle transaction"
+    assert_grep 're-read your AGENTS.md' "$dir/home/state/sm1.inbox/002.msg" "$verb must receive the ordinary nudge"
+    [ "$verb" != working ] || phase=awaiting_report
+  fi
+  grep -h '^phase=' "$dir/home/state/pending-replies"/* | grep -q "^phase=$phase$" \
+    || fail "$verb left the wrong expectation phase, wanted $phase"
+}
+
+test_persist_reply_verbs() {
+  local dir out rc verb
+  for verb in blocked failed needs-decision working 'done'; do
+    dir=$(new_case "reply-$verb")
+    add_local_mate "$dir" sm1
+    arm_answer "$dir" sm1
+    printf '%s' "$verb" > "$dir/fake/answer-verb"
+    out=$(FM_TEST_PERSIST_WAIT=0 run_restart "$dir" sm1); rc=$?
+    assert_persist_result "$dir" "$verb" "$out" "$rc"
+  done
+  pass "T2d only a terminal done reply permits restart"
+}
+
+test_progress_waits_for_done() {
+  local dir out rc
+  dir=$(new_case progress-then-done)
+  add_local_mate "$dir" sm1
+  arm_answer "$dir" sm1
+  printf 'working' > "$dir/fake/answer-verb"
+  : > "$dir/fake/finish-progress"
+  printf 'done [corr=0000000000000000]: stale answer\n' > "$dir/home/state/sm1.status"
+  out=$(run_restart "$dir" sm1); rc=$?
+  assert_present "$dir/fake/progress-waited" "progress or a stale done released the gate before waiting"
+  assert_persist_result "$dir" 'done' "$out" "$rc"
+  pass "T2e progress waits for a done with the request's own correlation"
 }
 
 # --- T3: a runtime that cannot prove a restart never gets one ----------------
@@ -990,6 +1047,8 @@ w = { tokens: [],
 test_persist_gates_and_asks_only_for_open_records
 test_persist_precedes_restart
 test_arrived_answer_precedes_deadline_check
+test_persist_reply_verbs
+test_progress_waits_for_done
 test_answer_between_resolution_and_timeout_wins
 test_unprovable_runtime_falls_back
 test_unknown_mate_is_accounted_for

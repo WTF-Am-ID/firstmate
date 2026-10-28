@@ -28,7 +28,7 @@
 #      every instruction update cost far more than the reload it is paying for.
 #      All requests go out before any restart, so a slow mate delays only its own
 #      restart instead of serializing the fleet behind it.
-#   B. RESTART. Only after that mate's own correlated answer lands on the parent
+#   B. RESTART. Only after that mate's own correlated done answer lands on the parent
 #      channel. The gate is that answer, never a wall clock, so a mate that is
 #      mid-turn queues the request behind that turn; the bound below exists to
 #      end the wait, not to authorize a restart without the answer. A timeout
@@ -36,7 +36,7 @@
 #      open loop owned by the ordinary pending-reply recovery ladder, not state
 #      this restart pass may close.
 #
-# A mate whose persist answer did not arrive or whose runtime cannot prove a
+# A mate whose persist answer did not confirm success or whose runtime cannot prove a
 # restart gets the ordinary re-read nudge and is reported as a nudge, never as a
 # clean reload. Once a relaunch is attempted, any failed or ambiguous result is
 # reported as unknown rather than attributing it to either incarnation.
@@ -202,6 +202,42 @@ launch_restart() {  # <array-index>
   restart_active_count=$((restart_active_count + 1))
 }
 
+# Persistence has a narrower success contract than ordinary reply tracking.
+# Snapshot only the asked mate's parent channel and ignore progress, even if
+# another pending-reply consumer has already settled the generic expectation.
+resolve_persist_reply() {  # <array-index>
+  local i=$1 rec status_file status_lines line verb
+  PERSIST_VERB=
+  rec=$(fm_pending_reply_path "$STATE" "${CORR[i]}")
+  status_file=$(fm_pending_reply_get "$rec" parent_status)
+  [ -f "$status_file" ] || return 1
+  status_lines=$(cat "$status_file") || return 1
+  while IFS= read -r line; do
+    fm_pending_reply_line_resolves "$line" "${CORR[i]}" || continue
+    verb=${line%%[[:space:]:]*}
+    case "$verb" in
+      done|blocked|failed|needs-decision)
+        fm_pending_reply_try_resolve "$STATE" "${CORR[i]}" || return 1
+        PERSIST_VERB=$verb
+        return 0
+        ;;
+    esac
+  done <<< "$status_lines"
+  return 1
+}
+
+finish_persist_reply() {  # <array-index>
+  local i=$1
+  pending_count=$((pending_count - 1))
+  if [ "$PERSIST_VERB" = "done" ]; then
+    launch_restart "$i"
+  else
+    fall_back_to_nudge "${IDS[$i]}" \
+      "its persist reply was $PERSIST_VERB, so its conversation was not spent"
+    PLAN[i]="done"
+  fi
+}
+
 harvest_restarts() {
   local i out worker_state
   i=0
@@ -354,9 +390,8 @@ while [ "$((pending_count + restart_active_count))" -gt 0 ]; do
   i=0
   while [ "$i" -lt "${#IDS[@]}" ]; do
     if [ "${PLAN[i]}" = persisted-pending ] \
-      && fm_pending_reply_try_resolve "$STATE" "${CORR[i]}"; then
-      pending_count=$((pending_count - 1))
-      launch_restart "$i"
+      && resolve_persist_reply "$i"; then
+      finish_persist_reply "$i"
     fi
     i=$((i + 1))
   done
@@ -369,9 +404,8 @@ while [ "$((pending_count + restart_active_count))" -gt 0 ]; do
     if [ "$now" -ge "${DEADLINE[i]}" ]; then
       # A reply can land after the fleet-wide resolution pass. Recheck at the
       # timeout decision so an answer already on disk wins over the fallback.
-      if fm_pending_reply_try_resolve "$STATE" "${CORR[i]}"; then
-        pending_count=$((pending_count - 1))
-        launch_restart "$i"
+      if resolve_persist_reply "$i"; then
+        finish_persist_reply "$i"
       else
         fall_back_to_nudge "${IDS[$i]}" \
           "it did not confirm within ${PERSIST_WAIT}s that its open work is written down, so its conversation was not spent"
