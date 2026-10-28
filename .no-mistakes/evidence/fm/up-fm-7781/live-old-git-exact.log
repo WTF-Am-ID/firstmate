@@ -1,0 +1,27 @@
+mode=old-git-exact
+revision=3366e893056c69d30593db27050993644c0da8d3
+command=FM_HOME=<marked-lab> TREEHOUSE_ROOT=<lab-pool> bin/fm-teardown.sh task-x1
+exit=1
+local_head_before=27bc300b25671aae5bcce0866498e55976544c52
+merged_head=aab28e114275805935bfa10e7dbc130096b4bdab
+local content before teardown:
+a:
+  b: 1
+stdout:
+stderr:
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/daddy/.no-mistakes-upstream-codex/worktrees/b5ea3869ea6e/01M616RBW0B9HP0T9V5MFFGC02/.phase-test/live/old-git-exact/home
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/b5ea3869ea6e/01M616RBW0B9HP0T9V5MFFGC02/.phase-test/live/old-git-exact/pool/.treehouse/repo-83400d/1/repo has work not on any remote and not landed.
+unpushed commits:
+27bc300 add semantic indentation
+Push the branch, land its PR, or get the captain's explicit OK to discard, then --force.
+local_head_after=27bc300b25671aae5bcce0866498e55976544c52
+task_branch=retained
+task_record=retained
+patch-id --verbatim

@@ -1,0 +1,26 @@
+mode=baseline-yaml
+revision=417cec2feb4e2976c0acdb2527b87b3ccc71535f
+command=FM_HOME=<marked-lab> TREEHOUSE_ROOT=<lab-pool> bin/fm-teardown.sh task-x1
+exit=0
+local_head_before=8eaa8e3018179a664fc2cfad2f6021cc0d04e7e8
+merged_head=65574c673bf371a1c1bcc42970e0649923105f0a
+local content before teardown:
+a:
+b: 1
+stdout:
+🌳 Worktree returned to pool.
+repo: already current
+teardown task-x1 complete (window fm-lab-7781:fm-task-x1, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/b5ea3869ea6e/01M616RBW0B9HP0T9V5MFFGC02/.phase-test/live/baseline-yaml/pool/.treehouse/repo-b120d5/1/repo)
+Backlog: task-x1 just finished (this home keeps no markdown backlog at /Users/daddy/.no-mistakes-upstream-codex/worktrees/b5ea3869ea6e/01M616RBW0B9HP0T9V5MFFGC02/.phase-test/live/baseline-yaml/home/data/backlog.md). Update /Users/daddy/.no-mistakes-upstream-codex/worktrees/b5ea3869ea6e/01M616RBW0B9HP0T9V5MFFGC02/.phase-test/live/baseline-yaml/home/data/backlog.md - move task-x1 to Done, keep Done to the 10 most recent, then re-scan Queued and dispatch only work whose blockers are gone and date is due.
+stderr:
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/daddy/.no-mistakes-upstream-codex/worktrees/b5ea3869ea6e/01M616RBW0B9HP0T9V5MFFGC02/.phase-test/live/baseline-yaml/home
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+local_head_after=cb1f33a5b660959820ad87178b013ed673e24366
+task_branch=removed
+task_record=removed

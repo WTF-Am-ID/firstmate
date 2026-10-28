@@ -1,0 +1,26 @@
+mode=amended-yaml
+revision=3366e893056c69d30593db27050993644c0da8d3
+command=FM_HOME=<marked-lab> TREEHOUSE_ROOT=<lab-pool> bin/fm-teardown.sh task-x1
+exit=1
+local_head_before=5f84517cb80b9b5ee07b8e9123dd0d8c2aa5ba47
+merged_head=3638fe3e353e011cb8ef541e33a6e3bb1e204ca5
+local content before teardown:
+a:
+b: 1
+stdout:
+stderr:
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/daddy/.no-mistakes-upstream-codex/worktrees/b5ea3869ea6e/01M616RBW0B9HP0T9V5MFFGC02/.phase-test/live/amended-yaml/home
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/b5ea3869ea6e/01M616RBW0B9HP0T9V5MFFGC02/.phase-test/live/amended-yaml/pool/.treehouse/repo-1ba4fb/1/repo has work not on any remote and not landed.
+unpushed commits:
+5f84517 add semantic indentation
+Push the branch, land its PR, or get the captain's explicit OK to discard, then --force.
+local_head_after=5f84517cb80b9b5ee07b8e9123dd0d8c2aa5ba47
+task_branch=retained
+task_record=retained

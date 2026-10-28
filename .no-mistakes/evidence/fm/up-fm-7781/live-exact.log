@@ -1,0 +1,26 @@
+mode=exact
+revision=3366e893056c69d30593db27050993644c0da8d3
+command=FM_HOME=<marked-lab> TREEHOUSE_ROOT=<lab-pool> bin/fm-teardown.sh task-x1
+exit=0
+local_head_before=d1772bbc812823c8a582de0c4cc3c149bd2b7d91
+merged_head=c231c5283b1729eb7a17427b848089598e5b9696
+local content before teardown:
+a:
+  b: 1
+stdout:
+🌳 Worktree returned to pool.
+repo: already current
+teardown task-x1 complete (window fm-lab-7781:fm-task-x1, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/b5ea3869ea6e/01M616RBW0B9HP0T9V5MFFGC02/.phase-test/live/exact/pool/.treehouse/repo-35ee86/1/repo)
+Backlog: task-x1 just finished (this home keeps no markdown backlog at /Users/daddy/.no-mistakes-upstream-codex/worktrees/b5ea3869ea6e/01M616RBW0B9HP0T9V5MFFGC02/.phase-test/live/exact/home/data/backlog.md). Update /Users/daddy/.no-mistakes-upstream-codex/worktrees/b5ea3869ea6e/01M616RBW0B9HP0T9V5MFFGC02/.phase-test/live/exact/home/data/backlog.md - move task-x1 to Done, keep Done to the 10 most recent, then re-scan Queued and dispatch only work whose blockers are gone and date is due.
+stderr:
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/daddy/.no-mistakes-upstream-codex/worktrees/b5ea3869ea6e/01M616RBW0B9HP0T9V5MFFGC02/.phase-test/live/exact/home
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 0s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+local_head_after=69f86b95a1e0a74575541fc91f85b27ea0601611
+task_branch=removed
+task_record=removed
