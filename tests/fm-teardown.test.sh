@@ -6348,8 +6348,162 @@ SH
   pass "completion replay retires only its incarnation's branch identity and permits task ID reuse"
 }
 
+test_task_branch_stable_identity_and_manual_recovery() {
+  local case_dir gen rc mode interruption problems=0 real_rm marker
+  real_rm=$(command -v rm)
+  case_dir=$(make_case branch-control-exit-retry)
+  write_meta "$case_dir" local-only ship
+  printf 'branch=fm/task-x1\nharness=codex\n' >> "$case_dir/state/task-x1.meta"
+  gen=$("$ROOT/bin/fm-busy-event.sh" arm "$case_dir/state" task-x1 --state idle --source fm-spawn --event seed)
+  printf 'busy_gen=%s\n' "$gen" >> "$case_dir/state/task-x1.meta"
+  add_review_branch_delete_failure "$case_dir"
+  rc=0
+  FM_HOME="$case_dir" run_teardown "$case_dir" --force \
+    > "$case_dir/first-out" 2> "$case_dir/first-err" || rc=$?
+  expect_code 1 "$rc" "control-exit fixture must retain the branch"
+  assert_present "$case_dir/state/task-x1.teardown-branch" "fixture never captured retry identity"
+  grep -v '^busy_gen=' "$case_dir/state/task-x1.meta" > "$case_dir/expected-meta"
+  cat > "$case_dir/fakebin/tmux" <<'SH'
+#!/usr/bin/env bash
+case "${1:-}" in
+  display-message)
+    case "$*" in
+      *pane_current_command*)
+        if [ -e "$FM_BRANCH_CONTROL_CASE/stopped" ]; then printf 'zsh\n'; else printf 'codex\n'; fi ;;
+      *pane_current_path*) printf '%s/wt\n' "$FM_BRANCH_CONTROL_CASE" ;;
+      *cursor_y*) printf '1\n' ;;
+      *) printf 'fakepane\n' ;;
+    esac ;;
+  capture-pane) printf '╭────╮\n│    │\n╰────╯\n' ;;
+  list-windows) printf 'fm-task-x1\n' ;;
+  send-keys)
+    for arg in "$@"; do
+      [ "$arg" != /quit ] || : > "$FM_BRANCH_CONTROL_CASE/stopped"
+    done ;;
+esac
+exit 0
+SH
+  chmod +x "$case_dir/fakebin/tmux"
+  FM_HOME="$case_dir" FM_ROOT_OVERRIDE="$ROOT" FM_BRANCH_CONTROL_CASE="$case_dir" \
+  FM_STATE_OVERRIDE="$case_dir/state" FM_DATA_OVERRIDE="$case_dir/data" \
+  FM_CONFIG_OVERRIDE="$case_dir/config" PATH="$case_dir/fakebin:$PATH" \
+  FM_CONTROL_POLL=0.01 FM_CONTROL_EXIT_WAIT=0.1 \
+    "$ROOT/bin/fm-control.sh" task-x1 exit > "$case_dir/control-out" 2> "$case_dir/control-err" \
+    || fail "fake Codex exit failed: $(cat "$case_dir/control-err")"
+  cmp -s "$case_dir/expected-meta" "$case_dir/state/task-x1.meta" \
+    || fail "control exit changed fields other than busy_gen"
+  touch "$case_dir/allow-delete"
+  rc=0
+  FM_HOME="$case_dir" run_teardown "$case_dir" --force \
+    > "$case_dir/retry-out" 2> "$case_dir/retry-err" || rc=$?
+  if [ "$rc" -ne 0 ]; then
+    printf 'red P1: a busy_gen-only control exit blocked the same task cleanup: %s\n' "$(cat "$case_dir/retry-err")" >&2
+    problems=$((problems + 1))
+  fi
+
+  for mode in manual absent; do
+    for interruption in before-meta metadata identity; do
+      case_dir=$(make_case "branch-local-completion-$mode-$interruption")
+      write_meta "$case_dir" local-only ship
+      printf 'branch=fm/task-x1\n' >> "$case_dir/state/task-x1.meta"
+      if [ "$interruption" = before-meta ]; then
+        # Older backlog-exempt records still need recoverable completion.
+        sed '/^spawn_gen=/d' "$case_dir/state/task-x1.meta" > "$case_dir/legacy-meta"
+        mv "$case_dir/legacy-meta" "$case_dir/state/task-x1.meta"
+      fi
+      if [ "$mode" = manual ]; then
+        seed_backlog_in_flight "$case_dir"
+        printf 'manual\n' > "$case_dir/config/backlog-backend"
+      fi
+      cat > "$case_dir/fakebin/rm" <<'SH'
+#!/usr/bin/env bash
+for arg in "$@"; do
+  if [ "${FM_LOCAL_COMPLETION_INTERRUPT:-}" = before-meta ] && [ "$arg" = "$FM_HOME/state/task-x1.meta" ]; then
+    echo 'synthetic interruption before metadata removal' >&2
+    exit 1
+  fi
+  if [ "${FM_LOCAL_COMPLETION_INTERRUPT:-}" = metadata ] && [ "$arg" = "$FM_HOME/state/task-x1.meta" ]; then
+    "${REAL_RM_FOR_LOCAL_COMPLETION:?}" "$@" || exit $?
+    echo 'synthetic interruption after metadata removal' >&2
+    exit 1
+  fi
+  if [ "${FM_LOCAL_COMPLETION_INTERRUPT:-}" = identity ] && [ "$arg" = "$FM_HOME/state/task-x1.teardown-branch" ]; then
+    echo 'synthetic identity retirement failure' >&2
+    exit 1
+  fi
+done
+exec "${REAL_RM_FOR_LOCAL_COMPLETION:?}" "$@"
+SH
+      chmod +x "$case_dir/fakebin/rm"
+      rc=0
+      FM_HOME="$case_dir" REAL_RM_FOR_LOCAL_COMPLETION="$real_rm" \
+      FM_LOCAL_COMPLETION_INTERRUPT="$interruption" run_teardown "$case_dir" --force \
+        > "$case_dir/first-out" 2> "$case_dir/first-err" || rc=$?
+      expect_code 1 "$rc" "$mode/$interruption fixture must interrupt completion"
+      if [ "$interruption" = before-meta ]; then
+        assert_present "$case_dir/state/task-x1.meta" "fixture passed its metadata interruption"
+      else
+        assert_absent "$case_dir/state/task-x1.meta" "fixture did not reach metadata retirement"
+      fi
+      assert_present "$case_dir/state/task-x1.teardown-branch" "interruption erased the pending identity"
+      marker="$case_dir/state/task-x1.backlog-close"
+      if [ ! -f "$marker" ]; then
+        printf 'red P1: %s/%s completion left no recoverable pending marker\n' "$mode" "$interruption" >&2
+        problems=$((problems + 1))
+      fi
+      if [ "$interruption" != identity ]; then
+        FM_HOME="$case_dir" FM_ROOT_OVERRIDE="$ROOT" \
+        FM_STATE_OVERRIDE="$case_dir/state" FM_DATA_OVERRIDE="$case_dir/data" \
+        FM_CONFIG_OVERRIDE="$case_dir/config" FM_BOOTSTRAP_NETWORK=skip \
+        REAL_RM_FOR_LOCAL_COMPLETION="$real_rm" PATH="$case_dir/fakebin:$PATH" \
+          "$ROOT/bin/fm-bootstrap.sh" > "$case_dir/replay-out" 2> "$case_dir/replay-err" \
+          || fail "local completion bootstrap failed: $(cat "$case_dir/replay-err")"
+        if [ -e "$marker" ] || [ -e "$case_dir/state/task-x1.teardown-branch" ] \
+           || [ -e "$case_dir/state/task-x1.meta" ]; then
+          printf 'red P1: bootstrap did not recover %s/%s record cleanup\n' "$mode" "$interruption" >&2
+          problems=$((problems + 1))
+          [ "$interruption" != before-meta ] || continue
+        fi
+      fi
+      # Reuse before recovery must leave the replacement metadata and branch
+      # untouched while replay retires only the completed older incarnation.
+      write_meta "$case_dir" local-only ship
+      sed 's/^spawn_gen=.*/spawn_gen=manual-replacement/' "$case_dir/state/task-x1.meta" > "$case_dir/new-meta"
+      mv "$case_dir/new-meta" "$case_dir/state/task-x1.meta"
+      printf 'branch=fm/task-x1\n' >> "$case_dir/state/task-x1.meta"
+      cp "$case_dir/state/task-x1.meta" "$case_dir/replacement-before"
+      git -C "$case_dir/wt" checkout -q -b fm/task-x1
+      if [ "$interruption" = identity ] && [ -f "$marker" ]; then
+        FM_HOME="$case_dir" FM_ROOT_OVERRIDE="$ROOT" \
+        FM_STATE_OVERRIDE="$case_dir/state" FM_DATA_OVERRIDE="$case_dir/data" \
+        FM_CONFIG_OVERRIDE="$case_dir/config" FM_BOOTSTRAP_NETWORK=skip \
+        REAL_RM_FOR_LOCAL_COMPLETION="$real_rm" PATH="$case_dir/fakebin:$PATH" \
+          "$ROOT/bin/fm-bootstrap.sh" > "$case_dir/replay-out" 2> "$case_dir/replay-err" \
+          || fail "local completion bootstrap failed: $(cat "$case_dir/replay-err")"
+        cmp -s "$case_dir/replacement-before" "$case_dir/state/task-x1.meta" \
+          || fail "local completion replay changed replacement metadata"
+        git -C "$case_dir/project" show-ref --verify --quiet refs/heads/fm/task-x1 \
+          || fail "local completion replay removed the replacement branch"
+      fi
+      rc=0
+      FM_HOME="$case_dir" REAL_RM_FOR_LOCAL_COMPLETION="$real_rm" \
+        run_teardown "$case_dir" --force > "$case_dir/reuse-out" 2> "$case_dir/reuse-err" || rc=$?
+      if [ "$rc" -ne 0 ]; then
+        printf 'red P1: %s/%s completion blocked the reused task ID: %s\n' "$mode" "$interruption" "$(cat "$case_dir/reuse-err")" >&2
+        problems=$((problems + 1))
+      fi
+      if [ "$mode" = manual ]; then
+        [ "$(backlog_row_state "$case_dir")" = in_flight ] || fail "manual cleanup mutated its backlog row"
+      fi
+    done
+  done
+  [ "$problems" -eq 0 ] || fail "$problems stable-identity/local-completion regressions remain"
+  pass "control exit preserves retry identity and manual/no-backlog completion recovers before task ID reuse"
+}
+
 test_hidden_untracked_work_refuses_before_return
 test_content_fallback_git_capability_boundary
+test_task_branch_stable_identity_and_manual_recovery
 test_task_branch_identity_replay
 test_task_branch_review_regressions
 test_task_branch_cleanup_outcomes

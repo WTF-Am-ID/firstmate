@@ -9,7 +9,7 @@
 # before declaring cleanup complete. A detach, delete, or verification
 # failure names the retained ref and preserves task metadata for retry, even
 # under --force. Task branch and Git identity are saved in state/<id>.teardown-branch,
-# bound to the metadata hash and spawn generation, until cleanup completes,
+# bound to the recorded paths, Git identity and spawn generation until cleanup completes,
 # without changing record export snapshots. Staging, remote-tracking, and recovery refs are
 # left intact; local branch removal does not prove commits unreachable.
 # An endpoint whose close could not do its job REFUSES before any record naming
@@ -3758,6 +3758,21 @@ if [ "$TEARDOWN_BACKLOG_APPLIES" = 1 ]; then
     echo "error: the pending backlog $BACKLOG_TRANSITION for $ID is not replayable; refusing destructive teardown" >&2
     exit 1
   }
+fi
+# Backlog-exempt homes historically accept records predating spawn_gen. Give
+# those records an owned incarnation under the existing task lock before branch
+# cleanup, so records-only completion can recover without binding a reused ID.
+TEARDOWN_RECORDS_ONLY_STAMP=0
+if [ "$TEARDOWN_BACKLOG_APPLIES" = 0 ] && [ "$KIND" != secondmate ]; then
+  fm_backlog_meta_spawn_gen_optional "$META" "$STATE" || {
+    echo "error: cannot identify task incarnation for $ID ($FM_BACKLOG_TRANSITION_ERROR); preserving task records" >&2
+    exit 1
+  }
+  if [ -z "$FM_BACKLOG_META_SPAWN_GEN" ]; then
+    TEARDOWN_META_SPAWN_GEN="cleanup-$(date -u +%Y%m%dT%H%M%SZ)-$$"
+    TEARDOWN_RECORDS_ONLY_STAMP=1
+  fi
+fi
 # Roll the accepted legacy incarnation's stamp back to the record's exact
 # pre-stamp bytes. Uses perl - already in the teardown lifecycle's curated PATH
 # (truncate is not, and is absent on stock macOS) - and verifies the restored
@@ -3777,7 +3792,8 @@ teardown_legacy_stamp_rollback() {
   # to the record's pre-stamp bytes, so a retried teardown re-runs the
   # dead-or-agent-less endpoint gate instead of sailing past it on a stamp the
   # abandoned attempt left behind.
-  if [ "$TEARDOWN_LEGACY_ACCEPTED" = 1 ] && [ -z "$TEARDOWN_LEGACY_RETAINED_STAMP" ]; then
+  if { [ "$TEARDOWN_LEGACY_ACCEPTED" = 1 ] || [ "$TEARDOWN_RECORDS_ONLY_STAMP" = 1 ]; } \
+     && [ -z "$TEARDOWN_LEGACY_RETAINED_STAMP" ]; then
     TEARDOWN_LEGACY_PRESTAMP_SIZE=$(wc -c < "$META" | tr -d ' ')
     TEARDOWN_LEGACY_STAMP_FAILED=
     if [ -s "$META" ] && [ -n "$(tail -c 1 -- "$META" 2>/dev/null)" ]; then
@@ -3802,6 +3818,7 @@ teardown_legacy_stamp_rollback() {
       exit 1
     fi
   fi
+if [ "$TEARDOWN_BACKLOG_APPLIES" = 1 ]; then
   BACKLOG_CLOSED=1
   META_SPAWN_GEN=$TEARDOWN_META_SPAWN_GEN
   if ! fm_backlog_close_marker_write "$STATE" "$ID" "$DATA" "$META_SPAWN_GEN" \
@@ -3835,15 +3852,13 @@ TEARDOWN_TASK_GIT_COMMON=
 TEARDOWN_TASK_GIT_WORKTREE=
 TEARDOWN_TASK_SPAWN_GEN=
 teardown_task_branch() {
-  local branch current='' ref rc identity="$STATE/$ID.teardown-branch" meta_hash tmp
-  local common='' captured_wt='' live_common='' spawn_gen
+  local branch current='' ref rc identity="$STATE/$ID.teardown-branch" tmp
+  local common='' captured_wt='' live_common='' spawn_gen recorded_wt recorded_project
   if [ "${1:-}" = capture ]; then
     branch=$(fm_meta_get "$META" branch)
     spawn_gen=$(fm_meta_get "$META" spawn_gen)
     if [ -e "$identity" ] || [ -L "$identity" ]; then
-      meta_hash=$(git -C "$PROJ" hash-object --no-filters -- "$META") || return 1
       if ! fm_backlog_record_present "$identity" "task branch identity" "$STATE" \
-         || [ "$(fm_meta_get "$identity" meta_hash)" != "$meta_hash" ] \
          || [ "$(fm_meta_get "$identity" spawn_gen)" != "$spawn_gen" ]; then
         echo "error: cannot verify legacy branch retry identity $identity for $ID; preserving task records" >&2
         return 1
@@ -3855,6 +3870,25 @@ teardown_task_branch() {
       branch=$(fm_meta_get "$identity" branch)
       common=$(fm_meta_get "$identity" git_common)
       captured_wt=$(fm_meta_get "$identity" worktree)
+      recorded_wt=$(fm_meta_get "$identity" task_worktree)
+      recorded_project=$(fm_meta_get "$identity" project)
+      if { [ -n "$recorded_wt" ] && [ "$recorded_wt" != "$WT" ]; } \
+         || { [ -n "$recorded_project" ] && [ "$recorded_project" != "$PROJ" ]; }; then
+        echo "error: retained ref refs/heads/$branch for $ID: task paths changed; preserving task records" >&2
+        return 1
+      fi
+      if teardown_owns_worktree && [ -d "$WT" ]; then
+        live_common=$(git -C "$WT" rev-parse --path-format=absolute --git-common-dir) || return 1
+        live_common=$(canonical_existing_dir "$live_common") || return 1
+        if [ "$live_common" != "$common" ] \
+           || [ "$(canonical_existing_dir "$WT")" != "$captured_wt" ]; then
+          echo "error: retained ref refs/heads/$branch for $ID: task Git identity changed; preserving task records" >&2
+          return 1
+        fi
+      elif [ -z "$recorded_wt" ] && [ "$WT" != "$captured_wt" ]; then
+        echo "error: cannot verify legacy task path for refs/heads/$branch; preserving task records" >&2
+        return 1
+      fi
     fi
     if [ -z "$common" ]; then
       if teardown_owns_worktree && [ -d "$WT" ]; then
@@ -3888,12 +3922,10 @@ teardown_task_branch() {
       return 1
     }
     case "$common:$captured_wt" in /*:/*) ;; *) echo "error: invalid task Git identity for $ref; preserving task records" >&2; return 1 ;; esac
-    if [ -z "${meta_hash:-}" ]; then
-      meta_hash=$(git -C "$PROJ" hash-object --no-filters -- "$META") || return 1
-    fi
     tmp=$(mktemp "$STATE/.$ID.teardown-branch.XXXXXX") || return 1
     if ! {
-      printf 'meta_hash=%s\nbranch=%s\ngit_common=%s\nworktree=%s\n' "$meta_hash" "$branch" "$common" "$captured_wt" \
+      printf 'branch=%s\ngit_common=%s\nworktree=%s\ntask_worktree=%s\nproject=%s\n' \
+        "$branch" "$common" "$captured_wt" "$WT" "$PROJ" \
         && { [ -z "$spawn_gen" ] || printf 'spawn_gen=%s\n' "$spawn_gen"; }
     } > "$tmp" \
        || ! fm_backlog_atomic_transition publish "$tmp" "$identity" "task branch identity" "$STATE"; then
@@ -4295,7 +4327,36 @@ if [ -e "$HERDR_PRESENTATION_JOURNAL" ] || [ -L "$HERDR_PRESENTATION_JOURNAL" ];
     echo "warning: retaining herdr presentation journal for $ID; it still names a projected workspace the session-start sweep owns, not the closed endpoint" >&2
   fi
 fi
-# The record is gone, so the backlog must not still show this task in flight
+# Before removing a records-only task, retain a generation-bound completion
+# intent. Startup can retire its identity even if metadata removal completed
+# just before an interruption. Existing backlog intents retain their exact mode
+# and arguments rather than being replaced by a records-only intent.
+TEARDOWN_RECORDS_ONLY_MARKER=0
+if [ "$BACKLOG_CLOSED" = 0 ] && [ -n "$TEARDOWN_TASK_BRANCH" ]; then
+  BACKLOG_CLOSE_MARKER=$(fm_backlog_close_marker_path "$STATE" "$ID") || exit 1
+  cleanup_flags=(--cleanup-only)
+  cleanup_args=()
+  if [ -e "$BACKLOG_CLOSE_MARKER" ] || [ -L "$BACKLOG_CLOSE_MARKER" ]; then
+    fm_backlog_close_marker_validate "$BACKLOG_CLOSE_MARKER" "$DATA" "$ID" "$STATE" || exit 1
+    [ "$FM_BACKLOG_CLOSE_VALIDATED_SPAWN_GEN" = "$TEARDOWN_TASK_SPAWN_GEN" ] || {
+      echo "error: completion marker names another incarnation of $ID; preserving task records" >&2
+      exit 1
+    }
+    case "$FM_BACKLOG_CLOSE_VALIDATED_MODE" in
+      close) cleanup_flags=() ;;
+      retain) cleanup_flags=(--retain) ;;
+    esac
+    cleanup_args=("${FM_BACKLOG_CLOSE_VALIDATED_ARGS[@]+"${FM_BACKLOG_CLOSE_VALIDATED_ARGS[@]}"}")
+  fi
+  fm_backlog_close_marker_write "$STATE" "$ID" "$DATA" "$TEARDOWN_TASK_SPAWN_GEN" \
+    "${cleanup_flags[@]+"${cleanup_flags[@]}"}" "${cleanup_args[@]+"${cleanup_args[@]}"}" || {
+      echo "error: cannot record pending metadata retirement for $ID; preserving task records" >&2
+      exit 1
+    }
+  [ "${cleanup_flags[0]-}" != --cleanup-only ] || TEARDOWN_RECORDS_ONLY_MARKER=1
+fi
+
+# The record is going away, so the backlog must not still show this task in flight
 # when teardown reports success. Still under this task's meta lock, so a steer
 # racing the same id stays serialized exactly as it was before. A captain-held
 # row takes the retain transition here instead of the close: same record, same
@@ -4332,6 +4393,12 @@ fm_backlog_teardown_branch_retire "$STATE" "$ID" "$TEARDOWN_TASK_SPAWN_GEN" || {
   echo "error: cannot retire task branch identity for $ID ($FM_BACKLOG_TRANSITION_ERROR)" >&2
   exit 1
 }
+if [ "$TEARDOWN_RECORDS_ONLY_MARKER" = 1 ]; then
+  fm_backlog_close_marker_clear "$STATE" "$ID" || {
+    echo "error: cannot retire pending cleanup marker for $ID ($FM_BACKLOG_TRANSITION_ERROR)" >&2
+    exit 1
+  }
+fi
 fm_lock_release "$META_LOCK"
 META_LOCK_HELD=0
 if [ "$KIND" != scout ] && [ "$KIND" != secondmate ] && [ "$MODE" != local-only ]; then
