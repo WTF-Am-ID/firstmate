@@ -1,0 +1,47 @@
+baseline-hidden-untracked
+revision: 417cec2feb4e2976c0acdb2527b87b3ccc71535f
+$ FM_HOME=<disposable-marked-lab> bash bin/.fm-teardown-before-7779.sh task-x1
+plain git status: ''
+explicit git status: '?? "new directory/newfile.txt"\n'
+exit: 0
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/9219cc476b8b/01M615TS187BHETD3WPXZCBJD3/.fm-7779-probe-2uokf19x/baseline-hidden-untracked/wt)
+dependency calls:
+no-mistakes axi status
+treehouse return --force /Users/daddy/.no-mistakes-upstream-codex/worktrees/9219cc476b8b/01M615TS187BHETD3WPXZCBJD3/.fm-7779-probe-2uokf19x/baseline-hidden-untracked/wt
+tmux kill-window -t =firstmate:=fm-task-x1
+file preserved: False
+metadata byte-identical: False
+metadata exists: False
+
+target-hidden-untracked
+revision: c813da600ee483a688f985336b6dc90270c1d026
+$ FM_HOME=<disposable-marked-lab> bash bin/fm-teardown.sh task-x1
+plain git status: ''
+explicit git status: '?? "new directory/newfile.txt"\n'
+exit: 1
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/9219cc476b8b/01M615TS187BHETD3WPXZCBJD3/.fm-7779-probe-2uokf19x/target-hidden-untracked/wt has uncommitted changes.
+uncommitted changes present (untracked-only leftovers)
+untracked paths (up to 10):
+  "new directory/newfile.txt"
+Commit them (or get the captain's explicit OK to discard, then --force).
+dependency calls:
+<none>
+file preserved: True
+metadata byte-identical: True
+metadata exists: True
+
+target-clean
+revision: c813da600ee483a688f985336b6dc90270c1d026
+$ FM_HOME=<disposable-marked-lab> bash bin/fm-teardown.sh task-x1
+plain git status: ''
+explicit git status: ''
+exit: 0
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/9219cc476b8b/01M615TS187BHETD3WPXZCBJD3/.fm-7779-probe-2uokf19x/target-clean/wt)
+dependency calls:
+no-mistakes axi status
+treehouse return --force /Users/daddy/.no-mistakes-upstream-codex/worktrees/9219cc476b8b/01M615TS187BHETD3WPXZCBJD3/.fm-7779-probe-2uokf19x/target-clean/wt
+tmux kill-window -t =firstmate:=fm-task-x1
+file preserved: False
+metadata byte-identical: False
+metadata exists: False
+
