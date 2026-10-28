@@ -1,0 +1,17 @@
+Scenario: error
+Candidate: a8f05422b22261372eb8b75d8e3f873c068e5fd3
+Git: git version 2.56.0
+Command: FM_HOME=<marked lab> TREEHOUSE_ROOT=<isolated pool> bash bin/fm-teardown.sh task-error
+Direct merge-tree probe exit=0
+e82f70d73bc81151eaac70fe628aed4881733b04
+
+Teardown exit=1
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/daddy/.no-mistakes-upstream-codex/worktrees/78d33fa396cd/01M61M7ZJKT753PDHW6ZNXF5HN/.live-4216-test-current/lab
+WARNING: watcher still down (same stale episode; last beat: 2s ago, grace 300s) - full banner already printed this episode.
+REFUSED: content-landed proof unavailable for worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/78d33fa396cd/01M61M7ZJKT753PDHW6ZNXF5HN/.live-4216-test-current/error/pool/.treehouse/project-01a1bc/1/project: git merge-tree --write-tree failed (Git exit 128).
+Restore or upgrade Git and retry the content check.
+unpushed commits:
+2fc09d5 task work
+Push the branch, land its PR, or get the captain's explicit OK to discard, then --force.
+
+Observed preservation: HEAD=2fc09d5958666c63934c52059a431cc1dca47447, branch=fm/task-error, worktree bytes, metadata, status and real tmux task window unchanged. Treehouse return never invoked.

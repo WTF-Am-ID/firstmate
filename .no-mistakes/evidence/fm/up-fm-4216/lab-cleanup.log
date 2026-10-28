@@ -1,0 +1,2 @@
+Private tmux kill-server exit=0
+Private socket teardown exit=0

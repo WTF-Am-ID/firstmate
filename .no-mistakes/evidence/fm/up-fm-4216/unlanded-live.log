@@ -1,0 +1,16 @@
+Scenario: unlanded
+Candidate: a8f05422b22261372eb8b75d8e3f873c068e5fd3
+Git: git version 2.56.0
+Command: FM_HOME=<marked lab> TREEHOUSE_ROOT=<isolated pool> bash bin/fm-teardown.sh task-unlanded
+Direct merge-tree probe exit=0
+e82f70d73bc81151eaac70fe628aed4881733b04
+
+Teardown exit=1
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/daddy/.no-mistakes-upstream-codex/worktrees/78d33fa396cd/01M61M7ZJKT753PDHW6ZNXF5HN/.live-4216-test-current/lab
+WARNING: watcher still down (same stale episode; last beat: 2s ago, grace 300s) - full banner already printed this episode.
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/78d33fa396cd/01M61M7ZJKT753PDHW6ZNXF5HN/.live-4216-test-current/unlanded/pool/.treehouse/project-9c3021/1/project has work not on any remote and not landed.
+unpushed commits:
+af4b10b task work
+Push the branch, land its PR, or get the captain's explicit OK to discard, then --force.
+
+Observed preservation: HEAD=af4b10bb4f84ea52ced9788086cccde0a370d6d2, branch=fm/task-unlanded, worktree bytes, metadata, status and real tmux task window unchanged. Treehouse return never invoked.

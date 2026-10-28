@@ -1,0 +1,22 @@
+Scenario: conflict
+Candidate: a8f05422b22261372eb8b75d8e3f873c068e5fd3
+Git: git version 2.56.0
+Command: FM_HOME=<marked lab> TREEHOUSE_ROOT=<isolated pool> bash bin/fm-teardown.sh task-conflict
+Direct merge-tree probe exit=1
+4d18b583fe2abc76f0c402fb4bd62d7836babe1b
+100644 180b47c18ba7e484fc0d7350bc6cad8ec3423ea0 1	feature.txt
+100644 9d73fc989a0275fec500dd402e13e46c90674e15 2	feature.txt
+100644 9301c2c31c62520765f8e0ce9beec62a0b5187a9 3	feature.txt
+
+Auto-merging feature.txt
+CONFLICT (content): Merge conflict in feature.txt
+
+Teardown exit=1
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/daddy/.no-mistakes-upstream-codex/worktrees/78d33fa396cd/01M61M7ZJKT753PDHW6ZNXF5HN/.live-4216-test-current/lab
+WARNING: watcher still down (same stale episode; last beat: 3s ago, grace 300s) - full banner already printed this episode.
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/78d33fa396cd/01M61M7ZJKT753PDHW6ZNXF5HN/.live-4216-test-current/conflict/pool/.treehouse/project-2f892c/1/project has work not on any remote and not landed.
+unpushed commits:
+87b97de task work
+Push the branch, land its PR, or get the captain's explicit OK to discard, then --force.
+
+Observed preservation: HEAD=87b97dee11a614fd29d778d5638533d1c79922bc, branch=fm/task-conflict, worktree bytes, metadata, status and real tmux task window unchanged. Treehouse return never invoked.

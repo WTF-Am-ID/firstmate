@@ -1,0 +1,13 @@
+BASELINE exit=1
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/daddy/.no-mistakes-upstream-codex/worktrees/78d33fa396cd/01M61M7ZJKT753PDHW6ZNXF5HN/.live-4216-test-current/lab
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 3s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/78d33fa396cd/01M61M7ZJKT753PDHW6ZNXF5HN/.live-4216-test-current/old-git/pool/.treehouse/project-1d53eb/1/project has work not on any remote and not landed.
+unpushed commits:
+ef7488b task work
+Push the branch, land its PR, or get the captain's explicit OK to discard, then --force.

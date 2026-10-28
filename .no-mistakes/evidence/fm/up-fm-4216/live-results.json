@@ -1,0 +1,32 @@
+[
+  {
+    "scenario": "old-git",
+    "result": "pass",
+    "exit": 1
+  },
+  {
+    "scenario": "unsupported-129",
+    "result": "pass",
+    "exit": 1
+  },
+  {
+    "scenario": "contained",
+    "result": "pass",
+    "exit": 0
+  },
+  {
+    "scenario": "conflict",
+    "result": "pass",
+    "exit": 1
+  },
+  {
+    "scenario": "unlanded",
+    "result": "pass",
+    "exit": 1
+  },
+  {
+    "scenario": "error",
+    "result": "pass",
+    "exit": 1
+  }
+]

@@ -1,0 +1,39 @@
+Candidate: a8f05422b22261372eb8b75d8e3f873c068e5fd3
+Baseline: 4a67799d8a8670d6ea1a55250b67d8474b070a09
+Driver command: python3 .live-4216-test-current/drive.py
+
+All six probes invoked the real teardown executable against local bare origins,
+real leased Treehouse pool copies and real task windows on a private tmux server.
+No model session was required for this harness-independent Git diagnostic.
+Git history, fetches, conflicts and containment used installed Git 2.56.0.
+For the old-Git probe only, merge-tree executed locally built Git 2.37.7.
+The unsupported-129 and error probes injected dependency errors at merge-tree.
+GitHub lookups and optional no-mistakes status used inert dependency shims to
+prevent access to shared services or pipeline state. Treehouse calls were logged
+and delegated to the installed Treehouse executable. The driver is retained
+beside these notes for inspection and reproduction.
+
+Old Git source: https://www.kernel.org/pub/software/scm/git/git-2.37.7.tar.xz
+Archive SHA256: 979916049b8c60e66d6542e19c5de3b131f2cb9a6a5419307e939bbe0760f490
+Build: make -C .live-4216-test-current/git-2.37.7 -j4 NO_TCLTK=YesPlease NO_GETTEXT=YesPlease NO_CURL=YesPlease NO_OPENSSL=YesPlease NO_EXPAT=YesPlease git
+No installation or system configuration changes were made.
+
+Actual old Git returned 128 (fatal: unknown rev --write-tree).
+The baseline called the work unlanded. The candidate reported the unavailable
+proof and refused safely. Modern containment completed real cleanup. Conflict
+and differing content refused as unlanded. Error 128 and unsupported-option 129
+reported unavailable proofs. Every refusal preserved HEAD, branch, file bytes,
+metadata, status and the task window, without invoking Treehouse return.
+
+A targeted attempt to load and call the existing capability-boundary test
+through shell eval was blocked by the command guard as indirect execution.
+That operation was stopped and not retried. No repository suite, linter,
+formatter, static analysis, publication or other gate phase was run.
+
+The private tmux server and its helper-created temporary socket directory were
+removed successfully. The final rm -rf -- .live-4216-test-current command was
+refused with: rm -f style commands are not permitted. No alternate deletion was
+attempted. Remaining scratch is .live-4216-test-current/ (approximately 103 MB),
+including the old-Git source/build, copied baseline scripts, disposable lab home,
+local fixture repositories and driver. It is Git-excluded by the existing
+/.live-4216-*/ pattern. Tracked source and tests were not changed.
