@@ -13,7 +13,7 @@
 #       it. timeout and gtimeout are selected only when type -P yields an
 #       executable path, and that path is what fm_run_timed and fm_exec_timed
 #       invoke, so a builtin or function of the same name cannot shadow the
-#       runner. The perl and bash fallbacks are unchanged.
+#       runner.
 #
 #   fm_run_timed <seconds> <command> [args...]
 #       Runs the command with a hard bound. Exit status is the command's own,
@@ -27,8 +27,9 @@
 #       own KILL escalation, with no status recorded by the bounded command,
 #       also collapses into 124: there it means the bound fired, not that the
 #       command chose to die.
-#       The Perl fallback also reaps its command group on caller INT/HUP/TERM,
-#       returning 128+n for the interrupt after a 0.2s TERM-to-KILL grace.
+#       On caller INT/HUP/TERM, the Perl fallback reaps its command group with
+#       up to 0.2s TERM-to-KILL grace, then restores the caller's traps and
+#       redelivers the signal. If the caller continues, it returns 128+n.
 #
 #   fm_exec_timed <seconds> <grace-seconds> <command> [args...]
 #       Replaces the calling shell with the bounded command, so it must be the
@@ -68,14 +69,13 @@
 #   fm_timed_out <status>
 #       0 iff <status> is how fm_run_timed or fm_exec_timed reports the bound.
 #
-# A non-positive bound is not a bound: `timeout 0` and the perl fallback's
-# `alarm 0` both disable the deadline, so callers must reject 0 before calling.
+# Callers must supply a positive integer bound; `timeout 0` disables the deadline.
 #
 # All four fm_run_timed mechanisms terminate the whole process GROUP, not just
 # the direct child, so a hung grandchild (a vendor CLI spawned by a wrapper
 # script, a git fetch spawned by a sweep) cannot outlive the bound. GNU/BSD
 # `timeout` does this by default because it does not run the command in the
-# foreground process group; the perl fallback does it explicitly with setpgrp
+# foreground process group; the perl fallback does it explicitly with setpgid
 # plus a negative pid, and the bash fallback uses monitor mode to give the
 # bounded child its own process group before signaling its negative pid.
 set -u
