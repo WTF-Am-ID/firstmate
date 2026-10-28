@@ -264,6 +264,7 @@ fm_run_timed() {  # <seconds> <command...>
       done
       trap - INT HUP TERM
       eval "$saved_traps"
+      [ -z "$interrupted" ] || kill -s "$interrupted" "$(exec perl -e 'print getppid()')"
       return "$runner_rc"
       ;;
     bash) fm_run_bash_timeout "$seconds" "$@" ;;

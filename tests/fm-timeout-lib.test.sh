@@ -417,24 +417,36 @@ test_run_timed_keeps_stdout_and_nonzero_status_when_a_function_shadows_timeout()
 }
 
 test_run_timed_perl_interrupt_cleanup() {
-  local signal target
+  local signal target disposition
   for signal in INT HUP TERM timeout; do
     for target in caller group; do
       [ "$signal:$target" != timeout:group ] || continue
-      PATH=$PERL_ONLY perl -MPOSIX=setpgid,WNOHANG -MTime::HiRes=time,sleep -MIO::Select -e '
-        my ($root, $dir, $signal, $target) = @ARGV;
-        mkdir $dir or die "mkdir $dir: $!";
-        pipe(my $output, my $writer) or die "pipe: $!";
-        my $caller = fork;
-        die "fork: $!" unless defined $caller;
-        if (!$caller) {
-          close $output;
-          setpgid(0, 0) == 0 or die "setpgid: $!";
-          $SIG{$_} = "DEFAULT" for qw(INT HUP TERM);
-          open STDOUT, ">&", $writer or die "stdout: $!";
-          close $writer;
-          exec "/bin/bash", "-c", q{
-            . "$1/bin/fm-timeout-lib.sh"
+      for disposition in default exit return ignore; do
+        [ "$signal" != timeout ] || [ "$disposition" = default ] || continue
+        PATH=$PERL_ONLY perl -MPOSIX=setpgid,WNOHANG -MTime::HiRes=time,sleep -MIO::Select -e '
+          my ($root, $dir, $signal, $target, $disposition) = @ARGV;
+          mkdir $dir or die "mkdir $dir: $!";
+          pipe(my $output, my $writer) or die "pipe: $!";
+          my $caller = fork;
+          die "fork: $!" unless defined $caller;
+          if (!$caller) {
+            close $output;
+            setpgid(0, 0) == 0 or die "setpgid: $!";
+            $SIG{$_} = "DEFAULT" for qw(INT HUP TERM);
+            open STDOUT, ">&", $writer or die "stdout: $!";
+            close $writer;
+            exec "/bin/bash", "-c", q{
+              . "$1/bin/fm-timeout-lib.sh"
+              case $4 in
+                exit|return)
+                  handler_exit=""
+                  [ "$4" != exit ] || handler_exit="; exit 61"
+                  for caught in INT HUP TERM; do
+                    trap "printf \"handled $caught\\n\"$handler_exit" "$caught"
+                done
+                ;;
+              ignore) trap "" INT HUP TERM ;;
+            esac
             fm_run_timed "$3" perl -e '\''
               my $dir = shift;
               $SIG{$_} = "IGNORE" for qw(INT HUP TERM);
@@ -452,13 +464,16 @@ test_run_timed_perl_interrupt_cleanup() {
               close $f;
               waitpid $child, 0;
             '\'' "$2"
-            exit $?
-          }, "_", $root, $dir, ($signal eq "timeout" ? 1 : 30);
+            rc=$?
+            printf "continued %s\n" "$rc"
+            exit "$rc"
+          }, "_", $root, $dir, ($signal eq "timeout" ? 1 : 30), $disposition;
           die "exec: $!";
         }
         close $writer;
         setpgid($caller, $caller);
         my ($command, $descendant, $status, $eof, $error);
+        my $captured = "";
         eval {
           my $ready_by = time + 10;
           for my $entry ([command => \$command], [descendant => \$descendant]) {
@@ -482,6 +497,7 @@ test_run_timed_perl_interrupt_cleanup() {
             if (!$eof && $select->can_read(0.02)) {
               my $n = sysread $output, my $buf, 4096;
               die "read: $!" unless defined $n;
+              $captured .= $buf;
               $eof = 1 if !$n;
             }
             die "caller or captured stdout exceeded interrupt cleanup bound" if time >= $end;
@@ -489,7 +505,12 @@ test_run_timed_perl_interrupt_cleanup() {
           my %number = (HUP => 1, INT => 2, TERM => 15);
           my $rc = ($status & 127) ? 128 + ($status & 127) : $status >> 8;
           my $expected = $signal eq "timeout" ? 124 : 128 + $number{$signal};
+          $expected = 61 if $disposition eq "exit";
           die "incorrect status $rc" unless $rc == $expected;
+          my $expected_output = $signal eq "timeout" || $disposition eq "ignore"
+            ? "continued $expected\n" : $disposition eq "exit" ? "handled $signal\n"
+            : $disposition eq "return" ? "handled $signal\ncontinued $expected\n" : "";
+          die "incorrect caller behavior: $captured" unless $captured eq $expected_output;
           # Allow the host init to reap orphaned descendants after KILL.
           while (kill(0, $command) || kill(0, $descendant) || kill(0, -$command)) {
             die "owned command or group survived" if time >= $end;
@@ -501,12 +522,13 @@ test_run_timed_perl_interrupt_cleanup() {
         kill "KILL", -$command if $command;
         kill "KILL", -$caller;
         waitpid $caller, 0 unless defined $status;
-        die "$signal to $target: $error" if $error;
-      ' "$ROOT" "$TMP_ROOT/interrupt-$signal-$target" "$signal" "$target" \
-        || fail "fm_run_timed perl cleanup for $signal to $target"
+        die "$signal to $target with $disposition disposition: $error" if $error;
+      ' "$ROOT" "$TMP_ROOT/interrupt-$signal-$target-$disposition" "$signal" "$target" "$disposition" \
+        || fail "fm_run_timed perl cleanup for $signal to $target with $disposition disposition"
+      done
     done
   done
-  pass "fm_run_timed perl reaps commands and output holders on caller and group INT/HUP/TERM and timeout"
+  pass "fm_run_timed perl reaps owned groups and preserves caller signal dispositions on INT/HUP/TERM and timeout"
 }
 
 test_run_timed_perl_preserves_completion_and_caller_traps() {
