@@ -1,0 +1,51 @@
+FM_TEST_BEGIN 2026-10-28T16:02:56Z tests/fm-7778-evidence.test.sh family=unclassified expected_gate_skip=none
+@4
+ok - real tmux: fm_backend_tmux_create_task creates a window and refuses a duplicate
+ok - real tmux: fm_backend_tmux_send_text_line sends literal text and submits with Enter
+ok - real tmux: fm_backend_tmux_send_literal + fm_backend_tmux_send_key Enter submit as two separate steps
+ok - real tmux: fm_backend_tmux_capture's -S -N bound trims old history for a small window and reaches it for a large one
+ok - real tmux: fm_backend_tmux_resolve_bare_selector (list-live) finds the created window by name
+ok - real tmux: fm_backend_tmux_resolve_bare_selector fails for a window that does not exist
+ok - real tmux: fm_backend_target_exists finds an existing window
+ok - real tmux: fm_backend_target_exists finds an existing pane
+ok - real tmux: fm_backend_target_exists accepts bare and session-scoped window ids
+ok - real tmux: fm_backend_target_exists accepts window indexes including firstmate:0
+ok - real tmux: fm_backend_target_exists accepts index.pane targets
+ok - real tmux: fm_backend_target_exists accepts a bare session and explicit exact markers
+ok - real tmux: fm_backend_target_exists anchors the session name
+ok - real tmux: fm_backend_target_exists rejects malformed targets
+ok - real tmux: fm_backend_tmux_send_key withholds a key from a gone prefix target
+ok - real tmux: a gone dotted window reads absent beside its undotted neighbor
+PRODUCT direct target=fm-api verdict=send-failed sibling=fm-api-v2 before=text-receiver-ready after=text-receiver-ready log_exists=no
+PRODUCT legacy selector=api exit=1 stderr=fm-gate-refuse: gate agent lifecycle permitted only against lab home /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-backend-smoke.h5lnc0/home
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the requested message WILL still be sent.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: text not sent to smoke:fm-api (tmux send failed; tried meta=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-backend-smoke.h5lnc0/home/state/api.meta; backend=from-meta)
+PRODUCT legacy selector=fm-api exit=1 stderr=fm-gate-refuse: gate agent lifecycle permitted only against lab home /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-backend-smoke.h5lnc0/home
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+error: text not sent to smoke:fm-api (tmux send failed; tried meta=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-backend-smoke.h5lnc0/home/state/api.meta; backend=from-meta)
+PRODUCT direct target=fm-release.0 verdict=send-failed sibling=fm-release before=text-receiver-ready after=text-receiver-ready log_exists=no
+PRODUCT legacy selector=release.0 exit=1 stderr=fm-gate-refuse: gate agent lifecycle permitted only against lab home /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-backend-smoke.h5lnc0/home
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+error: text not sent to smoke:fm-release.0 (tmux send failed; tried meta=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-backend-smoke.h5lnc0/home/state/release.0.meta; backend=from-meta)
+PRODUCT legacy selector=fm-release.0 exit=1 stderr=fm-gate-refuse: gate agent lifecycle permitted only against lab home /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-backend-smoke.h5lnc0/home
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+error: text not sent to smoke:fm-release.0 (tmux send failed; tried meta=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-backend-smoke.h5lnc0/home/state/release.0.meta; backend=from-meta)
+ok - real tmux: direct and legacy task text sends refuse gone prefix and dotted targets without changing siblings
+PRODUCT live target=smoke:fm-api verdict=unknown received=/clear lines=1
+ok - real tmux: an exact live window text submit types and submits once
+PRODUCT live target=smoke:fm-live.0 verdict=unknown received=/clear lines=1
+ok - real tmux: fm_backend_target_exists rejects a killed window while another session stays alive
+ok - real tmux: fm_backend_target_exists rejects a missing session while another session stays alive
+ok - real tmux: kill removes the window and the readable session inventory authoritatively classifies it missing
+ok - real tmux: container_ensure names the pane's own session, not a more recent grouped session
+ok - real tmux: container_ensure falls back to the pane's surviving session when the $TMUX session id is stale
+FM_TEST_END 2026-10-28T16:03:09Z tests/fm-7778-evidence.test.sh exit=0 duration_ms=12601 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=12807
+FM_TEST_SUMMARY_FAMILY family=unclassified count=1 duration_ms=12601 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-7778-evidence.test.sh duration_ms=12601

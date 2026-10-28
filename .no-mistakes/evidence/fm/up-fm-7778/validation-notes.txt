@@ -1,0 +1,47 @@
+Candidate: 7705d3822377c566b2dcb0f1ecbd58a438c3e014
+Baseline: 417cec2feb4e2976c0acdb2527b87b3ccc71535f
+All execution and review in this test phase used Codex only.
+
+The canonical real-tmux smoke suite uses a private tmux socket, real Firstmate
+adapter and fm-send.sh, a disposable marked FM_HOME, and shell line receivers.
+Its legacy records specify harness=codex and omit backend and bound pane fields.
+The receivers are not a Codex TUI and do not prove composer acknowledgement.
+
+product-transcript.log records actual adapter verdicts, CLI stderr, sibling
+captures, and received text. Its temporary driver copies the canonical smoke
+suite, prints these observations, and adds an exact live dotted-name submit.
+Both live receivers got /clear once. Their unknown verdict is expected because
+the shell line receiver has no supported harness composer to acknowledge.
+
+baseline-regression.log runs the same canonical smoke suite against the baseline
+tmux adapter with the candidate's unchanged shared submit core. It exits 1 at
+"direct text submit changed the sibling of fm-api". This is the expected red
+counterfactual, not a candidate failure.
+
+An additional real Codex TUI probe was attempted through a disposable marked lab
+home and named private tmux socket. The command hook rejected its combined
+setup/launch command before execution:
+"Command blocked by PreToolUse hook: BLOCKED: Indirect command execution not allowed"
+"87:89: syntax error: A unknown token can't go after this [quote]. (-2740)"
+No alternate route to launch Codex was attempted. No login or credentials were
+changed. Actual Codex composer behavior remains untested. To drive this optional
+probe, provide an approved disposable Codex lab or resolve the command-hook
+refusal while retaining the guard.
+
+No UI code changed. No real Codex TUI could be launched after the refusal, so
+there is no screenshot. The CLI transcript is the product evidence for the
+backend behavior.
+
+The existing supervision-host-hook suite also runs in the canonical focused
+selection. It uses synthetic harness and tmux fixtures, including the changed
+handoff-doorbell fixture. Its results are supplementary automated checks, not
+live Codex or live handoff evidence.
+The complete focused selection exited 0, with both selected scripts exiting 0
+and neither gate-skipping. The evidence-instrumented real-tmux driver exited 0.
+The baseline-adapter counterfactual exited 1 at the expected wrong-target check.
+
+The previously declined disappearing-mid-submit race was not patched or retested.
+The previously declined scratch-cleanup finding was not acted on.
+All new temporary test drivers and the baseline adapter were copied here as
+evidence and removed from the worktree. Canonical suites clean their own private
+tmux servers and fixture roots. No source or permanent tests were changed.

@@ -1,4 +1,4 @@
-FM_TEST_BEGIN 2026-10-28T13:05:59Z tests/fm-backend-tmux-smoke.test.sh family=backend-dispatch expected_gate_skip=none
+FM_TEST_BEGIN 2026-10-28T16:03:21Z tests/fm-7778-baseline.test.sh family=unclassified expected_gate_skip=none
 @4
 ok - real tmux: fm_backend_tmux_create_task creates a window and refuses a duplicate
 ok - real tmux: fm_backend_tmux_send_text_line sends literal text and submits with Enter
@@ -17,7 +17,7 @@ ok - real tmux: fm_backend_target_exists rejects malformed targets
 ok - real tmux: fm_backend_tmux_send_key withholds a key from a gone prefix target
 ok - real tmux: a gone dotted window reads absent beside its undotted neighbor
 not ok - direct text submit changed the sibling of fm-api
-FM_TEST_END 2026-10-28T13:06:00Z tests/fm-backend-tmux-smoke.test.sh exit=1 duration_ms=1678 gate_skip=false
-FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=1743
-FM_TEST_SUMMARY_FAMILY family=backend-dispatch count=1 duration_ms=1678 failed=1
-FM_TEST_SLOWEST rank=1 script=tests/fm-backend-tmux-smoke.test.sh duration_ms=1678
+FM_TEST_END 2026-10-28T16:03:26Z tests/fm-7778-baseline.test.sh exit=1 duration_ms=4220 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=4319
+FM_TEST_SUMMARY_FAMILY family=unclassified count=1 duration_ms=4220 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-7778-baseline.test.sh duration_ms=4220
