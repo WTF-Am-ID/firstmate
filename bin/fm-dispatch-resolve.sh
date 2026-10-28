@@ -153,7 +153,7 @@ credential_sources_validate() {
     def text: type == "string" and test("[^[:space:]]") and (test("[[:cntrl:]]") | not);
     if length != 1 then error("one object required") else .[0] end
     | if type == "object" and all(to_entries[];
-        (.key | test("^[a-z0-9]+(-[a-z0-9]+)*$")) and
+        (.key | test("\\A[a-z0-9]+(-[a-z0-9]+)*\\z")) and
         (.value | type == "object" and
           ((keys - ["type", "service", "account"]) | length == 0) and
           .type == "macos-keychain" and (.service | text) and

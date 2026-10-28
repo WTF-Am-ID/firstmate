@@ -345,6 +345,28 @@ for invalid in 'null' '[]' '{' \
   run code out err --validate-credential-sources "$SOURCES"
   expect_code 2 "$code" "validation rejects invalid candidate without target writes"
 done
+for provider in typesafe openrouter; do
+  printf '{"%s\\n":{"type":"macos-keychain","service":"ok"}}\n' "$provider" > "$SOURCES"
+  reset_log
+  run code out err --validate-credential-sources "$SOURCES"
+  expect_code 2 "$code" "$provider trailing newline key fails candidate validation"
+  assert_equals '' "$out" "$provider malformed candidate never reports support"
+  assert_contains "$err" 'invalid credential sources: expected provider-keyed macos-keychain entries' "$provider malformed candidate names the expected declaration"
+  assert_absent "$LOG/security.argv" "$provider malformed candidate never retrieves a key"
+  assert_absent "$LOG/argv" "$provider malformed candidate makes no HTTP call"
+  assert_absent "$LOG/quota-axi.calls" "$provider malformed candidate never reads quota"
+  for selected_provider in typesafe openrouter; do
+    reset_log
+    FM_DISPATCH_PROVIDER="$selected_provider" FM_DISPATCH_MODEL=typesafe/jev-1.13 \
+      run code out err "$BRIEF"
+    expect_code 2 "$code" "$selected_provider rejects a trailing newline in the $provider declaration key"
+    assert_equals '' "$out" "$selected_provider malformed declaration emits no dispatch result"
+    assert_contains "$err" 'invalid credential sources: expected provider-keyed macos-keychain entries' "$selected_provider malformed declaration names the expected declaration"
+    assert_absent "$LOG/security.argv" "$selected_provider malformed declaration never retrieves a key"
+    assert_absent "$LOG/argv" "$selected_provider malformed declaration makes no HTTP call"
+    assert_absent "$LOG/quota-axi.calls" "$selected_provider malformed declaration never reads quota"
+  done
+done
 cp "$TMP_ROOT/sources-valid.json" "$SOURCES"
 
 reset_log
