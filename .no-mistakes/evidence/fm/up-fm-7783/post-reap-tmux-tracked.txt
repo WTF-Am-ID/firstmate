@@ -1,0 +1,54 @@
+Scenario: post-reap-tmux-tracked
+Running product: bin/fm-teardown.sh task-x1
+Disposable endpoint, reaper scan, and pool boundaries. Real Git and backlog consumer.
+
+Product stdout
+
+Product stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-tracked/wt has uncommitted changes.
+uncommitted changes present (includes tracked edits)
+Commit them (or get the captain's explicit OK to discard, then --force).
+
+Persisted Git state
+fm/task-x1
+ce7bfc7e14c69e9a83f13147a5833e881aa6dbab add worker.txt
+ M worker.txt
+
+Persisted worker bytes
+late edit
+
+Pool return or Orca removal boundary calls
+none
+
+Retained records
+state/task-x1.meta
+window=firstmate:fm-task-x1
+endpoint_task_id=task-x1
+worktree=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-tracked/wt
+project=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-tracked/project
+kind=ship
+mode=no-mistakes
+spawn_gen=teardown-test-task-x1
+decisions_reviewed=1
+decision_keys=
+state/task-x1.status
+working: retained history
+state/task-x1.inbox/001.msg
+retained steer
+state/task-x1.backlog-close
+absent
+data/backlog.md
+# Backlog
+
+## In flight
+- [ ] task-x1 - teardown fixture task (kind: ship) (since 2026-10-28)
+
+## Queued
+## Done

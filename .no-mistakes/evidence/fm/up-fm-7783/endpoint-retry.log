@@ -1,0 +1,642 @@
++ set -eu
+++ date -u +%Y-%m-%dT%H:%M:%SZ
++ RUN_STARTED_ISO=2026-10-28T17:01:59Z
+++ now_ms
+++ command -v python3
+++ python3 -c 'import time; print(int(time.time() * 1000))'
++ RUN_STARTED_MS=1793206919142
++++ dirname bin/fm-test-run.sh
+++ cd bin/..
+++ pwd
++ ROOT=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88
++ cd /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88
++ MODE=
++ LIST_ONLY=0
++ LIST_SCHEDULED=0
++ LIST_FAMILIES=0
++ LIST_CONCURRENT_SAFE_FAMILIES=0
++ LIST_LANES=0
++ CHECK_COVERAGE=0
++ AGGREGATE_OUT=
++ FAMILY=
++ LANE=
++ BASE_REF=origin/main
++ JSON_PATH=
++ SCRIPTS=()
++ EXCLUDE_FAMILIES=()
++ FAIL_ON_GATE_SKIP=
++ JOBS=1
++ JOBS_EXPLICIT=0
++ JOBS_MAX=8
++ MAX_WALL_MS=
++ PER_SCRIPT_TIMEOUT_SECS=0
++ CHANGED_DEFAULT_TIMEOUT_SECS=1500
++ PORTABLE_SERIAL_SHARDS=10
++ PORTABLE_SERIAL_DEFAULT_WEIGHT_MS=45000
++ PORTABLE_SERIAL_MAX_WEIGHT_MS=1200000
++ PORTABLE_SERIAL_MAX_UNHINTED_PERCENT=15
++ BIN_FALLBACK_DEPTH=0
++ '[' 1 -gt 0 ']'
++ case "$1" in
++ '[' '' = aggregate ']'
++ '[' -z '' ']'
++ MODE=scripts
++ SCRIPTS+=("$1")
++ shift
++ '[' 0 -gt 0 ']'
++ '[' 0 -eq 1 ']'
++ '[' 0 -eq 1 ']'
++ '[' 0 -eq 1 ']'
++ '[' 0 -eq 1 ']'
++ '[' scripts = aggregate ']'
++ case "$JOBS" in
++ '[' 1 -ge 1 ']'
++ '[' 1 -le 8 ']'
++ '[' -n '' ']'
++ case "$PER_SCRIPT_TIMEOUT_SECS" in
++ '[' -n scripts ']'
++ '[' 0 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ refuse_primary_checkout_for_task
++ local task_id git_dir common_dir top
++ task_id=
++ '[' -n '' ']'
++ return 0
++ case "${MODE:-}" in
++ raw=("${SCRIPTS[@]+"${SCRIPTS[@]}"}")
++ SCRIPTS=()
++ for s in '"${raw[@]}"'
++ add_script tests/fm-teardown-endpoint-safety.test.sh
++ local p existing
+++ normalize_script_path tests/fm-teardown-endpoint-safety.test.sh
+++ local p=tests/fm-teardown-endpoint-safety.test.sh
+++ case "$p" in
+++ p=tests/fm-teardown-endpoint-safety.test.sh
+++ printf '%s\n' tests/fm-teardown-endpoint-safety.test.sh
++ p=tests/fm-teardown-endpoint-safety.test.sh
++ SCRIPTS+=("$p")
++ SELECTION_DESC=scripts
++ apply_exclude_families
++ local s fam keep ex
++ kept=()
++ local -a kept
++ '[' 0 -gt 0 ']'
++ return 0
++ '[' 0 -gt 0 ']'
++ '[' -n '' ']'
++ '[' 0 -eq 1 ']'
++ '[' 0 -eq 1 ']'
++ '[' 1 -eq 0 ']'
++ for s in '"${SCRIPTS[@]}"'
++ '[' -f tests/fm-teardown-endpoint-safety.test.sh ']'
++ '[' -x tests/fm-teardown-endpoint-safety.test.sh ']'
++ AUTO_CONCURRENCY=0
++ '[' scripts = changed ']'
++ '[' scripts = scripts ']'
++ '[' 0 -eq 0 ']'
++ '[' scripts = changed ']'
++ auto_admissible=0
++ for s in '"${SCRIPTS[@]}"'
++ script_allows_concurrency tests/fm-teardown-endpoint-safety.test.sh
++ local s=tests/fm-teardown-endpoint-safety.test.sh family repo_script
++ is_proven_isolated_script tests/fm-teardown-endpoint-safety.test.sh
++ local want=tests/fm-teardown-endpoint-safety.test.sh line
++ IFS=
++ read -r line
+++ list_proven_isolated
+++ cat
++ '[' tests/fm-arm-pretool-check.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-backend-herdr.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-backend-t3code.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-brief.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-captain-hold-lifecycle.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-cd-pretool-check.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-composer-ghost.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-composer-lib.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-crew-state.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-ensure-agents-md.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-grok-harness.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-herdr-lab.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-lint.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-pi-primary-types.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-pr-merge.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-review-diff.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-send-popup-settle.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-send-settle.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-send-strict.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-spawn-batch.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-supervision-instructions.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-t3-mcp.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-test-run.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-tmux-submit-busy.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-transition-lib.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ '[' tests/fm-x-mode.test.sh = tests/fm-teardown-endpoint-safety.test.sh ']'
++ IFS=
++ read -r line
++ return 1
++++ basename tests/fm-teardown-endpoint-safety.test.sh
+++ family_for_basename fm-teardown-endpoint-safety.test.sh
+++ case "$1" in
+++ printf '%s\n' backend-dispatch
++ family=backend-dispatch
++ family_is_concurrent_safe backend-dispatch
++ local want=backend-dispatch line
+++ list_concurrent_safe_families
+++ cat
++ IFS=
++ read -r line
++ '[' watcher-wake-lock = backend-dispatch ']'
++ IFS=
++ read -r line
++ '[' pure-contract-unit = backend-dispatch ']'
++ IFS=
++ read -r line
++ '[' pr-forge = backend-dispatch ']'
++ IFS=
++ read -r line
++ '[' secondmate = backend-dispatch ']'
++ IFS=
++ read -r line
++ '[' session-bootstrap = backend-dispatch ']'
++ IFS=
++ read -r line
++ '[' standalone = backend-dispatch ']'
++ IFS=
++ read -r line
++ return 1
++ return 1
++ '[' 0 -gt 1 ']'
++ '[' 1 -gt 1 ']'
++ '[' scripts = changed ']'
++ '[' scripts = scripts ']'
++ SELECTION_DESC='scripts;jobs=1'
++ '[' 1 -gt 1 ']'
++ CONCURRENT_SCRIPTS=()
++ SERIAL_TAIL_SCRIPTS=()
++ CONCURRENT_PHASE_BREAK=__fm_test_concurrent_phase_break__
++ '[' 1 -gt 1 ']'
++ '[' 0 -gt 0 ']'
+++ mktemp -d /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.XXXXXX
++ RUN_TMP=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq
++ RECORDS=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/records.tsv
++ FAMILIES_TSV=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/families.tsv
++ :
++ WORKER_PIDS=()
++ declare -a WORKER_PIDS
++ WORKER_IDX=()
++ declare -a WORKER_IDX
++ WORKER_SCRIPTS=()
++ declare -a WORKER_SCRIPTS
++ trap cleanup_run EXIT
++ RUN_ID=fm-test-run-1793206919142-29708
++ TOTAL=0
++ FAILED=0
++ SKIPPED_GATE=0
++ AGG_RC=0
++ '[' 1 -eq 1 ']'
++ for script in '"${SCRIPTS[@]}"'
++ run_one_serial tests/fm-teardown-endpoint-safety.test.sh
++ local script=tests/fm-teardown-endpoint-safety.test.sh
++ local base family expected out begin_iso begin_ms end_ms end_iso duration rc
+++ basename tests/fm-teardown-endpoint-safety.test.sh
++ base=fm-teardown-endpoint-safety.test.sh
+++ family_for_basename fm-teardown-endpoint-safety.test.sh
+++ case "$1" in
+++ printf '%s\n' backend-dispatch
++ family=backend-dispatch
+++ expected_gate_skip_for_family backend-dispatch
+++ case "$1" in
+++ printf '%s\n' none
++ expected=none
++ out=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/out.0
+++ now_iso
+++ date -u +%Y-%m-%dT%H:%M:%SZ
++ begin_iso=2026-10-28T17:01:59Z
+++ now_ms
+++ command -v python3
+++ python3 -c 'import time; print(int(time.time() * 1000))'
++ begin_ms=1793206919184
++ printf 'FM_TEST_BEGIN %s %s family=%s expected_gate_skip=%s\n' 2026-10-28T17:01:59Z tests/fm-teardown-endpoint-safety.test.sh backend-dispatch none
+FM_TEST_BEGIN 2026-10-28T17:01:59Z tests/fm-teardown-endpoint-safety.test.sh family=backend-dispatch expected_gate_skip=none
++ set +e
++ run_script_bounded tests/fm-teardown-endpoint-safety.test.sh /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/out.0 1 s0
++ local script=tests/fm-teardown-endpoint-safety.test.sh out=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/out.0 stream=1 id=s0
++ local GIT_CONFIG_GLOBAL GIT_CONFIG_NOSYSTEM
++ . /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/tests/git-config-helpers.sh
+++ export GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_NOSYSTEM=1
+++ GIT_CONFIG_GLOBAL=/dev/null
+++ GIT_CONFIG_NOSYSTEM=1
+++ unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_COMMON_DIR
++ local rc
++ : s0
++ set +e
++ '[' 1 -eq 1 ']'
++ '[' 0 -gt 0 ']'
++ bash tests/fm-teardown-endpoint-safety.test.sh
++ tee /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/out.0
++ set -u
+++ dirname tests/fm-teardown-endpoint-safety.test.sh
++ . tests/lib.sh
+++ '[' -n '' ']'
+++ FM_TEST_LIB_SOURCED=1
+++ umask 022
++++ dirname tests/lib.sh
+++ . tests/git-config-helpers.sh
++++ export GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_NOSYSTEM=1
++++ GIT_CONFIG_GLOBAL=/dev/null
++++ GIT_CONFIG_NOSYSTEM=1
++++ unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_COMMON_DIR
+++ export FM_GATE_REFUSE_BYPASS=1
+++ FM_GATE_REFUSE_BYPASS=1
+++ export FM_TEST_SEAM=1
+++ FM_TEST_SEAM=1
+++ unset FM_TASK_ID
+++ unset TASKS_AXI_FILE TASKS_AXI_BACKEND
+++ unset REX_SESSION REX_BLOCK
+++++ dirname tests/lib.sh
++++ cd tests/..
++++ pwd
+++ ROOT=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88
++++ fm_test_tmpdir
++++ local base=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp physical
++++ base=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
++++ '[' -n /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp ']'
++++ case "$base" in
+++++ CDPATH=
+++++ cd -- /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
+++++ pwd -P
++++ physical=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
++++ base=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
++++ '[' -e /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.git ']'
++++ printf '%s\n' /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
+++ FM_TEST_TMPDIR=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
+++ FM_TEST_CLEANUP_DIRS=()
++++ mktemp /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.fm-test-cleanup.29829.XXXXXX
+++ FM_TEST_CLEANUP_REGISTRY=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.fm-test-cleanup.29829.wi5hpt
++++ fm_test_pid_identity 29829
++++ local pid=29829
++++ FM_STATE_OVERRIDE=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
++++ bash -c '. "$1"; fm_pid_identity "$2"' _ /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/bin/fm-wake-lib.sh 29829
++ . /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/bin/fm-wake-lib.sh
++++ d=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/bin
++++ '[' /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/bin '!=' /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/bin/fm-wake-lib.sh ']'
++++ cd /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/bin
++++ pwd
+++ FM_WAKE_LIB_DIR=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/bin
++++ cd /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/bin/..
++++ pwd
+++ FM_WAKE_DEFAULT_ROOT=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88
+++ FM_ROOT=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88
+++ FM_HOME=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88
+++ STATE=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
+++ FM_WAKE_QUEUE=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.wake-queue
+++ FM_WAKE_QUEUE_LOCK=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.wake-queue.lock
+++ FM_LOCK_STALE_AFTER=2
+++ . /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/bin/fm-path-lib.sh
++++ uname
+++ _FM_UNAME=Darwin
+++ mkdir -p /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
+++ '[' 3 -gt 4 ']'
+++ '[' 3 -eq 4 ']'
+++ FM_WATCHER_MATCHED_IDENTITY=
+++ FM_WATCHER_HEALTHY_PID=
+++ FM_WATCHER_HEALTHY_IDENTITY=
+++ FM_WATCHER_VERDICT_OK=false
+++ FM_WATCHER_VERDICT_REASON=stale-beacon
+++ _FM_LOCK_SELF_START_PID=
+++ _FM_LOCK_SELF_START=
+++ FM_RECOVERY_MARKER_TOKEN=
+++ FM_RECOVERY_MARKER_ACTION=none
+++ FM_RECOVERY_MARKER_WRITTEN_TOKEN=
+++ FM_WAKE_APPEND_RECOVERY_PREVIOUS_TOKEN=
+++ FM_WAKE_APPEND_RECOVERY_PUBLISHED_TOKEN=
+++ FM_RECOVERY_HANDOVER_TOKEN=
+++ FM_RECOVERY_HANDOVER_SEQ=
+++ FM_WAKE_STATUS_KEY=
+++ FM_WAKE_STATUS_HISTORICAL=false
+++ FM_WAKE_EVENT_LINE=
+++ FM_WAKE_UNREAD_LINES=
++ fm_pid_identity 29829
++ local pid=29829 out proc_root starttime cmdline_hex identity_key
++ case "$pid" in
++ proc_root=/proc
++ '[' -r /proc/29829/stat ']'
+++ COLUMNS=10000
+++ LC_ALL=C
+++ TZ=UTC0
+++ ps -p 29829 -o lstart= -o command=
++ out='Wed Oct 28 17:01:59 2026     bash tests/fm-teardown-endpoint-safety.test.sh'
++ '[' -n 'Wed Oct 28 17:01:59 2026     bash tests/fm-teardown-endpoint-safety.test.sh' ']'
++ printf '%s\n' 'Wed Oct 28 17:01:59 2026     bash tests/fm-teardown-endpoint-safety.test.sh'
++ sed 's/^[[:space:]]*//'
+++ FM_TEST_OWNER_IDENTITY='Wed Oct 28 17:01:59 2026     bash tests/fm-teardown-endpoint-safety.test.sh'
++++ mktemp /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.fm-test-procevent.29829.XXXXXX
+++ FM_TEST_PROCEVENT_REGISTRY=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.fm-test-procevent.29829.qIJ0Sx
++++ mktemp /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.fm-test-watcher.29829.XXXXXX
+++ FM_TEST_WATCHER_REGISTRY=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.fm-test-watcher.29829.jnlpRN
+++ FM_TEST_STUB_MAX_BLOCK_SECONDS=120
+++ export FM_TEST_STUB_MAX_BLOCK_SECONDS
+++ FM_TEST_SUITE_PID=29829
+++ export FM_TEST_SUITE_PID
+++ trap fm_test_cleanup EXIT
+++ trap 'fm_test_cleanup; exit 130' INT
+++ trap 'fm_test_cleanup; exit 143' TERM
+++ trap 'fm_test_cleanup; exit 129' HUP
+++ trap 'fm_test_cleanup; exit 131' QUIT
+++ FM_TEST_ORPHAN_MAX_AGE_SECONDS=3600
+++ '[' 0 '!=' 1 ']'
+++ fm_test_reap_orphans
+++ local marker dir mtime now owner_pid owner_identity current_identity
++++ date +%s
+++ now=1793206919
+++ for marker in '"$FM_TEST_TMPDIR"/fm-*/.fm-test-fixture'
+++ '[' -e /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-tests.RqfNer/.fm-test-fixture ']'
++++ sed -n 1p /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-tests.RqfNer/.fm-test-fixture
+++ owner_pid=82080
++++ sed -n '2,$p' /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-tests.RqfNer/.fm-test-fixture
+++ owner_identity='Wed Oct 28 17:01:15 2026     bash tests/fm-teardown.test.sh'
+++ case "$owner_pid" in
++++ fm_test_pid_identity 82080
+++ current_identity='Wed Oct 28 17:01:15 2026     bash tests/fm-teardown.test.sh'
+++ '[' -n 'Wed Oct 28 17:01:15 2026     bash tests/fm-teardown.test.sh' ']'
+++ '[' 'Wed Oct 28 17:01:15 2026     bash tests/fm-teardown.test.sh' = 'Wed Oct 28 17:01:15 2026     bash tests/fm-teardown.test.sh' ']'
+++ continue
+++ dirname tests/fm-teardown-endpoint-safety.test.sh
++ . tests/t3-fake-lib.sh
+++++ dirname tests/t3-fake-lib.sh
++++ cd tests
++++ pwd
+++ T3_FAKE_SERVER=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/tests/t3-fake-server.mjs
+++ T3_FAKE_PID=
++ TEARDOWN=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/bin/fm-teardown.sh
+++ fm_test_tmproot fm-teardown-endpoint-safety
+++ local prefix=fm-teardown-endpoint-safety root tmp_base
++++ fm_test_tmpdir
++++ local base=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp physical
++++ base=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
++++ '[' -n /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp ']'
++++ case "$base" in
+++++ CDPATH=
+++++ cd -- /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
+++++ pwd -P
++++ physical=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
++++ base=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
++++ '[' -e /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.git ']'
++++ printf '%s\n' /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
+++ tmp_base=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
+++ tmp_base=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp
++++ mktemp -d /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.XXXXXX
+++ root=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs
++++ cd -P -- /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs
++++ pwd -P
+++ root=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs
+++ printf '%s\n%s\n' 29829 'Wed Oct 28 17:01:59 2026     bash tests/fm-teardown-endpoint-safety.test.sh'
+++ printf '%s\n' /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs
+++ printf '%s\n' /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs
++ TMP_ROOT=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs
+++ command -v tmux
++ REAL_TMUX=/opt/homebrew/bin/tmux
++ test_invalid_endpoint_records_refuse_before_mutation
++ local dir id=endpoint-a
+++ make_case missing
+++ local dir=missing
+++ mkdir -p /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/home/state /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/home/data /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/home/config /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/fakebin /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/worktree /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/project
+++ git init -q /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/project
+++ :
+++ :
+++ cat
+++ cat
+++ chmod +x /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/fakebin/tmux /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/fakebin/treehouse
+++ printf '%s\n' /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing
++ dir=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing
++ fm_write_meta /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/home/state/endpoint-a.meta worktree=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/worktree project=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/project kind=scout
++ local file=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/home/state/endpoint-a.meta kv
++ shift
++ :
++ for kv in '"$@"'
++ printf '%s\n' worktree=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/worktree
++ for kv in '"$@"'
++ printf '%s\n' project=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/project
++ for kv in '"$@"'
++ printf '%s\n' kind=scout
++ assert_refused_without_mutation /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing endpoint-a 'missing endpoint'
++ local dir=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing id=endpoint-a 'description=missing endpoint' rc
++ set +e
++ run_case /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing endpoint-a
++ rc=1
++ set -e
++ '[' 1 -ne 0 ']'
++ assert_present /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/home/state/endpoint-a.meta 'missing endpoint: metadata changed before refusal'
++ '[' -e /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/missing/home/state/endpoint-a.meta ']'
++ fail 'missing endpoint: metadata changed before refusal'
++ printf 'not ok - %s\n' 'missing endpoint: metadata changed before refusal'
+not ok - missing endpoint: metadata changed before refusal
++ exit 1
++ fm_test_cleanup
++ local d
++ fm_test_reap_watchers
++ local state lock_home 'seen=
+'
++ '[' -f /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.fm-test-watcher.29829.jnlpRN ']'
++ IFS=
++ read -r state
++ rm -f /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.fm-test-watcher.29829.jnlpRN
++ fm_test_reap_procevent_homes
++ local home claim_root 'seen=
+'
++ '[' -f /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.fm-test-procevent.29829.qIJ0Sx ']'
++ IFS='	'
++ read -r home claim_root
++ rm -f /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.fm-test-procevent.29829.qIJ0Sx
++ for d in '"${FM_TEST_CLEANUP_DIRS[@]:-}"'
++ '[' -n '' ']'
++ '[' -f /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.fm-test-cleanup.29829.wi5hpt ']'
++ IFS=
++ read -r d
++ '[' -n /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs ']'
++ fm_test_reap_root_processes /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs
++ local root=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs chain pid pids signal i
++ '[' -n /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs ']'
++ '[' /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs '!=' / ']'
++ chain=' '
++ pid=29829
++ '[' -n 29829 ']'
++ '[' 29829 -gt 1 ']'
++ chain=' 29829 '
+++ ps -o ppid= -p 29829
+++ tr -d '[:space:]'
++ pid=29708
++ '[' -n 29708 ']'
++ '[' 29708 -gt 1 ']'
++ chain=' 29829 29708 '
+++ ps -o ppid= -p 29708
+++ tr -d '[:space:]'
++ pid=61273
++ '[' -n 61273 ']'
++ '[' 61273 -gt 1 ']'
++ chain=' 29829 29708 61273 '
+++ ps -o ppid= -p 61273
+++ tr -d '[:space:]'
++ pid=11519
++ '[' -n 11519 ']'
++ '[' 11519 -gt 1 ']'
++ chain=' 29829 29708 61273 11519 '
+++ ps -o ppid= -p 11519
+++ tr -d '[:space:]'
++ pid=1
++ '[' -n 1 ']'
++ '[' 1 -gt 1 ']'
++ for signal in TERM KILL
++ i=0
++ '[' 0 -lt 20 ']'
+++ ps -ww -eo pid=,args=
+++ FM_TEST_REAP_ROOT=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs/
+++ awk -v 'chain= 29829 29708 61273 11519 ' 'index($0, ENVIRON["FM_TEST_REAP_ROOT"]) && index(chain, " " $1 " ") == 0 { print $1 }'
++ pids=
++ '[' -n '' ']'
++ return 0
++ fm_test_remove_tree /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs
++ local dir=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs
++ '[' -d /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs ']'
++ '[' '!' -L /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs ']'
++ find /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs -type d -exec chmod u+rwx '{}' +
++ rm -rf /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-teardown-endpoint-safety.khXVWs
++ IFS=
++ read -r d
++ rm -f /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/.fm-test-cleanup.29829.wi5hpt
++ rc=1
++ '[' 0 -gt 0 ']'
++ return 1
++ rc=1
++ set -e
++ : 1
+++ now_ms
+++ command -v python3
+++ python3 -c 'import time; print(int(time.time() * 1000))'
++ end_ms=1793206922797
+++ now_iso
+++ date -u +%Y-%m-%dT%H:%M:%SZ
++ end_iso=2026-10-28T17:02:02Z
++ duration=3613
++ '[' 3613 -lt 0 ']'
++ record_script_result tests/fm-teardown-endpoint-safety.test.sh 1 3613 /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/out.0 2026-10-28T17:02:02Z
++ local script=tests/fm-teardown-endpoint-safety.test.sh rc=1 duration=3613 out=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/out.0 end_iso=2026-10-28T17:02:02Z
++ local base family expected gate_skip gate_reason fail_delta
+++ basename tests/fm-teardown-endpoint-safety.test.sh
++ base=fm-teardown-endpoint-safety.test.sh
+++ family_for_basename fm-teardown-endpoint-safety.test.sh
+++ case "$1" in
+++ printf '%s\n' backend-dispatch
++ family=backend-dispatch
+++ expected_gate_skip_for_family backend-dispatch
+++ case "$1" in
+++ printf '%s\n' none
++ expected=none
++ '[' -n '' ']'
++ gate_skip=false
++ gate_reason=
++ '[' 1 -eq 0 ']'
++ printf 'FM_TEST_END %s %s exit=%s duration_ms=%s gate_skip=%s\n' 2026-10-28T17:02:02Z tests/fm-teardown-endpoint-safety.test.sh 1 3613 false
+FM_TEST_END 2026-10-28T17:02:02Z tests/fm-teardown-endpoint-safety.test.sh exit=1 duration_ms=3613 gate_skip=false
++ fail_delta=0
++ '[' 1 -ne 0 ']'
++ FAILED=1
++ fail_delta=1
++ AGG_RC=1
++ printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' tests/fm-teardown-endpoint-safety.test.sh backend-dispatch none 1 3613 false ''
++ family_bump backend-dispatch 3613 1
++ local fam=backend-dispatch dur=3613 failed_delta=1
++ local line name count duration failed_count rest
++ local found=0
++ local tmp=/Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/families.new
++ :
++ '[' -s /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/families.tsv ']'
++ '[' 0 -eq 0 ']'
++ printf '%s\t%s\t%s\t%s\n' backend-dispatch 1 3613 1
++ mv /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/families.new /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/families.tsv
++ TOTAL=1
+++ now_iso
+++ date -u +%Y-%m-%dT%H:%M:%SZ
++ RUN_FINISHED_ISO=2026-10-28T17:02:02Z
+++ now_ms
+++ command -v python3
+++ python3 -c 'import time; print(int(time.time() * 1000))'
++ RUN_FINISHED_MS=1793206922825
++ RUN_DURATION=3683
++ '[' 3683 -lt 0 ']'
++ printf 'FM_TEST_SUMMARY total=%s failed=%s skipped_gate=%s duration_ms=%s\n' 1 1 0 3683
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=3683
++ '[' -s /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/families.tsv ']'
++ sort '-t	' -k1,1 /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/families.tsv
++ IFS='	'
++ read -r name count duration failed_count
++ printf 'FM_TEST_SUMMARY_FAMILY family=%s count=%s duration_ms=%s failed=%s\n' backend-dispatch 1 3613 1
+FM_TEST_SUMMARY_FAMILY family=backend-dispatch count=1 duration_ms=3613 failed=1
++ IFS='	'
++ read -r name count duration failed_count
++ '[' -s /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/records.tsv ']'
++ rank=1
++ sort '-t	' -k5,5nr /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq/records.tsv
++ head -n 15
++ IFS='	'
++ read -r path _family _expected _rc duration _gate
++ printf 'FM_TEST_SLOWEST rank=%s script=%s duration_ms=%s\n' 1 tests/fm-teardown-endpoint-safety.test.sh 3613
+FM_TEST_SLOWEST rank=1 script=tests/fm-teardown-endpoint-safety.test.sh duration_ms=3613
++ rank=2
++ IFS='	'
++ read -r path _family _expected _rc duration _gate
++ '[' -n '' ']'
++ '[' -n '' ']'
++ exit 1
++ cleanup_run
++ rm -rf /Users/daddy/.no-mistakes-upstream-codex/evidence/01M61Q2K4WVRWMEZGFSRV4CD88/fixture-tmp/fm-test-run.qYLxpq

@@ -1,0 +1,605 @@
+Scenario: post-reap-orca-clean
+Running product: bin/fm-teardown.sh task-x1
+Disposable endpoint, reaper scan, and pool boundaries. Real Git and backlog consumer.
+
+Product stdout
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-clean/project: already current
+teardown task-x1 complete (window term-test, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-clean/wt)
+Backlog: task-x1 is closed in /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-clean/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+
+Product stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Persisted Git state
+fatal: ref HEAD is not a symbolic ref
+c02e2a7af4f54169ec79057a384fca51e76433d5 add worker.txt
+
+Persisted worker bytes
+baseline
+
+Pool return or Orca removal boundary calls
+remove
+
+Retained records
+state/task-x1.meta
+absent
+state/task-x1.status
+absent
+state/task-x1.inbox/001.msg
+absent
+state/task-x1.backlog-close
+absent
+data/backlog.md
+# Backlog
+
+## In flight
+## Queued
+## Done
+- [x] task-x1 - teardown fixture task (kind: ship) (done 2026-10-28)
+Scenario: post-reap-orca-commit
+Running product: bin/fm-teardown.sh task-x1
+Disposable endpoint, reaper scan, and pool boundaries. Real Git and backlog consumer.
+
+Product stdout
+
+Product stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-commit/wt has work not on any remote and not landed.
+unpushed commits:
+6fb3cc3 late worker commit
+Push the branch, land its PR, or get the captain's explicit OK to discard, then --force.
+
+Persisted Git state
+fm/task-x1
+6fb3cc32c3a5b0059c9269f1cf7967e7fba5950e late worker commit
+
+Persisted worker bytes
+late commit
+
+Pool return or Orca removal boundary calls
+none
+
+Retained records
+state/task-x1.meta
+window=fm-task-x1
+endpoint_task_id=task-x1
+worktree=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-commit/wt
+project=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-commit/project
+kind=ship
+mode=no-mistakes
+spawn_gen=teardown-test-task-x1
+decisions_reviewed=1
+decision_keys=
+backend=orca
+terminal=term-test
+orca_worktree_id=wt-test::/orca/wt-test
+state/task-x1.status
+working: retained history
+state/task-x1.inbox/001.msg
+retained steer
+state/task-x1.backlog-close
+absent
+data/backlog.md
+# Backlog
+
+## In flight
+- [ ] task-x1 - teardown fixture task (kind: ship) (since 2026-10-28)
+
+## Queued
+## Done
+Scenario: post-reap-orca-force
+Running product: bin/fm-teardown.sh task-x1
+Disposable endpoint, reaper scan, and pool boundaries. Real Git and backlog consumer.
+
+Product stdout
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-force/project: already current
+teardown task-x1 complete (window term-test, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-force/wt)
+Backlog: task-x1 is closed in /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-force/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+
+Product stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Persisted Git state
+fatal: ref HEAD is not a symbolic ref
+e64b488307616fee6f26b8b2a7f4273bb772e013 add worker.txt
+ M worker.txt
+
+Persisted worker bytes
+late edit
+
+Pool return or Orca removal boundary calls
+remove
+
+Retained records
+state/task-x1.meta
+absent
+state/task-x1.status
+absent
+state/task-x1.inbox/001.msg
+absent
+state/task-x1.backlog-close
+absent
+data/backlog.md
+# Backlog
+
+## In flight
+## Queued
+## Done
+- [x] task-x1 - teardown fixture task (kind: ship) (done 2026-10-28)
+Scenario: post-reap-orca-scout
+Running product: bin/fm-teardown.sh task-x1
+Disposable endpoint, reaper scan, and pool boundaries. Real Git and backlog consumer.
+
+Product stdout
+teardown task-x1 complete (window term-test, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-scout/wt)
+Backlog: task-x1 is closed in /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-scout/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+
+Product stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Persisted Git state
+fatal: ref HEAD is not a symbolic ref
+f1ff80faa32d7588c2138c909d6ebc78a7f8c98b add worker.txt
+ M worker.txt
+
+Persisted worker bytes
+late edit
+
+Pool return or Orca removal boundary calls
+remove
+
+Retained records
+state/task-x1.meta
+absent
+state/task-x1.status
+absent
+state/task-x1.inbox/001.msg
+absent
+state/task-x1.backlog-close
+absent
+data/backlog.md
+# Backlog
+
+## In flight
+## Queued
+## Done
+- [x] task-x1 - teardown fixture task data/task-x1/report.md (kind: scout) (reported 2026-10-28)
+Scenario: post-reap-orca-tracked
+Running product: bin/fm-teardown.sh task-x1
+Disposable endpoint, reaper scan, and pool boundaries. Real Git and backlog consumer.
+
+Product stdout
+
+Product stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-tracked/wt has uncommitted changes.
+uncommitted changes present (includes tracked edits)
+Commit them (or get the captain's explicit OK to discard, then --force).
+
+Persisted Git state
+fm/task-x1
+702edaf0e53a42109f4ff93795d57eb6071cb4b7 add worker.txt
+ M worker.txt
+
+Persisted worker bytes
+late edit
+
+Pool return or Orca removal boundary calls
+none
+
+Retained records
+state/task-x1.meta
+window=fm-task-x1
+endpoint_task_id=task-x1
+worktree=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-tracked/wt
+project=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-tracked/project
+kind=ship
+mode=no-mistakes
+spawn_gen=teardown-test-task-x1
+decisions_reviewed=1
+decision_keys=
+backend=orca
+terminal=term-test
+orca_worktree_id=wt-test::/orca/wt-test
+state/task-x1.status
+working: retained history
+state/task-x1.inbox/001.msg
+retained steer
+state/task-x1.backlog-close
+absent
+data/backlog.md
+# Backlog
+
+## In flight
+- [ ] task-x1 - teardown fixture task (kind: ship) (since 2026-10-28)
+
+## Queued
+## Done
+Scenario: post-reap-orca-untracked
+Running product: bin/fm-teardown.sh task-x1
+Disposable endpoint, reaper scan, and pool boundaries. Real Git and backlog consumer.
+
+Product stdout
+
+Product stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-untracked/wt has uncommitted changes.
+uncommitted changes present (untracked-only leftovers)
+untracked paths (up to 10):
+  late.txt
+Commit them (or get the captain's explicit OK to discard, then --force).
+
+Persisted Git state
+fm/task-x1
+166ae9019943258e63c751071312a349a7fb6ad6 add worker.txt
+?? late.txt
+
+Persisted worker bytes
+baseline
+late file
+
+Pool return or Orca removal boundary calls
+none
+
+Retained records
+state/task-x1.meta
+window=fm-task-x1
+endpoint_task_id=task-x1
+worktree=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-untracked/wt
+project=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-orca-untracked/project
+kind=ship
+mode=no-mistakes
+spawn_gen=teardown-test-task-x1
+decisions_reviewed=1
+decision_keys=
+backend=orca
+terminal=term-test
+orca_worktree_id=wt-test::/orca/wt-test
+state/task-x1.status
+working: retained history
+state/task-x1.inbox/001.msg
+retained steer
+state/task-x1.backlog-close
+absent
+data/backlog.md
+# Backlog
+
+## In flight
+- [ ] task-x1 - teardown fixture task (kind: ship) (since 2026-10-28)
+
+## Queued
+## Done
+Scenario: post-reap-tmux-clean
+Running product: bin/fm-teardown.sh task-x1
+Disposable endpoint, reaper scan, and pool boundaries. Real Git and backlog consumer.
+
+Product stdout
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-clean/project: already current
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-clean/wt)
+Backlog: task-x1 is closed in /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-clean/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+
+Product stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Persisted Git state
+fatal: ref HEAD is not a symbolic ref
+22b8828fdda472b19cde0911cb9c1594b429f8cd add worker.txt
+
+Persisted worker bytes
+baseline
+
+Pool return or Orca removal boundary calls
+return
+
+Retained records
+state/task-x1.meta
+absent
+state/task-x1.status
+absent
+state/task-x1.inbox/001.msg
+absent
+state/task-x1.backlog-close
+absent
+data/backlog.md
+# Backlog
+
+## In flight
+## Queued
+## Done
+- [x] task-x1 - teardown fixture task (kind: ship) (done 2026-10-28)
+Scenario: post-reap-tmux-commit
+Running product: bin/fm-teardown.sh task-x1
+Disposable endpoint, reaper scan, and pool boundaries. Real Git and backlog consumer.
+
+Product stdout
+
+Product stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-commit/wt has work not on any remote and not landed.
+unpushed commits:
+784fb3e late worker commit
+Push the branch, land its PR, or get the captain's explicit OK to discard, then --force.
+
+Persisted Git state
+fm/task-x1
+784fb3e8237f4a4d2ccb52a27e11c672bd845e54 late worker commit
+
+Persisted worker bytes
+late commit
+
+Pool return or Orca removal boundary calls
+none
+
+Retained records
+state/task-x1.meta
+window=firstmate:fm-task-x1
+endpoint_task_id=task-x1
+worktree=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-commit/wt
+project=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-commit/project
+kind=ship
+mode=no-mistakes
+spawn_gen=teardown-test-task-x1
+decisions_reviewed=1
+decision_keys=
+state/task-x1.status
+working: retained history
+state/task-x1.inbox/001.msg
+retained steer
+state/task-x1.backlog-close
+absent
+data/backlog.md
+# Backlog
+
+## In flight
+- [ ] task-x1 - teardown fixture task (kind: ship) (since 2026-10-28)
+
+## Queued
+## Done
+Scenario: post-reap-tmux-force
+Running product: bin/fm-teardown.sh task-x1
+Disposable endpoint, reaper scan, and pool boundaries. Real Git and backlog consumer.
+
+Product stdout
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-force/project: already current
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-force/wt)
+Backlog: task-x1 is closed in /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-force/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+
+Product stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Persisted Git state
+fatal: ref HEAD is not a symbolic ref
+aeaebfb4266ef737b7fd2c182389349f0e831489 add worker.txt
+ M worker.txt
+
+Persisted worker bytes
+late edit
+
+Pool return or Orca removal boundary calls
+return
+
+Retained records
+state/task-x1.meta
+absent
+state/task-x1.status
+absent
+state/task-x1.inbox/001.msg
+absent
+state/task-x1.backlog-close
+absent
+data/backlog.md
+# Backlog
+
+## In flight
+## Queued
+## Done
+- [x] task-x1 - teardown fixture task (kind: ship) (done 2026-10-28)
+Scenario: post-reap-tmux-scout
+Running product: bin/fm-teardown.sh task-x1
+Disposable endpoint, reaper scan, and pool boundaries. Real Git and backlog consumer.
+
+Product stdout
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-scout/wt)
+Backlog: task-x1 is closed in /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-scout/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+
+Product stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Persisted Git state
+fatal: ref HEAD is not a symbolic ref
+e80078b77bff4e0ec9c25a577056aa4c5bca26e9 add worker.txt
+ M worker.txt
+
+Persisted worker bytes
+late edit
+
+Pool return or Orca removal boundary calls
+return
+
+Retained records
+state/task-x1.meta
+absent
+state/task-x1.status
+absent
+state/task-x1.inbox/001.msg
+absent
+state/task-x1.backlog-close
+absent
+data/backlog.md
+# Backlog
+
+## In flight
+## Queued
+## Done
+- [x] task-x1 - teardown fixture task data/task-x1/report.md (kind: scout) (reported 2026-10-28)
+Scenario: post-reap-tmux-tracked
+Running product: bin/fm-teardown.sh task-x1
+Disposable endpoint, reaper scan, and pool boundaries. Real Git and backlog consumer.
+
+Product stdout
+
+Product stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-tracked/wt has uncommitted changes.
+uncommitted changes present (includes tracked edits)
+Commit them (or get the captain's explicit OK to discard, then --force).
+
+Persisted Git state
+fm/task-x1
+ce7bfc7e14c69e9a83f13147a5833e881aa6dbab add worker.txt
+ M worker.txt
+
+Persisted worker bytes
+late edit
+
+Pool return or Orca removal boundary calls
+none
+
+Retained records
+state/task-x1.meta
+window=firstmate:fm-task-x1
+endpoint_task_id=task-x1
+worktree=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-tracked/wt
+project=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-tracked/project
+kind=ship
+mode=no-mistakes
+spawn_gen=teardown-test-task-x1
+decisions_reviewed=1
+decision_keys=
+state/task-x1.status
+working: retained history
+state/task-x1.inbox/001.msg
+retained steer
+state/task-x1.backlog-close
+absent
+data/backlog.md
+# Backlog
+
+## In flight
+- [ ] task-x1 - teardown fixture task (kind: ship) (since 2026-10-28)
+
+## Queued
+## Done
+Scenario: post-reap-tmux-untracked
+Running product: bin/fm-teardown.sh task-x1
+Disposable endpoint, reaper scan, and pool boundaries. Real Git and backlog consumer.
+
+Product stdout
+
+Product stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-untracked/wt has uncommitted changes.
+uncommitted changes present (untracked-only leftovers)
+untracked paths (up to 10):
+  late.txt
+Commit them (or get the captain's explicit OK to discard, then --force).
+
+Persisted Git state
+fm/task-x1
+d02c4ef281e2dc37e1a7bcb8bd90e5a07d2d6600 add worker.txt
+?? late.txt
+
+Persisted worker bytes
+baseline
+late file
+
+Pool return or Orca removal boundary calls
+none
+
+Retained records
+state/task-x1.meta
+window=firstmate:fm-task-x1
+endpoint_task_id=task-x1
+worktree=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-untracked/wt
+project=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/post-reap-tmux-untracked/project
+kind=ship
+mode=no-mistakes
+spawn_gen=teardown-test-task-x1
+decisions_reviewed=1
+decision_keys=
+state/task-x1.status
+working: retained history
+state/task-x1.inbox/001.msg
+retained steer
+state/task-x1.backlog-close
+absent
+data/backlog.md
+# Backlog
+
+## In flight
+- [ ] task-x1 - teardown fixture task (kind: ship) (since 2026-10-28)
+
+## Queued
+## Done

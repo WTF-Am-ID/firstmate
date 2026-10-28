@@ -1,0 +1,26 @@
+FM_TEST_BEGIN 2026-10-28T16:59:29Z tests/fm-teardown.test.sh family=pr-forge expected_gate_skip=none
+ok - teardown leaves opencode's busy plugin in the returned pool worktree as on main
+ok - post-reap proof retains late work and retry records on ordinary and Orca paths, preserving clean/force/scout behavior
+ok - status archival is opt-in and preserves the complete log
+ok - config-absent teardown does not read or invoke record export
+ok - unopted teardown ignores symlinked config when record export is absent
+not ok - record export teardown: ●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: record export root overlaps the effective home root: /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M61Q2K4WVRWMEZGFSRV4CD88/.test-up7783/tmp/fm-teardown-tests.VXFE6x/record-export-success/export
+error: record export archive failed for task-x1; retaining task records for retry: expected exit 0, got 1
+FM_TEST_END 2026-10-28T17:00:48Z tests/fm-teardown.test.sh exit=1 duration_ms=78894 gate_skip=false
+FM_TEST_BEGIN 2026-10-28T17:00:48Z tests/fm-teardown-endpoint-safety.test.sh family=backend-dispatch expected_gate_skip=none
+ok - fm-teardown: missing, empty, malformed, ambiguous, and task-mismatched endpoints refuse before every mutation or runtime call
+ok - fm-teardown: a concurrent lifecycle action refuses before mutation
+ok - fm-teardown: non-pool cleanup ignores unrelated task publication locks
+FM_TEST_END 2026-10-28T17:01:22Z tests/fm-teardown-endpoint-safety.test.sh exit=1 duration_ms=34019 gate_skip=false
+FM_TEST_SUMMARY total=2 failed=2 skipped_gate=0 duration_ms=113099
+FM_TEST_SUMMARY_FAMILY family=backend-dispatch count=1 duration_ms=34019 failed=1
+FM_TEST_SUMMARY_FAMILY family=pr-forge count=1 duration_ms=78894 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-teardown.test.sh duration_ms=78894
+FM_TEST_SLOWEST rank=2 script=tests/fm-teardown-endpoint-safety.test.sh duration_ms=34019
