@@ -67,8 +67,8 @@
 # by itself causes a false refusal of landed work.
 # A gh lookup error falls back to the content check; if that is also inconclusive,
 # teardown refuses rather than risk discarding unlanded work.
-# A Git option or execution error reports the content-landed proof as unavailable;
-# the merge-tree --write-tree proof requires Git 2.38 or newer.
+# A merge-tree option or execution error reports the content-landed proof as
+# unavailable. The merge-tree --write-tree proof requires Git 2.38 or newer.
 # Uncommitted changes are never landed; dirty refusals distinguish untracked-only
 # leftovers from tracked edits and list at most ten non-exempt untracked paths.
 # local-only projects additionally accept work merged into the local default
@@ -1746,9 +1746,10 @@ pr_is_merged() {
 # the default branch does not already contain (e.g. its change landed via squash) the
 # merged tree equals the default branch's tree. This isolates branch-only changes, so
 # unrelated commits the default branch gained past the merge-base do not count as
-# "added". Returns non-zero when inconclusive (no default ref, or a merge conflict),
-# so the caller refuses rather than guesses. CONTENT_LANDED_PROOF_ERROR names a
-# Git option or execution failure separately from a conflict or differing tree.
+# "added". Returns non-zero when inconclusive (no default ref, a merge conflict,
+# or a Git error), so the caller refuses rather than guesses.
+# CONTENT_LANDED_PROOF_ERROR names a merge-tree option or execution failure
+# separately from a conflict or differing tree.
 content_in_default() {
   local name=${BASE_BRANCH:-} ref default_tree merged_tree merge_status
   CONTENT_LANDED_PROOF_ERROR=
@@ -1780,7 +1781,7 @@ content_in_default() {
 # reachable from any remote-tracking branch? True when a merged PR proves the
 # current local work is contained in the PR head, OR the content is already in the
 # default branch (fallback, which also covers the no-PR and gh-error paths). False
-# only for genuinely unlanded work.
+# when neither proof establishes that the work landed.
 work_is_landed() {
   local branch=$1
   pr_is_merged "$branch" && return 0
