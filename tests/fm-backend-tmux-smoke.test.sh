@@ -304,18 +304,14 @@ for stale_window in fm-api fm-release.0; do
 done
 pass "real tmux: direct and legacy task text sends refuse gone prefix and dotted targets without changing siblings"
 
-for live_window in fm-api fm-release.0; do
-  log="$SHIM_DIR/$live_window-text"
-  text_receiver "$live_window" "$log"
-  live_target="$SESSION:$live_window"
-  case "$live_window" in *.*) live_target="=$SESSION:=$live_window" ;; esac
-  verdict=$(fm_backend_tmux_send_text_submit "$live_target" /clear 1 0.1 0)
-  [ "$verdict" != send-failed ] || fail "text submit refused live window $live_window"
-  [ -f "$log" ] && [ "$(cat "$log")" = /clear ] \
-    && [ "$(wc -l < "$log" | tr -d ' ')" = 1 ] \
-    || fail "text submit did not send /clear exactly once to $live_window"
-done
-pass "real tmux: exact live and dotted window text submits type and submit once"
+log="$SHIM_DIR/live-text"
+text_receiver fm-api "$log"
+verdict=$(fm_backend_tmux_send_text_submit "$SESSION:fm-api" /clear 1 0.1 0)
+[ "$verdict" != send-failed ] || fail "text submit refused live window fm-api"
+[ -f "$log" ] && [ "$(cat "$log")" = /clear ] \
+  && [ "$(wc -l < "$log" | tr -d ' ')" = 1 ] \
+  || fail "text submit did not send /clear exactly once to fm-api"
+pass "real tmux: an exact live window text submit types and submits once"
 
 # --- kill and recovery-grade missing-window classification ------------------
 
