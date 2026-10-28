@@ -30,6 +30,7 @@
 #       On caller INT/HUP/TERM, the Perl fallback reaps its command group with
 #       up to 0.2s TERM-to-KILL grace, then restores the caller's traps and
 #       redelivers the signal. If the caller continues, it returns 128+n.
+#       Its deadline and cleanup grace use a monotonic clock.
 #
 #   fm_exec_timed <seconds> <grace-seconds> <command> [args...]
 #       Replaces the calling shell with the bounded command, so it must be the
