@@ -1,0 +1,510 @@
+[
+  {
+    "mode": "injected-failure",
+    "action": "release",
+    "revision": "8dce46f1707bb950cacfbc03d145442ac03a9dd4",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/.test-3602/injected/bin/fm-wake-grant.sh",
+      "release",
+      "existing"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "injected acquire failure\n",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "expected_observed": true
+  },
+  {
+    "mode": "injected-failure",
+    "action": "deactivate",
+    "revision": "8dce46f1707bb950cacfbc03d145442ac03a9dd4",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/.test-3602/injected/bin/fm-wake-grant.sh",
+      "deactivate",
+      "23424",
+      "existing"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "injected acquire failure\n",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "expected_observed": true
+  },
+  {
+    "mode": "injected-failure",
+    "action": "activate",
+    "revision": "8dce46f1707bb950cacfbc03d145442ac03a9dd4",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/.test-3602/injected/bin/fm-wake-grant.sh",
+      "activate",
+      "23424",
+      "replacement"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "injected acquire failure\n",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "expected_observed": true
+  },
+  {
+    "mode": "injected-failure",
+    "action": "publish",
+    "revision": "8dce46f1707bb950cacfbc03d145442ac03a9dd4",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/.test-3602/injected/bin/fm-wake-grant.sh",
+      "publish",
+      "existing",
+      "1"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "injected acquire failure\n",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "expected_observed": true
+  },
+  {
+    "mode": "real-acquire-failure",
+    "action": "release",
+    "revision": "8dce46f1707bb950cacfbc03d145442ac03a9dd4",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/bin/fm-wake-grant.sh",
+      "release",
+      "existing"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "expected_observed": true
+  },
+  {
+    "mode": "real-acquire-failure",
+    "action": "deactivate",
+    "revision": "8dce46f1707bb950cacfbc03d145442ac03a9dd4",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/bin/fm-wake-grant.sh",
+      "deactivate",
+      "23424",
+      "existing"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "expected_observed": true
+  },
+  {
+    "mode": "real-acquire-failure",
+    "action": "activate",
+    "revision": "8dce46f1707bb950cacfbc03d145442ac03a9dd4",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/bin/fm-wake-grant.sh",
+      "activate",
+      "23424",
+      "replacement"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "expected_observed": true
+  },
+  {
+    "mode": "real-acquire-failure",
+    "action": "publish",
+    "revision": "8dce46f1707bb950cacfbc03d145442ac03a9dd4",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/bin/fm-wake-grant.sh",
+      "publish",
+      "existing",
+      "1"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "expected_observed": true
+  },
+  {
+    "mode": "real-success",
+    "action": "release",
+    "revision": "8dce46f1707bb950cacfbc03d145442ac03a9dd4",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/bin/fm-wake-grant.sh",
+      "release",
+      "existing"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": false,
+      "lock_pid": null,
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": null,
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": false,
+      "lock_pid": null,
+      "temporary_records": []
+    },
+    "expected_observed": true
+  },
+  {
+    "mode": "real-success",
+    "action": "deactivate",
+    "revision": "8dce46f1707bb950cacfbc03d145442ac03a9dd4",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/bin/fm-wake-grant.sh",
+      "deactivate",
+      "23424",
+      "existing"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": false,
+      "lock_pid": null,
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": null,
+      ".branch-eligible-rows": null,
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": false,
+      "lock_pid": null,
+      "temporary_records": []
+    },
+    "expected_observed": true
+  },
+  {
+    "mode": "real-success",
+    "action": "activate",
+    "revision": "8dce46f1707bb950cacfbc03d145442ac03a9dd4",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/bin/fm-wake-grant.sh",
+      "activate",
+      "23424",
+      "replacement"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": false,
+      "lock_pid": null,
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nreplacement\n",
+      ".branch-eligible-rows": null,
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": false,
+      "lock_pid": null,
+      "temporary_records": []
+    },
+    "expected_observed": true
+  },
+  {
+    "mode": "real-success",
+    "action": "publish",
+    "revision": "8dce46f1707bb950cacfbc03d145442ac03a9dd4",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/bin/fm-wake-grant.sh",
+      "publish",
+      "existing",
+      "1"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": null,
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": false,
+      "lock_pid": null,
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": false,
+      "lock_pid": null,
+      "temporary_records": []
+    },
+    "expected_observed": true
+  },
+  {
+    "mode": "baseline-injected-failure",
+    "action": "release",
+    "revision": "417cec2feb4e2976c0acdb2527b87b3ccc71535f",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/.test-3602/baseline/bin/fm-wake-grant.sh",
+      "release",
+      "existing"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "injected acquire failure\n",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": null,
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "expected_observed": true
+  },
+  {
+    "mode": "baseline-injected-failure",
+    "action": "deactivate",
+    "revision": "417cec2feb4e2976c0acdb2527b87b3ccc71535f",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/.test-3602/baseline/bin/fm-wake-grant.sh",
+      "deactivate",
+      "23424",
+      "existing"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "injected acquire failure\n",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": null,
+      ".branch-eligible-rows": null,
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "expected_observed": true
+  },
+  {
+    "mode": "baseline-injected-failure",
+    "action": "activate",
+    "revision": "417cec2feb4e2976c0acdb2527b87b3ccc71535f",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/.test-3602/baseline/bin/fm-wake-grant.sh",
+      "activate",
+      "23424",
+      "replacement"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "injected acquire failure\n",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nreplacement\n",
+      ".branch-eligible-rows": null,
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "expected_observed": true
+  },
+  {
+    "mode": "baseline-injected-failure",
+    "action": "publish",
+    "revision": "417cec2feb4e2976c0acdb2527b87b3ccc71535f",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/.test-3602/baseline/bin/fm-wake-grant.sh",
+      "publish",
+      "existing",
+      "1"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "injected acquire failure\n",
+    "before": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "after": {
+      ".branch-eligible-owner": "fm-branch-eligible-owner-v1\n23424\nWed Oct 28 12:59:25 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python .test-3602/grant_probe.py\nexisting\n",
+      ".branch-eligible-rows": "1\n",
+      ".wake-queue": "1\t1\tsignal\ttask.status\tsignal: task\n",
+      "lock_exists": true,
+      "lock_pid": "23424\n",
+      "temporary_records": []
+    },
+    "expected_observed": true
+  }
+]

@@ -1,0 +1,2 @@
+{"command": ["bash", "/Users/daddy/.no-mistakes-upstream-codex/worktrees/d3c5a4c1e8a9/01M619AKHZZ4PM0HFR59XMA839/bin/fm-wake-grant.sh", "release", "existing"], "while_foreign_lock_held": {"process_waiting": true, "owner_record_retained": true, "rows": "1\n", "lock_pid": "87473\n"}}
+{"after_foreign_owner_releases_lock": {"exit": 0, "stdout": "", "stderr": "", "rows_removed": true, "owner_record_retained": true, "acquired_lock_released": true}}
