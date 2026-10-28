@@ -234,6 +234,7 @@ fi
 # --- single-flight generation claim --------------------------------------------
 SESSION_PID=$(sed -n '1p' "$STATE/.lock" 2>/dev/null || true)
 SESSION_IDENTITY=$(fm_session_pid_identity "$SESSION_PID" 2>/dev/null || true)
+SESSION_ID=$(fm_session_lock_recorded_session_id "$STATE" 2>/dev/null || true)
 # Claude runs one background process per firing with no dedupe. Exactly one
 # generation owner arms and translates per event epoch: every firing defers to
 # a live open claim, and a stuck, dead, identity-mismatched, or finished claim
@@ -277,7 +278,7 @@ autoarm_commit() {  # <outcome> [marker-file] [interrupted-session-identity]
     esac
     fm_autoarm_write_owned "$STATE" "$MY_GEN" "$outcome" "$marker" "$session_pid" "$recovery"
   else
-    fm_autoarm_write_owned "$STATE" "$MY_GEN" "$outcome" "$marker" '' '' "$marker_identity"
+    fm_autoarm_write_owned "$STATE" "$MY_GEN" "$outcome" "$marker" '' '' "$marker_identity" "$SESSION_ID"
   fi
 }
 
@@ -299,16 +300,14 @@ autoarm_record() {  # <outcome>
 # fail-open was already consumed must not restart automatic continuation.
 # shellcheck disable=SC2329 # Invoked indirectly by the signal traps below.
 handle_autoarm_signal() {
-  local signal=$1 current_pid current_identity
+  local signal=$1
   trap - HUP TERM INT
   if [ -n "${ARM_PID:-}" ]; then
     kill -TERM "$ARM_PID" 2>/dev/null || true
     wait "$ARM_PID" 2>/dev/null || true
   fi
   [ -z "${OUT:-}" ] || rm -f "$OUT" 2>/dev/null || true
-  current_pid=$(sed -n '1p' "$STATE/.lock" 2>/dev/null || true)
-  current_identity=$(fm_session_pid_identity "$current_pid" 2>/dev/null || true)
-  if [ -n "$SESSION_IDENTITY" ] && [ "$SESSION_IDENTITY" != "$current_identity" ]; then
+  if ! fm_autoarm_session_matches "$STATE" "$SESSION_IDENTITY" "$SESSION_ID"; then
     autoarm_record session-ended
     exit 0
   fi
