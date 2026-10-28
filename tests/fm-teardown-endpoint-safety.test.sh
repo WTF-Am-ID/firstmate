@@ -17,6 +17,8 @@ make_case() {  # <name>
     "$TMP_ROOT/$dir/home/config" "$TMP_ROOT/$dir/fakebin" \
     "$TMP_ROOT/$dir/worktree" "$TMP_ROOT/$dir/project"
   git init -q "$TMP_ROOT/$dir/project"
+  fm_git_init_commit "$TMP_ROOT/$dir/worktree"
+  git -C "$TMP_ROOT/$dir/worktree" checkout -qb fm/endpoint-fixture
   : > "$TMP_ROOT/$dir/worktree/sentinel"
   : > "$TMP_ROOT/$dir/runtime.log"
   cat > "$TMP_ROOT/$dir/fakebin/tmux" <<'SH'
@@ -43,7 +45,7 @@ mark_case_as_treehouse_pool() {  # <case>
   mkdir -p "$dir/pool/1"
   git -C "$dir/project" -c user.name=test -c user.email=test@example.invalid \
     commit --allow-empty -qm pool-fixture
-  git -C "$dir/project" worktree add -q --detach "$dir/pool/1/project"
+  git -C "$dir/project" worktree add -q -b fm/pool-fixture "$dir/pool/1/project"
   ln -s "pool/1/project" "$dir/worktree"
   printf '{"worktrees":[{"name":"1","path":"%s"}]}\n' \
     "$dir/pool/1/project" > "$dir/pool/treehouse-state.json"
