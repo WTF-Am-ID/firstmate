@@ -21,7 +21,9 @@ make_case() {
   chmod +x "$HOME_DIR/bin/fm-guard.sh"
   fm_git_worktree "$PROJ" "$WT" fm/local-task
   BASE=$(git -C "$PROJ" rev-parse HEAD)
-  git -C "$WT" commit -q --allow-empty -m X
+  printf 'approved X\n' > "$WT/approved.txt"
+  git -C "$WT" add approved.txt
+  git -C "$WT" commit -q -m X
   X=$(git -C "$WT" rev-parse HEAD)
   printf 'kind=ship\nmode=local-only\nbranch=fm/local-task\nproject=%s\nworktree=%s\nspawn_gen=fixture-1\n' \
     "$PROJ" "$WT" > "$META"
@@ -43,6 +45,8 @@ assert_refused() {
   out=$(land 2>&1) || rc=$?
   [ "$rc" -ne 0 ] || fail "landing unexpectedly succeeded: $out"
   [ "$(git -C "$PROJ" rev-parse HEAD)" = "$BASE" ] || fail 'refusal moved main'
+  [ -z "$(git -C "$PROJ" status --porcelain)" ] || fail 'refusal left a dirty checkout'
+  [ ! -e "$PROJ/approved.txt" ] || fail 'refusal left approved files behind'
 }
 
 test_branch_advance_does_not_change_approval() {
@@ -55,6 +59,8 @@ test_branch_advance_does_not_change_approval() {
   git -C "$WT" reset -q --hard "$X"
   land >/dev/null || fail 'approved X did not land'
   [ "$(git -C "$PROJ" rev-parse HEAD)" = "$X" ] || fail 'landing did not use X'
+  [ "$(cat "$PROJ/approved.txt")" = 'approved X' ] || fail 'landing did not update the checkout'
+  [ -z "$(git -C "$PROJ" status --porcelain)" ] || fail 'landing left a dirty checkout'
   pass 'branch advance refuses, and restoring the reported X lands exactly X'
 }
 
@@ -74,44 +80,47 @@ test_missing_and_malformed_head_refuse() {
   pass 'missing, malformed and ambiguous done heads refuse without moving main'
 }
 
-# A Git shim moves either approval metadata or the branch after the hold check.
+# A Git shim moves the branch inside the final ref-changing Git invocation.
 # It is a scheduling seam only: every Git operation still uses the real binary.
 test_change_after_hold_check_refuses() {
-  local mode real_git out rc
+  local real_git out rc
   real_git=$(command -v git)
-  for mode in branch approval; do
-    make_case "race-$mode"
-    record_done || fail 'race fixture done was not accepted'
-    git -C "$WT" commit -q --allow-empty -m Y
-    Y=$(git -C "$WT" rev-parse HEAD)
-    git -C "$WT" reset -q --hard "$X"
-    mkdir -p "$CASE/fakebin"
-    cat > "$CASE/fakebin/git" <<'SH'
+  make_case race-branch
+  record_done || fail 'race fixture done was not accepted'
+  git -C "$WT" commit -q --allow-empty -m Y
+  Y=$(git -C "$WT" rev-parse HEAD)
+  git -C "$WT" reset -q --hard "$X"
+  mkdir -p "$CASE/fakebin"
+  cat > "$CASE/fakebin/git" <<'SH'
 #!/usr/bin/env bash
 case "$*" in
-  *' merge --ff-only '*)
-    if [ "$RACE_MODE" = branch ]; then
-      "$REAL_GIT" -C "$RACE_PROJ" update-ref refs/heads/fm/local-task "$RACE_Y"
-    else
-      printf 'local_done_head=%s\n' "$RACE_Y" >> "$RACE_META"
-    fi
+  *' merge --ff-only '*|*' update-ref '*' --stdin')
+    "$REAL_GIT" -C "$RACE_PROJ" update-ref refs/heads/fm/local-task "$RACE_Y" || exit $?
+    printf 'moved\n' > "$RACE_MARKER"
     ;;
 esac
 exec "$REAL_GIT" "$@"
 SH
-    chmod +x "$CASE/fakebin/git"
-    rc=0
-    out=$(PATH="$CASE/fakebin:$PATH" REAL_GIT="$real_git" RACE_MODE="$mode" \
-      RACE_PROJ="$PROJ" RACE_Y="$Y" RACE_META="$META" land 2>&1) || rc=$?
-    # A branch race after Git itself starts cannot select Y: the merge operand
-    # must already be X. Earlier races and metadata races must refuse.
-    if [ "$rc" -eq 0 ]; then
-      [ "$(git -C "$PROJ" rev-parse HEAD)" = "$X" ] || fail "race landed Y: $out"
-    else
-      [ "$(git -C "$PROJ" rev-parse HEAD)" = "$BASE" ] || fail 'race refusal moved main'
-    fi
-  done
-  pass 'a concurrent branch or approval change cannot land Y'
+  chmod +x "$CASE/fakebin/git"
+  rc=0
+  out=$(PATH="$CASE/fakebin:$PATH" REAL_GIT="$real_git" RACE_MARKER="$CASE/moved" \
+    RACE_PROJ="$PROJ" RACE_Y="$Y" land 2>&1) || rc=$?
+  [ -f "$CASE/moved" ] || fail 'branch race was not exercised'
+  [ "$(git -C "$PROJ" rev-parse refs/heads/fm/local-task)" = "$Y" ] || fail 'worker branch did not move'
+  [ "$rc" -ne 0 ] || fail "branch race unexpectedly landed: $out"
+  [ "$(git -C "$PROJ" rev-parse HEAD)" = "$BASE" ] || fail 'branch race moved main'
+  [ -z "$(git -C "$PROJ" status --porcelain)" ] || fail 'branch race left a dirty checkout'
+  [ ! -e "$PROJ/approved.txt" ] || fail 'branch race left approved files behind'
+  pass 'a branch move inside the final Git invocation refuses without changing main or its checkout'
+}
+
+test_diverged_default_refuses() {
+  make_case diverged
+  record_done || fail 'diverged fixture done was not accepted'
+  git -C "$PROJ" commit -q --allow-empty -m diverged
+  BASE=$(git -C "$PROJ" rev-parse HEAD)
+  assert_refused
+  pass 'a diverged default branch refuses without changing main or its checkout'
 }
 
 test_change_during_approval_check_refuses() {
@@ -156,4 +165,5 @@ test_snapshot_cannot_pin_a_replacement_task() {
 
 fm_test_run test_branch_advance_does_not_change_approval \
   test_missing_and_malformed_head_refuse test_change_after_hold_check_refuses \
-  test_change_during_approval_check_refuses test_snapshot_cannot_pin_a_replacement_task
+  test_diverged_default_refuses test_change_during_approval_check_refuses \
+  test_snapshot_cannot_pin_a_replacement_task

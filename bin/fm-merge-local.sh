@@ -137,13 +137,13 @@ if [ -n "$(git -C "$PROJ" status --porcelain 2>/dev/null | head -1)" ]; then
 fi
 
 # Clean fast-forward only: DEFAULT must be an ancestor of BRANCH.
-if ! git -C "$PROJ" merge-base --is-ancestor "$DEFAULT" "$MERGE_HEAD"; then
+before=$(git -C "$PROJ" rev-parse "$DEFAULT")
+if ! git -C "$PROJ" merge-base --is-ancestor "$before" "$MERGE_HEAD"; then
   echo "REFUSED: $BRANCH is not a fast-forward of $DEFAULT (it has diverged)." >&2
   echo "Have the crewmate rebase $BRANCH onto $DEFAULT, then retry." >&2
   exit 1
 fi
 
-before=$(git -C "$PROJ" rev-parse --short "$DEFAULT")
 hold_status=0
 FM_HOME="$FM_HOME" FM_STATE_OVERRIDE="$STATE" \
   "$SCRIPT_DIR/fm-captain-hold.sh" open "$ID" --distinguish-absent || hold_status=$?
@@ -158,14 +158,31 @@ case "$hold_status" in
     exit 1
     ;;
 esac
-# Recheck after the approval read. The literal commit operand below also closes
-# the final branch-move race: Git can never resolve a later worker tip here.
+# Recheck after the approval read. Git's ref transaction below verifies and
+# locks the worker head together with the default-branch update.
 if [ "$(fm_dod_local_done_head "$META")" != "$MERGE_HEAD" ] || ! local_head_matches; then
   echo "error: local done head or branch changed during approval check; refusing" >&2
   exit 1
 fi
 merge_status=0
-git -C "$PROJ" merge --ff-only "$MERGE_HEAD" >/dev/null || merge_status=$?
+# Stage the fast-forward with Git's two-tree checkout, which preserves local
+# changes made since the clean-tree check and refuses obstructing files.
+git -C "$PROJ" read-tree -m -u "$before" "$MERGE_HEAD" || exit $?
+git -C "$PROJ" update-ref -m "merge $BRANCH: Fast-forward" --stdin >/dev/null <<EOF || merge_status=$?
+start
+verify refs/heads/$BRANCH $MERGE_HEAD
+update refs/heads/$DEFAULT $MERGE_HEAD $before
+prepare
+commit
+EOF
+if [ "$merge_status" -ne 0 ]; then
+  # The transaction left main untouched. Undo only the staged fast-forward;
+  # the two-tree checkout also protects any intervening local edits here.
+  git -C "$PROJ" read-tree -m -u "$MERGE_HEAD" "$before" || {
+    echo "error: local merge refused and checkout restoration failed in $PROJ" >&2
+    exit 1
+  }
+fi
 fm_lock_release "$MERGE_META_LOCK" || true
 MERGE_META_LOCK=
 fm_lock_release "$MERGE_CONTROL_LOCK" || true
