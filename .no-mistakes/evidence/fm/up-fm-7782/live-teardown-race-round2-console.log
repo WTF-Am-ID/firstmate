@@ -1,0 +1,86 @@
+
+SCENARIO S10: Forced teardown during validated landing refuses, then exactly approved X lands
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/project rev-parse HEAD
+8df00a52e1b3a8573b9b7965fcb5581d0495997d
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/worker rev-parse HEAD
+8786ee5ec0fd376b107357bb95ed6329fdc45ce9
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash -c source "$1/bin/fm-dod-lib.sh"; fm_dod_accept_ship_done ship local-only "$2" "$3" "done: ready in branch fm/local-task" "$4/state" local-task "$5" live-done /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7 /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/worker /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/project /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/home /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/home/state/local-task.meta
+
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh hold local-task --reason Local merge approval
+local-task
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh answer local-task --release --decision-file /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/home/approval.txt
+released: local-task
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task [paused after ancestry validation]
+OBSERVED landing paused after ancestry validation with task control lock held
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-teardown.sh local-task --force
+error: another lifecycle action is already running for task local-task; nothing was changed
+exit=1
+OBSERVED forced teardown refused; task metadata and worker remain
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+merged fm/local-task into local main (8df00a52e1b3a8573b9b7965fcb5581d0495997d -> 8786ee5) in /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/project
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/project rev-parse main
+8786ee5ec0fd376b107357bb95ed6329fdc45ce9
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo/teardown-race/project status --porcelain
+
+exit=0
+OBSERVED exactly approved X landed after forced teardown was rejected
+RESULT pass
+CLEANUP removed /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-9io4dduo

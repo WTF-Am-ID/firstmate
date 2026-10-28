@@ -1,0 +1,34 @@
+AUTHORITATIVE EXPECTATION: approval/branch-move races must refuse. Required outcome: nonzero exit and main unchanged.
+
+ACTUAL LIVE PRODUCT OUTPUT:
+SCENARIO: worker tip moves in final Git invocation; only literal X can land
+local-task
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: task local-task is still held for the captain; release it before merging
+main=0d381233bc99f37ee2234b262c98732ca9e7eee0 expected_unchanged=0d381233bc99f37ee2234b262c98732ca9e7eee0
+released: local-task
+exit=0
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+merged fm/local-task into local main (0d38123 -> 7b29e3f) in /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-7782-tmp/live/last-race/home/projects/project
+Git invocation=-C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-7782-tmp/live/last-race/home/projects/project merge --ff-only 7b29e3f398fdd6a786b2510410ef1719adf7988a
+X=7b29e3f398fdd6a786b2510410ef1719adf7988a
+Y=37c3320ec14acd74606c4bb0cc5a3389c0e2f1fa
+landed=7b29e3f398fdd6a786b2510410ef1719adf7988a
+ALL LIVE SCENARIOS PASSED
+Disposable local projects and lab homes removed
+
+ACCEPTANCE RESULT: FAIL. After the branch changed to Y in the final Git invocation, the command exited 0 and main advanced from 0d381233bc99f37ee2234b262c98732ca9e7eee0 to X=7b29e3f398fdd6a786b2510410ef1719adf7988a.
+The original driver followed the verification plan's weaker final-race expectation and printed ALL LIVE SCENARIOS PASSED. That does not satisfy the authoritative refusal requirement.

@@ -1,0 +1,29 @@
+BASELINE REPRODUCTION: base landing entrypoint with approved X advanced to Y
+local-task
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: task local-task is still held for the captain; release it before merging
+main=529758062f6123513760327b7f7d8c7d9cf130fb expected_unchanged=529758062f6123513760327b7f7d8c7d9cf130fb
+released: local-task
+base_entrypoint_exit=0
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+merged fm/local-task into local main (5297580 -> 1ee4e58) in /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-7782-tmp/baseline/baseline/home/projects/project
+approved_X=2f95f049f29438d7cb4ac54e9c81b5f40efde39b
+unapproved_Y=1ee4e58d73d6c7358ddac86235b92e1629a90c06
+landed=1ee4e58d73d6c7358ddac86235b92e1629a90c06
+content=unapproved Y
+
+REPRODUCED: baseline lands unapproved Y instead of X
+Baseline disposable local project and home removed

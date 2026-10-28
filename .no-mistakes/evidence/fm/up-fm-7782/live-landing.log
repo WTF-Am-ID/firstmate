@@ -1,0 +1,219 @@
+SCENARIO: approved X refuses moved Y, then restored X lands
+base=325c129a663cb7e709a29e9ae31a45bba995b50c
+X=857c9ef25149ff608e158a406f83ff018391bce2
+kind=ship
+mode=local-only
+harness=codex
+branch=fm/local-task
+project=/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-7782-tmp/live/closure/home/projects/project
+worktree=/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-7782-tmp/live/closure/home/projects/worker
+spawn_gen=live-7782
+
+local_done_head=857c9ef25149ff608e158a406f83ff018391bce2
+
+local-task
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: task local-task is still held for the captain; release it before merging
+main=325c129a663cb7e709a29e9ae31a45bba995b50c expected_unchanged=325c129a663cb7e709a29e9ae31a45bba995b50c
+released: local-task
+Y=b2517324735e3c9f28349fe1794f6853310c5470
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: branch fm/local-task differs from the recorded local done head; refusing
+main=325c129a663cb7e709a29e9ae31a45bba995b50c expected_unchanged=325c129a663cb7e709a29e9ae31a45bba995b50c
+reobserving_old_done_exit=1
+local-only done head could not be recorded or differs from the recorded head; revised work requires a new task/approval record
+restored_X_exit=0
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+merged fm/local-task into local main (325c129 -> 857c9ef) in /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-7782-tmp/live/closure/home/projects/project
+landed=857c9ef25149ff608e158a406f83ff018391bce2
+content=approved X
+
+SCENARIO: invalid durable identities refuse
+case=missing
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: missing or malformed local done head for task local-task; report readiness before approval
+main=7232106dcb776e8d60dd1bba87c337dc734f569d expected_unchanged=7232106dcb776e8d60dd1bba87c337dc734f569d
+case=empty
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: missing or malformed local done head for task local-task; report readiness before approval
+main=b18e9312052d9d69c9714d0c148f4741cdf27eb8 expected_unchanged=b18e9312052d9d69c9714d0c148f4741cdf27eb8
+case=abbreviated
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: missing or malformed local done head for task local-task; report readiness before approval
+main=85853951cf0b700aef333c23bef9b05d5b4d595c expected_unchanged=85853951cf0b700aef333c23bef9b05d5b4d595c
+case=expression
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: missing or malformed local done head for task local-task; report readiness before approval
+main=fd522f4ec893fc8dfaf7906476a4025825cdf115 expected_unchanged=fd522f4ec893fc8dfaf7906476a4025825cdf115
+case=nonhex
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: missing or malformed local done head for task local-task; report readiness before approval
+main=f88940f21618a66f344bc9981eb9840b7b5dda49 expected_unchanged=f88940f21618a66f344bc9981eb9840b7b5dda49
+case=nonexistent
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: branch fm/local-task differs from the recorded local done head; refusing
+main=a0059fdb8a907ca5b204de81d53a57824cffdcc3 expected_unchanged=a0059fdb8a907ca5b204de81d53a57824cffdcc3
+case=duplicate
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: missing or malformed local done head for task local-task; report readiness before approval
+main=733317eda92f512bfdd4e1def7ee86132c7c8fe1 expected_unchanged=733317eda92f512bfdd4e1def7ee86132c7c8fe1
+SCENARIO: stale task generation cannot acquire a new readiness identity
+accept_exit=1
+local-only done head could not be recorded or differs from the recorded head; revised work requires a new task/approval record
+metadata_unchanged=True
+SCENARIO: approval identity changes while landing waits for metadata lock
+changed_while_waiting=c7854b996d3708b4d6862ecd8e2658d39c18105c -> 38105cffa26630ec3c46e150063e8446ebe3c989
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: task local-task local done head changed while waiting to merge; refusing
+main=783a4aff2af46d66251aa889991e43ae7013ee26 expected_unchanged=783a4aff2af46d66251aa889991e43ae7013ee26
+SCENARIO: real approval-read races refuse
+local-task
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: task local-task is still held for the captain; release it before merging
+main=9e73310c7e6ac11aab582b62d79b3cbb1667e728 expected_unchanged=9e73310c7e6ac11aab582b62d79b3cbb1667e728
+released: local-task
+mutation=branch
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: local done head or branch changed during approval check; refusing
+main=9e73310c7e6ac11aab582b62d79b3cbb1667e728 expected_unchanged=9e73310c7e6ac11aab582b62d79b3cbb1667e728
+local-task
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: task local-task is still held for the captain; release it before merging
+main=e4630c73833135153867d75815b4a48c9e3709f9 expected_unchanged=e4630c73833135153867d75815b4a48c9e3709f9
+released: local-task
+mutation=approval
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: local done head or branch changed during approval check; refusing
+main=e4630c73833135153867d75815b4a48c9e3709f9 expected_unchanged=e4630c73833135153867d75815b4a48c9e3709f9
+SCENARIO: worker tip moves in final Git invocation; only literal X can land
+local-task
+exit=1
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: task local-task is still held for the captain; release it before merging
+main=0d381233bc99f37ee2234b262c98732ca9e7eee0 expected_unchanged=0d381233bc99f37ee2234b262c98732ca9e7eee0
+released: local-task
+exit=0
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  This read-only session should report the lapse, not repair it.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  Watcher repair belongs to the session holding the fleet lock; do not drain, arm, or repair from this read-only session.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+merged fm/local-task into local main (0d38123 -> 7b29e3f) in /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-7782-tmp/live/last-race/home/projects/project
+Git invocation=-C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-7782-tmp/live/last-race/home/projects/project merge --ff-only 7b29e3f398fdd6a786b2510410ef1719adf7988a
+X=7b29e3f398fdd6a786b2510410ef1719adf7988a
+Y=37c3320ec14acd74606c4bb0cc5a3389c0e2f1fa
+landed=7b29e3f398fdd6a786b2510410ef1719adf7988a
+ALL LIVE SCENARIOS PASSED
+Disposable local projects and lab homes removed

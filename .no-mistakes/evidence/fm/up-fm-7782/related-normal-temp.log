@@ -1,0 +1,1 @@
+FM_TEST_BEGIN 2026-10-28T12:11:12Z tests/fm-captain-hold-lifecycle.test.sh family=pure-contract-unit expected_gate_skip=none

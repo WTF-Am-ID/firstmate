@@ -1,0 +1,1260 @@
+
+SCENARIO S1: Approved X persists, advancing to Y refuses, stale readiness refuses, restoring X lands exactly X
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/project rev-parse HEAD
+ac7fb882dd2d4af6f72dfd065169f8ce77d30e65
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/worker rev-parse HEAD
+76e1ffa945625b0fb521841c97e055b64e658162
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash -c source "$1/bin/fm-dod-lib.sh"; fm_dod_accept_ship_done ship local-only "$2" "$3" "done: ready in branch fm/local-task" "$4/state" local-task "$5" live-done /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7 /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/worker /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/project /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/home /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/home/state/local-task.meta
+
+exit=0
+PERSISTED kind=ship
+mode=local-only
+branch=fm/local-task
+project=/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/project
+worktree=/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/worker
+spawn_gen=live-1
+harness=codex
+
+local_done_head=76e1ffa945625b0fb521841c97e055b64e658162
+
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh hold local-task --reason Local merge approval
+local-task
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh answer local-task --release --decision-file /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/home/approval.txt
+released: local-task
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/worker add unapproved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/worker commit -qm Y
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/worker rev-parse HEAD
+376d33a9e4266c19d7e837a4f1dfd8d2b8685065
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: branch fm/local-task differs from the recorded local done head; refusing
+exit=1
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/project rev-parse main
+ac7fb882dd2d4af6f72dfd065169f8ce77d30e65
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/project status --porcelain
+
+exit=0
+OBSERVED refusal exit=1, main=ac7fb882dd2d4af6f72dfd065169f8ce77d30e65, clean checkout, approved.txt absent
+$ bash -c source "$1/bin/fm-dod-lib.sh"; fm_dod_accept_ship_done ship local-only "$2" "$3" "done: ready in branch fm/local-task" "$4/state" local-task "$5" live-done /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7 /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/worker /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/project /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/home /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/home/state/local-task.meta
+local-only done head could not be recorded or differs from the recorded head; revised work requires a new task/approval record
+exit=1
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/worker reset --hard 76e1ffa945625b0fb521841c97e055b64e658162
+HEAD is now at 76e1ffa X
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+merged fm/local-task into local main (ac7fb882dd2d4af6f72dfd065169f8ce77d30e65 -> 76e1ffa) in /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/project
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/project rev-parse main
+76e1ffa945625b0fb521841c97e055b64e658162
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/project status --porcelain
+
+exit=0
+OBSERVED approved X landed exactly: main=76e1ffa945625b0fb521841c97e055b64e658162; approved.txt=approved X; no unapproved.txt; clean checkout
+RESULT pass
+
+SCENARIO S2: Missing, empty, abbreviated, symbolic, duplicate and nonhex approval heads refuse
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-missing/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-missing/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-missing/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-missing/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-missing/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-missing/project rev-parse HEAD
+8bd76b1f61b943d2a9fca8fa781fcab92413deb4
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-missing/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-missing/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-missing/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-missing/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-missing/worker rev-parse HEAD
+83497ee4bda5ecbe7cdb76208eaca1c47909aad1
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: missing or malformed local done head for task local-task; report readiness before approval
+exit=1
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-missing/project rev-parse main
+8bd76b1f61b943d2a9fca8fa781fcab92413deb4
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-missing/project status --porcelain
+
+exit=0
+OBSERVED refusal exit=1, main=8bd76b1f61b943d2a9fca8fa781fcab92413deb4, clean checkout, approved.txt absent
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-empty/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-empty/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-empty/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-empty/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-empty/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-empty/project rev-parse HEAD
+98085f0bd95dd6489964c5110ecb834e3d09e568
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-empty/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-empty/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-empty/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-empty/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-empty/worker rev-parse HEAD
+068d07e97b7d102dd03fc0c4fc1e7578c9b6164e
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: missing or malformed local done head for task local-task; report readiness before approval
+exit=1
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-empty/project rev-parse main
+98085f0bd95dd6489964c5110ecb834e3d09e568
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-empty/project status --porcelain
+
+exit=0
+OBSERVED refusal exit=1, main=98085f0bd95dd6489964c5110ecb834e3d09e568, clean checkout, approved.txt absent
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-abbreviated/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-abbreviated/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-abbreviated/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-abbreviated/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-abbreviated/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-abbreviated/project rev-parse HEAD
+3db7f7149fc844887e7f41ee6fe1224e28d2003b
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-abbreviated/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-abbreviated/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-abbreviated/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-abbreviated/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-abbreviated/worker rev-parse HEAD
+10ef9e79da1e9b4f432ca89d5fe1c627d70fdf11
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: missing or malformed local done head for task local-task; report readiness before approval
+exit=1
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-abbreviated/project rev-parse main
+3db7f7149fc844887e7f41ee6fe1224e28d2003b
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-abbreviated/project status --porcelain
+
+exit=0
+OBSERVED refusal exit=1, main=3db7f7149fc844887e7f41ee6fe1224e28d2003b, clean checkout, approved.txt absent
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-expression/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-expression/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-expression/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-expression/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-expression/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-expression/project rev-parse HEAD
+4955d34b56b83a87250d81387262f60b7ba6c8c8
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-expression/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-expression/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-expression/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-expression/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-expression/worker rev-parse HEAD
+3ab34b9902e965ca8aa5041c8a993703a5131a6c
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: missing or malformed local done head for task local-task; report readiness before approval
+exit=1
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-expression/project rev-parse main
+4955d34b56b83a87250d81387262f60b7ba6c8c8
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-expression/project status --porcelain
+
+exit=0
+OBSERVED refusal exit=1, main=4955d34b56b83a87250d81387262f60b7ba6c8c8, clean checkout, approved.txt absent
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-duplicate/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-duplicate/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-duplicate/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-duplicate/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-duplicate/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-duplicate/project rev-parse HEAD
+4955d34b56b83a87250d81387262f60b7ba6c8c8
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-duplicate/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-duplicate/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-duplicate/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-duplicate/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-duplicate/worker rev-parse HEAD
+3ab34b9902e965ca8aa5041c8a993703a5131a6c
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: missing or malformed local done head for task local-task; report readiness before approval
+exit=1
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-duplicate/project rev-parse main
+4955d34b56b83a87250d81387262f60b7ba6c8c8
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-duplicate/project status --porcelain
+
+exit=0
+OBSERVED refusal exit=1, main=4955d34b56b83a87250d81387262f60b7ba6c8c8, clean checkout, approved.txt absent
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-nonhex/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-nonhex/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-nonhex/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-nonhex/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-nonhex/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-nonhex/project rev-parse HEAD
+c8507a65890c7ad062cfd27e440195cbb874320d
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-nonhex/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-nonhex/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-nonhex/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-nonhex/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-nonhex/worker rev-parse HEAD
+f4ce1e0b37c2e2d5aa67289903b5ca1c5679d71b
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: missing or malformed local done head for task local-task; report readiness before approval
+exit=1
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-nonhex/project rev-parse main
+c8507a65890c7ad062cfd27e440195cbb874320d
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/invalid-nonhex/project status --porcelain
+
+exit=0
+OBSERVED refusal exit=1, main=c8507a65890c7ad062cfd27e440195cbb874320d, clean checkout, approved.txt absent
+RESULT pass
+
+SCENARIO S3: An unreleased captain hold prevents local landing
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/project rev-parse HEAD
+8322ebf2bc6b5919486a1dd6551211ee2f259457
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/worker rev-parse HEAD
+89c7cbd3ad1da87d5c8e7a509b211b5c768d6074
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash -c source "$1/bin/fm-dod-lib.sh"; fm_dod_accept_ship_done ship local-only "$2" "$3" "done: ready in branch fm/local-task" "$4/state" local-task "$5" live-done /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7 /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/worker /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/project /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/home /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/home/state/local-task.meta
+
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh hold local-task --reason Approval still pending
+local-task
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: task local-task is still held for the captain; release it before merging
+exit=1
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/project rev-parse main
+8322ebf2bc6b5919486a1dd6551211ee2f259457
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/held/project status --porcelain
+
+exit=0
+OBSERVED refusal exit=1, main=8322ebf2bc6b5919486a1dd6551211ee2f259457, clean checkout, approved.txt absent
+RESULT pass
+
+SCENARIO S4: Branch and approval-record changes during the real approval read refuse
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/project rev-parse HEAD
+9c13a7d67c0e1033535169fcb295096c06899a4d
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/worker rev-parse HEAD
+017dc255e8155812b384d18acbb0825dbec08b35
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash -c source "$1/bin/fm-dod-lib.sh"; fm_dod_accept_ship_done ship local-only "$2" "$3" "done: ready in branch fm/local-task" "$4/state" local-task "$5" live-done /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7 /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/worker /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/project /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/home /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/home/state/local-task.meta
+
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh hold local-task --reason Local merge approval
+local-task
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh answer local-task --release --decision-file /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/home/approval.txt
+released: local-task
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/worker add unapproved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/worker commit -qm Y
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/worker rev-parse HEAD
+254193b60080056c42916e55d47a7fe72f510e5b
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/worker reset --hard 017dc255e8155812b384d18acbb0825dbec08b35
+HEAD is now at 017dc25 X
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: local done head or branch changed during approval check; refusing
+exit=1
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/project rev-parse main
+9c13a7d67c0e1033535169fcb295096c06899a4d
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-branch/project status --porcelain
+
+exit=0
+OBSERVED refusal exit=1, main=9c13a7d67c0e1033535169fcb295096c06899a4d, clean checkout, approved.txt absent
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/project rev-parse HEAD
+b96e8758a061e5c6fbb5e20073518a465d2d509d
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/worker rev-parse HEAD
+ff4db40ab2052b0acc9173b37aae74d615ebee1a
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash -c source "$1/bin/fm-dod-lib.sh"; fm_dod_accept_ship_done ship local-only "$2" "$3" "done: ready in branch fm/local-task" "$4/state" local-task "$5" live-done /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7 /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/worker /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/project /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/home /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/home/state/local-task.meta
+
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh hold local-task --reason Local merge approval
+local-task
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh answer local-task --release --decision-file /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/home/approval.txt
+released: local-task
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/worker add unapproved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/worker commit -qm Y
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/worker rev-parse HEAD
+9a69d3bf9eaea9876fc309cd88991ea67e6be2a6
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/worker reset --hard ff4db40ab2052b0acc9173b37aae74d615ebee1a
+HEAD is now at ff4db40 X
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: local done head or branch changed during approval check; refusing
+exit=1
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/project rev-parse main
+b96e8758a061e5c6fbb5e20073518a465d2d509d
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approval-race-approval/project status --porcelain
+
+exit=0
+OBSERVED refusal exit=1, main=b96e8758a061e5c6fbb5e20073518a465d2d509d, clean checkout, approved.txt absent
+RESULT pass
+
+SCENARIO S5: A branch move inside the final Git invocation refuses and restores the checkout
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/project rev-parse HEAD
+cea6320a97445c43ef0cda3d071134ba5062328e
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/worker rev-parse HEAD
+fc70630f1e32656f68b1ae535d7ce70d2471b925
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash -c source "$1/bin/fm-dod-lib.sh"; fm_dod_accept_ship_done ship local-only "$2" "$3" "done: ready in branch fm/local-task" "$4/state" local-task "$5" live-done /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7 /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/worker /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/project /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/home /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/home/state/local-task.meta
+
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh hold local-task --reason Local merge approval
+local-task
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh answer local-task --release --decision-file /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/home/approval.txt
+released: local-task
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/worker add unapproved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/worker commit -qm Y
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/worker rev-parse HEAD
+e905a2b59961c4b1bc00dd3e1a08d079cea25ba8
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/worker reset --hard fc70630f1e32656f68b1ae535d7ce70d2471b925
+HEAD is now at fc70630 X
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+fatal: prepare: cannot lock ref 'refs/heads/fm/local-task': is at e905a2b59961c4b1bc00dd3e1a08d079cea25ba8 but expected fc70630f1e32656f68b1ae535d7ce70d2471b925
+exit=128
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/project rev-parse fm/local-task
+e905a2b59961c4b1bc00dd3e1a08d079cea25ba8
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/project rev-parse main
+cea6320a97445c43ef0cda3d071134ba5062328e
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/final-race/project status --porcelain
+
+exit=0
+OBSERVED refusal exit=128, main=cea6320a97445c43ef0cda3d071134ba5062328e, clean checkout, approved.txt absent
+RESULT pass
+
+SCENARIO S6: Captured readiness cannot pin a replacement task generation
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/snapshot/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/snapshot/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/snapshot/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/snapshot/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/snapshot/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/snapshot/project rev-parse HEAD
+c6c2a782c778966ecb120956e2478130bb7817ad
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/snapshot/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/snapshot/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/snapshot/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/snapshot/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/snapshot/worker rev-parse HEAD
+5f969844fe638e777e81346ffa3ef3c7eafac6f0
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash -c source "$1/bin/fm-dod-lib.sh"; fm_dod_accept_ship_done ship local-only "$2" "$3" "done: ready in branch fm/local-task" "$4/state" local-task "$5" live-done /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7 /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/snapshot/worker /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/snapshot/project /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/snapshot/home /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/snapshot/captured.meta
+local-only done head could not be recorded or differs from the recorded head; revised work requires a new task/approval record
+exit=1
+OBSERVED replacement generation remains unpinned after stale captured readiness
+RESULT pass
+
+SCENARIO S7: Diverged main refuses without changing its checkout
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/project rev-parse HEAD
+e0e30e0d4767051a1f4304ec05f2ec853dd457e8
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/worker rev-parse HEAD
+cd61ea2ce9941c6008f844c5c880764be5fa1ecc
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash -c source "$1/bin/fm-dod-lib.sh"; fm_dod_accept_ship_done ship local-only "$2" "$3" "done: ready in branch fm/local-task" "$4/state" local-task "$5" live-done /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7 /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/worker /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/project /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/home /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/home/state/local-task.meta
+
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh hold local-task --reason Local merge approval
+local-task
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh answer local-task --release --decision-file /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/home/approval.txt
+released: local-task
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/project commit --allow-empty -qm diverged
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/project rev-parse HEAD
+00fb83e47af89d766abaea5bd90ece9fcdd5eab1
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: fm/local-task is not a fast-forward of main (it has diverged).
+Have the crewmate rebase fm/local-task onto main, then retry.
+exit=1
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/project rev-parse main
+00fb83e47af89d766abaea5bd90ece9fcdd5eab1
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/diverged/project status --porcelain
+
+exit=0
+OBSERVED refusal exit=1, main=00fb83e47af89d766abaea5bd90ece9fcdd5eab1, clean checkout, approved.txt absent
+RESULT pass
+
+SCENARIO B1: Baseline lands Y after approval at X, reproducing the original defect
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/project rev-parse HEAD
+c0982deec6c9ed01cd022946b0bdb3e496204f99
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/worker rev-parse HEAD
+c6c03e37c79995862a1aef5a908e2e8f9e338b82
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash -c source "$1/bin/fm-dod-lib.sh"; fm_dod_accept_ship_done ship local-only "$2" "$3" "done: ready in branch fm/local-task" "$4/state" local-task "$5" live-done /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7 /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/worker /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/project /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/home /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/home/state/local-task.meta
+
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh hold local-task --reason Local merge approval
+local-task
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh answer local-task --release --decision-file /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/home/approval.txt
+released: local-task
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/worker add unapproved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/worker commit -qm Y
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/worker rev-parse HEAD
+dd22ae8d5c79929cf24251f85c66dc239285c080
+exit=0
+$ git show 417cec2feb4e2976c0acdb2527b87b3ccc71535f:bin/fm-merge-local.sh
+#!/usr/bin/env bash
+# Perform the approved local merge for a local-only ship task: fast-forward the
+# project's default branch to the crewmate's immutable ship branch recorded in
+# state/<task-id>.meta ("fm/<id>" for records created before that field existed).
+#
+# This is firstmate's merge gate-action (the captain's merge authority applied
+# locally instead of via a GitHub PR). It is the one sanctioned exception to hard
+# rule #1 "never run state-changing git in projects/", and it is narrow: it only
+# runs for mode=local-only tasks, only after the captain approves (or yolo=on
+# auto-approves), and only as a clean fast-forward - it refuses a diverged branch
+# and tells you to have the crewmate rebase. See AGENTS.md prime directives,
+# project management, and task lifecycle.
+# The task's existing per-task control lock serializes the captain-hold check
+# through that fast-forward. A still-held or unreadable row refuses before the
+# merge, so a captain approval must be recorded as an `answer --release` before
+# this entrypoint is invoked. The lock ends when the fast-forward returns;
+# docs/captain-hold-lifecycle.md owns the accepted merge-to-cleanup residual.
+# Usage: fm-merge-local.sh <task-id>
+set -eu
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+FM_ROOT="${FM_ROOT_OVERRIDE:-$(cd "$SCRIPT_DIR/.." && pwd)}"
+FM_HOME="${FM_HOME:-${FM_ROOT_OVERRIDE:-$FM_ROOT}}"
+STATE="${FM_STATE_OVERRIDE:-$FM_HOME/state}"
+# shellcheck source=bin/fm-pr-lib.sh
+. "$SCRIPT_DIR/fm-pr-lib.sh"
+# shellcheck source=bin/fm-backlog-transition-lib.sh
+. "$SCRIPT_DIR/fm-backlog-transition-lib.sh"
+if [ "$#" -ne 1 ] || ! fm_pr_task_id_valid "$1"; then
+  echo "error: invalid local merge request" >&2
+  exit 2
+fi
+ID=$1
+fm_backlog_directory_present "$STATE" "state directory" || {
+  echo "error: local merge refused: $FM_BACKLOG_TRANSITION_ERROR" >&2
+  exit 1
+}
+META="$STATE/$ID.meta"
+
+# shellcheck source=bin/fm-wake-lib.sh
+. "$SCRIPT_DIR/fm-wake-lib.sh"
+"$FM_ROOT/bin/fm-guard.sh" || true
+# Role partition: landing local-only work is MAIN-owned; the Pi supervision
+# branch reports readiness and never lands (contract: bin/fm-lease-lib.sh;
+# no-op in homes without a branch actor). This action is deliberately NOT
+# relocated under the away-posture record: unlike the PR merge it has no
+# record-side grant gate of its own, so a parked main keeps it held for the
+# captain's return. This precedes reading the task record, because the wrong
+# actor is refused for its role whatever it says.
+# shellcheck source=bin/fm-lease-lib.sh
+. "$SCRIPT_DIR/fm-lease-lib.sh"
+fm_lease_forbid_branch "local-only landing (fm-merge-local)"
+
+[ -f "$META" ] || { echo "error: no meta for task $ID at $META" >&2; exit 1; }
+if ! fm_backlog_meta_spawn_gen_optional "$META" "$STATE"; then
+  echo "error: local merge refused: $FM_BACKLOG_TRANSITION_ERROR" >&2
+  exit 1
+fi
+MERGE_EXPECTED_SPAWN_GEN=$FM_BACKLOG_META_SPAWN_GEN
+
+MERGE_CONTROL_LOCK=
+merge_control_cleanup() {
+  [ -z "$MERGE_CONTROL_LOCK" ] || fm_lock_release "$MERGE_CONTROL_LOCK" || true
+}
+trap merge_control_cleanup EXIT
+MERGE_CONTROL_LOCK="$STATE/.control-$ID.lock"
+fm_lock_acquire_wait "$MERGE_CONTROL_LOCK"
+if ! fm_backlog_meta_spawn_gen_optional "$META" "$STATE"; then
+  echo "error: task $ID changed while waiting to merge; refusing: $FM_BACKLOG_TRANSITION_ERROR" >&2
+  exit 1
+fi
+if [ "$FM_BACKLOG_META_SPAWN_GEN" != "$MERGE_EXPECTED_SPAWN_GEN" ]; then
+  echo "error: task $ID changed incarnation while waiting to merge; refusing" >&2
+  exit 1
+fi
+
+PROJ=$(grep '^project=' "$META" | cut -d= -f2-)
+MODE=$(grep '^mode=' "$META" | cut -d= -f2- || true)
+[ "$MODE" = local-only ] || { echo "error: task $ID is mode=$MODE, not local-only; merge PR tasks with bin/fm-pr-merge.sh <id> <PR url> after approval" >&2; exit 1; }
+
+default_branch() {
+  local ref branch
+  ref=$(git -C "$PROJ" symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null || true)
+  if [ -n "$ref" ]; then
+    echo "${ref#origin/}"
+    return 0
+  fi
+  for branch in main master; do
+    if git -C "$PROJ" show-ref --verify --quiet "refs/heads/$branch"; then
+      echo "$branch"
+      return 0
+    fi
+  done
+  return 1
+}
+
+BRANCH=$(grep '^branch=' "$META" | cut -d= -f2- || true)
+[ -n "$BRANCH" ] || BRANCH="fm/$ID"
+if ! git check-ref-format --branch "$BRANCH" >/dev/null 2>&1; then
+  echo "error: task $ID has an invalid recorded ship branch '$BRANCH'" >&2
+  exit 1
+fi
+git -C "$PROJ" rev-parse --verify --quiet "refs/heads/$BRANCH" >/dev/null || { echo "error: branch $BRANCH does not exist in $PROJ" >&2; exit 1; }
+
+DEFAULT=$(default_branch) || { echo "error: cannot determine default branch for $PROJ; expected origin/HEAD, main, or master" >&2; exit 1; }
+
+# The project's main checkout must be on its default branch and clean, so the
+# fast-forward lands predictably (firstmate never writes here otherwise).
+cur=$(git -C "$PROJ" symbolic-ref --short HEAD 2>/dev/null || echo "")
+[ "$cur" = "$DEFAULT" ] || { echo "error: $PROJ is on '$cur', expected default branch '$DEFAULT'; cannot merge safely" >&2; exit 1; }
+if [ -n "$(git -C "$PROJ" status --porcelain 2>/dev/null | head -1)" ]; then
+  echo "error: $PROJ has a dirty working tree; refusing to merge into it" >&2
+  exit 1
+fi
+
+# Clean fast-forward only: DEFAULT must be an ancestor of BRANCH.
+if ! git -C "$PROJ" merge-base --is-ancestor "$DEFAULT" "$BRANCH"; then
+  echo "REFUSED: $BRANCH is not a fast-forward of $DEFAULT (it has diverged)." >&2
+  echo "Have the crewmate rebase $BRANCH onto $DEFAULT, then retry." >&2
+  exit 1
+fi
+
+before=$(git -C "$PROJ" rev-parse --short "$DEFAULT")
+hold_status=0
+FM_HOME="$FM_HOME" FM_STATE_OVERRIDE="$STATE" \
+  "$SCRIPT_DIR/fm-captain-hold.sh" open "$ID" --distinguish-absent || hold_status=$?
+case "$hold_status" in
+  0)
+    echo "error: task $ID is still held for the captain; release it before merging" >&2
+    exit 1
+    ;;
+  1|3) ;;
+  *)
+    echo "error: could not determine whether task $ID is still held for the captain; refusing to merge" >&2
+    exit 1
+    ;;
+esac
+merge_status=0
+git -C "$PROJ" merge --ff-only "$BRANCH" >/dev/null || merge_status=$?
+fm_lock_release "$MERGE_CONTROL_LOCK" || true
+MERGE_CONTROL_LOCK=
+[ "$merge_status" -eq 0 ] || exit "$merge_status"
+after=$(git -C "$PROJ" rev-parse --short "$DEFAULT")
+# Opt-in fleet activity ledger (docs/fleet-ledger.md); off costs one file test.
+[ ! -e "${FM_CONFIG_OVERRIDE:-$FM_HOME/config}/fleet-ledger" ] || FM_HOME=$FM_HOME FM_STATE_OVERRIDE=$STATE "$SCRIPT_DIR/fm-fleet-ledger.sh" merged "$ID" local || true
+echo "merged $BRANCH into local $DEFAULT ($before -> $after) in $PROJ"
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/baseline-bin/fm-merge-local.sh local-task
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+merged fm/local-task into local main (c0982de -> dd22ae8) in /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/project
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/project rev-parse main
+dd22ae8d5c79929cf24251f85c66dc239285c080
+exit=0
+BASELINE REPRODUCED defect: approved=c6c03e37c79995862a1aef5a908e2e8f9e338b82; main landed unapproved Y=dd22ae8d5c79929cf24251f85c66dc239285c080
+RESULT pass
+CLEANUP removed /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp

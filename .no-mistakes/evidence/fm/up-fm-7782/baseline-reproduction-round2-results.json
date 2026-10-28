@@ -1,0 +1,7 @@
+[
+  {
+    "name": "B1: Baseline lands Y after approval at X, reproducing the original defect",
+    "result": "pass",
+    "live": true
+  }
+]

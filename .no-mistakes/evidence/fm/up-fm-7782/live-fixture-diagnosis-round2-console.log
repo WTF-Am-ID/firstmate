@@ -1,0 +1,74 @@
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/project rev-parse HEAD
+f1ecb66283aaa1efe33492efee24276b5f1bb914
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/worker rev-parse HEAD
+1b05e095b603cee679091f36fc0aba481e6e91bf
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash -c source "$1/bin/fm-dod-lib.sh"; fm_dod_accept_ship_done ship local-only "$2" "$3" "done: ready in branch fm/local-task" "$4/state" local-task "$5" live-done /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7 /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/worker /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/project /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/home /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/home/state/local-task.meta
+
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh hold local-task --reason Local merge approval
+local-task
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh answer local-task --release --decision-file /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/home/approval.txt
+released: local-task
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/project rev-parse main
+1b05e095b603cee679091f36fc0aba481e6e91bf
+exit=0
+OBSERVED at old fixture checkpoint: main already equals approved X and control lock is released; this is after the protected landing operation
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+merged fm/local-task into local main (f1ecb66283aaa1efe33492efee24276b5f1bb914 -> 1b05e09) in /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj/old-fixture-checkpoint/project
+exit=0
+CLEANUP removed /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-duzf10uj

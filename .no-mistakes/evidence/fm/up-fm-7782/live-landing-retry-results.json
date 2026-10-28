@@ -1,0 +1,42 @@
+[
+  {
+    "name": "S1: Approved X persists, advancing to Y refuses, stale readiness refuses, restoring X lands exactly X",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "S2: Missing, empty, abbreviated, symbolic, duplicate and nonhex approval heads refuse",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "S3: An unreleased captain hold prevents local landing",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "S4: Branch and approval-record changes during the real approval read refuse",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "S5: A branch move inside the final Git invocation refuses and restores the checkout",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "S6: Captured readiness cannot pin a replacement task generation",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "S7: Diverged main refuses without changing its checkout",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "B1: Baseline lands Y after approval at X, reproducing the original defect",
+    "result": "pass",
+    "live": true
+  }
+]

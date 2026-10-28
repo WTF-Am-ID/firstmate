@@ -1,0 +1,7 @@
+[
+  {
+    "name": "S10: Forced teardown during validated landing refuses, then exactly approved X lands",
+    "result": "pass",
+    "live": true
+  }
+]

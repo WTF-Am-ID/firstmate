@@ -1,0 +1,12 @@
+[
+  {
+    "name": "S8: Replacing a valid approval head while landing waits for its control lock refuses",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "S9: Replacing the task generation while landing waits for its control lock refuses",
+    "result": "pass",
+    "live": true
+  }
+]

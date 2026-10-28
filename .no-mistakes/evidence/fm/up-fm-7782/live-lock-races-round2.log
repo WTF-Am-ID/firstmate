@@ -1,0 +1,190 @@
+
+SCENARIO S8: Replacing a valid approval head while landing waits for its control lock refuses
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/project rev-parse HEAD
+4ed0380f91f393165cc73f2cbaa15fd95c5f9c6b
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/worker rev-parse HEAD
+2acffec536c8a7750fae9de4b1ac65da506137a3
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash -c source "$1/bin/fm-dod-lib.sh"; fm_dod_accept_ship_done ship local-only "$2" "$3" "done: ready in branch fm/local-task" "$4/state" local-task "$5" live-done /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7 /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/worker /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/project /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/home /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/home/state/local-task.meta
+
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh hold local-task --reason Local merge approval
+local-task
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh answer local-task --release --decision-file /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/home/approval.txt
+released: local-task
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/worker add unapproved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/worker commit -qm Y
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/worker rev-parse HEAD
+5bd7e717cd1cb7d767640c7186ae341252d30aed
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/worker reset --hard 2acffec536c8a7750fae9de4b1ac65da506137a3
+HEAD is now at 2acffec X
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task [held-lock interleaving]
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/project update-ref refs/heads/fm/local-task 5bd7e717cd1cb7d767640c7186ae341252d30aed
+
+exit=0
+INTERLEAVING changed head after landing captured expected identity and waited for control lock
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: task local-task local done head changed while waiting to merge; refusing
+exit=1
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/project rev-parse main
+4ed0380f91f393165cc73f2cbaa15fd95c5f9c6b
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-head/project status --porcelain
+
+exit=0
+OBSERVED refusal exit=1, main=4ed0380f91f393165cc73f2cbaa15fd95c5f9c6b, clean checkout, approved.txt absent
+RESULT pass
+
+SCENARIO S9: Replacing the task generation while landing waits for its control lock refuses
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-lab-home.sh create /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/home
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/home
+exit=0
+$ git init -q -b main /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/project
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/project add base.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/project commit -qm base
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/project rev-parse HEAD
+5bb7d54bd2f82831af319d569775a71d4308c756
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/project worktree add -q -b fm/local-task /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/worker
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/worker add approved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/worker commit -qm X
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/worker rev-parse HEAD
+123758bb678daa90f5d603dbdd9c5a16668bfbb6
+exit=0
+$ /opt/homebrew/bin/tasks-axi add local-task Land approved X --kind ship --start
+ok: added local-task (ship) -> In flight
+task:
+  id: local-task
+  title: Land approved X
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-28
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi done local-task --pr <url>` when it ships
+  - Run `tasks-axi block local-task --by <other>` to record a dependency
+exit=0
+$ bash -c source "$1/bin/fm-dod-lib.sh"; fm_dod_accept_ship_done ship local-only "$2" "$3" "done: ready in branch fm/local-task" "$4/state" local-task "$5" live-done /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7 /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/worker /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/project /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/home /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/home/state/local-task.meta
+
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh hold local-task --reason Local merge approval
+local-task
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-captain-hold.sh answer local-task --release --decision-file /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/home/approval.txt
+released: local-task
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/worker add unapproved.txt
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/worker commit -qm Y
+
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/worker rev-parse HEAD
+7e96aed2721b0fe711dee40a096d01a590872af8
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/worker reset --hard 123758bb678daa90f5d603dbdd9c5a16668bfbb6
+HEAD is now at 123758b X
+exit=0
+$ bash /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/bin/fm-merge-local.sh local-task [held-lock interleaving]
+INTERLEAVING changed generation after landing captured expected identity and waited for control lock
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: task local-task changed incarnation while waiting to merge; refusing
+exit=1
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/project rev-parse main
+5bb7d54bd2f82831af319d569775a71d4308c756
+exit=0
+$ /opt/homebrew/bin/git -C /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy/locked-generation/project status --porcelain
+
+exit=0
+OBSERVED refusal exit=1, main=5bb7d54bd2f82831af319d569775a71d4308c756, clean checkout, approved.txt absent
+RESULT pass
+CLEANUP removed /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-cvjsxahy

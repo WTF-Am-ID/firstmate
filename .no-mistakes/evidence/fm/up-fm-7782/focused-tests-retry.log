@@ -1,0 +1,172 @@
+FM_TEST_BEGIN 2026-10-28T13:06:53Z tests/fm-merge-local.test.sh family=pure-contract-unit expected_gate_skip=none
+1..6
+ok - branch advance refuses, and restoring the reported X lands exactly X
+ok - missing, malformed and ambiguous done heads refuse without moving main
+ok - a branch move inside the final Git invocation refuses without changing main or its checkout
+ok - a diverged default branch refuses without changing main or its checkout
+ok - approval and branch changes during the hold read refuse without moving main
+ok - captured metadata cannot pin a replacement task generation
+FM_TEST_COMPLETE
+FM_TEST_END 2026-10-28T13:07:04Z tests/fm-merge-local.test.sh exit=0 duration_ms=11171 gate_skip=false
+FM_TEST_BEGIN 2026-10-28T13:07:04Z tests/fm-dod-lib.test.sh family=pure-contract-unit expected_gate_skip=none
+ok - scout done: is not gated
+ok - unpushed ship done: is refused
+ok - no-mistakes pre-validation done: is not gated
+ok - named head on a remote-tracking ref is accepted
+ok - a moved remote branch that lacks the named head is refused
+ok - a 40-hex token in the note is not the named head
+ok - a recorded merged PR satisfies the gate after prune
+ok - the merged-PR short-circuit applies only to the recorded PR the done line names
+ok - a forge-recorded head for the named PR is accepted without a local object
+ok - a direct-PR recorded head does not cover a later unpushed commit
+ok - CI-ready notes require checks green and an actual PR reference
+ok - no-mistakes CI-ready done: with extra text is gated
+ok - keyed and spaced ship done: lines are gated
+ok - local-only linked named branch is reachable from the project clone
+ok - local-only detached HEAD only in the disposable copy is refused
+ok - standalone local-only done: requires the named head in the project clone
+ok - non-done lines are not gated
+ok - fenced and indented Captain lines are not authorized intent
+ok - PR-based DoD draft check uses gh-axi
+ok - promotion keeps a scout's recorded base branch and refuses local-only for it
+ok - forge=external composes with direct-PR only and refuses a base branch
+ok - external rule one forbids origin and task-prefixed pushes and names only the backup copy
+ok - external DoD renders the contract, the review grammar, and the adapter, and refuses without one
+ok - external review done: accepted on a canonical URL alone without a backup; PR, non-https, query, fragment, forge, and pattern mismatches refused
+ok - external review done with a backup: refused until HEAD is under refs/remotes/backup/backup/, then accepted
+ok - worker role names the skill and its fallback skill file
+all fm-dod-lib tests passed
+FM_TEST_END 2026-10-28T13:07:12Z tests/fm-dod-lib.test.sh exit=0 duration_ms=7748 gate_skip=false
+FM_TEST_BEGIN 2026-10-28T13:07:12Z tests/fm-task-delivery.test.sh family=pure-contract-unit expected_gate_skip=none
+ok - fm-spawn/fm-promote: authorized intent preserves exact words and refuses operator-address lines
+ok - fm-spawn: every legacy worker receives scoped role instructions without changing project or primary instructions
+ok - fm-spawn: a ship spawn requires a valid explicit mode and yolo before anything is created
+ok - fm-spawn: scout and secondmate spawns refuse ship delivery flags
+ok - fm-spawn: the brief's recorded mode and the spawn's explicit mode must agree
+ok - fm-spawn: a rigor downgrade against the registered posture is announced, never blocked
+ok - fm-spawn: a scout spawn resolves no delivery posture from the registry
+ok - fm-promote: promotion requires the delivery contract and records it exactly once
+ok - fm-promote: a symlinked task record is refused and its target is left untouched
+ok - fm-promote: a promoted worker receives the same mode-specific delivery contract a briefed one does
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ok - fm-promote: a selected branch prefix reaches both worker instructions and durable task state
+Switched to a new branch '$(touch${IFS}/private/tmp/fm-task-delivery.q7GNWR/promote-branch-shell-safe-marker)/promote-branch-safe-e3'
+ok - fm-promote: ref-format-valid shell metacharacters stay literal in promotion branch commands
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ok - fm-merge-local: a registry change cannot redirect an in-flight local-only task
+ok - fm-project-mode: the registry lookup matches a whole multi-word name, not just its first token
+ok - fm-project-mode: the conditional policy is accepted, mapped for mechanical callers, and readable raw
+ok - fm-project-mode: the forge binds from its own token and is reported only through --forge
+ok - fm-project-mode: only a malformed forge binding refuses; every other token keeps its old tolerance
+ok - forge=gerrit: yolo is refused with its reason, never silently dropped
+ok - forge=external: promoting a scout is refused because only a ship spawn installs the push guard
+ok - forge=gerrit: no-mistakes runs with its forge steps skipped, recovers its fixes, then publishes one change
+ok - forge=gerrit: direct-PR publishes one squashed change and a stack is refused with its reason
+ok - fm-spawn: a registered forge must reach the worker's brief
+ok - fm-spawn: the brief must carry the spawn's selected ship branch, and the selection is validated before anything is created
+ok - fm-spawn: a ship branch that deviates from the registered prefix is announced, never blocked
+ok - fm-spawn: a registry forge token the parser refuses stops the launch, reason included
+ok - fm-promote: a promoted worker receives the project's registered forge contract with no flag to remember
+ok - forge=forgejo: spawn agreement and promotion carry the binding, name tea, and keep yolo
+ok - fm-spawn/fm-promote: leftover Task placeholders are refused until both subsections are filled
+ok - fm-project-mode: --branch-prefix resolves order-independently and defaults to the legacy fm/ prefix
+# all fm-task-delivery tests passed
+FM_TEST_END 2026-10-28T13:08:16Z tests/fm-task-delivery.test.sh exit=0 duration_ms=64226 gate_skip=false
+FM_TEST_BEGIN 2026-10-28T13:08:16Z tests/fm-fleet-ledger.test.sh family=unclassified expected_gate_skip=none
+ok - flag on: dispatch, polled status lines, the local merge after its task's pending lines, and cleanup are recorded in order
+ok - flag on: a PR merge is recorded once, after the task's pending status lines
+ok - flag on: registering a PR records task.pr_ready with its full URL after the task's pending status lines, and the merge-time re-record adds nothing
+ok - flag on: a worker's status command records its line at once, and the watcher backstop does not record it again
+ok - flag on, state override outside the home: the worker's status command records its line at once
+ok - flag on, relative config override: a worker running elsewhere still records its line at once
+ok - append failing: the worker's status command exits nonzero and records nothing
+ok - ledger failing: the worker's status line still lands exactly, quietly, and the backstop records it later
+ok - flag off: the worker's status command is a plain append and leaves no ledger file, offset, or lock
+ok - flag off: the whole lifecycle leaves no ledger file, offset, or lock
+FM_TEST_END 2026-10-28T13:09:06Z tests/fm-fleet-ledger.test.sh exit=0 duration_ms=50251 gate_skip=false
+FM_TEST_BEGIN 2026-10-28T13:09:06Z tests/fm-captain-hold-lifecycle.test.sh family=pure-contract-unit expected_gate_skip=none
+ok - marked hold reasons round-trip through public reads, fleet, startup, and return without changing other fields
+ok - new, active, and released holds require the origin first with and without deferral
+ok - historical self-inventories name a workable repair that preserves sibling entries
+ok - completion and verification compare backend identities for entries and current or stored origins
+ok - complete refuses the origin as its own captain-call inventory
+ok - complete refuses an entry held for another origin and flags one with none recorded
+ok - report-only unresolved captain call is reproduced and completion refuses before loss
+ok - both body-decoding paths work without the allow_nonref default
+ok - cleanup preserves every byte of a retained body's non-ASCII characters
+ok - the completion gate attests captain-held inventory and transfers open status decisions
+ok - answer records the captain's words, closes idempotently, and releases routed work
+ok - release frees held work with the captain's words recorded and the body preserved
+ok - captain holds become visible only after their hold-set timestamp is durable
+ok - an interrupted answer preserves its hold age until close retry
+ok - a deferred captain call leaves the live Captain's Call until its date and stays answerable
+ok - an out-of-band close is recordable with the captain's word and nothing else
+ok - ended visual review follows the same captain-hold completion owner
+ok - resolved findings and decision-like prose do not create captain-held tasks
+ok - terminal single-owner stale status decisions do not block empty inventory
+ok - main-home and secondmate-home captain calls remain correctly routed
+ok - a secondmate home publishes each hold occurrence and its answer on the parent channel
+ok - secondmate resolutions publish before retiring durable retry triggers
+ok - a bound channel's captured answers close their captain-held tasks at answer time
+ok - only a bound captured source creates reconcile requests
+ok - normal answers and their replays retire reconcile requests
+ok - reconcile closes a moot call with evidence and keeps an active one open with a note
+ok - reconcile outcomes apply durable mutations once across partial failures
+ok - a channel source with no decision binding closes nothing
+ok - legacy identities, metadata, bindings, and the shim keep working
+ok - a board answer reaches the keyed-answer intake and wakes firstmate
+ok - the chat channel feeds the same keyed-answer intake a captured review does
+ok - completion and verification validate origins before constructing paths
+ok - a status resolution over a still-open captain-held task is signalled, not closed
+ok - a captain call with no routed work, a verified transfer, an open decision, and an answered call all stay silent
+ok - cleanup leaves a captain-held work item open with its deliverable, and only an answer closes it
+ok - release and scout report retention distinguish deliveries from rejected merge answers
+ok - an interrupted cleanup keeps the captain call recoverable and session start retains it
+ok - an answer before cleanup replay preserves the retained report
+ok - an answer before cleanup replay notes the retained Gerrit change
+ok - an unusable pending-close record names its reason instead of a bare refusal
+ok - an unsupported relocated report does not wedge the captain's answer
+ok - cleanup retains captain calls in the configured backlog
+ok - cleanup keeps a captain-held Gerrit task open and records its change URL
+ok - merge approval releases before zero-retention cleanup records completion
+ok - the PR merge entrypoint refuses a captain-held task before merging
+ok - the local merge entrypoint refuses a captain-held task before merging
+ok - the PR merge entrypoint separates an unreadable authority record from an absent one
+ok - the local merge entrypoint separates an unreadable authority record from an absent one
+ok - merge entrypoints reject unsafe identities and absent state before locking
+ok - merge entrypoints refuse a replacement incarnation after waiting for cleanup
+ok - merge entrypoints own task state before forced cleanup can retire it
+ok - a released merge passes the guarded entrypoint and remains recently landed
+ok - cleanup refuses a ship row when its captain hold cannot be read
+ok - skipped on markdown-only tasks-axi: verify against a beads-migrated hold
+ok - skipped on markdown-only tasks-axi: verify against a prefix-migrated hold
+ok - skipped on markdown-only tasks-axi: prefer a marker-noted row over a prefix namesake
+ok - skipped on markdown-only tasks-axi: complete against a beads-migrated hold
+ok - skipped on markdown-only tasks-axi: verify an unresolvable beads legacy id
+ok - skipped on markdown-only tasks-axi: verify a derived pre-collapse key
+ok - captain-hold mutations address the beads backend without a markdown override
+ok - skipped on markdown-only tasks-axi: captain-hold create under due.required without types.custom
+ok - an answered captain call archived by Done retention still satisfies the completion gate
+ok - an answered captain call archived to a user-configured location still satisfies the completion gate
+FM_TEST_END 2026-10-28T13:24:03Z tests/fm-captain-hold-lifecycle.test.sh exit=0 duration_ms=896977 gate_skip=false
+FM_TEST_SUMMARY total=5 failed=0 skipped_gate=0 duration_ms=1030698
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=4 duration_ms=980122 failed=0
+FM_TEST_SUMMARY_FAMILY family=unclassified count=1 duration_ms=50251 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-captain-hold-lifecycle.test.sh duration_ms=896977
+FM_TEST_SLOWEST rank=2 script=tests/fm-task-delivery.test.sh duration_ms=64226
+FM_TEST_SLOWEST rank=3 script=tests/fm-fleet-ledger.test.sh duration_ms=50251
+FM_TEST_SLOWEST rank=4 script=tests/fm-merge-local.test.sh duration_ms=11171
+FM_TEST_SLOWEST rank=5 script=tests/fm-dod-lib.test.sh duration_ms=7748
+fm-test-run: wrote timing artifact: /tmp/fm-7782-focused-retry.json

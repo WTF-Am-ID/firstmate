@@ -1,0 +1,10 @@
+git check-ref-format --branch '$(touch${IFS}/tmp/fm-probe-marker)/task'
+exit=0
+$(touch${IFS}/tmp/fm-probe-marker)/task
+
+git check-ref-format --branch '$(touch${IFS}/example/.test-7782-tmp/fm-probe-marker)/task'
+exit=128
+fatal: '$(touch${IFS}/example/.test-7782-tmp/fm-probe-marker)/task' is not a valid branch name
+
+Initial hold-lifecycle fixture diagnostic: invalid home: secondmate home cannot be inside the firstmate repo
+Corrected affected-suite command: TMPDIR=/tmp bash bin/fm-test-run.sh tests/fm-captain-hold-lifecycle.test.sh tests/fm-task-delivery.test.sh

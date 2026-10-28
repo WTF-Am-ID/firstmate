@@ -1,0 +1,73 @@
+Candidate: a6728a4cde587d506e248b3f37884daca0409111
+Preserved lifecycle checkpoint diff SHA-256: 11d760b58cc3933141e3b510fdd53eeca0102537fd9302ee3c53f9cfa2b32f6e
+Excerpts from real CLI transcripts from this validation retry. Full transcripts are retained beside this file.
+
+Transcript: live-landing-retry.log
+SCENARIO S1: Approved X persists, advancing to Y refuses, stale readiness refuses, restoring X lands exactly X
+error: branch fm/local-task differs from the recorded local done head; refusing
+OBSERVED refusal exit=1, main=ac7fb882dd2d4af6f72dfd065169f8ce77d30e65, clean checkout, approved.txt absent
+merged fm/local-task into local main (ac7fb882dd2d4af6f72dfd065169f8ce77d30e65 -> 76e1ffa) in /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/approved/project
+OBSERVED approved X landed exactly: main=76e1ffa945625b0fb521841c97e055b64e658162; approved.txt=approved X; no unapproved.txt; clean checkout
+RESULT pass
+SCENARIO S2: Missing, empty, abbreviated, symbolic, duplicate and nonhex approval heads refuse
+error: missing or malformed local done head for task local-task; report readiness before approval
+OBSERVED refusal exit=1, main=8bd76b1f61b943d2a9fca8fa781fcab92413deb4, clean checkout, approved.txt absent
+error: missing or malformed local done head for task local-task; report readiness before approval
+OBSERVED refusal exit=1, main=98085f0bd95dd6489964c5110ecb834e3d09e568, clean checkout, approved.txt absent
+error: missing or malformed local done head for task local-task; report readiness before approval
+OBSERVED refusal exit=1, main=3db7f7149fc844887e7f41ee6fe1224e28d2003b, clean checkout, approved.txt absent
+error: missing or malformed local done head for task local-task; report readiness before approval
+OBSERVED refusal exit=1, main=4955d34b56b83a87250d81387262f60b7ba6c8c8, clean checkout, approved.txt absent
+error: missing or malformed local done head for task local-task; report readiness before approval
+OBSERVED refusal exit=1, main=4955d34b56b83a87250d81387262f60b7ba6c8c8, clean checkout, approved.txt absent
+error: missing or malformed local done head for task local-task; report readiness before approval
+OBSERVED refusal exit=1, main=c8507a65890c7ad062cfd27e440195cbb874320d, clean checkout, approved.txt absent
+RESULT pass
+SCENARIO S3: An unreleased captain hold prevents local landing
+error: task local-task is still held for the captain; release it before merging
+OBSERVED refusal exit=1, main=8322ebf2bc6b5919486a1dd6551211ee2f259457, clean checkout, approved.txt absent
+RESULT pass
+SCENARIO S4: Branch and approval-record changes during the real approval read refuse
+error: local done head or branch changed during approval check; refusing
+OBSERVED refusal exit=1, main=9c13a7d67c0e1033535169fcb295096c06899a4d, clean checkout, approved.txt absent
+error: local done head or branch changed during approval check; refusing
+OBSERVED refusal exit=1, main=b96e8758a061e5c6fbb5e20073518a465d2d509d, clean checkout, approved.txt absent
+RESULT pass
+SCENARIO S5: A branch move inside the final Git invocation refuses and restores the checkout
+fatal: prepare: cannot lock ref 'refs/heads/fm/local-task': is at e905a2b59961c4b1bc00dd3e1a08d079cea25ba8 but expected fc70630f1e32656f68b1ae535d7ce70d2471b925
+OBSERVED refusal exit=128, main=cea6320a97445c43ef0cda3d071134ba5062328e, clean checkout, approved.txt absent
+RESULT pass
+SCENARIO S6: Captured readiness cannot pin a replacement task generation
+OBSERVED replacement generation remains unpinned after stale captured readiness
+RESULT pass
+SCENARIO S7: Diverged main refuses without changing its checkout
+REFUSED: fm/local-task is not a fast-forward of main (it has diverged).
+OBSERVED refusal exit=1, main=00fb83e47af89d766abaea5bd90ece9fcdd5eab1, clean checkout, approved.txt absent
+RESULT pass
+SCENARIO B1: Baseline lands Y after approval at X, reproducing the original defect
+merged fm/local-task into local main (c0982de -> dd22ae8) in /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp/baseline/project
+BASELINE REPRODUCED defect: approved=c6c03e37c79995862a1aef5a908e2e8f9e338b82; main landed unapproved Y=dd22ae8d5c79929cf24251f85c66dc239285c080
+RESULT pass
+CLEANUP removed /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-wxd4t4kp
+
+Transcript: live-lock-races-retry.log
+SCENARIO S8: Replacing a valid approval head while landing waits for its control lock refuses
+error: task local-task local done head changed while waiting to merge; refusing
+OBSERVED refusal exit=1, main=c7fd164a6762261af238439b16807e3d6cbb96ea, clean checkout, approved.txt absent
+RESULT pass
+SCENARIO S9: Replacing the task generation while landing waits for its control lock refuses
+error: task local-task changed incarnation while waiting to merge; refusing
+OBSERVED refusal exit=1, main=0e53fa3370d7a0a5ed5b601fbf8f01f170a5b6e0, clean checkout, approved.txt absent
+RESULT pass
+CLEANUP removed /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-_qt8nipu
+
+Transcript: live-teardown-race-retry.log
+SCENARIO S10: Forced teardown during validated landing refuses, then exactly approved X lands
+OBSERVED landing paused after ancestry validation with task control lock held
+error: another lifecycle action is already running for task local-task; nothing was changed
+OBSERVED forced teardown refused; task metadata and worker remain
+merged fm/local-task into local main (2a98a9147c0523b6d8511c44aa989241f70513c5 -> 4833e45) in /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-4omsii4b/teardown-race/project
+OBSERVED exactly approved X landed after forced teardown was rejected
+RESULT pass
+CLEANUP removed /Users/daddy/.no-mistakes-upstream-codex/worktrees/4a2a74270675/01M615GR82CTFFPXAXTV2V7AC7/.test-live-7782-retry-4omsii4b
+
