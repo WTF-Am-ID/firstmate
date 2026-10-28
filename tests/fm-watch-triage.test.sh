@@ -4900,9 +4900,6 @@ test_colliding_endpoints_keep_independent_stale_history() (
   local dir state fakebin out pid round endpoint key first_key second_key marker
   dir=$(make_case independent-window-keys); state="$dir/state"; fakebin="$dir/fakebin"
   mkdir -p "$dir/config" "$dir/data"
-  export FM_HOME="$dir" FM_STATE_OVERRIDE="$state" FM_CONFIG_OVERRIDE="$dir/config"
-  # The fixture handles its own prior cycles, as in the wedge/recovery suites.
-  export FM_WATCH_HANDLING_SUCCESSOR=1
   out="$dir/watch.out"
   cat > "$fakebin/tmux" <<'SH'
 #!/usr/bin/env bash
@@ -4927,7 +4924,9 @@ SH
   done
   printf '99\n' > "$state/.count-s_a_b"
   for round in first second; do
-    watch_bg "$state" "$fakebin" "$out" env FM_CONFIG_OVERRIDE="$dir/config"
+    # Each child gets its own home and handles the fixture's acknowledged cycles.
+    watch_bg "$state" "$fakebin" "$out" env FM_HOME="$dir" \
+      FM_CONFIG_OVERRIDE="$dir/config" FM_WATCH_HANDLING_SUCCESSOR=1
     pid=$!
     if ! wait_for_exit "$pid" 150; then
       reap "$pid"
@@ -4939,7 +4938,8 @@ SH
       || fail "round $round did not wake for $endpoint"
     [ "$(wedge_stale_wakes "$state" "$endpoint")" -eq 1 ] \
       || fail "$endpoint did not queue exactly one independent stale wake"
-    ack_stopped_cycle "$state" || fail "could not acknowledge round $round"
+    FM_HOME="$dir" FM_CONFIG_OVERRIDE="$dir/config" ack_stopped_cycle "$state" \
+      || fail "could not acknowledge round $round"
   done
   first_key=$(watch_window_key s:a.b); second_key=$(watch_window_key s:a_b)
   [ "$first_key" != "$second_key" ] || fail "colliding legacy spellings still share a key"
@@ -4953,13 +4953,15 @@ SH
   done
   mv "$state/second.meta" "$dir/second.meta"
   [ "$(watch_window_key s:a.b)" = "$first_key" ] || fail "removing sibling changed identity"
-  watch_bg "$state" "$fakebin" "$out" env FM_CONFIG_OVERRIDE="$dir/config"
+  watch_bg "$state" "$fakebin" "$out" env FM_HOME="$dir" \
+    FM_CONFIG_OVERRIDE="$dir/config" FM_WATCH_HANDLING_SUCCESSOR=1
   pid=$!
   wait_poll_cycle "$state" "$pid" || fail "remaining endpoint reawakened after sibling removal"
   reap "$pid"
   mv "$dir/second.meta" "$state/second.meta"
   [ "$(watch_window_key s:a.b)" = "$first_key" ] || fail "adding sibling changed identity"
-  watch_bg "$state" "$fakebin" "$out" env FM_CONFIG_OVERRIDE="$dir/config"
+  watch_bg "$state" "$fakebin" "$out" env FM_HOME="$dir" \
+    FM_CONFIG_OVERRIDE="$dir/config" FM_WATCH_HANDLING_SUCCESSOR=1
   pid=$!
   wait_poll_cycle "$state" "$pid" || fail "restored sibling woke: $(cat "$out")"
   reap "$pid"
@@ -4968,7 +4970,6 @@ SH
 )
 
 test_long_endpoint_keeps_stale_history() (
-  local FM_HOME FM_STATE_OVERRIDE FM_CONFIG_OVERRIDE FM_WATCH_HANDLING_SUCCESSOR
   unset FM_HOME FM_STATE_OVERRIDE FM_DATA_OVERRIDE FM_CONFIG_OVERRIDE
   unset FM_WATCH_HANDLING_SUCCESSOR FM_WATCH_DELIVERED_REASON FM_FAKE_CREW_STATE
   unset FM_FAKE_TMUX_WINDOWS FM_FAKE_TMUX_WINDOW FM_FAKE_TMUX_CAPTURE
@@ -4976,8 +4977,6 @@ test_long_endpoint_keeps_stale_history() (
   local LC_ALL=C
   dir=$(make_case long-window-key); state="$dir/state"; fakebin="$dir/fakebin"
   mkdir -p "$dir/config" "$dir/data"
-  export FM_HOME="$dir" FM_STATE_OVERRIDE="$state" FM_CONFIG_OVERRIDE="$dir/config"
-  export FM_WATCH_HANDLING_SUCCESSOR=1
   session=$(printf '%180s' '' | tr ' ' s)
   task=$(printf '%64s' '' | tr ' ' t)
   window="$session:fm-$task"
@@ -4986,7 +4985,8 @@ test_long_endpoint_keeps_stale_history() (
   out="$dir/watch.out"; capture_file="$dir/pane.txt"
   printf 'quiet long-endpoint pane\n' > "$capture_file"
   printf 'window=%s\nkind=ship\nharness=codex\n' "$window" > "$state/$task.meta"
-  watch_bg "$state" "$fakebin" "$out" env FM_FAKE_TMUX_WINDOW="$window" \
+  watch_bg "$state" "$fakebin" "$out" env FM_HOME="$dir" \
+    FM_CONFIG_OVERRIDE="$dir/config" FM_WATCH_HANDLING_SUCCESSOR=1 FM_FAKE_TMUX_WINDOW="$window" \
     FM_FAKE_TMUX_CAPTURE="$capture_file" 2> "$dir/watch.err"
   pid=$!
   if ! wait_for_exit "$pid" 150; then
@@ -5004,7 +5004,8 @@ test_long_endpoint_keeps_stale_history() (
   [ "$(cat "$state/.count-$key")" -ge 2 ] || fail "long endpoint did not accumulate stable polls"
   [ "$(cat "$state/.stale-$key")" = "$(cat "$state/.hash-$key")" ] \
     || fail "long endpoint lost its stale suppressor"
-  ack_stopped_cycle "$state" || fail "could not acknowledge long endpoint stale"
+  FM_HOME="$dir" FM_CONFIG_OVERRIDE="$dir/config" ack_stopped_cycle "$state" \
+    || fail "could not acknowledge long endpoint stale"
   pass "a 180-byte session and 64-byte task retain bounded markers and produce a stale wake"
 )
 
