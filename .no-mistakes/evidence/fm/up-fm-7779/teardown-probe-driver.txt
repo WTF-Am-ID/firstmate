@@ -1,0 +1,78 @@
+Disposable probe appended to the existing teardown suite declarations.
+The declarations were copied up to, but excluding, the bottom-level test invocations.
+BASELINE points to the base revision teardown script beside symlinks to the worktree bin dependencies.
+Only pool and backend commands are faked. The entry point and Git are real.
+
+set -e
+EVIDENCE="$1"
+BASELINE="$2"
+CURRENT="$TEARDOWN"
+printf 'candidate=%s\nbaseline=%s\n' "$(git -C "$ROOT" rev-parse HEAD)" 417cec2feb4e2976c0acdb2527b87b3ccc71535f
+for variant in baseline-dirty candidate-dirty candidate-clean; do
+  case_dir=$(make_case "product-$variant")
+  write_meta "$case_dir" no-mistakes ship
+  printf '%s\n' harness=codex backend=tmux >> "$case_dir/state/task-x1.meta"
+  cp "$case_dir/state/task-x1.meta" "$case_dir/meta-before"
+  git -C "$case_dir/wt" config status.showUntrackedFiles no
+  case "$variant" in
+    *dirty)
+      mkdir "$case_dir/wt/new directory"
+      printf '%s\n' 'unadded work' > "$case_dir/wt/new directory/newfile.txt"
+      ;;
+  esac
+  cat > "$case_dir/fakebin/treehouse" <<'SH'
+#!/usr/bin/env bash
+printf '%s\n' "$*" >> "$FM_STATE_OVERRIDE/pool-calls"
+if [ "${1:-}" = return ]; then
+  git -C "$3" reset --hard -q HEAD
+  git -C "$3" clean -fdq
+fi
+SH
+  cat > "$case_dir/fakebin/tmux" <<'SH'
+#!/usr/bin/env bash
+printf '%s\n' "$*" >> "$FM_STATE_OVERRIDE/backend-calls"
+exit 0
+SH
+  case "$variant" in baseline-*) TEARDOWN="$BASELINE";; *) TEARDOWN="$CURRENT";; esac
+  printf '\n=== %s ===\n' "$variant"
+  printf 'Git preference: status.showUntrackedFiles=%s\n' "$(git -C "$case_dir/wt" config status.showUntrackedFiles)"
+  printf 'Plain status output: [%s]\n' "$(git -C "$case_dir/wt" status --porcelain)"
+  printf 'Explicit all-untracked status:\n'
+  git -C "$case_dir/wt" status --porcelain --untracked-files=all
+  before_head=$(git -C "$case_dir/wt" rev-parse HEAD)
+  rc=0
+  FM_HOME="$case_dir" run_teardown "$case_dir" > "$case_dir/stdout" 2> "$case_dir/stderr" || rc=$?
+  printf 'Teardown exit status: %s\n' "$rc"
+  printf 'Teardown stdout:\n'; cat "$case_dir/stdout"
+  printf 'Teardown stderr:\n'; cat "$case_dir/stderr"
+  pool_calls=0
+  [ ! -f "$case_dir/state/pool-calls" ] || pool_calls=$(wc -l < "$case_dir/state/pool-calls" | tr -d ' ')
+  backend_closes=0
+  [ ! -f "$case_dir/state/backend-calls" ] || backend_closes=$(grep -c kill "$case_dir/state/backend-calls" || true)
+  preserved=false
+  [ ! -f "$case_dir/wt/new directory/newfile.txt" ] || preserved=true
+  metadata=false
+  if cmp -s "$case_dir/meta-before" "$case_dir/state/task-x1.meta"; then metadata=true; fi
+  printf 'Pool calls: %s\nBackend close calls: %s\nUnadded file exists: %s\nTask metadata unchanged: %s\n' "$pool_calls" "$backend_closes" "$preserved" "$metadata"
+  case "$variant" in
+    baseline-dirty)
+      [ "$rc" -eq 0 ] && [ "$pool_calls" -gt 0 ] && [ "$preserved" = false ] && [ ! -e "$case_dir/state/task-x1.meta" ]
+      printf 'Baseline reproduced: teardown returned the dirty copy and erased the unadded file and task metadata.\n'
+      ;;
+    candidate-dirty)
+      [ "$rc" -eq 1 ] && [ "$pool_calls" -eq 0 ] && [ "$backend_closes" -eq 0 ] && [ "$preserved" = true ] && [ "$metadata" = true ]
+      [ "$(cat "$case_dir/wt/new directory/newfile.txt")" = 'unadded work' ]
+      assert_refusal_retained_task_state "$case_dir" product-probe "$before_head"
+      assert_grep 'uncommitted changes' "$case_dir/stderr" 'missing dirty diagnostic'
+      assert_grep 'new directory/newfile.txt' "$case_dir/stderr" 'missing unadded path'
+      printf 'Candidate preserved bytes: %s\n' "$(cat "$case_dir/wt/new directory/newfile.txt")"
+      printf 'Candidate preserved task branch and HEAD: %s %s\n' "$(git -C "$case_dir/wt" branch --show-current)" "$(git -C "$case_dir/wt" rev-parse HEAD)"
+      ;;
+    candidate-clean)
+      [ "$rc" -eq 0 ] && [ "$pool_calls" -gt 0 ] && [ ! -e "$case_dir/state/task-x1.meta" ]
+      printf 'Clean control reached guarded pool return and removed task metadata.\n'
+      ;;
+  esac
+  cp "$case_dir/stdout" "$EVIDENCE/$variant.stdout.txt"
+  cp "$case_dir/stderr" "$EVIDENCE/$variant.stderr.txt"
+done

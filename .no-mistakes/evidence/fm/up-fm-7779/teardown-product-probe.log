@@ -1,0 +1,77 @@
+ok - teardown leaves opencode's busy plugin in the returned pool worktree as on main
+candidate=af68224ea3b5d49d432eeeb47187e12e3695647d
+baseline=417cec2feb4e2976c0acdb2527b87b3ccc71535f
+
+=== baseline-dirty ===
+Git preference: status.showUntrackedFiles=no
+Plain status output: []
+Explicit all-untracked status:
+?? "new directory/newfile.txt"
+Teardown exit status: 0
+Teardown stdout:
+/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-teardown-tests.U3JrUi/product-baseline-dirty/project: already current
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-teardown-tests.U3JrUi/product-baseline-dirty/wt)
+Backlog: task-x1 just finished (this home keeps no markdown backlog at /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-teardown-tests.U3JrUi/product-baseline-dirty/data/backlog.md). Update /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-teardown-tests.U3JrUi/product-baseline-dirty/data/backlog.md - move task-x1 to Done, keep Done to the 10 most recent, then re-scan Queued and dispatch only work whose blockers are gone and date is due.
+Teardown stderr:
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Pool calls: 1
+Backend close calls: 1
+Unadded file exists: false
+Task metadata unchanged: false
+Baseline reproduced: teardown returned the dirty copy and erased the unadded file and task metadata.
+
+=== candidate-dirty ===
+Git preference: status.showUntrackedFiles=no
+Plain status output: []
+Explicit all-untracked status:
+?? "new directory/newfile.txt"
+Teardown exit status: 1
+Teardown stdout:
+Teardown stderr:
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-teardown-tests.U3JrUi/product-candidate-dirty/wt has uncommitted changes.
+uncommitted changes present (untracked-only leftovers)
+untracked paths (up to 10):
+  "new directory/newfile.txt"
+Commit them (or get the captain's explicit OK to discard, then --force).
+Pool calls: 0
+Backend close calls: 0
+Unadded file exists: true
+Task metadata unchanged: true
+Candidate preserved bytes: unadded work
+Candidate preserved task branch and HEAD: fm/task-x1 de7fac63fb3c6b902c973746cf57ceb43d3d3031
+
+=== candidate-clean ===
+Git preference: status.showUntrackedFiles=no
+Plain status output: []
+Explicit all-untracked status:
+Teardown exit status: 0
+Teardown stdout:
+/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-teardown-tests.U3JrUi/product-candidate-clean/project: already current
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-teardown-tests.U3JrUi/product-candidate-clean/wt)
+Backlog: task-x1 just finished (this home keeps no markdown backlog at /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-teardown-tests.U3JrUi/product-candidate-clean/data/backlog.md). Update /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-teardown-tests.U3JrUi/product-candidate-clean/data/backlog.md - move task-x1 to Done, keep Done to the 10 most recent, then re-scan Queued and dispatch only work whose blockers are gone and date is due.
+Teardown stderr:
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 0s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Pool calls: 1
+Backend close calls: 1
+Unadded file exists: false
+Task metadata unchanged: false
+Clean control reached guarded pool return and removed task metadata.
