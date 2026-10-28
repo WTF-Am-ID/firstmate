@@ -1800,14 +1800,41 @@ Secondmate homes inherit this file from the primary, so a secondmate's own crewm
 `FM_DISPATCH_PROVIDER` selects `typesafe` or `openrouter`, and `FM_DISPATCH_MODEL` selects the model.
 Each setting comes from the calling environment or the home's gitignored `.env` through `bin/fm-env-lib.sh`; a non-empty environment value wins.
 OpenRouter requires both `FM_DISPATCH_PROVIDER=openrouter` and a non-empty `FM_DISPATCH_MODEL`; an omitted model is an actionable configuration error, and the presence of an OpenRouter key never selects the provider by itself.
-With no provider setting, the original typesafe.ai behavior is unchanged: `jev-latest` is used when `TYPESAFE_API_KEY` is available, `FM_DISPATCH_MODEL` is ignored, and the resolver is off otherwise.
+With no provider setting, typesafe.ai uses `jev-latest` when its key is available, and `FM_DISPATCH_MODEL` is ignored.
 Explicit `FM_DISPATCH_PROVIDER=typesafe` also uses `jev-latest` when no model is set.
-The selected provider's key must be non-empty in the environment or `.env`, with the environment taking precedence.
+The selected provider's key comes from a non-empty environment value, then the home's `.env`, then an optional declared credential source, in that order.
 
 Off means one `dispatch-resolve: off` line on stderr, nothing on stdout, exit 0, and no network call, so firstmate dispatches exactly as it does without the tool.
 This section is the single owner of the tool's operator contract; the script header owns its exact flags and output lines, and "Crew dispatch profiles" above owns the declared rule and profile fields it applies.
 
 Rules come only from the effective home's `config/crew-dispatch.json`; `FM_CONFIG_OVERRIDE` selects the config directory for tests and specialized setup like the other scripts.
+
+**Declared credential sources (config/dispatch-credential-sources.json)**
+
+This optional, gitignored JSON object maps provider IDs to credential-source declarations in that same effective config directory.
+No credential values belong in it.
+The first source adapter is `macos-keychain`, with a required non-empty `service` and an optional non-empty `account` identifying a generic password.
+Provider IDs use lowercase letters, digits, and internal single hyphens.
+Each entry accepts only `type`, `service`, and `account`, and its string values cannot contain control characters.
+
+```json
+{
+  "typesafe": {"type": "macos-keychain", "service": "firstmate-typesafe", "account": "work"},
+  "openrouter": {"type": "macos-keychain", "service": "firstmate-openrouter"}
+}
+```
+
+Only the selected provider's source is retrieved, and only when its environment and `.env` keys are absent.
+An absent file or absent provider entry retains the off behavior.
+When source lookup is needed, an invalid declaration is an actionable configuration error with exit 2.
+A declared source that cannot run, cannot retrieve a non-empty single-line key, or returns a failure produces a sanitized structured `status: error` with exit 0 and no network or quota call.
+It never silently becomes off.
+The key remains private to the resolver and reaches HTTP only through the existing file-descriptor header transport.
+
+The script's capability and candidate-validation modes let an installer inspect adapter support before writing target config, without retrieving credentials, reading `.env`, or making a network call.
+Their exact flags and JSON output are owned by the script header and `--help`.
+Validation checks the supplied candidate file without modifying it, and reports unsupported when the adapter executable is absent.
+Support means the adapter executable is available, not that a particular credential is accessible.
 
 ```sh
 bin/fm-dispatch-resolve.sh data/<id>/brief.md --project <name>        # TOON block on stdout

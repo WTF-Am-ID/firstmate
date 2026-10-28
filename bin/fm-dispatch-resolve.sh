@@ -4,11 +4,26 @@
 #
 # Usage:
 #   fm-dispatch-resolve.sh <brief-file> [--project <name>]
+#   fm-dispatch-resolve.sh --credential-capabilities
+#   fm-dispatch-resolve.sh --validate-credential-sources <candidate-json-file>
+#
+# Credential inspection: prints JSON without a brief, network, credential read,
+#   or config write. Capabilities reports sources.<type>.supported; validation
+#   checks the candidate declaration and reports supported (boolean). Invalid
+#   declarations exit 2. Support checks executable availability, not access to
+#   a particular credential; an installer must require supported=true before
+#   writing its target config. See docs/configuration.md for the schema.
 #
 # Opt-in gate: FM_DISPATCH_PROVIDER and FM_DISPATCH_MODEL select the provider
 #   and model from the environment or $FM_HOME/.env (environment wins). With no
-#   provider set, retain the original typesafe.ai/jev-latest key gate exactly.
+#   provider set, retain the typesafe.ai/jev-latest selection.
 #   OpenRouter requires both its provider selection and a model. The selected
+#   provider's config/dispatch-credential-sources.json entry is consulted only
+#   after environment and .env keys. The effective config directory owns it.
+#   Absent declaration/key stays off; invalid declarations exit 2; unavailable
+#   declared sources produce a sanitized structured error, without a request.
+#   macos-keychain uses security find-generic-password -w -s <service> [-a <account>].
+#   No credential value belongs in the declaration. The selected
 #   key lives in a non-exported shell variable and reaches curl through fd 3,
 #   never argv, logs, or child environments.
 #
@@ -114,16 +129,103 @@ usage() {
   ' "$0"
 }
 
+emit_error() {
+  local reason=$1
+  echo "dispatch-resolve: error ($reason)" >&2
+  printf 'dispatch-resolve:\n  status: error\n  reason: %s\n' "$reason"
+  exit 0
+}
+
+# This adapter boundary keeps credential retrieval separate from non-secret
+# declaration validation and capability inspection.
+credential_source_supported() {
+  case "$1" in
+    macos-keychain) command -v security >/dev/null 2>&1 ;;
+    *) return 1 ;;
+  esac
+}
+
+credential_sources_validate() {
+  command -v jq >/dev/null 2>&1 || die "jq required"
+  [ -f "$1" ] && [ -r "$1" ] || die "invalid credential sources: expected a readable regular file"
+  # Parse once, validating all entries, without echoing untrusted config values.
+  CREDENTIAL_SOURCES=$(jq -cse '
+    def text: type == "string" and test("[^[:space:]]") and (test("[[:cntrl:]]") | not);
+    if length != 1 then error("one object required") else .[0] end
+    | if type == "object" and all(to_entries[];
+        (.key | test("^[a-z0-9]+(-[a-z0-9]+)*$")) and
+        (.value | type == "object" and
+          ((keys - ["type", "service", "account"]) | length == 0) and
+          .type == "macos-keychain" and (.service | text) and
+          (if has("account") then (.account | text) else true end)))
+      then . else error("invalid declaration") end
+  ' "$1" 2>/dev/null) || die "invalid credential sources: expected provider-keyed macos-keychain entries with service and optional account"
+}
+
+credential_source_read() {
+  local entry type service account
+  entry=$(jq -c --arg provider "$DISPATCH_PROVIDER" '.[$provider] // empty' <<< "$CREDENTIAL_SOURCES")
+  [ -n "$entry" ] || return 0
+  type=$(jq -r .type <<< "$entry")
+  credential_source_supported "$type" || emit_error "credential source unavailable for $DISPATCH_PROVIDER"
+  service=$(jq -r .service <<< "$entry")
+  account=$(jq -r '.account // empty' <<< "$entry")
+  DISPATCH_SOURCE_KEY_PRIVATE=''
+  export -n DISPATCH_SOURCE_KEY_PRIVATE 2>/dev/null || true
+  case "$type" in
+    macos-keychain)
+      if [ -n "$account" ]; then
+        DISPATCH_SOURCE_KEY_PRIVATE=$(security find-generic-password -w -s "$service" -a "$account" 2>/dev/null) \
+          || emit_error "credential source unavailable for $DISPATCH_PROVIDER"
+      else
+        DISPATCH_SOURCE_KEY_PRIVATE=$(security find-generic-password -w -s "$service" 2>/dev/null) \
+          || emit_error "credential source unavailable for $DISPATCH_PROVIDER"
+      fi
+      ;;
+  esac
+  case "$DISPATCH_SOURCE_KEY_PRIVATE" in
+    ''|*$'\n'*|*$'\r'*) emit_error "credential source unavailable for $DISPATCH_PROVIDER" ;;
+  esac
+  case "$DISPATCH_PROVIDER" in
+    typesafe) TYPESAFE_API_KEY_PRIVATE=$DISPATCH_SOURCE_KEY_PRIVATE ;;
+    openrouter) OPENROUTER_API_KEY_PRIVATE=$DISPATCH_SOURCE_KEY_PRIVATE ;;
+  esac
+  unset DISPATCH_SOURCE_KEY_PRIVATE
+}
+
 BRIEF='' PROJECT='' RULES_PATH="$CONFIG/crew-dispatch.json" RULES=''
+CREDENTIAL_MODE='' CREDENTIAL_CANDIDATE='' CREDENTIAL_SOURCES=''
+CREDENTIAL_SOURCES_PATH="$CONFIG/dispatch-credential-sources.json"
 NEVER_SEND_PATH="$CONFIG/dispatch-never-send"
 while [ $# -gt 0 ]; do
   case "$1" in
     --project) [ $# -ge 2 ] || die "--project needs a value"; PROJECT=$2; shift 2 ;;
+    --credential-capabilities)
+      [ -z "$CREDENTIAL_MODE" ] || die "one credential inspection mode only"
+      CREDENTIAL_MODE=capabilities; shift ;;
+    --validate-credential-sources)
+      [ $# -ge 2 ] || die "--validate-credential-sources needs a file"
+      [ -z "$CREDENTIAL_MODE" ] || die "one credential inspection mode only"
+      CREDENTIAL_MODE=validate; CREDENTIAL_CANDIDATE=$2; shift 2 ;;
     -h|--help) usage; exit 0 ;;
     -*) die "unknown flag $1" ;;
     *) [ -z "$BRIEF" ] || die "one brief file only"; BRIEF=$1; shift ;;
   esac
 done
+
+if [ -n "$CREDENTIAL_MODE" ]; then
+  [ -z "$BRIEF$PROJECT" ] || die "credential inspection does not accept a brief or project"
+  supported=false
+  credential_source_supported macos-keychain && supported=true
+  if [ "$CREDENTIAL_MODE" = capabilities ]; then
+    printf '{"sources":{"macos-keychain":{"supported":%s}}}\n' "$supported"
+  else
+    credential_sources_validate "$CREDENTIAL_CANDIDATE"
+    [ "$CREDENTIAL_SOURCES" != '{}' ] || supported=true
+    printf '{"supported":%s}\n' "$supported"
+  fi
+  exit 0
+fi
 
 # ---- opt-in gate ---------------------------------------------------------------
 DISPATCH_PROVIDER=${FM_DISPATCH_PROVIDER:-}
@@ -134,30 +236,37 @@ case "$DISPATCH_PROVIDER" in
   '')
     DISPATCH_PROVIDER=typesafe
     DISPATCH_MODEL=$TS_MODEL
-    [ -n "$TYPESAFE_API_KEY_PRIVATE" ] || TYPESAFE_API_KEY_PRIVATE=$(fmx_env_get TYPESAFE_API_KEY "$FM_HOME/.env")
-    if [ -z "$TYPESAFE_API_KEY_PRIVATE" ]; then
-      echo "dispatch-resolve: off (TYPESAFE_API_KEY absent from the environment and $FM_HOME/.env)" >&2
-      exit 0
-    fi
     ;;
   typesafe)
     [ -n "$DISPATCH_MODEL" ] || DISPATCH_MODEL=$TS_MODEL
-    [ -n "$TYPESAFE_API_KEY_PRIVATE" ] || TYPESAFE_API_KEY_PRIVATE=$(fmx_env_get TYPESAFE_API_KEY "$FM_HOME/.env")
-    if [ -z "$TYPESAFE_API_KEY_PRIVATE" ]; then
-      echo "dispatch-resolve: off (TYPESAFE_API_KEY absent from the environment and $FM_HOME/.env)" >&2
-      exit 0
-    fi
     ;;
   openrouter)
     [ -n "$DISPATCH_MODEL" ] || die "FM_DISPATCH_MODEL required when FM_DISPATCH_PROVIDER=openrouter"
-    [ -n "$OPENROUTER_API_KEY_PRIVATE" ] || OPENROUTER_API_KEY_PRIVATE=$(fmx_env_get OPENROUTER_API_KEY "$FM_HOME/.env")
-    if [ -z "$OPENROUTER_API_KEY_PRIVATE" ]; then
-      echo "dispatch-resolve: off (OPENROUTER_API_KEY absent from the environment and $FM_HOME/.env)" >&2
-      exit 0
-    fi
     ;;
   *) die "unknown FM_DISPATCH_PROVIDER: $DISPATCH_PROVIDER (expected typesafe or openrouter)" ;;
 esac
+
+case "$DISPATCH_PROVIDER" in
+  typesafe)
+    [ -n "$TYPESAFE_API_KEY_PRIVATE" ] || TYPESAFE_API_KEY_PRIVATE=$(fmx_env_get TYPESAFE_API_KEY "$FM_HOME/.env")
+    KEY_ABSENT=$([ -n "$TYPESAFE_API_KEY_PRIVATE" ] && echo false || echo true)
+    KEY_NAME=TYPESAFE_API_KEY ;;
+  openrouter)
+    [ -n "$OPENROUTER_API_KEY_PRIVATE" ] || OPENROUTER_API_KEY_PRIVATE=$(fmx_env_get OPENROUTER_API_KEY "$FM_HOME/.env")
+    KEY_ABSENT=$([ -n "$OPENROUTER_API_KEY_PRIVATE" ] && echo false || echo true)
+    KEY_NAME=OPENROUTER_API_KEY ;;
+esac
+if [ "$KEY_ABSENT" = true ]; then
+  if [ -e "$CREDENTIAL_SOURCES_PATH" ] || [ -L "$CREDENTIAL_SOURCES_PATH" ]; then
+    credential_sources_validate "$CREDENTIAL_SOURCES_PATH"
+    credential_source_read
+  fi
+  if { [ -z "$TYPESAFE_API_KEY_PRIVATE" ] && [ "$DISPATCH_PROVIDER" = typesafe ]; } ||
+    { [ -z "$OPENROUTER_API_KEY_PRIVATE" ] && [ "$DISPATCH_PROVIDER" = openrouter ]; }; then
+    echo "dispatch-resolve: off ($KEY_NAME absent from the environment and $FM_HOME/.env)" >&2
+    exit 0
+  fi
+fi
 
 # ---- inputs --------------------------------------------------------------------
 [ -n "$BRIEF" ] || die "brief file required (see --help)"
@@ -259,13 +368,6 @@ done < <(jq -r '
   | map(.harness) | unique | .[]' "$RULES")
 
 RULE_COUNT=$(jq -r '(.rules // []) | length' "$RULES")
-
-emit_error() {
-  local reason=$1
-  echo "dispatch-resolve: error ($reason)" >&2
-  printf 'dispatch-resolve:\n  status: error\n  reason: %s\n' "$reason"
-  exit 0
-}
 
 if [ "$RULE_COUNT" -eq 0 ]; then
   no_rules

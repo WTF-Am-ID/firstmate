@@ -152,6 +152,26 @@ cat "${QUOTA_AXI_FIXTURE:?}"
 SH
 chmod +x "$FAKEBIN/quota-axi"
 
+cat > "$FAKEBIN/security" <<'SH'
+#!/usr/bin/env bash
+set -u
+printf '%s\n' "$@" >> "${FAKE_CURL_LOG:?}/security.argv"
+if [ -n "${TYPESAFE_API_KEY+x}" ] || [ -n "${TYPESAFE_API_KEY_PRIVATE+x}" ] ||
+  [ -n "${OPENROUTER_API_KEY+x}" ] || [ -n "${OPENROUTER_API_KEY_PRIVATE+x}" ] ||
+  [ -n "${DISPATCH_SOURCE_KEY_PRIVATE+x}" ]; then
+  printf 'security:secret-present\n' >> "${CHILD_ENV_LOG:?}"
+else
+  printf 'security:clean\n' >> "${CHILD_ENV_LOG:?}"
+fi
+if [ "${FAKE_SECURITY_FAIL:-0}" = 1 ]; then
+  cat "${FAKE_SECURITY_KEY:?}"
+  cat "${FAKE_SECURITY_KEY:?}" >&2
+  exit 44
+fi
+cat "${FAKE_SECURITY_KEY:?}"
+SH
+chmod +x "$FAKEBIN/security"
+
 RESPONSE="$TMP_ROOT/response.json"
 export FAKE_CURL_LOG="$LOG" FAKE_CURL_RESPONSE="$RESPONSE" QUOTA_AXI_CALLS="$LOG/quota-axi.calls" QUOTA_AXI_FIXTURE="$QUOTA" CHILD_ENV_LOG="$LOG/child-env"
 
@@ -195,6 +215,157 @@ assert_contains "$err" 'dispatch-resolve: off (TYPESAFE_API_KEY absent from the 
 assert_absent "$LOG/argv" "absent key never calls curl"
 assert_absent "$LOG/quota-axi.calls" "absent key never reads quota-axi"
 pass "absent key is off: one stderr line, exit 0, no network call"
+
+# --- declared sources: private, provider-keyed, effective-home scoped --------
+SOURCES="$HOME_DIR/config/dispatch-credential-sources.json"
+SOURCE_KEY='source-key-never-in-argv-logs-or-child-environments'
+printf '%s' "$SOURCE_KEY" > "$TMP_ROOT/source-key"
+export FAKE_SECURITY_KEY="$TMP_ROOT/source-key"
+cat > "$SOURCES" <<'JSON'
+{"typesafe":{"type":"macos-keychain","service":"dispatch-typesafe","account":"work"},
+ "openrouter":{"type":"macos-keychain","service":"dispatch-openrouter"}}
+JSON
+reset_log
+run code out err "$BRIEF" --project pager
+expect_code 0 "$code" "declared source resolves"
+assert_contains "$out" '  status: clear' "declared source activates the direct resolver"
+assert_equals $'find-generic-password\n-w\n-s\ndispatch-typesafe\n-a\nwork' "$(cat "$LOG/security.argv")" "only the selected provider's service and account are retrieved"
+assert_equals "Authorization: Bearer $SOURCE_KEY" "$(cat "$LOG/header")" "declared key reaches the fd header"
+assert_contains "$(cat "$LOG/argv")" '@/dev/fd/3' "declared source retains fd-only transport"
+assert_not_contains "$(cat "$LOG/argv" "$LOG/security.argv" "$LOG/body")$out$err" "$SOURCE_KEY" "source key stays out of argv, request body, and diagnostics"
+assert_equals $'security:clean\ncurl:clean\nquota-axi:clean' "$(cat "$LOG/child-env")" "source key is absent from child environments"
+
+reset_log
+TYPESAFE_API_KEY=env-wins run code out err "$BRIEF"
+assert_equals 'Authorization: Bearer env-wins' "$(cat "$LOG/header")" "environment precedes declaration"
+assert_absent "$LOG/security.argv" "environment key skips source lookup"
+printf '%s\n' 'TYPESAFE_API_KEY=dotenv-wins' > "$HOME_DIR/.env"
+reset_log
+run code out err "$BRIEF"
+assert_equals 'Authorization: Bearer dotenv-wins' "$(cat "$LOG/header")" ".env precedes declaration"
+assert_absent "$LOG/security.argv" ".env key skips source lookup"
+rm -f "$HOME_DIR/.env"
+
+SOURCE_OR_RESPONSE="$TMP_ROOT/source-openrouter-response.json"
+write_response "$SOURCE_OR_RESPONSE" rule_4 0.9
+reset_log
+FM_DISPATCH_PROVIDER=openrouter FM_DISPATCH_MODEL=typesafe/jev-1.13 \
+  FAKE_CURL_RESPONSE="$SOURCE_OR_RESPONSE" run code out err "$BRIEF"
+assert_contains "$out" '  status: clear' "OpenRouter accepts its declared source"
+assert_equals $'find-generic-password\n-w\n-s\ndispatch-openrouter' "$(cat "$LOG/security.argv")" "OpenRouter never reads the typesafe source"
+assert_equals "Authorization: Bearer $SOURCE_KEY" "$(cat "$LOG/header")" "OpenRouter source uses the fd header"
+assert_not_contains "$(cat "$LOG/argv")$out$err" "$SOURCE_KEY" "OpenRouter source key remains private"
+assert_equals $'security:clean\ncurl:clean\nquota-axi:clean' "$(cat "$LOG/child-env")" "OpenRouter source key never enters child environments"
+reset_log
+FM_DISPATCH_PROVIDER=openrouter FM_DISPATCH_MODEL=typesafe/jev-1.13 \
+  OPENROUTER_API_KEY=router-env FAKE_CURL_RESPONSE="$SOURCE_OR_RESPONSE" run code out err "$BRIEF"
+assert_equals 'Authorization: Bearer router-env' "$(cat "$LOG/header")" "OpenRouter environment precedes declaration"
+assert_absent "$LOG/security.argv" "OpenRouter environment skips retrieval"
+printf '%s\n' 'OPENROUTER_API_KEY=router-dotenv' > "$HOME_DIR/.env"
+reset_log
+FM_DISPATCH_PROVIDER=openrouter FM_DISPATCH_MODEL=typesafe/jev-1.13 \
+  FAKE_CURL_RESPONSE="$SOURCE_OR_RESPONSE" run code out err "$BRIEF"
+assert_equals 'Authorization: Bearer router-dotenv' "$(cat "$LOG/header")" "OpenRouter .env precedes declaration"
+assert_absent "$LOG/security.argv" "OpenRouter .env skips retrieval"
+rm -f "$HOME_DIR/.env"
+
+SOURCE_CONFIG="$TMP_ROOT/source-config"
+mkdir -p "$SOURCE_CONFIG"
+cp "$BASE_RULES" "$SOURCE_CONFIG/crew-dispatch.json"
+reset_log
+FM_CONFIG_OVERRIDE="$SOURCE_CONFIG" run code out err "$BRIEF"
+assert_equals '' "$out" "another effective config cannot use the home's declaration"
+assert_contains "$err" 'dispatch-resolve: off' "absent effective declaration remains off"
+assert_absent "$LOG/security.argv" "effective config never reads another home's source"
+assert_absent "$LOG/argv" "absent effective declaration makes no network call"
+printf '%s\n' '{"typesafe":{"type":"macos-keychain","service":"override-service"}}' > "$SOURCE_CONFIG/dispatch-credential-sources.json"
+reset_log
+FM_CONFIG_OVERRIDE="$SOURCE_CONFIG" run code out err "$BRIEF"
+assert_contains "$(cat "$LOG/security.argv")" 'override-service' "effective config owns the declaration"
+assert_not_contains "$(cat "$LOG/security.argv")" 'dispatch-typesafe' "home declaration is not consulted with a config override"
+SECOND_HOME="$TMP_ROOT/second-home"
+mkdir -p "$SECOND_HOME/config"
+cp "$BASE_RULES" "$SECOND_HOME/config/crew-dispatch.json"
+reset_log
+HOME_DIR="$SECOND_HOME" run code out err "$BRIEF"
+assert_contains "$err" 'dispatch-resolve: off' "another effective home stays off"
+assert_absent "$LOG/security.argv" "another home never reads the first home's source"
+
+mv "$SOURCES" "$TMP_ROOT/sources-valid.json"
+printf '%s\n' '{"openrouter":{"type":"macos-keychain","service":"other-provider"}}' > "$SOURCES"
+reset_log
+run code out err "$BRIEF"
+assert_equals '' "$out" "another provider's source does not enable typesafe"
+assert_absent "$LOG/security.argv" "missing provider entry never retrieves a key"
+printf '%s\n' '{}' > "$SOURCES"
+reset_log
+run code out err "$BRIEF"
+assert_contains "$err" 'dispatch-resolve: off' "empty declaration retains off behavior"
+cp "$TMP_ROOT/sources-valid.json" "$SOURCES"
+
+reset_log
+FAKE_SECURITY_FAIL=1 run code out err "$BRIEF"
+expect_code 0 "$code" "unavailable source is a structured runtime error"
+assert_contains "$out" '  status: error' "unavailable source cannot be mistaken for off"
+assert_contains "$out" 'credential source unavailable' "source failure is actionable"
+assert_not_contains "$out$err" "$SOURCE_KEY" "source stdout and stderr are sanitized on failure"
+assert_absent "$LOG/argv" "source failure makes zero network calls"
+assert_absent "$LOG/quota-axi.calls" "source failure never reads quota"
+reset_log
+FAKEBIN="$NO_CURL_BIN" BASE_PATH="$NO_CURL_BIN" run code out err "$BRIEF"
+assert_contains "$out" '  status: error' "missing source executable is unavailable"
+assert_contains "$out" 'credential source unavailable' "unsupported runtime cannot be mistaken for off"
+assert_absent "$LOG/argv" "missing source executable makes zero network calls"
+printf '' > "$TMP_ROOT/source-key"
+reset_log
+run code out err "$BRIEF"
+assert_contains "$out" '  status: error' "empty retrieved key is unavailable"
+assert_absent "$LOG/argv" "empty source key makes no network call"
+printf 'invalid\nheader' > "$TMP_ROOT/source-key"
+reset_log
+run code out err "$BRIEF"
+assert_contains "$out" '  status: error' "multiline source key is rejected"
+assert_absent "$LOG/argv" "invalid header makes no network call"
+printf '%s' "$SOURCE_KEY" > "$TMP_ROOT/source-key"
+
+for invalid in 'null' '[]' '{' \
+  '{"typesafe":null}' \
+  '{"typesafe":{"type":"macos-keychain","service":""}}' \
+  '{"typesafe":{"type":"macos-keychain","service":"ok","account":null}}' \
+  '{"typesafe":{"type":"macos-keychain","service":"ok","key":"secret"}}' \
+  '{"typesafe":{"type":"unknown","service":"ok"}}'; do
+  printf '%s\n' "$invalid" > "$SOURCES"
+  reset_log
+  run code out err "$BRIEF"
+  expect_code 2 "$code" "invalid declaration is a configuration error"
+  assert_contains "$err" 'invalid credential sources' "invalid declaration names the config contract"
+  assert_not_contains "$out$err" 'secret' "invalid declaration never echoes values"
+  assert_absent "$LOG/security.argv" "invalid declaration never retrieves a key"
+  assert_absent "$LOG/argv" "invalid declaration makes no network call"
+  run code out err --validate-credential-sources "$SOURCES"
+  expect_code 2 "$code" "validation rejects invalid candidate without target writes"
+done
+cp "$TMP_ROOT/sources-valid.json" "$SOURCES"
+
+reset_log
+run code out err --credential-capabilities
+expect_code 0 "$code" "capability interface succeeds without a brief"
+assert_equals true "$(jq -r '.sources["macos-keychain"].supported' <<<"$out")" "capability interface reports source support"
+run code out err --validate-credential-sources "$SOURCES"
+expect_code 0 "$code" "validation accepts the candidate declaration"
+assert_equals true "$(jq -r .supported <<<"$out")" "validation reports support"
+assert_equals "$(cat "$TMP_ROOT/sources-valid.json")" "$(cat "$SOURCES")" "validation does not write target config"
+assert_absent "$LOG/security.argv" "capability and validation never retrieve credentials"
+assert_absent "$LOG/argv" "capability and validation make no network call"
+FAKEBIN="$NO_CURL_BIN" BASE_PATH="$NO_CURL_BIN" run code out err --credential-capabilities
+assert_equals false "$(jq -r '.sources["macos-keychain"].supported' <<<"$out")" "capabilities disclose unavailable adapter"
+FAKEBIN="$NO_CURL_BIN" BASE_PATH="$NO_CURL_BIN" run code out err --validate-credential-sources "$SOURCES"
+expect_code 0 "$code" "unsupported is distinct from malformed configuration"
+assert_equals false "$(jq -r .supported <<<"$out")" "installer can refuse unsupported activation before writing"
+assert_absent "$LOG/security.argv" "unsupported inspection retrieves no credentials"
+assert_equals "$(cat "$TMP_ROOT/sources-valid.json")" "$(cat "$SOURCES")" "unsupported validation preserves target config"
+rm -f "$SOURCES"
+pass "declared sources preserve precedence, provider and home isolation, private transport, and non-secret inspection"
 
 # --- .env key, and the environment wins over it ------------------------------
 printf '%s\n' '# local secrets' 'FMX_PAIRING_TOKEN=abc' "export TYPESAFE_API_KEY=\"$KEY\"" > "$HOME_DIR/.env"
