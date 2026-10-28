@@ -3832,15 +3832,18 @@ fi
 TEARDOWN_TASK_BRANCH=
 TEARDOWN_TASK_GIT_COMMON=
 TEARDOWN_TASK_GIT_WORKTREE=
+TEARDOWN_TASK_SPAWN_GEN=
 teardown_task_branch() {
   local branch current='' ref rc identity="$STATE/$ID.teardown-branch" meta_hash tmp
-  local common='' captured_wt='' live_common=''
+  local common='' captured_wt='' live_common='' spawn_gen
   if [ "${1:-}" = capture ]; then
     branch=$(fm_meta_get "$META" branch)
+    spawn_gen=$(fm_meta_get "$META" spawn_gen)
     if [ -e "$identity" ] || [ -L "$identity" ]; then
       meta_hash=$(git -C "$PROJ" hash-object --no-filters -- "$META") || return 1
       if ! fm_backlog_record_present "$identity" "task branch identity" "$STATE" \
-         || [ "$(fm_meta_get "$identity" meta_hash)" != "$meta_hash" ]; then
+         || [ "$(fm_meta_get "$identity" meta_hash)" != "$meta_hash" ] \
+         || [ "$(fm_meta_get "$identity" spawn_gen)" != "$spawn_gen" ]; then
         echo "error: cannot verify legacy branch retry identity $identity for $ID; preserving task records" >&2
         return 1
       fi
@@ -3888,7 +3891,10 @@ teardown_task_branch() {
       meta_hash=$(git -C "$PROJ" hash-object --no-filters -- "$META") || return 1
     fi
     tmp=$(mktemp "$STATE/.$ID.teardown-branch.XXXXXX") || return 1
-    if ! printf 'meta_hash=%s\nbranch=%s\ngit_common=%s\nworktree=%s\n' "$meta_hash" "$branch" "$common" "$captured_wt" > "$tmp" \
+    if ! {
+      printf 'meta_hash=%s\nbranch=%s\ngit_common=%s\nworktree=%s\n' "$meta_hash" "$branch" "$common" "$captured_wt" \
+        && { [ -z "$spawn_gen" ] || printf 'spawn_gen=%s\n' "$spawn_gen"; }
+    } > "$tmp" \
        || ! fm_backlog_atomic_transition publish "$tmp" "$identity" "task branch identity" "$STATE"; then
       rm -f -- "$tmp"
       echo "error: cannot save retry identity for $ref; preserving task records" >&2
@@ -3897,6 +3903,7 @@ teardown_task_branch() {
     TEARDOWN_TASK_BRANCH=$branch
     TEARDOWN_TASK_GIT_COMMON=$common
     TEARDOWN_TASK_GIT_WORKTREE=$captured_wt
+    TEARDOWN_TASK_SPAWN_GEN=$spawn_gen
     return 0
   fi
   [ -n "$TEARDOWN_TASK_BRANCH" ] || return 0
@@ -4320,7 +4327,10 @@ else
 fi
 # Retain the legacy branch identity through every retryable cleanup and the
 # atomic metadata/backlog transition, including failures after pool return.
-rm -f -- "$STATE/$ID.teardown-branch"
+fm_backlog_teardown_branch_retire "$STATE" "$ID" "$TEARDOWN_TASK_SPAWN_GEN" || {
+  echo "error: cannot retire task branch identity for $ID ($FM_BACKLOG_TRANSITION_ERROR)" >&2
+  exit 1
+}
 fm_lock_release "$META_LOCK"
 META_LOCK_HELD=0
 if [ "$KIND" != scout ] && [ "$KIND" != secondmate ] && [ "$MODE" != local-only ]; then

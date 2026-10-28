@@ -6210,8 +6210,147 @@ SH
   pass "task branch cleanup proves absence or refuses with the retained ref and retry records on the ordinary path"
 }
 
+test_task_branch_identity_replay() {
+  local case_dir mode scenario rc head expected_state real_rm real_tasks ref
+  real_rm=$(command -v rm)
+  real_tasks=$(command -v tasks-axi)
+  for mode in close retain; do
+    for scenario in meta-present meta-removed stale-old stale-replacement; do
+      case_dir=$(make_case "branch-identity-$mode-$scenario")
+      write_meta "$case_dir" local-only ship
+      printf 'branch=fm/task-x1\n' >> "$case_dir/state/task-x1.meta"
+      seed_backlog_in_flight "$case_dir"
+      expected_state=done
+      if [ "$mode" = retain ]; then
+        tasks-axi hold task-x1 --kind captain --reason 'fixture decision' \
+          --file "$case_dir/data/backlog.md" >/dev/null
+        expected_state=queued
+      fi
+      head=$(git -C "$case_dir/wt" rev-parse HEAD)
+      git -C "$case_dir/project" update-ref refs/no-mistakes/recover/identity "$head"
+      git -C "$case_dir/project" update-ref refs/remotes/no-mistakes/identity "$head"
+      cat > "$case_dir/fakebin/rm" <<'SH'
+#!/usr/bin/env bash
+if [ "${FM_BRANCH_IDENTITY_INTERRUPT:-}" = meta ]; then
+  for arg in "$@"; do
+    [ "$arg" != "$FM_HOME/state/task-x1.meta" ] || exit 1
+  done
+fi
+exec "${REAL_RM_FOR_BRANCH_TEST:?}" "$@"
+SH
+      cat > "$case_dir/fakebin/tasks-axi" <<'SH'
+#!/usr/bin/env bash
+case "${1:-}" in
+  done|reopen)
+    if [ "${FM_BRANCH_IDENTITY_INTERRUPT:-}" = backlog ]; then
+      echo 'synthetic completion interruption' >&2
+      exit 1
+    fi ;;
+esac
+exec "${REAL_TASKS_FOR_BRANCH_TEST:?}" "$@"
+SH
+      chmod +x "$case_dir/fakebin/rm" "$case_dir/fakebin/tasks-axi"
+      rc=0
+      FM_HOME="$case_dir" REAL_RM_FOR_BRANCH_TEST="$real_rm" \
+      REAL_TASKS_FOR_BRANCH_TEST="$real_tasks" \
+      FM_BRANCH_IDENTITY_INTERRUPT=$([ "$scenario" = meta-removed ] && echo backlog || echo meta) \
+        run_teardown "$case_dir" --force > "$case_dir/first-out" 2> "$case_dir/first-err" || rc=$?
+      expect_code 1 "$rc" "identity fixture must interrupt completion"
+      assert_present "$case_dir/state/task-x1.teardown-branch" "interruption lost the retry identity"
+      assert_present "$case_dir/state/task-x1.backlog-close" "interruption lost completion intent"
+      if [ "$scenario" = meta-removed ]; then
+        assert_absent "$case_dir/state/task-x1.meta" "fixture did not reach backlog mutation after metadata removal"
+      else
+        assert_present "$case_dir/state/task-x1.meta" "fixture did not stop before metadata removal"
+      fi
+      ! git -C "$case_dir/project" show-ref --verify --quiet refs/heads/fm/task-x1 \
+        || fail "identity fixture interrupted before branch cleanup"
+      case "$scenario" in
+        stale-*)
+          cp "$case_dir/state/task-x1.backlog-close" "$case_dir/old-marker"
+          write_meta "$case_dir" local-only ship
+          sed 's/^spawn_gen=.*/spawn_gen=identity-replacement/' "$case_dir/state/task-x1.meta" \
+            > "$case_dir/replacement.meta"
+          mv "$case_dir/replacement.meta" "$case_dir/state/task-x1.meta"
+          printf 'branch=fm/task-x1\n' >> "$case_dir/state/task-x1.meta"
+          git -C "$case_dir/wt" checkout -q -b fm/task-x1
+          if [ "$scenario" = stale-replacement ]; then
+            mv "$case_dir/state/task-x1.teardown-branch" "$case_dir/old-identity"
+            add_review_branch_delete_failure "$case_dir"
+            rc=0
+            FM_HOME="$case_dir" REAL_RM_FOR_BRANCH_TEST="$real_rm" \
+            REAL_TASKS_FOR_BRANCH_TEST="$real_tasks" \
+              run_teardown "$case_dir" --force > "$case_dir/replacement-out" 2> "$case_dir/replacement-err" || rc=$?
+            expect_code 1 "$rc" "replacement fixture must retain its task branch"
+            cp "$case_dir/state/task-x1.teardown-branch" "$case_dir/replacement-identity"
+            cp "$case_dir/old-marker" "$case_dir/state/task-x1.backlog-close"
+          fi
+          cp "$case_dir/state/task-x1.meta" "$case_dir/replacement-before"
+          ;;
+      esac
+      FM_HOME="$case_dir" FM_ROOT_OVERRIDE="$ROOT" \
+      FM_STATE_OVERRIDE="$case_dir/state" FM_DATA_OVERRIDE="$case_dir/data" \
+      FM_CONFIG_OVERRIDE="$case_dir/config" bash -c '
+        . "$1/bin/fm-tasks-axi-lib.sh"
+        . "$1/bin/fm-backlog-transition-lib.sh"
+        fm_backlog_close_marker_replay "$2/state" "$2/state/task-x1.backlog-close" "$2/data"
+      ' _ "$ROOT" "$case_dir" > "$case_dir/replay-out" 2> "$case_dir/replay-err" \
+        || fail "identity replay failed: $(cat "$case_dir/replay-err")"
+      assert_absent "$case_dir/state/task-x1.backlog-close" "replay retained completion intent"
+      case "$scenario" in
+        stale-*)
+          cmp -s "$case_dir/replacement-before" "$case_dir/state/task-x1.meta" \
+            || fail "stale replay changed replacement metadata"
+          git -C "$case_dir/project" show-ref --verify --quiet refs/heads/fm/task-x1 \
+            || fail "stale replay removed the replacement branch"
+          [ "$(backlog_row_state "$case_dir")" = in_flight ] \
+            || fail "stale replay changed the replacement backlog row"
+          ;;
+        *)
+          assert_absent "$case_dir/state/task-x1.meta" "replay retained completed metadata"
+          [ "$(backlog_row_state "$case_dir")" = "$expected_state" ] \
+            || fail "replay did not finish the $mode transition"
+          ;;
+      esac
+      if [ "$scenario" = stale-replacement ]; then
+        cmp -s "$case_dir/replacement-identity" "$case_dir/state/task-x1.teardown-branch" \
+          || fail "stale replay changed replacement branch identity"
+        touch "$case_dir/allow-delete"
+      else
+        assert_absent "$case_dir/state/task-x1.teardown-branch" "replay stranded the retired branch identity"
+      fi
+      case "$scenario" in
+        meta-*)
+          if [ "$mode" = retain ]; then
+            tasks-axi unhold task-x1 --file "$case_dir/data/backlog.md" >/dev/null
+          fi
+          tasks-axi reopen task-x1 --file "$case_dir/data/backlog.md" >/dev/null
+          tasks-axi start task-x1 --file "$case_dir/data/backlog.md" >/dev/null
+          write_meta "$case_dir" local-only ship
+          sed 's/^spawn_gen=.*/spawn_gen=identity-reused/' "$case_dir/state/task-x1.meta" \
+            > "$case_dir/reused.meta"
+          mv "$case_dir/reused.meta" "$case_dir/state/task-x1.meta"
+          printf 'branch=fm/task-x1\n' >> "$case_dir/state/task-x1.meta"
+          git -C "$case_dir/wt" checkout -q -b fm/task-x1
+          ;;
+      esac
+      FM_HOME="$case_dir" REAL_RM_FOR_BRANCH_TEST="$real_rm" \
+      REAL_TASKS_FOR_BRANCH_TEST="$real_tasks" \
+        run_teardown "$case_dir" --force > "$case_dir/reuse-out" 2> "$case_dir/reuse-err" \
+        || fail "reused task ID could not finish: $(cat "$case_dir/reuse-err")"
+      assert_absent "$case_dir/state/task-x1.teardown-branch" "completed replacement retained its identity"
+      for ref in refs/no-mistakes/recover/identity refs/remotes/no-mistakes/identity; do
+        [ "$(git -C "$case_dir/project" rev-parse "$ref")" = "$head" ] \
+          || fail "identity retirement changed $ref"
+      done
+    done
+  done
+  pass "completion replay retires only its incarnation's branch identity and permits task ID reuse"
+}
+
 test_hidden_untracked_work_refuses_before_return
 test_content_fallback_git_capability_boundary
+test_task_branch_identity_replay
 test_task_branch_review_regressions
 test_task_branch_cleanup_outcomes
 test_status_archive_opt_in

@@ -856,7 +856,7 @@ fm_backlog_close_transition() {
   shift 5
   [ -z "$meta" ] || fm_backlog_record_remove "$meta" "task record" "$state" || return 1
   fm_backlog_done "$data" "$id" "$@" || return 1
-  fm_backlog_record_remove "$marker" "pending-close record" "$state"
+  fm_backlog_close_marker_remove "$marker" "$state"
 }
 
 # The captain-held twin of the close transition: same record, same ordering,
@@ -866,7 +866,7 @@ fm_backlog_retain_transition() {
   shift 5
   [ -z "$meta" ] || fm_backlog_record_remove "$meta" "task record" "$state" || return 1
   fm_backlog_retain "$data" "$id" "$@" || return 1
-  fm_backlog_record_remove "$marker" "pending-close record" "$state"
+  fm_backlog_close_marker_remove "$marker" "$state"
 }
 
 fm_backlog_atomic_transition() {
@@ -1147,8 +1147,30 @@ fm_backlog_close_marker_mark_cleanup_incomplete() {  # <state-dir> <marker-path>
     || { rm -f "$tmp"; return 1; }
 }
 
-fm_backlog_close_marker_remove() {  # <marker-path> <state-dir>
-  fm_backlog_atomic_transition remove "$1" "pending-close record" "$2"
+fm_backlog_teardown_branch_retire() {
+  local state=$1 id=$2 spawn_gen=$3 identity
+  case "$id" in
+    ''|.*|*[!A-Za-z0-9._-]*)
+      FM_BACKLOG_TRANSITION_ERROR="invalid task identity for branch retirement"
+      return 1 ;;
+  esac
+  identity="$state/$id.teardown-branch"
+  [ -e "$identity" ] || [ -L "$identity" ] || return 0
+  fm_backlog_meta_spawn_gen_optional "$identity" "$state" || return 1
+  [ "$FM_BACKLOG_META_SPAWN_GEN" = "$spawn_gen" ] || return 0
+  fm_backlog_atomic_transition remove "$identity" "task branch identity" "$state"
+}
+
+fm_backlog_close_marker_remove() {
+  local marker=$1 state=$2 id spawn_gen
+  if [ -e "$marker" ] || [ -L "$marker" ]; then
+    fm_backlog_meta_spawn_gen "$marker" "$state" || return 1
+    spawn_gen=$FM_BACKLOG_META_SPAWN_GEN
+    id=${marker##*/}
+    id=${id%.backlog-close}
+    fm_backlog_teardown_branch_retire "$state" "$id" "$spawn_gen" || return 1
+  fi
+  fm_backlog_atomic_transition remove "$marker" "pending-close record" "$state"
 }
 
 fm_backlog_close_marker_clear() {  # <state-dir> <id>
