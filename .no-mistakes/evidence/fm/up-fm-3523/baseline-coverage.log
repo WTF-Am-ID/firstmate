@@ -1,0 +1,66 @@
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+.fm-test-local/base-source/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+fm-test-run: coverage guard: portable serial shards share scripts:
+tests/fm-approval-failover.test.sh
+tests/fm-backend-cmux.test.sh
+tests/fm-backend-rex.test.sh
+tests/fm-backend-tern-smoke.test.sh
+tests/fm-bearings-board-lavish-live-e2e.test.sh
+tests/fm-bootstrap.test.sh
+tests/fm-calm-pi-queue-retention-live-e2e.test.sh
+tests/fm-claude-stop-autoarm-live-e2e.test.sh
+tests/fm-composer-codex-idle-live-e2e.test.sh
+tests/fm-cortex-signals-live-e2e.test.sh
+tests/fm-dod-lib.test.sh
+tests/fm-gate-refuse.test.sh
+tests/fm-gemini-harness.test.sh
+tests/fm-gitignore-config.test.sh
+tests/fm-harness-liveness-drift-live-e2e.test.sh
+tests/fm-harness-precedence.test.sh
+tests/fm-host-mirror.test.sh
+tests/fm-jev-mem-guard.test.sh
+tests/fm-lint-workflows.test.sh
+tests/fm-live-gate.test.sh
+tests/fm-muse-signals-live-e2e.test.sh
+tests/fm-nm-test-contract.test.sh
+tests/fm-no-mistakes-required.test.sh
+tests/fm-omp-primary-live-e2e.test.sh
+tests/fm-pi-primary-live-e2e.test.sh
+tests/fm-pi-seeded-home-trust-live-e2e.test.sh
+tests/fm-polytoken-signals-live-e2e.test.sh
+tests/fm-pr-reviewers.test.sh
+tests/fm-record-export-remote-home.test.sh
+tests/fm-remote-entrypoint.test.sh
+tests/fm-remote-job.test.sh
+tests/fm-remote-transport-lanes.test.sh
+tests/fm-secondmate-harness.test.sh
+tests/fm-send-inbox-doorbell-live-e2e.test.sh
+tests/fm-send-secondmate-marker.test.sh
+tests/fm-sessionstart-instruction-refresh-live-e2e.test.sh
+tests/fm-spawn-orca-worktree.test.sh
+tests/fm-startup-growth-check.test.sh
+tests/fm-tangle-guard.test.sh
+tests/fm-task-delivery.test.sh

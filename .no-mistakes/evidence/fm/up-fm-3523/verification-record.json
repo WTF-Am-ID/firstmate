@@ -1,0 +1,14 @@
+{
+  "candidate_revision": "bb758259026fd3fba040253c6c2dc97221c42958",
+  "baseline_revision": "3fbace9fa861a3a304e1ab6fbf10d019218218ee",
+  "bash_version": "GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)",
+  "candidate_source_sha256": {
+    "bin/fm-test-run.sh": "1b13723c5bbd36c622dcc2e201c832bba4790126f19f30b5eb1eaa04ab759b59",
+    "tests/lib.sh": "1a1975e629e2ba72f37167cd166f998ec0eb3ff320550df47c168f69341c9a99"
+  },
+  "candidate_live_cases_passed": true,
+  "baseline_reporting_failure_reproduced": true,
+  "focused_test_exit": 1,
+  "focused_limitation": "Known baseline shard coverage failure with file descriptor exhaustion; exact overlapping-script list matches baseline. No test selection or source fixes made.",
+  "tap_verifier_exit": 0
+}

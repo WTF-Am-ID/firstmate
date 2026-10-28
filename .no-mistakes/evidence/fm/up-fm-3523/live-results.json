@@ -1,0 +1,550 @@
+[
+  {
+    "case": "baseline-delegated-exit-jobs1",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/baseline/bin/fm-test-run.sh",
+      "--jobs",
+      "1",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/baseline-delegated-exit-jobs1.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 1,
+    "suite_exit": 7,
+    "executed": [
+      "A",
+      "B"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [
+      "console abort details missing",
+      "JSON failed_invocation mismatch",
+      "JSON unexecuted_invocations mismatch",
+      "JSON skipped_after_failure mismatch",
+      "FM_TEST_END abort details missing"
+    ],
+    "console": "baseline-delegated-exit-jobs1.log",
+    "timing": "baseline-delegated-exit-jobs1.json",
+    "cleanup_entry_status": 7,
+    "cleanup_calls": [
+      "suite-owned cleanup ran"
+    ],
+    "persisted_execution_trace": "A\nB\n"
+  },
+  {
+    "case": "baseline-default-fail-jobs1",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/baseline/bin/fm-test-run.sh",
+      "--jobs",
+      "1",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/baseline-default-fail-jobs1.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 1,
+    "suite_exit": 1,
+    "executed": [
+      "A",
+      "B"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [
+      "console abort details missing",
+      "JSON failed_invocation mismatch",
+      "JSON unexecuted_invocations mismatch",
+      "JSON skipped_after_failure mismatch",
+      "FM_TEST_END abort details missing"
+    ],
+    "console": "baseline-default-fail-jobs1.log",
+    "timing": "baseline-default-fail-jobs1.json",
+    "persisted_execution_trace": "A\nB\n"
+  },
+  {
+    "case": "candidate-delegated-exit-jobs1",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "1",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-delegated-exit-jobs1.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 1,
+    "suite_exit": 7,
+    "executed": [
+      "A",
+      "B"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-delegated-exit-jobs1.log",
+    "timing": "candidate-delegated-exit-jobs1.json",
+    "cleanup_entry_status": 7,
+    "cleanup_calls": [
+      "suite-owned cleanup ran"
+    ],
+    "persisted_execution_trace": "A\nB\n"
+  },
+  {
+    "case": "candidate-delegated-exit-jobs2",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "2",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-delegated-exit-jobs2.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 1,
+    "suite_exit": 7,
+    "executed": [
+      "A",
+      "B"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-delegated-exit-jobs2.log",
+    "timing": "candidate-delegated-exit-jobs2.json",
+    "cleanup_entry_status": 7,
+    "cleanup_calls": [
+      "suite-owned cleanup ran"
+    ],
+    "persisted_execution_trace": "A\nB\n"
+  },
+  {
+    "case": "candidate-delegated-fail-jobs1",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "1",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-delegated-fail-jobs1.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 1,
+    "suite_exit": 1,
+    "executed": [
+      "A",
+      "B"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-delegated-fail-jobs1.log",
+    "timing": "candidate-delegated-fail-jobs1.json",
+    "cleanup_entry_status": 1,
+    "cleanup_calls": [
+      "suite-owned cleanup ran"
+    ],
+    "persisted_execution_trace": "A\nB\n"
+  },
+  {
+    "case": "candidate-delegated-fail-jobs2",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "2",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-delegated-fail-jobs2.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 1,
+    "suite_exit": 1,
+    "executed": [
+      "A",
+      "B"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-delegated-fail-jobs2.log",
+    "timing": "candidate-delegated-fail-jobs2.json",
+    "cleanup_entry_status": 1,
+    "cleanup_calls": [
+      "suite-owned cleanup ran"
+    ],
+    "persisted_execution_trace": "A\nB\n"
+  },
+  {
+    "case": "candidate-delegated-errexit-jobs1",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "1",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-delegated-errexit-jobs1.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 1,
+    "suite_exit": 1,
+    "executed": [
+      "A",
+      "B"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-delegated-errexit-jobs1.log",
+    "timing": "candidate-delegated-errexit-jobs1.json",
+    "cleanup_entry_status": 1,
+    "cleanup_calls": [
+      "suite-owned cleanup ran"
+    ],
+    "persisted_execution_trace": "A\nB\n"
+  },
+  {
+    "case": "candidate-delegated-errexit-jobs2",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "2",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-delegated-errexit-jobs2.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 1,
+    "suite_exit": 1,
+    "executed": [
+      "A",
+      "B"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-delegated-errexit-jobs2.log",
+    "timing": "candidate-delegated-errexit-jobs2.json",
+    "cleanup_entry_status": 1,
+    "cleanup_calls": [
+      "suite-owned cleanup ran"
+    ],
+    "persisted_execution_trace": "A\nB\n"
+  },
+  {
+    "case": "candidate-delegated-last-jobs1",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "1",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-delegated-last-jobs1.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 1,
+    "suite_exit": 1,
+    "executed": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-delegated-last-jobs1.log",
+    "timing": "candidate-delegated-last-jobs1.json",
+    "cleanup_entry_status": 1,
+    "cleanup_calls": [
+      "suite-owned cleanup ran"
+    ],
+    "persisted_execution_trace": "A\nB\nC\nD\n"
+  },
+  {
+    "case": "candidate-delegated-last-jobs2",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "2",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-delegated-last-jobs2.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 1,
+    "suite_exit": 1,
+    "executed": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-delegated-last-jobs2.log",
+    "timing": "candidate-delegated-last-jobs2.json",
+    "cleanup_entry_status": 1,
+    "cleanup_calls": [
+      "suite-owned cleanup ran"
+    ],
+    "persisted_execution_trace": "A\nB\nC\nD\n"
+  },
+  {
+    "case": "candidate-delegated-cleanup-jobs1",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "1",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-delegated-cleanup-jobs1.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 0,
+    "suite_exit": 0,
+    "executed": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-delegated-cleanup-jobs1.log",
+    "timing": "candidate-delegated-cleanup-jobs1.json",
+    "cleanup_entry_status": 0,
+    "cleanup_calls": [
+      "suite-owned cleanup ran"
+    ],
+    "persisted_execution_trace": "A\nB\nC\nD\n"
+  },
+  {
+    "case": "candidate-delegated-cleanup-jobs2",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "2",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-delegated-cleanup-jobs2.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 0,
+    "suite_exit": 0,
+    "executed": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-delegated-cleanup-jobs2.log",
+    "timing": "candidate-delegated-cleanup-jobs2.json",
+    "cleanup_entry_status": 0,
+    "cleanup_calls": [
+      "suite-owned cleanup ran"
+    ],
+    "persisted_execution_trace": "A\nB\nC\nD\n"
+  },
+  {
+    "case": "candidate-delegated-green-jobs1",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "1",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-delegated-green-jobs1.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 0,
+    "suite_exit": 0,
+    "executed": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-delegated-green-jobs1.log",
+    "timing": "candidate-delegated-green-jobs1.json",
+    "cleanup_entry_status": 0,
+    "cleanup_calls": [
+      "suite-owned cleanup ran"
+    ],
+    "persisted_execution_trace": "A\nB\nC\nD\n"
+  },
+  {
+    "case": "candidate-delegated-green-jobs2",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "2",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-delegated-green-jobs2.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 0,
+    "suite_exit": 0,
+    "executed": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-delegated-green-jobs2.log",
+    "timing": "candidate-delegated-green-jobs2.json",
+    "cleanup_entry_status": 0,
+    "cleanup_calls": [
+      "suite-owned cleanup ran"
+    ],
+    "persisted_execution_trace": "A\nB\nC\nD\n"
+  },
+  {
+    "case": "candidate-delegated-subshell-jobs1",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "1",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-delegated-subshell-jobs1.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 0,
+    "suite_exit": 0,
+    "executed": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-delegated-subshell-jobs1.log",
+    "timing": "candidate-delegated-subshell-jobs1.json",
+    "cleanup_entry_status": 0,
+    "cleanup_calls": [
+      "suite-owned cleanup ran"
+    ],
+    "persisted_execution_trace": "A\nB\nC\nD\n"
+  },
+  {
+    "case": "candidate-delegated-subshell-jobs2",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "2",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-delegated-subshell-jobs2.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 0,
+    "suite_exit": 0,
+    "executed": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-delegated-subshell-jobs2.log",
+    "timing": "candidate-delegated-subshell-jobs2.json",
+    "cleanup_entry_status": 0,
+    "cleanup_calls": [
+      "suite-owned cleanup ran"
+    ],
+    "persisted_execution_trace": "A\nB\nC\nD\n"
+  },
+  {
+    "case": "candidate-direct-exit-jobs1",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "1",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-direct-exit-jobs1.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 1,
+    "suite_exit": 7,
+    "executed": [
+      "A",
+      "B"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-direct-exit-jobs1.log",
+    "timing": "candidate-direct-exit-jobs1.json",
+    "persisted_execution_trace": "A\nB\n"
+  },
+  {
+    "case": "candidate-direct-exit-jobs2",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "2",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-direct-exit-jobs2.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 1,
+    "suite_exit": 7,
+    "executed": [
+      "A",
+      "B"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-direct-exit-jobs2.log",
+    "timing": "candidate-direct-exit-jobs2.json",
+    "persisted_execution_trace": "A\nB\n"
+  },
+  {
+    "case": "candidate-default-exit-jobs1",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "1",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-default-exit-jobs1.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 1,
+    "suite_exit": 7,
+    "executed": [
+      "A",
+      "B"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-default-exit-jobs1.log",
+    "timing": "candidate-default-exit-jobs1.json",
+    "persisted_execution_trace": "A\nB\n"
+  },
+  {
+    "case": "candidate-default-exit-jobs2",
+    "command": [
+      "bash",
+      "/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/.fm-test-local/candidate/bin/fm-test-run.sh",
+      "--jobs",
+      "2",
+      "--json",
+      "/Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/candidate-default-exit-jobs2.json",
+      "tests/fm-brief.test.sh"
+    ],
+    "runner_exit": 1,
+    "suite_exit": 7,
+    "executed": [
+      "A",
+      "B"
+    ],
+    "cleanup_removed_root": true,
+    "errors": [],
+    "console": "candidate-default-exit-jobs2.log",
+    "timing": "candidate-default-exit-jobs2.json",
+    "persisted_execution_trace": "A\nB\n"
+  }
+]

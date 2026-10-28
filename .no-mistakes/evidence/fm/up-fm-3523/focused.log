@@ -1,0 +1,115 @@
+FM_TEST_BEGIN 2026-10-28T09:52:10Z tests/fm-test-run.test.sh family=pure-contract-unit expected_gate_skip=none
+ok - aborted registered invocations are named in console, FM_TEST_END and JSON; green suites name none
+ok - exact suite coverage: --all lists every tests/*.test.sh once
+ok - family selection returns a proper subset of the suite
+ok - single-script selection lists exactly that path
+ok - changed-file selection stays conservative (never silent full suite)
+ok - a task marker refuses execution in the primary checkout and leaves worktrees and inspection alone
+ok - runner and its documentation surfaces select their curated family, not just their contract owners
+ok - shell line-ending policy selects runner coverage
+fm-test-run: no tests selected for changes vs HEAD (map is conservative; use --all for the complete suite)
+ok - changed selection covers dependents, fails closed for live unmapped source, and accepts retired unconsumed source
+ok - a bin reference selects the referencing scripts, and consumers still select their curated families
+ok - changed defaults to bounded automatic scheduling with serial override
+ok - Windows emulation exempts only synthetic POSIX modes
+ok - a plain script list defaults to bounded automatic concurrency without an automatic timeout
+ok - family proofs run concurrently only within separate family phases
+ok - empty changed selection emits deterministic text and JSON summaries
+ok - timing markers and JSON artifact are valid
+ok - aggregate exit reflects any script failure
+ok - gate-skip accounting is honest and non-failing
+ok - a gate skip records why it skipped
+ok - a script that actually ran records no skip reason
+ok - live guards are recorded as a capability class, not a bare env opt-in
+ok - fail-on-gate-skip converts herdr-not-found into a hard failure
+ok - exclude-family drops the named primary family after selection
+ok - fm-test-run: family tern selects the tern suite and smoke test, and the lane coverage guard accepts them
+ok - proven-isolated scheduling ignores parallel hints
+ok - family, all, changed, and script selections ignore parallel hints
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: cannot make pipe for command substitution: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/f14045979967/01M60Y09K42DWX8883NDZVJ1N7/bin/fm-test-run.sh: redirection error: cannot duplicate fd: Too many open files
+fm-test-run: coverage guard: portable serial shards share scripts:
+tests/fm-approval-failover.test.sh
+tests/fm-backend-cmux.test.sh
+tests/fm-backend-rex.test.sh
+tests/fm-backend-tern-smoke.test.sh
+tests/fm-bearings-board-lavish-live-e2e.test.sh
+tests/fm-bootstrap.test.sh
+tests/fm-calm-pi-queue-retention-live-e2e.test.sh
+tests/fm-claude-stop-autoarm-live-e2e.test.sh
+tests/fm-composer-codex-idle-live-e2e.test.sh
+tests/fm-cortex-signals-live-e2e.test.sh
+tests/fm-dod-lib.test.sh
+tests/fm-gate-refuse.test.sh
+tests/fm-gemini-harness.test.sh
+tests/fm-gitignore-config.test.sh
+tests/fm-harness-liveness-drift-live-e2e.test.sh
+tests/fm-harness-precedence.test.sh
+tests/fm-host-mirror.test.sh
+tests/fm-jev-mem-guard.test.sh
+tests/fm-lint-workflows.test.sh
+tests/fm-live-gate.test.sh
+tests/fm-muse-signals-live-e2e.test.sh
+tests/fm-nm-test-contract.test.sh
+tests/fm-no-mistakes-required.test.sh
+tests/fm-omp-primary-live-e2e.test.sh
+tests/fm-pi-primary-live-e2e.test.sh
+tests/fm-pi-seeded-home-trust-live-e2e.test.sh
+tests/fm-polytoken-signals-live-e2e.test.sh
+tests/fm-pr-reviewers.test.sh
+tests/fm-record-export-remote-home.test.sh
+tests/fm-remote-entrypoint.test.sh
+tests/fm-remote-job.test.sh
+tests/fm-remote-transport-lanes.test.sh
+tests/fm-secondmate-harness.test.sh
+tests/fm-send-inbox-doorbell-live-e2e.test.sh
+tests/fm-send-secondmate-marker.test.sh
+tests/fm-sessionstart-instruction-refresh-live-e2e.test.sh
+tests/fm-spawn-orca-worktree.test.sh
+tests/fm-startup-growth-check.test.sh
+tests/fm-tangle-guard.test.sh
+tests/fm-task-delivery.test.sh
+FM_TEST_END 2026-10-28T09:53:17Z tests/fm-test-run.test.sh exit=1 duration_ms=66797 gate_skip=false
+FM_TEST_BEGIN 2026-10-28T09:53:17Z tests/fm-test-tap-verify.test.sh family=pure-contract-unit expected_gate_skip=none
+ok - a complete matching suite passes
+ok - an early exit 0 fails even when some ok lines printed
+ok - a not-ok line fails even when the suite exits 0
+ok - a nonzero process status fails even with a matching TAP plan
+ok - planned count must equal the number of ok lines
+ok - fm_test_run derives N from the registered names
+ok - a test function that exits 0 before later tests fail completeness
+ok - a completeness failure prints an error annotation
+FM_TEST_END 2026-10-28T09:53:17Z tests/fm-test-tap-verify.test.sh exit=0 duration_ms=362 gate_skip=false
+FM_TEST_SUMMARY total=2 failed=1 skipped_gate=0 duration_ms=67242
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=2 duration_ms=67159 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-test-run.test.sh duration_ms=66797
+FM_TEST_SLOWEST rank=2 script=tests/fm-test-tap-verify.test.sh duration_ms=362
+fm-test-run: wrote timing artifact: /Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/focused.json

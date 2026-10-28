@@ -1,0 +1,8 @@
+FM_TEST_BEGIN 2026-10-28T09:54:05Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_END 2026-10-28T09:54:05Z tests/fm-brief.test.sh exit=7 duration_ms=126 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=174
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=126 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=126
+fm-test-run: wrote timing artifact: /Users/daddy/.no-mistakes-upstream-codex/evidence/01M60Y09K42DWX8883NDZVJ1N7/baseline-delegated-exit-jobs1.json
