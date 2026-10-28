@@ -7,8 +7,8 @@
 # a supervision-host home the supervision session's new and unprocessed
 # outcomes (BRANCH OUTCOMES), then assert liveness.
 #
-# Keep sequence-bound row consumption independent from generation-bound episode
-# retirement; docs/watcher-continuity.md owns the recovery contract.
+# docs/watcher-continuity.md owns generation-bound acknowledgement and
+# actor-scoped row consumption.
 # Every scratch file this script mints (.main-eligible-rows.tmp.*,
 # .wake-rows.consume.*, .wake-queue.retire.*, .wake-queue.ack.*,
 # .wake-queue.actor-view.*) is created and removed under the queue lock, so one
@@ -37,11 +37,11 @@ SCRIPT_DIR="$(d=${BASH_SOURCE[0]%/*}; [ "$d" != "${BASH_SOURCE[0]}" ] || d=.; cd
 DRAIN_TMP=
 DRAIN_VIEW_TMP=
 DRAIN_LOCK_HELD=false
+RECOVERY_LOCK_HELD=false
 RAW_ROWS=
 RECOVERY_MARKER="$STATE/.watcher-down"
 RECOVERY_MARKER_TOKEN=
 RECOVERY_ACK_REQUIRED=false
-RECOVERY_ACK_MOVED=false
 ACK_THROUGH=
 ACK_GENERATION=
 ACK_REMOVED=0
@@ -215,6 +215,25 @@ presented_max_row() { # <rows-file>
   else
     printf '0\n'
   fi
+}
+
+# Hold the marker lock until the caller releases it, so generation validation
+# and queue consumption cannot race a marker publisher. Queue lock comes first.
+lock_ack_generation() {
+  fm_lock_acquire_wait "${RECOVERY_MARKER}.lock" || return 1
+  RECOVERY_LOCK_HELD=true
+  if fm_recovery_marker_read "$RECOVERY_MARKER" \
+    && [ "${FM_RECOVERY_MARKER_TOKEN##*:}" = "$ACK_GENERATION" ]; then
+    RECOVERY_MARKER_TOKEN=$FM_RECOVERY_MARKER_TOKEN
+    return 0
+  fi
+  if [ "$PRESENTED_MAX" -gt "$ACK_THROUGH" ] && [ -n "$FM_RECOVERY_MARKER_TOKEN" ]; then
+    printf 'wake drain: nothing was acknowledged through %s (recovery generation does not match); the current wake is row %s: run bin/fm-wake-drain.sh --ack-through %s --recovery-generation %s after handling it\n' \
+      "$ACK_THROUGH" "$PRESENTED_MAX" "$PRESENTED_MAX" "${FM_RECOVERY_MARKER_TOKEN##*:}" >&2
+  else
+    echo "wake drain: recovery generation does not match; nothing was acknowledged; re-run bin/fm-wake-drain.sh and use the new WAKE_ACK_REQUIRED command" >&2
+  fi
+  return 1
 }
 
 case "${1:-}" in
@@ -814,6 +833,9 @@ cleanup() {
   local status=$?
   [ -z "$DRAIN_TMP" ] || rm -f -- "$DRAIN_TMP" 2>/dev/null || true
   [ -z "$DRAIN_VIEW_TMP" ] || rm -f -- "$DRAIN_VIEW_TMP" 2>/dev/null || true
+  if [ "$RECOVERY_LOCK_HELD" = true ]; then
+    fm_lock_release "${RECOVERY_MARKER}.lock"
+  fi
   if [ "$DRAIN_LOCK_HELD" = true ]; then
     fm_lock_release "$FM_WAKE_QUEUE_LOCK"
   fi
@@ -839,6 +861,17 @@ else
   exit 1
 fi
 DRAIN_LOCK_HELD=true
+if [ -n "$ACK_THROUGH" ]; then
+  if [ "$ACTOR" = branch ]; then
+    PRESENTED_MAX=$(presented_max_row "$ELIGIBLE_ROWS_FILE") || exit 1
+  else
+    PRESENTED_MAX=$(presented_max_row "$MAIN_ROWS_FILE") || exit 1
+  fi
+  # Refuse before changing claims, retiring malformed rows or recording receipts.
+  lock_ack_generation || exit 1
+  fm_lock_release "${RECOVERY_MARKER}.lock"
+  RECOVERY_LOCK_HELD=false
+fi
 rotate_scratch_locked
 reclaim_stale_branch_grant_locked || exit 1
 [ "$ACTOR" != main ] || retire_unconsumable_rows_locked
@@ -889,6 +922,9 @@ if [ -n "$ACK_THROUGH" ]; then
   fi
   fm_lock_acquire_wait "$FM_WAKE_QUEUE_LOCK"
   DRAIN_LOCK_HELD=true
+  # Receipt recording releases the queue lock. Validate again, and keep the
+  # marker locked through consumption so a newer episode cannot be acknowledged.
+  lock_ack_generation || exit 1
   DRAIN_TMP=$(mktemp "$STATE/.wake-queue.ack.XXXXXX") || exit 1
   chmod 0600 "$DRAIN_TMP" || exit 1
   if [ "$ACTOR" = branch ]; then
@@ -924,22 +960,16 @@ if [ -n "$ACK_THROUGH" ]; then
   fi
   ACK_REMOVED=$(( $(awk 'END { print NR }' "$FM_WAKE_QUEUE") - $(awk 'END { print NR }' "$DRAIN_TMP") ))
   if [ ! -s "$DRAIN_TMP" ]; then
-    fm_recovery_marker_ack "$RECOVERY_MARKER" "$ACK_GENERATION"
-    RECOVERY_ACK_STATUS=$?
-    case "$RECOVERY_ACK_STATUS" in
-      0) ;;
-      3) RECOVERY_ACK_MOVED=true ;;
+    case "$RECOVERY_MARKER_TOKEN" in
+      acked:*) ;;
       *)
-        echo "wake drain: recovery episode could not be retired safely; re-run bin/fm-wake-drain.sh and use the new WAKE_ACK_REQUIRED command" >&2
-        exit 1
+        RECOVERY_KIND=${RECOVERY_MARKER_TOKEN#*:}
+        if ! _fm_recovery_marker_write_locked "$RECOVERY_MARKER" "${RECOVERY_KIND%%:*}" "$ACK_GENERATION" acked; then
+          echo "wake drain: recovery episode could not be retired safely; re-run bin/fm-wake-drain.sh and use the new WAKE_ACK_REQUIRED command" >&2
+          exit 1
+        fi
         ;;
     esac
-  else
-    fm_recovery_marker_snapshot "$RECOVERY_MARKER" || exit 1
-    RECOVERY_MARKER_TOKEN=$FM_RECOVERY_MARKER_TOKEN
-    if [ "${RECOVERY_MARKER_TOKEN##*:}" != "$ACK_GENERATION" ]; then
-      RECOVERY_ACK_MOVED=true
-    fi
   fi
   if ! _fm_atomic_replace "$DRAIN_TMP" "$FM_WAKE_QUEUE"; then
     echo "wake drain: acknowledged wakes could not be consumed safely" >&2
@@ -954,6 +984,8 @@ if [ -n "$ACK_THROUGH" ]; then
   else
     consume_actor_rows_locked "$MAIN_ROWS_FILE" "$ACK_THROUGH" || exit 1
   fi
+  fm_lock_release "${RECOVERY_MARKER}.lock"
+  RECOVERY_LOCK_HELD=false
   fm_lock_release "$FM_WAKE_QUEUE_LOCK"
   DRAIN_LOCK_HELD=false
   if [ "$ACK_REMOVED" -eq 0 ] && [ "$PRESENTED_MAX" -gt "$ACK_THROUGH" ]; then
@@ -974,9 +1006,6 @@ if [ -n "$ACK_THROUGH" ]; then
           "$ACK_THROUGH" "$PRESENTED_MAX" >&2
         ;;
     esac
-  elif [ "$RECOVERY_ACK_MOVED" = true ]; then
-    printf 'wake drain: acknowledged wakes through %s (%s row(s) consumed), but a newer recovery episode is pending; re-run bin/fm-wake-drain.sh and use the new WAKE_ACK_REQUIRED command\n' \
-      "$ACK_THROUGH" "$ACK_REMOVED" >&2
   fi
   exit 0
 fi

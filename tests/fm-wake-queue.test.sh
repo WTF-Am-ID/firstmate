@@ -2238,8 +2238,8 @@ test_stale_recovery_generation_cannot_touch_a_newer_episode() {
   rc=0
   FM_STATE_OVERRIDE="$state" "$DRAIN" --ack-through "$sequence" \
     --recovery-generation "$generation" > "$dir/stale-ack.out" 2> "$dir/stale-ack.err" || rc=$?
-  [ "$rc" -eq 0 ] \
-    || fail "a stale acknowledgement failed instead of degrading safely: $(cat "$dir/stale-ack.err")"
+  [ "$rc" -ne 0 ] \
+    || fail "a stale generation was accepted: $(cat "$dir/stale-ack.err")"
   if ! grep -F 'WAKE_ACK_REQUIRED' "$dir/stale-ack.err" >/dev/null \
     || ! grep -F 're-run' "$dir/stale-ack.err" >/dev/null; then
     fail "a stale acknowledgement did not name its own remedy: $(cat "$dir/stale-ack.err")"
@@ -2286,7 +2286,7 @@ test_stale_ack_that_consumes_nothing_names_the_current_wake() {
   rc=0
   FM_STATE_OVERRIDE="$state" "$DRAIN" --ack-through "$first_seq" --recovery-generation "$first_gen" \
     > "$dir/stale.out" 2> "$dir/stale.err" || rc=$?
-  [ "$rc" -eq 0 ] || fail "a stale acknowledgement failed instead of degrading safely: $(cat "$dir/stale.err")"
+  [ "$rc" -ne 0 ] || fail "a stale generation was accepted: $(cat "$dir/stale.err")"
   grep -F "nothing was acknowledged through $first_seq" "$dir/stale.err" >/dev/null \
     || fail "a no-op acknowledgement was not reported as acknowledging nothing: $(cat "$dir/stale.err")"
   grep -F "the current wake is row $second_seq" "$dir/stale.err" >/dev/null \
@@ -2314,7 +2314,7 @@ test_stale_ack_that_consumes_nothing_names_the_current_wake() {
 }
 
 test_branch_stale_ack_that_consumes_nothing_names_its_granted_wake() {
-  local dir state first_seq first_gen second_seq second_gen remedy
+  local dir state first_seq first_gen second_seq second_gen remedy rc
   dir=$(make_case branch-stale-ack-current-wake)
   state="$dir/state"
   append_wake "$state" signal "task-a.status" "signal: task-a first" || fail "first signal append failed"
@@ -2338,8 +2338,10 @@ test_branch_stale_ack_that_consumes_nothing_names_its_granted_wake() {
   [ "$second_seq" -eq 2 ] || fail "second branch drain did not present the granted stale row: $(cat "$dir/second.out")"
 
   # The refused-ack loop's first step: the PREVIOUS wake's command.
+  rc=0
   FM_STATE_OVERRIDE="$state" FM_SUPERVISION_ACTOR=branch "$DRAIN" --ack-through "$first_seq" --recovery-generation "$first_gen" \
-    > "$dir/stale.out" 2> "$dir/stale.err" || fail "a stale branch acknowledgement failed instead of degrading safely: $(cat "$dir/stale.err")"
+    > "$dir/stale.out" 2> "$dir/stale.err" || rc=$?
+  [ "$rc" -ne 0 ] || fail "a stale branch generation was accepted"
   grep -F "nothing was acknowledged through $first_seq" "$dir/stale.err" >/dev/null \
     || fail "the branch's no-op acknowledgement was not reported as acknowledging nothing: $(cat "$dir/stale.err")"
   remedy=$(stale_ack_remedy "$dir/stale.err") \
@@ -3707,7 +3709,114 @@ SH
   pass "watch liveness: an unreachable remote secondmate is probed, preserved, and never failed over"
 }
 
+test_generation_bound_ack_preserves_rows_and_marker() {
+  local actor dir state generation rows other_rows rc
+  for actor in main branch; do
+    dir=$(make_case "generation-bound-$actor")
+    state="$dir/state"
+    append_wake "$state" signal other 'signal: other actor' || fail "other append failed"
+    append_wake "$state" signal earlier 'signal: earlier owned row' || fail "earlier append failed"
+    append_wake "$state" signal later 'signal: later owned row' || fail "later append failed"
+    FM_STATE_OVERRIDE="$state" "$GRANT" activate "$$" generation-bound || fail "activate failed"
+    if [ "$actor" = main ]; then
+      FM_STATE_OVERRIDE="$state" "$GRANT" publish generation-bound 1 || fail "grant failed"
+      rows="$state/.main-eligible-rows"
+      other_rows="$state/.branch-eligible-rows"
+    else
+      FM_STATE_OVERRIDE="$state" "$GRANT" publish generation-bound 2 3 || fail "grant failed"
+      FM_STATE_OVERRIDE="$state" "$DRAIN" > "$dir/main.out" 2> "$dir/main.err" || fail "main drain failed"
+      rows="$state/.branch-eligible-rows"
+      other_rows="$state/.main-eligible-rows"
+    fi
+    FM_STATE_OVERRIDE="$state" FM_SUPERVISION_ACTOR="$actor" "$DRAIN" > "$dir/drain.out" 2> "$dir/drain.err" \
+      || fail "actor drain failed"
+    generation=$(sed -n 's/^WAKE_ACK_REQUIRED:.*--recovery-generation \([A-Za-z0-9._-][A-Za-z0-9._-]*\)$/\1/p' "$dir/drain.err")
+    [ -n "$generation" ] || fail "fixture omitted generation"
+    cp "$state/.wake-queue" "$dir/queue.before"
+    cp "$state/.watcher-down" "$dir/marker.before"
+    cp "$rows" "$dir/rows.before"
+    cp "$other_rows" "$dir/other.before"
+    rc=0
+    FM_STATE_OVERRIDE="$state" FM_SUPERVISION_ACTOR="$actor" "$DRAIN" --ack-through 2 --recovery-generation stale \
+      > "$dir/stale.out" 2> "$dir/stale.err" || rc=$?
+    [ "$rc" -ne 0 ] || fail "$actor stale generation was accepted while rows remained"
+    cmp -s "$state/.wake-queue" "$dir/queue.before" || fail "stale ack changed queue bytes"
+    cmp -s "$state/.watcher-down" "$dir/marker.before" || fail "stale ack changed marker"
+    cmp -s "$rows" "$dir/rows.before" || fail "stale ack changed actor ownership"
+    cmp -s "$other_rows" "$dir/other.before" || fail "stale ack changed other ownership"
+    FM_STATE_OVERRIDE="$state" FM_SUPERVISION_ACTOR="$actor" "$DRAIN" --ack-through 2 --recovery-generation "$generation" \
+      || fail "matching generation was refused"
+    awk -F '\t' '$2 != 2' "$dir/queue.before" > "$dir/queue.after"
+    cmp -s "$state/.wake-queue" "$dir/queue.after" || fail "matching ack consumed ineligible rows"
+    cmp -s "$state/.watcher-down" "$dir/marker.before" || fail "partial ack retired marker"
+    cmp -s "$other_rows" "$dir/other.before" || fail "matching ack changed other ownership"
+    FM_STATE_OVERRIDE="$state" "$GRANT" deactivate "$$" generation-bound || fail "deactivate failed"
+  done
+  pass "wake drain: stale generations preserve queue, marker and ownership for both actors"
+}
+
+test_generation_bound_empty_ack() {
+  local dir state rc
+  dir=$(make_case generation-bound-empty)
+  state="$dir/state"
+  : > "$state/.wake-queue"
+  printf 'pending:handling:current\n' > "$state/.watcher-down"
+  cp "$state/.watcher-down" "$dir/marker.before"
+  rc=0
+  FM_STATE_OVERRIDE="$state" "$DRAIN" --ack-through 0 --recovery-generation stale \
+    > "$dir/stale.out" 2> "$dir/stale.err" || rc=$?
+  [ "$rc" -ne 0 ] || fail "empty queue accepted a stale generation"
+  [ ! -s "$state/.wake-queue" ] || fail "empty ack created queue rows"
+  cmp -s "$state/.watcher-down" "$dir/marker.before" || fail "empty stale ack changed marker"
+  FM_STATE_OVERRIDE="$state" "$DRAIN" --ack-through 0 --recovery-generation current || fail "empty matching ack failed"
+  [ "$(cat "$state/.watcher-down")" = acked:handling:current ] || fail "empty matching ack did not retire episode"
+  pass "wake drain: empty acknowledgements enforce generation before retiring the marker"
+}
+
+test_generation_change_during_ack_lock_handoff() {
+  local dir state generation real_rm rc
+  dir=$(make_case generation-bound-race)
+  state="$dir/state"
+  append_wake "$state" signal earlier 'signal: earlier' || fail "earlier append failed"
+  append_wake "$state" signal later 'signal: later' || fail "later append failed"
+  FM_STATE_OVERRIDE="$state" "$DRAIN" > "$dir/drain.out" 2> "$dir/drain.err" || fail "drain failed"
+  generation=$(sed -n 's/^WAKE_ACK_REQUIRED:.*--recovery-generation \([A-Za-z0-9._-][A-Za-z0-9._-]*\)$/\1/p' "$dir/drain.err")
+  cp "$state/.wake-queue" "$dir/queue.before"
+  cp "$state/.main-eligible-rows" "$dir/rows.before"
+  real_rm=$(command -v rm)
+  # Publish a new episode exactly when the ack releases its queue lock to
+  # record inactive-outcome receipts, before it reacquires that lock to consume.
+  cat > "$dir/fakebin/rm" <<'SH'
+#!/usr/bin/env bash
+"$FM_REAL_RM" "$@" || exit $?
+for arg in "$@"; do
+  if [ "$arg" = "$FM_STATE_OVERRIDE/.wake-queue.lock" ] && [ ! -e "$FM_RACE_DIR/published" ]; then
+    : > "$FM_RACE_DIR/published"
+    # shellcheck disable=SC1090,SC1091
+    . "$FM_RACE_ROOT/bin/fm-wake-lib.sh"
+    fm_recovery_marker_publish "$FM_STATE_OVERRIDE/.watcher-down" handling || exit 1
+    cp "$FM_STATE_OVERRIDE/.watcher-down" "$FM_RACE_DIR/marker.after"
+  fi
+done
+SH
+  chmod +x "$dir/fakebin/rm"
+  rc=0
+  PATH="$dir/fakebin:$PATH" FM_REAL_RM="$real_rm" FM_RACE_DIR="$dir" FM_RACE_ROOT="$ROOT" \
+    FM_STATE_OVERRIDE="$state" "$DRAIN" --ack-through 1 --recovery-generation "$generation" \
+    > "$dir/race.out" 2> "$dir/race.err" || rc=$?
+  [ -s "$dir/marker.after" ] || fail "fixture did not publish during the lock handoff"
+  [ "$(cat "$dir/marker.after")" != "pending:handling:$generation" ] || fail "fixture did not change generation"
+  [ "$rc" -ne 0 ] || fail "generation change during acknowledgement was accepted"
+  cmp -s "$state/.wake-queue" "$dir/queue.before" || fail "raced ack changed queue bytes"
+  cmp -s "$state/.main-eligible-rows" "$dir/rows.before" || fail "raced ack consumed ownership"
+  cmp -s "$state/.watcher-down" "$dir/marker.after" || fail "raced ack changed the newer marker"
+  pass "wake drain: generation changes during the receipt handoff refuse consumption"
+}
+
 test_branch_grant_requires_lock_acquisition
+test_generation_bound_ack_preserves_rows_and_marker
+test_generation_bound_empty_ack
+test_generation_change_during_ack_lock_handoff
 test_self_held_lock_reclaims_instead_of_deadlocking
 test_lock_wait_returns_when_its_directory_is_removed
 test_subshell_lock_ownership_without_bashpid
