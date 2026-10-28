@@ -58,6 +58,9 @@
 # `branch_cleanup_pending=1` preserves the marker and matching metadata during
 # replay until teardown verifies its task ref and republishes the ready marker.
 # The generation check still retires a stale marker for another incarnation.
+# Marker retirement also removes the branch retry identity only when its
+# spawn generation matches the marker, preserving a replacement's identity.
+# tests/fm-teardown.test.sh covers interrupted completion and task ID reuse.
 
 # Set by fm_backlog_transition_applies for a return-1 exemption.
 # shellcheck disable=SC2034 # Output global, read by the sourcing caller.

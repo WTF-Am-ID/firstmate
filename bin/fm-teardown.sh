@@ -9,8 +9,8 @@
 # before declaring cleanup complete. A detach, delete, or verification
 # failure names the retained ref and preserves task metadata for retry, even
 # under --force. Task branch and Git identity are saved in state/<id>.teardown-branch,
-# bound to the metadata hash, until cleanup completes, without changing record
-# export snapshots. Staging, remote-tracking, and recovery refs are
+# bound to the metadata hash and spawn generation, until cleanup completes,
+# without changing record export snapshots. Staging, remote-tracking, and recovery refs are
 # left intact; local branch removal does not prove commits unreachable.
 # An endpoint whose close could not do its job REFUSES before any record naming
 # it is removed: those records are the only thing that names what survived, so
@@ -25,7 +25,8 @@
 # completion links (the PR, the report path, a local-main note) live only in the
 # record being removed, the intended transition is recorded in
 # state/<id>.backlog-close first, so a process killed between the halves leaves
-# the next session start enough to finish it; a landed close removes that record.
+# the next session start enough to replay it under the library's recovery rules;
+# a landed close removes that record.
 # A close that fails is fatal and loud, preserves its pending-close record, and
 # is retried by the next session start. The transition is skipped on a
 # config/backlog-backend=manual home and in a markdown home that keeps no
