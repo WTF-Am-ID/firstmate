@@ -1,0 +1,5 @@
+old-git: exit 1, expected behavior verified
+contained: exit 0, expected behavior verified
+conflict: exit 1, expected behavior verified
+unlanded: exit 1, expected behavior verified
+unrelated-history: exit 1, expected behavior verified

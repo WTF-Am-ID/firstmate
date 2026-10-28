@@ -1,0 +1,13 @@
+Scenario: unsupported
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: content-landed proof unavailable for worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-teardown-tests.iIjC73/content-git-unsupported/wt: git merge-tree --write-tree was rejected (Git 2.38 or newer required).
+Restore or upgrade Git and retry the content check.
+unpushed commits:
+fbda1b3 add feature
+Push the branch, land its PR, or get the captain's explicit OK to discard, then --force.

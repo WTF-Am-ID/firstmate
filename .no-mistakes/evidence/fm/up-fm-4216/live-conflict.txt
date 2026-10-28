@@ -1,0 +1,27 @@
+Candidate: a7176af0be881d254a53acaecd6ee4dd8c51f4be
+Scenario: conflict
+git version 2.56.0
+Command: FM_HOME=<marked-disposable-lab> bash bin/fm-teardown.sh task-x1
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/daddy/.no-mistakes-upstream-codex/worktrees/78d33fa396cd/01M61AQ8YRZZ6KT5VG5JF4W5EH/.test-phase-4216/live-conflict
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/78d33fa396cd/01M61AQ8YRZZ6KT5VG5JF4W5EH/.test-phase-4216/live-conflict/projects/pool/.treehouse/project-7bfd31/1/project has work not on any remote and not landed.
+unpushed commits:
+dce02c7 feature
+Push the branch, land its PR, or get the captain's explicit OK to discard, then --force.
+Exit: 1
+Observed: isolated copy, original branch and HEAD, byte-identical task metadata, and real task window all preserved.
+
+Independent real-Git probe: git merge-tree --write-tree origin/main HEAD
+Git exit: 1
+15572ecda7fb5253851b64e87ceff7fd28c340d4
+100644 8dca2f88bcfeb5fb3ecb832c4170ea85ef7be25c 2	feature.txt
+100644 ce013625030ba8dba906f756967f9e9ca394464a 3	feature.txt
+
+Auto-merging feature.txt
+CONFLICT (add/add): Merge conflict in feature.txt

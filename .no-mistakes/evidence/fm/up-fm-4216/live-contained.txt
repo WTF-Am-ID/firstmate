@@ -1,0 +1,20 @@
+Candidate: a7176af0be881d254a53acaecd6ee4dd8c51f4be
+Scenario: contained
+git version 2.56.0
+Command: FM_HOME=<marked-disposable-lab> bash bin/fm-teardown.sh task-x1
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/daddy/.no-mistakes-upstream-codex/worktrees/78d33fa396cd/01M61AQ8YRZZ6KT5VG5JF4W5EH/.test-phase-4216/live-contained
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌳 Worktree returned to pool.
+project: already current
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/78d33fa396cd/01M61AQ8YRZZ6KT5VG5JF4W5EH/.test-phase-4216/live-contained/projects/pool/.treehouse/project-4cc016/1/project)
+Backlog: task-x1 just finished (this home keeps no markdown backlog at /Users/daddy/.no-mistakes-upstream-codex/worktrees/78d33fa396cd/01M61AQ8YRZZ6KT5VG5JF4W5EH/.test-phase-4216/live-contained/data/backlog.md). Update /Users/daddy/.no-mistakes-upstream-codex/worktrees/78d33fa396cd/01M61AQ8YRZZ6KT5VG5JF4W5EH/.test-phase-4216/live-contained/data/backlog.md - move task-x1 to Done, keep Done to the 10 most recent, then re-scan Queued and dispatch only work whose blockers are gone and date is due.
+Exit: 0
+Observed: task metadata removed; task window closed; task branch removed.
+base  main  (repository default)
+1     available    ~/.no-mistakes-upstream-codex/worktrees/78d33fa396cd/01M61AQ8YRZZ6KT5VG5JF4W5EH/.test-phase-4216/live-contained/projects/pool/.treehouse/project-4cc016/1/project  (detached)

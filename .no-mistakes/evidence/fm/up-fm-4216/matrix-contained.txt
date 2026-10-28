@@ -1,0 +1,11 @@
+Scenario: contained
+/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-teardown-tests.iIjC73/content-git-contained/project: synced 82cf9e2..2c197ab
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-teardown-tests.iIjC73/content-git-contained/wt)
+Backlog: task-x1 just finished (this home keeps no markdown backlog at /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-teardown-tests.iIjC73/content-git-contained/data/backlog.md). Update /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-teardown-tests.iIjC73/content-git-contained/data/backlog.md - move task-x1 to Done, keep Done to the 10 most recent, then re-scan Queued and dispatch only work whose blockers are gone and date is due.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

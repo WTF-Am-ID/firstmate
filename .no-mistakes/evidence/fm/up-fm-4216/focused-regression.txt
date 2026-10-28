@@ -1,0 +1,4 @@
+ok - teardown leaves opencode's busy plugin in the returned pool worktree as on main
+1..1
+ok - content fallback distinguishes unavailable Git proof, containment, conflicts, and unlanded content
+FM_TEST_COMPLETE
