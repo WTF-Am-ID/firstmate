@@ -147,8 +147,7 @@ try {
   process.exit(2);
 }
 if (data.ok === false) {
-  const msg = data.error && (data.error.message || data.error.code);
-  if (msg) console.error(msg);
+  console.error(input);
   process.exit(2);
 }
 '
