@@ -1,0 +1,153 @@
+Revision: 7b7bff7d6925e96f7c19c92ea75e0c2147fec615
+Worktree: /Users/daddy/.no-mistakes-upstream-codex/worktrees/21760474d773/01M6162Q8DPJNV9961SWZHZ5QZ
+
+SCENARIO actor=main: stale refusal and matching partial consumption
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal other signal: other actor
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal earlier signal: earlier owned row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal later signal: later owned row
+exit=0
+$ ./bin/fm-wake-grant.sh activate 94392 probe
+exit=0
+$ ./bin/fm-wake-grant.sh publish probe 1
+exit=0
+$ ./bin/fm-wake-drain.sh
+exit=0
+1793189113	2	signal	earlier	signal: earlier owned row
+1793189113	3	signal	later	signal: later owned row
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 3 --recovery-generation 94686.1793189112.4SUdbH
+Before stale acknowledgement
+.wake-queue sha256=91c687a05d5abd958c123d901fa117bbaec145f5ee4d6e051df5a69b8550e1bc bytes=b'1793189112\t1\tsignal\tother\tsignal: other actor\n1793189113\t2\tsignal\tearlier\tsignal: earlier owned row\n1793189113\t3\tsignal\tlater\tsignal: later owned row\n'
+.watcher-down sha256=2526ce8fef0ec9cc2b2ebd63765867f8b3db69cb40f9c6a3140f7ffadb48526f bytes=b'pending:handling:94686.1793189112.4SUdbH\n'
+.main-eligible-rows sha256=fcb9cc30b0f3e4715d032f3a0ce158e4d6bea8c618bda0f5d1f167300a087b8a bytes=b'2\n3\n'
+.branch-eligible-rows sha256=4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865 bytes=b'1\n'
+.branch-eligible-owner sha256=dc5d96509fe351ec672bea1d19b1e39f5d956490a3c585e02107c7a64e4405cc bytes=b'fm-branch-eligible-owner-v1\n94392\nWed Oct 28 12:05:12 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/live-ack-probe.py\nprobe\n'
+$ ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation stale
+exit=1
+wake drain: nothing was acknowledged through 2 (recovery generation does not match); the current wake is row 3: run bin/fm-wake-drain.sh --ack-through 3 --recovery-generation 94686.1793189112.4SUdbH after handling it
+Stale rejection preserved all queue, marker and ownership bytes.
+$ ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 94686.1793189112.4SUdbH
+exit=0
+After matching partial acknowledgement
+.wake-queue sha256=70b311263bcfe0d4b98ee867670bfa425e001b14631eeb6d102cfc5e0aab24a7 bytes=b'1793189112\t1\tsignal\tother\tsignal: other actor\n1793189113\t3\tsignal\tlater\tsignal: later owned row\n'
+.watcher-down sha256=2526ce8fef0ec9cc2b2ebd63765867f8b3db69cb40f9c6a3140f7ffadb48526f bytes=b'pending:handling:94686.1793189112.4SUdbH\n'
+.main-eligible-rows sha256=1121cfccd5913f0a63fec40a6ffd44ea64f9dc135c66634ba001d10bcf4302a2 bytes=b'3\n'
+.branch-eligible-rows sha256=4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865 bytes=b'1\n'
+.branch-eligible-owner sha256=dc5d96509fe351ec672bea1d19b1e39f5d956490a3c585e02107c7a64e4405cc bytes=b'fm-branch-eligible-owner-v1\n94392\nWed Oct 28 12:05:12 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/live-ack-probe.py\nprobe\n'
+$ ./bin/fm-wake-drain.sh --ack-through 3 --recovery-generation 94686.1793189112.4SUdbH
+exit=0
+$ ./bin/fm-wake-grant.sh deactivate 94392 probe
+exit=0
+PASS main stale refusal, eligible cutoff and other-actor preservation
+
+SCENARIO actor=branch: stale refusal and matching partial consumption
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal other signal: other actor
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal earlier signal: earlier owned row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal later signal: later owned row
+exit=0
+$ ./bin/fm-wake-grant.sh activate 94392 probe
+exit=0
+$ ./bin/fm-wake-grant.sh publish probe 2 3
+exit=0
+$ ./bin/fm-wake-drain.sh
+exit=0
+1793189119	1	signal	other	signal: other actor
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 8166.1793189119.GFI3zZ
+$ ./bin/fm-wake-drain.sh
+exit=0
+1793189119	2	signal	earlier	signal: earlier owned row
+1793189119	3	signal	later	signal: later owned row
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 3 --recovery-generation 8166.1793189119.GFI3zZ
+Before stale acknowledgement
+.wake-queue sha256=bf432f5e03acf88e00dc36f6b4ded2aa94dd6802a8304551fc78245e66247e01 bytes=b'1793189119\t1\tsignal\tother\tsignal: other actor\n1793189119\t2\tsignal\tearlier\tsignal: earlier owned row\n1793189119\t3\tsignal\tlater\tsignal: later owned row\n'
+.watcher-down sha256=e9325e26bc5cd290037eaa9e96d18901c02145d1d2ac1171f11aa71711584ca6 bytes=b'pending:handling:8166.1793189119.GFI3zZ\n'
+.main-eligible-rows sha256=4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865 bytes=b'1\n'
+.branch-eligible-rows sha256=fcb9cc30b0f3e4715d032f3a0ce158e4d6bea8c618bda0f5d1f167300a087b8a bytes=b'2\n3\n'
+.branch-eligible-owner sha256=dc5d96509fe351ec672bea1d19b1e39f5d956490a3c585e02107c7a64e4405cc bytes=b'fm-branch-eligible-owner-v1\n94392\nWed Oct 28 12:05:12 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/live-ack-probe.py\nprobe\n'
+$ ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation stale
+exit=1
+wake drain: nothing was acknowledged through 2 (recovery generation does not match); the current wake is row 3: run bin/fm-wake-drain.sh --ack-through 3 --recovery-generation 8166.1793189119.GFI3zZ after handling it
+Stale rejection preserved all queue, marker and ownership bytes.
+$ ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 8166.1793189119.GFI3zZ
+exit=0
+After matching partial acknowledgement
+.wake-queue sha256=b9b29ff8d9490b405cca9fb6c3bf1c31826b2eae6780274262f3fc20ea17fbf5 bytes=b'1793189119\t1\tsignal\tother\tsignal: other actor\n1793189119\t3\tsignal\tlater\tsignal: later owned row\n'
+.watcher-down sha256=e9325e26bc5cd290037eaa9e96d18901c02145d1d2ac1171f11aa71711584ca6 bytes=b'pending:handling:8166.1793189119.GFI3zZ\n'
+.main-eligible-rows sha256=4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865 bytes=b'1\n'
+.branch-eligible-rows sha256=1121cfccd5913f0a63fec40a6ffd44ea64f9dc135c66634ba001d10bcf4302a2 bytes=b'3\n'
+.branch-eligible-owner sha256=dc5d96509fe351ec672bea1d19b1e39f5d956490a3c585e02107c7a64e4405cc bytes=b'fm-branch-eligible-owner-v1\n94392\nWed Oct 28 12:05:12 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/live-ack-probe.py\nprobe\n'
+$ ./bin/fm-wake-drain.sh --ack-through 3 --recovery-generation 8166.1793189119.GFI3zZ
+exit=0
+$ ./bin/fm-wake-grant.sh deactivate 94392 probe
+exit=0
+PASS branch stale refusal, eligible cutoff and other-actor preservation
+
+SCENARIO empty queue generation guard, retirement and repeated acknowledgement
+$ bash -c . "$1"; shift; fm_recovery_marker_publish "$STATE/.watcher-down" handling _ ./bin/fm-wake-lib.sh
+exit=0
+$ ./bin/fm-wake-drain.sh --ack-through 0 --recovery-generation stale
+exit=1
+wake drain: recovery generation does not match; nothing was acknowledged; re-run bin/fm-wake-drain.sh and use the new WAKE_ACK_REQUIRED command
+$ ./bin/fm-wake-drain.sh --ack-through 0 --recovery-generation 24686.1793189127.zCt97h
+exit=0
+$ ./bin/fm-wake-drain.sh --ack-through 0 --recovery-generation 24686.1793189127.zCt97h
+exit=0
+Empty matching acknowledgement retired only the matching episode
+.wake-queue sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 bytes=b''
+.watcher-down sha256=eab4296fac151fdf1263096e54560b118afc1d5a24665c4b46c6d73d94c91590 bytes=b'acked:handling:24686.1793189127.zCt97h\n'
+.main-eligible-rows sha256=absent bytes=None
+.branch-eligible-rows sha256=absent bytes=None
+.branch-eligible-owner sha256=absent bytes=None
+PASS empty queue stale refusal, matching retirement and idempotent repeat
+
+SCENARIO generation advances during the real receipt-lock handoff
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:abc123 check: handled inactive outcome
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal later signal: later row
+exit=0
+$ ./bin/fm-wake-drain.sh
+exit=0
+1793189130	1	check	inactive-outcome:abc123	check: handled inactive outcome
+1793189130	2	signal	later	signal: later row
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 30885.1793189130.8w0tLf
+Observed real acknowledgement waiting in fm-inactive-reconcile.sh with queue lock released.
+$ bash -c . "$1"; shift; fm_recovery_marker_publish "$STATE/.watcher-down" handling _ ./bin/fm-wake-lib.sh
+exit=0
+$ bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 30885.1793189130.8w0tLf
+exit=1
+wake drain: nothing was acknowledged through 1 (recovery generation does not match); the current wake is row 2: run bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 37324.1793189134.mWI2kv after handling it
+
+After racing acknowledgement
+.wake-queue sha256=e915e8ba9fcbb784b5957e82d32104207cb9eb509e011abcee9a12bdfb1d5b35 bytes=b'1793189130\t1\tcheck\tinactive-outcome:abc123\tcheck: handled inactive outcome\n1793189130\t2\tsignal\tlater\tsignal: later row\n'
+.watcher-down sha256=442fc90f4830a1fb307fa552af72fdb1a7ae446527665dd47864aa7c586a016a bytes=b'pending:handling:37324.1793189134.mWI2kv\n'
+.main-eligible-rows sha256=a6e2b7a040683432de03a18fd8a1939a2fdf82585b364bfc874bdd4095c4cae1 bytes=b'1\n2\n'
+.branch-eligible-rows sha256=absent bytes=None
+.branch-eligible-owner sha256=absent bytes=None
+$ ./bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 37324.1793189134.mWI2kv
+exit=0
+PASS real concurrent generation publication rejects stale consumption and permits current recovery
+
+BASELINE RED CASE: same stale partial acknowledgement against the base drain
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal earlier signal: earlier
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal later signal: later
+exit=0
+$ ./bin/fm-wake-drain.sh
+exit=0
+1793189136	1	signal	earlier	signal: earlier
+1793189136	2	signal	later	signal: later
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 41116.1793189136.651g3u
+$ ./.ack-live-n38818u2/baseline/bin/fm-wake-drain.sh --ack-through 1 --recovery-generation stale
+exit=0
+wake drain: acknowledged wakes through 1 (1 row(s) consumed), but a newer recovery episode is pending; re-run bin/fm-wake-drain.sh and use the new WAKE_ACK_REQUIRED command
+Baseline wrongly accepted stale generation and removed earlier row
+.wake-queue sha256=14b575965d54b771c1c9fbfd6fa0471b8245b760b6ef0b43e284a7dcb52d65b6 bytes=b'1793189136\t2\tsignal\tlater\tsignal: later\n'
+.watcher-down sha256=e020ea1360d8b770e1a5dad9281e52830302fa5524d868e4f90cd17c06cd5293 bytes=b'pending:handling:41116.1793189136.651g3u\n'
+.main-eligible-rows sha256=53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3 bytes=b'2\n'
+.branch-eligible-rows sha256=absent bytes=None
+.branch-eligible-owner sha256=absent bytes=None
+CONFIRMED regression red at base, green at candidate.
+Removed disposable workspace: /Users/daddy/.no-mistakes-upstream-codex/worktrees/21760474d773/01M6162Q8DPJNV9961SWZHZ5QZ/.ack-live-n38818u2
