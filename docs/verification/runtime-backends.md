@@ -2188,7 +2188,7 @@ ok - fm-teardown: an Orca close its missing CLI never attempted refuses even und
 ```
 
 The removal fixture prints its JSON body before exiting nonzero.
-It verifies metadata and backlog cleanup only on forced removal with an absent path, and preserves retry records without force, with an existing path, or on other errors and textual lookalikes.
+It verifies metadata and backlog cleanup only on forced removal with an absent path, and runs startup close-marker replay to verify refused removals preserve metadata and backlog state without a pending close marker.
 
 ### Orca environment source
 

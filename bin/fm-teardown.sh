@@ -3716,6 +3716,10 @@ if [ "$BACKEND" = herdr ]; then
   TEARDOWN_HERDR_PANE=$FM_BACKEND_HERDR_PANE
 fi
 
+if [ "$BACKEND" = orca ] && [ "$KIND" != secondmate ] && [ "$ORCA_PATH_MATCH_VERIFIED" != 1 ]; then
+  require_orca_worktree_path_match_if_present "$ORCA_WORKTREE_ID" "$WT" || exit 1
+fi
+
 BACKLOG_CLOSED=0
 BACKLOG_TRANSITION=$TEARDOWN_BACKLOG_TRANSITION
 BACKLOG_TRANSITION_FLAGS=()
@@ -3835,10 +3839,6 @@ if [ "$BACKEND" = t3code ]; then
 fi
 # Best-effort: drop the local task branch so the shared repo does not accumulate refs.
 if [ "$BACKEND" = orca ] && [ "$KIND" != secondmate ]; then
-  if [ "$ORCA_PATH_MATCH_VERIFIED" != 1 ]; then
-    require_orca_worktree_path_match_if_present "$ORCA_WORKTREE_ID" "$WT" || exit 1
-    ORCA_PATH_MATCH_VERIFIED=1
-  fi
   if [ -d "$WT" ]; then
     branch=$(git -C "$WT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo HEAD)
     if [ "$branch" != "HEAD" ]; then
@@ -3867,6 +3867,10 @@ try {
     echo "Orca worktree $ORCA_WORKTREE_ID already absent at $WT; continuing forced teardown."
   else
     printf '%s\n' "$orca_remove_error" >&2
+    fm_backlog_close_marker_clear "$STATE" "$ID" || {
+      echo "error: could not retire the pending backlog transition for $ID ($FM_BACKLOG_TRANSITION_ERROR); reconcile it before startup replay." >&2
+      exit 1
+    }
     echo "error: Orca worktree removal failed for $ID; preserving task records for retry." >&2
     exit 1
   fi

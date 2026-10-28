@@ -983,7 +983,7 @@ test_teardown_preserves_metadata_when_orca_remove_error_json() {
 
 test_teardown_orca_nonzero_removal_requires_force_and_absent_path() {
   local scenario id proj wt data state config neutral out rc removal response row before kind
-  for scenario in forced-absent unforced-absent unforced-scout forced-existing forced-file forced-symlink other-error malformed-error message-only; do
+  for scenario in forced-absent unforced-absent unforced-scout forced-existing forced-file forced-symlink other-error malformed-error message-only zero-exit-error; do
     id="orca-$scenario"
     orca_case "remove-nonzero-$scenario"
     proj="$CASE_DIR/project"
@@ -1019,12 +1019,12 @@ test_teardown_orca_nonzero_removal_requires_force_and_absent_path() {
     before=$(cat "$data/backlog.md")
     response='{"ok":false,"error":{"code":"selector_not_found","message":"recorded selector is gone"}}'
     case "$scenario" in
-      other-error) response='{"ok":false,"error":{"code":"runtime_unavailable","message":"selector_not_found is not the error code"}}' ;;
+      other-error|zero-exit-error) response='{"ok":false,"error":{"code":"runtime_unavailable","message":"selector_not_found is not the error code"}}' ;;
       malformed-error) response='selector_not_found: invalid JSON' ;;
       message-only) response='{"ok":false,"error":{"message":"selector_not_found"}}' ;;
     esac
     printf '%s\n' "$response" > "$RESP/$removal.out"
-    printf '1\n' > "$RESP/$removal.exit"
+    [ "$scenario" = zero-exit-error ] || printf '1\n' > "$RESP/$removal.exit"
     neutral=$(neutral_fm_root "$CASE_DIR/neutral")
     set +e
     case "$scenario" in
@@ -1039,6 +1039,13 @@ test_teardown_orca_nonzero_removal_requires_force_and_absent_path() {
     esac
     rc=$?
     set -e
+    PATH="$FB:$PATH" FM_HOME="$CASE_DIR/home" \
+      bash -c '
+        . "$1/bin/fm-tasks-axi-lib.sh"
+        . "$1/bin/fm-backlog-transition-lib.sh"
+        fm_backlog_close_marker_replay "$2" "$2/$3.backlog-close" "$4"
+      ' _ "$ROOT" "$state" "$id" "$data" \
+      || fail "$scenario: startup close-marker replay failed"
     row=$(tasks-axi show "$id" --file "$data/backlog.md" | sed -n 's/^  state: *//p' | head -1)
     if [ "$scenario" = forced-absent ]; then
       expect_code 0 "$rc" "forced teardown should accept an already-absent Orca selector"$'\n'"$out"
@@ -1049,13 +1056,15 @@ test_teardown_orca_nonzero_removal_requires_force_and_absent_path() {
     else
       [ "$rc" -ne 0 ] || fail "$scenario: teardown accepted an unsafe removal failure"
       assert_not_contains "$out" "already absent" "$scenario: refusal reported success"
-      assert_present "$state/$id.meta" "$scenario: refusal lost retry metadata"
-      [ "$(cat "$data/backlog.md")" = "$before" ] || fail "$scenario: refusal changed the backlog"
+      assert_present "$state/$id.meta" "$scenario: refusal lost retry metadata after startup replay"
+      assert_absent "$state/$id.backlog-close" "$scenario: refusal left a replayable close marker"
+      [ "$(cat "$data/backlog.md")" = "$before" ] || fail "$scenario: refusal changed the backlog after startup replay"
       case "$scenario" in
         unforced-absent|forced-file|forced-symlink) ;;
+        zero-exit-error)
+          assert_contains "$out" "selector_not_found is not the error code" "$scenario: teardown dropped the Orca diagnostic" ;;
         *)
-          assert_contains "$out" "$response" "$scenario: teardown dropped the nonzero Orca error body"
-          assert_present "$state/$id.backlog-close" "$scenario: refusal lost its pending close marker" ;;
+          assert_contains "$out" "$response" "$scenario: teardown dropped the Orca error body" ;;
       esac
     fi
   done
