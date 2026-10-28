@@ -27,6 +27,8 @@
 #       own KILL escalation, with no status recorded by the bounded command,
 #       also collapses into 124: there it means the bound fired, not that the
 #       command chose to die.
+#       The Perl fallback also reaps its command group on caller INT/HUP/TERM,
+#       returning 128+n for the interrupt after a 0.2s TERM-to-KILL grace.
 #
 #   fm_exec_timed <seconds> <grace-seconds> <command> [args...]
 #       Replaces the calling shell with the bounded command, so it must be the
@@ -206,8 +208,63 @@ fm_run_timed() {  # <seconds> <command...>
       fm_run_external_timeout "$timeout_path" "$seconds" "$@"
       ;;
     perl)
-      perl -e 'my $t = shift; my $pid = fork; die "fork failed" unless defined $pid; if (!$pid) { setpgrp(0, 0); exec @ARGV } local $SIG{ALRM} = sub { kill "TERM", -$pid; select undef, undef, undef, 0.2; kill "KILL", -$pid; exit 124 }; alarm $t; waitpid $pid, 0; exit(($? & 127) ? 128 + ($? & 127) : $? >> 8)' \
-        "$seconds" "$@"
+      local saved_traps runner_pid='' interrupted='' runner_rc
+      saved_traps=$(trap -p INT HUP TERM)
+      # wait on an asynchronous runner so Bash handles a process-directed signal
+      # immediately instead of deferring the trap until a foreground Perl exits.
+      trap 'interrupted=INT; [ -z "$runner_pid" ] || kill -INT "$runner_pid" 2>/dev/null || true' INT
+      trap 'interrupted=HUP; [ -z "$runner_pid" ] || kill -HUP "$runner_pid" 2>/dev/null || true' HUP
+      trap 'interrupted=TERM; [ -z "$runner_pid" ] || kill -TERM "$runner_pid" 2>/dev/null || true' TERM
+      perl -MPOSIX=WNOHANG,setpgid -MTime::HiRes=time -e '
+        my $bound = shift;
+        my ($signal, $kill_at, $result) = (0, 0, 0);
+        my $parent = getppid();
+        for my $entry ([HUP => 1], [INT => 2], [TERM => 15]) {
+          my ($name, $number) = @$entry;
+          $SIG{$name} = sub { $signal ||= $number };
+        }
+        my $pid = fork;
+        exit 127 unless defined $pid;
+        if (!$pid) {
+          $SIG{$_} = "DEFAULT" for qw(INT HUP TERM);
+          setpgid(0, 0);
+          exec @ARGV;
+          exit 127;
+        }
+        # Both sides establish the group before the parent can signal it.
+        setpgid($pid, $pid);
+        my $deadline = time + $bound;
+        while (1) {
+          if (!$kill_at && ($signal || getppid() != $parent || time >= $deadline)) {
+            $result = $signal ? 128 + $signal : getppid() != $parent ? 143 : 124;
+            $kill_at = time + 0.2;
+            kill "TERM", -$pid;
+          }
+          my $done = waitpid $pid, WNOHANG;
+          if ($done == $pid) {
+            my $status = $?;
+            kill "KILL", -$pid if $kill_at;
+            exit($kill_at ? $result : ($status & 127) ? 128 + ($status & 127) : $status >> 8);
+          }
+          exit 127 if $done == -1;
+          if ($kill_at && time >= $kill_at) {
+            kill "KILL", -$pid;
+            waitpid $pid, 0;
+            exit $result;
+          }
+          select undef, undef, undef, 0.02;
+        }
+      ' -- "$seconds" "$@" <&0 &
+      runner_pid=$!
+      [ -z "$interrupted" ] || kill -"$interrupted" "$runner_pid" 2>/dev/null || true
+      while :; do
+        if wait "$runner_pid"; then runner_rc=0; else runner_rc=$?; fi
+        # A trap interrupts wait before the runner has finished its cleanup.
+        kill -0 "$runner_pid" 2>/dev/null || break
+      done
+      trap - INT HUP TERM
+      eval "$saved_traps"
+      return "$runner_rc"
       ;;
     bash) fm_run_bash_timeout "$seconds" "$@" ;;
     *) return 124 ;;
