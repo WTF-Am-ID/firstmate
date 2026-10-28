@@ -348,27 +348,29 @@ test_answer_between_resolution_and_timeout_wins() {
   add_local_mate "$dir" sm1
   printf '%s' "$verb" > "$dir/fake/answer-verb"
 
-  # Delay the modelled answer until the first resolution attempt has completed
-  # its unsuccessful status snapshot. The wrapper appends the correlated answer
-  # after returning that snapshot, reproducing the boundary race deterministically.
+  # Deliver after the shared resolver persists its unsuccessful scan signature.
+  # Observe the pending-reply record's atomic publication so the answer lands
+  # between the preliminary resolution and the deadline recheck.
   : > "$dir/home/state/sm1.status"
-  cat > "$dir/fakebin/cat" <<'SH'
+  cat > "$dir/fakebin/mv" <<'SH'
 #!/usr/bin/env bash
 set -u
-/bin/cat "$@" || exit $?
-target=${1:-}
+/bin/mv "$@" || exit $?
+for target in "$@"; do :; done
 case "$target" in
-  "${FM_FAKE_DIR%/fake}"/home/state/sm1.status)
-    if [ ! -e "$FM_FAKE_DIR/answer-after-scan" ]; then
+  "${FM_FAKE_DIR%/fake}"/home/state/pending-replies/*)
+    if [ ! -e "$FM_FAKE_DIR/answer-after-scan" ] \
+      && grep -q '^parent_status_scan_signature=.' "$target"; then
       : > "$FM_FAKE_DIR/answer-after-scan"
-      corr=$(grep -h '^corr_id=' "${FM_FAKE_DIR%/fake}"/home/state/pending-replies/* | head -1 | cut -d= -f2)
-      verb=$(/bin/cat "$FM_FAKE_DIR/answer-verb")
-      printf '%s [corr=%s]: open records written down; deliberately left unrelated work alone\n' "$verb" "$corr" >> "$target"
+      corr=$(grep '^corr_id=' "$target" | cut -d= -f2)
+      status=$(grep '^parent_status=' "$target" | cut -d= -f2-)
+      verb=$(cat "$FM_FAKE_DIR/answer-verb")
+      printf '%s [corr=%s]: open records written down; deliberately left unrelated work alone\n' "$verb" "$corr" >> "$status"
     fi
     ;;
 esac
 SH
-  chmod +x "$dir/fakebin/cat"
+  chmod +x "$dir/fakebin/mv"
 
   out=$(FM_TEST_PERSIST_WAIT=0 run_restart "$dir" sm1); rc=$?
 
@@ -422,6 +424,54 @@ test_progress_waits_for_done() {
   assert_present "$dir/fake/progress-waited" "progress or a stale done released the gate before waiting"
   assert_persist_result "$dir" 'done' "$out" "$rc"
   pass "T2e progress waits for a done with the request's own correlation"
+}
+
+test_unchanged_history_is_not_reread() {
+  local dir out rc
+  dir=$(new_case unchanged-history)
+  add_local_mate "$dir" sm1
+  arm_answer "$dir" sm1
+  printf 'working' > "$dir/fake/answer-verb"
+  : > "$dir/fake/history-reads"
+  # Observe actual whole-file reads through the command boundary, keeping the
+  # history unchanged across three polls before appending a terminal reply.
+  cat > "$dir/fakebin/cat" <<'SH'
+#!/usr/bin/env bash
+if [ "${1:-}" = "${FM_FAKE_DIR%/fake}/home/state/sm1.status" ]; then
+  printf 'read\n' >> "$FM_FAKE_DIR/history-reads"
+fi
+exec /bin/cat "$@"
+SH
+  cat > "$dir/fakebin/sleep" <<'SH'
+#!/usr/bin/env bash
+case "${1:-}" in
+  ''|*[!0-9]*) exit 0 ;;
+esac
+D=$FM_FAKE_DIR
+poll=0
+[ ! -f "$D/polls" ] || poll=$(/bin/cat "$D/polls")
+poll=$((poll + 1))
+printf '%s' "$poll" > "$D/polls"
+case "$poll" in
+  1) cp "$D/history-reads" "$D/reads-first-poll" ;;
+  3)
+    cp "$D/history-reads" "$D/reads-third-poll"
+    status=$(/bin/cat "$D/answer-status")
+    corr=$(grep -oE 'corr=[0-9a-f]{16}' "$status" | tail -1)
+    printf 'done [%s]: open records written down\n' "$corr" >> "$status"
+    ;;
+esac
+/bin/sleep 0.01
+SH
+  chmod +x "$dir/fakebin/cat" "$dir/fakebin/sleep"
+
+  out=$(run_restart "$dir" sm1); rc=$?
+
+  assert_present "$dir/fake/reads-third-poll" "the fixture must wait through three polls before done"
+  assert_equals "$(cat "$dir/fake/reads-first-poll")" "$(cat "$dir/fake/reads-third-poll")" \
+    "unchanged history must not be reread on subsequent polls"
+  assert_persist_result "$dir" 'done' "$out" "$rc"
+  pass "T2g unchanged histories are skipped and a later terminal reply still settles"
 }
 
 # Consume replies through the real remote ingest or local watcher before restart
@@ -1151,6 +1201,7 @@ test_persist_precedes_restart
 test_arrived_answer_precedes_deadline_check
 test_persist_reply_verbs
 test_progress_waits_for_done
+test_unchanged_history_is_not_reread
 test_shared_consumers_preserve_persist_expectation
 test_answer_between_resolution_and_timeout_wins
 test_unprovable_runtime_falls_back
