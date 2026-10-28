@@ -1069,6 +1069,9 @@ cmd_start() {
   }
   fm_procevent_claim_acquire_locked "$id" "$FM_HOME" "$$" "$(source_file "$id")" "$STATE"
   claimed=$?
+  if [ "$claimed" -eq 0 ]; then
+    rm -f -- "$REG/.$id.cleanup-failed"
+  fi
   fm_procevent_source_lock_release "$id"
   case "$claimed" in
     0) ;;
@@ -1664,7 +1667,7 @@ report_extension_cleanup_failure() {  # <source-id>
   case "$identity" in ''|*[!0-9:]*) episode=unreadable ;; *) episode=${identity//:/-} ;; esac
   nonce="$RANDOM$RANDOM"
   announce_source_once "$REG/.$id.cleanup-failed" "$episode" \
-    "procevent:$id:cleanup-failed:$episode-$nonce" \
+    "procevent:$id:launch-failed:$episode-$nonce" \
     "check: process-event source $id cannot restart because extension invocation cleanup could not prove recovery safe. Run bin/fm-extension.sh cleanup-invocations in this source's home and effective state root to read the refusal, then verify the named invocation records and process ownership before changing them. Reconcile preserves the source and retries cleanup; successful cleanup ends this failure episode." \
     "$episode $nonce"
 }
@@ -1838,6 +1841,7 @@ cmd_reconcile() {
           # A live owner is the same evidence confirmation reads, however the
           # runner was started, so it ends any launch-failure episode here.
           rm -f -- "$(launch_failed_file "$id")"
+          rm -f -- "$REG/.$id.cleanup-failed"
         fi
       fi
       fm_procevent_source_lock_release "$id"
