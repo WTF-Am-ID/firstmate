@@ -36,7 +36,7 @@ test_nonterminal_stale_not_working_surfaced() {
   # primed so the signal scan does not pre-empt the stale path.
   printf 'working: implementing\n' > "$state/stopped.status"
   sig=$(seen_sig "$state/stopped.status"); printf '%s' "$sig" > "$state/.seen-stopped_status"
-  key=$(printf '%s' "$window" | tr ':/.' '___')
+  key=$(watch_window_key "$window")
   pane_hash=$(hash_text "idle prompt, finished")
   printf '%s' "$pane_hash" > "$state/.hash-$key"
   printf '1\n' > "$state/.count-$key"
@@ -78,7 +78,7 @@ test_nonterminal_stale_paused_absorbed_then_resurfaced() {
   # not pre-empt the stale path.
   printf 'paused: holding for the upstream tool release\n' > "$statusf"
   sig=$(seen_sig "$statusf"); printf '%s' "$sig" > "$state/.seen-held_status"
-  key=$(printf '%s' "$window" | tr ':/.' '___')
+  key=$(watch_window_key "$window")
   pane_hash=$(hash_text "idle, holding for upstream")
   printf '%s' "$pane_hash" > "$state/.hash-$key"
   printf '1\n' > "$state/.count-$key"
@@ -136,7 +136,7 @@ test_own_work_wait_keeps_first_alert_then_long_cadence() {
   for wait_kind in background-shell pipeline-run foreground-command; do
     dir=$(make_case "own-work-$wait_kind"); state="$dir/state"; fakebin="$dir/fakebin"
     out="$dir/watch.out"; capture_file="$dir/pane.txt"; statusf="$state/own-work.status"
-    window="test:fm-own-work"; key=$(printf '%s' "$window" | tr ':/.' '___')
+    window="test:fm-own-work"; key=$(watch_window_key "$window")
     printf 'idle worker awaiting its own %s\n' "$wait_kind" > "$capture_file"
     printf 'window=%s\nkind=scout\nharness=grok\nbackend=tmux\n' "$window" > "$state/own-work.meta"
     printf 'paused: waiting for my %s to finish; resume on completion\n' "$wait_kind" > "$statusf"
@@ -226,7 +226,7 @@ test_exited_declared_pause_is_bounded_but_live_gate_surfaces() {
   if [ "$(uname)" = Darwin ]; then touch -mt "$(date -r "$back" '+%Y%m%d%H%M.%S')" "$statusf"
   else touch -m -d "@$back" "$statusf"; fi
   sig=$(seen_sig "$statusf"); printf '%s' "$sig" > "$state/.seen-held_status"
-  key=$(printf '%s' "$window" | tr ':/.' '___')
+  key=$(watch_window_key "$window")
   pane_hash=$(hash_text "idle bare shell after agent exit")
   printf '%s' "$pane_hash" > "$state/.hash-$key"
   printf '1\n' > "$state/.count-$key"
@@ -272,7 +272,7 @@ test_exited_declared_pause_is_bounded_but_live_gate_surfaces() {
   if [ "$(uname)" = Darwin ]; then touch -mt "$(date -r "$back" '+%Y%m%d%H%M.%S')" "$statusf"
   else touch -m -d "@$back" "$statusf"; fi
   sig=$(seen_sig "$statusf"); printf '%s' "$sig" > "$state/.seen-held_status"
-  key=$(printf '%s' "$window" | tr ':/.' '___')
+  key=$(watch_window_key "$window")
   pane_hash=$(hash_text "idle bare shell after captain-held transfer")
   printf '%s' "$pane_hash" > "$state/.hash-$key"
   printf '1\n' > "$state/.count-$key"
@@ -294,7 +294,7 @@ test_exited_declared_pause_is_bounded_but_live_gate_surfaces() {
   printf 'window=%s\nkind=ship\nharness=grok\nbackend=tmux\n' "$window" > "$state/gate.meta"
   printf 'paused: waiting at an active external-decision gate\n' > "$statusf"
   sig=$(seen_sig "$statusf"); printf '%s' "$sig" > "$state/.seen-gate_status"
-  key=$(printf '%s' "$window" | tr ':/.' '___')
+  key=$(watch_window_key "$window")
   pane_hash=$(hash_text "idle external-decision gate")
   printf '%s' "$pane_hash" > "$state/.hash-$key"
   printf '1\n' > "$state/.count-$key"
@@ -357,7 +357,7 @@ test_absorbed_replacement_wait_does_not_inherit_the_old_throttle() {
     if [ "$(uname)" = Darwin ]; then touch -mt "$(date -r "$back" '+%Y%m%d%H%M.%S')" "$statusf"
     else touch -m -d "@$back" "$statusf"; fi
     sig=$(seen_sig "$statusf"); printf '%s' "$sig" > "$state/.seen-held_status"
-    key=$(printf '%s' "$window" | tr ':/.' '___')
+    key=$(watch_window_key "$window")
     printf '%s' "$(hash_text 'idle after agent exit')" > "$state/.hash-$key"
     printf '1\n' > "$state/.count-$key"
 
@@ -452,7 +452,7 @@ test_live_declared_wait_churn_honors_the_resurface_throttle() {
     printf 'window=%s\nkind=ship\nharness=grok\nbackend=tmux\n' "$window" > "$state/parked.meta"
     printf '%s\n' "$status_line" > "$statusf"
     sig=$(seen_sig "$statusf"); printf '%s' "$sig" > "$state/.seen-parked_status"
-    key=$(printf '%s' "$window" | tr ':/.' '___')
+    key=$(watch_window_key "$window")
     throttle="$state/.paused-resurfaced-$key"
 
     # First sight of a parked-but-live worker must still surface: the state is
@@ -534,7 +534,7 @@ test_live_paused_until_controls_recheck_time() {
   future=$(iso_utc_at "$(( $(date +%s) + 7200 ))")
   printf 'paused: rate limit until %s\n' "$future" > "$statusf"
   sig=$(seen_sig "$statusf"); printf '%s' "$sig" > "$state/.seen-parked_status"
-  key=$(printf '%s' "$window" | tr ':/.' '___')
+  key=$(watch_window_key "$window")
   printf 'parked, elapsed 1s' > "$capture_file"
   printf '%s' "$(hash_text 'parked, elapsed 1s')" > "$state/.hash-$key"
   printf '1\n' > "$state/.count-$key"
@@ -594,7 +594,7 @@ test_live_paused_until_controls_recheck_time() {
 
 # The window key every hold fixture uses, derived the way fm-watch.sh derives it.
 hold_key() {
-  printf '%s' test:fm-held-merge | tr ':/.' '___'
+  watch_window_key test:fm-held-merge
 }
 
 make_hold_home() {  # <name> <status-line> <hold|nohold>
@@ -949,7 +949,7 @@ test_nonterminal_stale_pause_transitions_reclassify_unchanged_hash() {
   printf 'window=%s\nkind=ship\n' "$window" > "$state/transition.meta"
   printf 'paused: awaiting the upstream release\n' > "$state/transition.status"
   sig=$(seen_sig "$state/transition.status"); printf '%s' "$sig" > "$state/.seen-transition_status"
-  key=$(printf '%s' "$window" | tr ':/.' '___')
+  key=$(watch_window_key "$window")
   pane_hash=$(hash_text "idle awaiting external")
   printf '%s' "$pane_hash" > "$state/.hash-$key"
   printf '%s' "$pane_hash" > "$state/.stale-$key"
@@ -1006,7 +1006,7 @@ test_nonterminal_paused_rechecks_authoritative_state() {
   printf 'window=%s\nkind=ship\n' "$window" > "$state/pause-recheck.meta"
   printf 'paused: awaiting the upstream release\n' > "$state/pause-recheck.status"
   sig=$(seen_sig "$state/pause-recheck.status"); printf '%s' "$sig" > "$state/.seen-pause-recheck_status"
-  key=$(printf '%s' "$window" | tr ':/.' '___')
+  key=$(watch_window_key "$window")
   pane_hash=$(hash_text "idle awaiting external")
   printf '%s' "$pane_hash" > "$state/.hash-$key"
   printf '%s' "$pane_hash" > "$state/.stale-$key"
@@ -1036,7 +1036,7 @@ test_paused_authoritative_working_preserves_wedge_timer() {
   printf 'window=%s\nkind=ship\n' "$window" > "$state/paused-working.meta"
   printf 'paused: awaiting the upstream release\n' > "$state/paused-working.status"
   sig=$(seen_sig "$state/paused-working.status"); printf '%s' "$sig" > "$state/.seen-paused-working_status"
-  key=$(printf '%s' "$window" | tr ':/.' '___')
+  key=$(watch_window_key "$window")
   pane_hash=$(hash_text "idle awaiting external")
   printf '%s' "$pane_hash" > "$state/.hash-$key"
   printf '%s' "$pane_hash" > "$state/.stale-$key"
@@ -1373,7 +1373,7 @@ bg_job_paused_case() {  # <name> <status-line> -> dir
   printf 'window=%s\nkind=scout\nharness=grok\nbackend=tmux\n' "$window" > "$state/parked.meta"
   printf '%s\n' "$2" > "$state/parked.status"
   printf '%s' "$(seen_sig "$state/parked.status")" > "$state/.seen-parked_status"
-  key=$(printf '%s' "$window" | tr ':/.' '___')
+  key=$(watch_window_key "$window")
   printf 'nightly build running' > "$dir/pane.txt"
   printf '%s' "$(hash_text 'nightly build running')" > "$state/.hash-$key"
   printf '1\n' > "$state/.count-$key"

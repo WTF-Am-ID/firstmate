@@ -199,7 +199,7 @@ FM_HOME="$LAB_HOME" bash -c '. "$1"; fm_wake_status_mark_current "$2" "$3"' \
 # copy has to agree with it byte for byte or the first sight seeded below is
 # orphaned; assert_derived_key_matches_watcher proves the agreement against a
 # real poll instead of trusting it.
-key=$(printf '%s' "$WINDOW" | tr ':/.' '___')
+key=$(watch_window_key "$WINDOW")
 KEY="$key"
 say "wedged worker recorded as $TASK (key=$key); its pane holds a live process that has made no progress"
 
