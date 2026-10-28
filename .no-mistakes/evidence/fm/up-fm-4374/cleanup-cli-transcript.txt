@@ -1,0 +1,304 @@
+Candidate: f336e51b50df34f4b1b8336c716b23db3cddf801
+Real fm-teardown.sh and backlog replay interfaces, disposable Git repositories, fake pool/Orca transports.
+No real backend administration or model calls.
+Saved CLI output is grouped by invocation. State and refs are final observed snapshots, including successful retries.
+The focused test logs contain the independent behavior assertions and runner exit results.
+
+=== branch-identity-close-meta-present ===
+Remaining retry/completion records: none
+first-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+first-err:
+error: task-x1's endpoint and local copy are cleaned up, but its backlog item could not be closed atomically (task record could not be removed at /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-identity-close-meta-present/state/task-x1.meta); the pending close is recorded and the next session start retries it
+project_refs:
+refs/heads/main c00a3440f2513d49d262c827104b781589bddab5
+refs/no-mistakes/recover/identity c00a3440f2513d49d262c827104b781589bddab5
+refs/remotes/no-mistakes/identity c00a3440f2513d49d262c827104b781589bddab5
+reuse-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-identity-close-meta-present/wt)
+
+=== branch-identity-close-meta-removed ===
+Remaining retry/completion records: none
+project_refs:
+refs/heads/main 6d87458613608666a750611609aa644fecdbba2a
+refs/no-mistakes/recover/identity 6d87458613608666a750611609aa644fecdbba2a
+refs/remotes/no-mistakes/identity 6d87458613608666a750611609aa644fecdbba2a
+first-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+first-err:
+error: task-x1's endpoint and local copy are cleaned up, but its backlog item could not be closed atomically (synthetic completion interruption); the pending close is recorded and the next session start retries it
+reuse-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-identity-close-meta-removed/wt)
+
+=== branch-identity-close-stale-old ===
+Remaining retry/completion records: none
+project_refs:
+refs/heads/main e005709c93ddcd249c624667c7fcfbc5e60da53e
+refs/no-mistakes/recover/identity e005709c93ddcd249c624667c7fcfbc5e60da53e
+refs/remotes/no-mistakes/identity e005709c93ddcd249c624667c7fcfbc5e60da53e
+first-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+first-err:
+error: task-x1's endpoint and local copy are cleaned up, but its backlog item could not be closed atomically (task record could not be removed at /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-identity-close-stale-old/state/task-x1.meta); the pending close is recorded and the next session start retries it
+reuse-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-identity-close-stale-old/wt)
+
+=== branch-identity-close-stale-replacement ===
+first-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+first-err:
+error: task-x1's endpoint and local copy are cleaned up, but its backlog item could not be closed atomically (task record could not be removed at /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-identity-close-stale-replacement/state/task-x1.meta); the pending close is recorded and the next session start retries it
+Remaining retry/completion records: none
+project_refs:
+refs/heads/main 5aa563c604d1944f9e826767b91131461e0c9abc
+refs/no-mistakes/recover/identity 5aa563c604d1944f9e826767b91131461e0c9abc
+refs/remotes/no-mistakes/identity 5aa563c604d1944f9e826767b91131461e0c9abc
+replacement-err:
+synthetic deletion failure
+error: retained ref refs/heads/fm/task-x1 for task-x1: branch deletion failed; preserving task records for retry
+reuse-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-identity-close-stale-replacement/wt)
+
+=== branch-identity-retain-meta-present ===
+Remaining retry/completion records: none
+project_refs:
+refs/heads/main 9f2d13f841fc3e4ecf240e36f4a9eecb8002b82a
+refs/no-mistakes/recover/identity 9f2d13f841fc3e4ecf240e36f4a9eecb8002b82a
+refs/remotes/no-mistakes/identity 9f2d13f841fc3e4ecf240e36f4a9eecb8002b82a
+first-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+first-err:
+error: task-x1's endpoint and local copy are cleaned up, but its captain-held backlog item could not be returned to Queued atomically (task record could not be removed at /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-identity-retain-meta-present/state/task-x1.meta); the pending retention is recorded and the next session start retries it
+reuse-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-identity-retain-meta-present/wt)
+
+=== branch-identity-retain-meta-removed ===
+Remaining retry/completion records: none
+project_refs:
+refs/heads/main 2099ea69a88ea2a5dbd81cf7c6b2f51207cb8469
+refs/no-mistakes/recover/identity 2099ea69a88ea2a5dbd81cf7c6b2f51207cb8469
+refs/remotes/no-mistakes/identity 2099ea69a88ea2a5dbd81cf7c6b2f51207cb8469
+first-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+first-err:
+error: task-x1's endpoint and local copy are cleaned up, but its captain-held backlog item could not be returned to Queued atomically (synthetic completion interruption); the pending retention is recorded and the next session start retries it
+reuse-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-identity-retain-meta-removed/wt)
+
+=== branch-identity-retain-stale-old ===
+first-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+first-err:
+error: task-x1's endpoint and local copy are cleaned up, but its captain-held backlog item could not be returned to Queued atomically (task record could not be removed at /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-identity-retain-stale-old/state/task-x1.meta); the pending retention is recorded and the next session start retries it
+Remaining retry/completion records: none
+project_refs:
+refs/heads/main 1b2cfd575029ca4fe99566c3aef30495cdbdd87c
+refs/no-mistakes/recover/identity 1b2cfd575029ca4fe99566c3aef30495cdbdd87c
+refs/remotes/no-mistakes/identity 1b2cfd575029ca4fe99566c3aef30495cdbdd87c
+reuse-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-identity-retain-stale-old/wt)
+
+=== branch-identity-retain-stale-replacement ===
+first-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+first-err:
+error: task-x1's endpoint and local copy are cleaned up, but its captain-held backlog item could not be returned to Queued atomically (task record could not be removed at /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-identity-retain-stale-replacement/state/task-x1.meta); the pending retention is recorded and the next session start retries it
+Remaining retry/completion records: none
+project_refs:
+refs/heads/main 5f16f6aba5f447fbbccd9a9599ea1111a1eb5aae
+refs/no-mistakes/recover/identity 5f16f6aba5f447fbbccd9a9599ea1111a1eb5aae
+refs/remotes/no-mistakes/identity 5f16f6aba5f447fbbccd9a9599ea1111a1eb5aae
+replacement-err:
+synthetic deletion failure
+error: retained ref refs/heads/fm/task-x1 for task-x1: branch deletion failed; preserving task records for retry
+reuse-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-identity-retain-stale-replacement/wt)
+
+=== branch-review-missing ===
+first-err:
+synthetic deletion failure
+error: retained ref refs/heads/fm/task-x1 for task-x1: branch deletion failed; preserving task records for retry
+Remaining retry/completion records: none
+project_refs:
+refs/heads/main b778424757a377ea5c1c76f60dba0943af1cf507
+retry-err:
+synthetic deletion failure
+error: retained ref refs/heads/fm/task-x1 for task-x1: branch deletion failed; preserving task records for retry
+final-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-review-missing/wt)
+
+=== branch-review-reassigned ===
+first-err:
+synthetic deletion failure
+error: retained ref refs/heads/fm/task-x1 for task-x1: branch deletion failed; preserving task records for retry
+Remaining retry/completion records: none
+project_refs:
+refs/heads/main b982026afe40fe61d87e91c7c2bc123c026f65c9
+retry-err:
+warning: task task-x1's recorded worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-review-reassigned/pool/1/project was reassigned to task new-holder (home /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-review-reassigned), which claimed that pool slot after this record was written; that slot is no longer task-x1's, so its processes, copy, and claim are left untouched and only task-x1's own cleanup runs.
+synthetic deletion failure
+error: retained ref refs/heads/fm/task-x1 for task-x1: branch deletion failed; preserving task records for retry
+final-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+teardown task-x1 complete (window firstmate:fm-task-x1; pool slot /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-review-reassigned/pool/1/project left to task new-holder (home /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-review-reassigned), which it was reassigned to)
+final-err:
+warning: task task-x1's recorded worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-review-reassigned/pool/1/project was reassigned to task new-holder (home /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-review-reassigned), which claimed that pool slot after this record was written; that slot is no longer task-x1's, so its processes, copy, and claim are left untouched and only task-x1's own cleanup runs.
+
+=== branch-review-replay ===
+Remaining retry/completion records: task-x1.meta
+project_refs:
+refs/heads/fm/task-x1 bcd153058d4fa91d5829fe21a073f68e8ddcce35
+refs/heads/main bcd153058d4fa91d5829fe21a073f68e8ddcce35
+first-err:
+synthetic deletion failure
+error: retained ref refs/heads/fm/task-x1 for task-x1: branch deletion failed; preserving task records for retry
+
+=== branch-review-standalone ===
+stdout:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-review-standalone/wt)
+Pool return attempt count: 2
+Remaining retry/completion records: none
+project_refs:
+refs/heads/fm/task-x1 5898d67d793aaca729a054b27b5a07889f0842da
+refs/heads/main 5898d67d793aaca729a054b27b5a07889f0842da
+wt_refs:
+refs/heads/main 5898d67d793aaca729a054b27b5a07889f0842da
+refs/no-mistakes/recover/standalone 68c83f906d82c9f7f8ccd0ed77aefe689726ebcc
+
+=== branch-tmux-removed ===
+Remaining retry/completion records: none
+stdout:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-tmux-removed/wt)
+project_refs:
+refs/heads/main 5a6fb8cdc61ea270eb38f2156d0576701f9500ff
+refs/no-mistakes/recover/test 5a6fb8cdc61ea270eb38f2156d0576701f9500ff
+refs/remotes/no-mistakes/fm/task-x1 5a6fb8cdc61ea270eb38f2156d0576701f9500ff
+
+=== branch-tmux-detach-fails ===
+stderr:
+synthetic detach failure
+error: retained ref refs/heads/fm/task-x1 for task-x1: detach failed; preserving task records for retry
+Remaining retry/completion records: task-x1.meta, task-x1.teardown-branch
+project_refs:
+refs/heads/fm/task-x1 b14f3f824ad2548550112d910aa7c8e617f0871e
+refs/heads/main b14f3f824ad2548550112d910aa7c8e617f0871e
+refs/no-mistakes/recover/test b14f3f824ad2548550112d910aa7c8e617f0871e
+refs/remotes/no-mistakes/fm/task-x1 b14f3f824ad2548550112d910aa7c8e617f0871e
+
+=== branch-tmux-delete-fails ===
+stderr:
+synthetic deletion failure
+error: retained ref refs/heads/fm/task-x1 for task-x1: branch deletion failed; preserving task records for retry
+Remaining retry/completion records: task-x1.meta, task-x1.teardown-branch
+project_refs:
+refs/heads/fm/task-x1 af3eb0733c6b624b89d4f944298bdbe4c51ae878
+refs/heads/main af3eb0733c6b624b89d4f944298bdbe4c51ae878
+refs/no-mistakes/recover/test af3eb0733c6b624b89d4f944298bdbe4c51ae878
+refs/remotes/no-mistakes/fm/task-x1 af3eb0733c6b624b89d4f944298bdbe4c51ae878
+
+=== branch-tmux-detached ===
+stdout:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-tmux-detached/wt)
+Remaining retry/completion records: none
+project_refs:
+refs/heads/main 1b41416f7aa70b2a46d77f256739e263a018c8db
+refs/no-mistakes/recover/test 1b41416f7aa70b2a46d77f256739e263a018c8db
+refs/remotes/no-mistakes/fm/task-x1 1b41416f7aa70b2a46d77f256739e263a018c8db
+
+=== branch-tmux-delete-noop ===
+stderr:
+error: retained ref refs/heads/fm/task-x1 for task-x1 after branch deletion; preserving task records for retry
+Remaining retry/completion records: task-x1.meta, task-x1.teardown-branch
+project_refs:
+refs/heads/fm/task-x1 3215f42ffe139137c8709674f3b2c002603355a5
+refs/heads/main 3215f42ffe139137c8709674f3b2c002603355a5
+refs/no-mistakes/recover/test 3215f42ffe139137c8709674f3b2c002603355a5
+refs/remotes/no-mistakes/fm/task-x1 3215f42ffe139137c8709674f3b2c002603355a5
+
+=== branch-tmux-legacy-retry ===
+stderr:
+synthetic deletion failure
+error: retained ref refs/heads/fm/task-x1 for task-x1: branch deletion failed; preserving task records for retry
+Remaining retry/completion records: none
+project_refs:
+refs/heads/main f986a0e9e7ea5fd411cfa0fb624c4562922ec1b6
+refs/no-mistakes/recover/test f986a0e9e7ea5fd411cfa0fb624c4562922ec1b6
+refs/remotes/no-mistakes/fm/task-x1 f986a0e9e7ea5fd411cfa0fb624c4562922ec1b6
+retry-out:
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+task branch refs/heads/fm/task-x1 is absent (staging and recovery refs unchanged)
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-4374-test-toolchain-8mh5y05x/fm-teardown-tests.E9hj7d/branch-tmux-legacy-retry/wt)
+
+=== orca-ship-match-removed ===
+backend_protocol:
+orca worktree show --worktree id:wt-ship-match::/orca/wt-ship-match --json
+orca terminal close --terminal term-ship-match --json
+orca worktree rm --worktree id:wt-ship-match::/orca/wt-ship-match --force --json
+Remaining retry/completion records: none
+project_refs:
+refs/heads/main 2e84a7df966aa39a1861a0f736647fb4edd38100
+refs/no-mistakes/recover/test 2e84a7df966aa39a1861a0f736647fb4edd38100
+refs/remotes/no-mistakes/task 2e84a7df966aa39a1861a0f736647fb4edd38100
+
+=== orca-ship-match-detach-fails ===
+backend_protocol:
+orca worktree show --worktree id:wt-ship-match::/orca/wt-ship-match --json
+Remaining retry/completion records: orcashipmatchz2.teardown-branch, orcashipmatchz2.meta
+project_refs:
+refs/heads/fm/orcashipmatchz2 585fddfd808c9abed2b3567b16c59f1852298fb8
+refs/heads/main 585fddfd808c9abed2b3567b16c59f1852298fb8
+refs/no-mistakes/recover/test 585fddfd808c9abed2b3567b16c59f1852298fb8
+refs/remotes/no-mistakes/task 585fddfd808c9abed2b3567b16c59f1852298fb8
+
+=== orca-ship-match-delete-fails ===
+backend_protocol:
+orca worktree show --worktree id:wt-ship-match::/orca/wt-ship-match --json
+Remaining retry/completion records: orcashipmatchz2.teardown-branch, orcashipmatchz2.meta
+project_refs:
+refs/heads/fm/orcashipmatchz2 a2e765fe8405438b8578c9aad5d50c607e386b92
+refs/heads/main a2e765fe8405438b8578c9aad5d50c607e386b92
+refs/no-mistakes/recover/test a2e765fe8405438b8578c9aad5d50c607e386b92
+refs/remotes/no-mistakes/task a2e765fe8405438b8578c9aad5d50c607e386b92
+
+=== orca-ship-match-detached ===
+backend_protocol:
+orca worktree show --worktree id:wt-ship-match::/orca/wt-ship-match --json
+orca terminal close --terminal term-ship-match --json
+orca worktree rm --worktree id:wt-ship-match::/orca/wt-ship-match --force --json
+Remaining retry/completion records: none
+project_refs:
+refs/heads/main 3484c4baef49662d85bbcba6c14c3769543584ff
+refs/no-mistakes/recover/test 3484c4baef49662d85bbcba6c14c3769543584ff
+refs/remotes/no-mistakes/task 3484c4baef49662d85bbcba6c14c3769543584ff
+
