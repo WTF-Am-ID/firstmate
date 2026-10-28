@@ -1,0 +1,4 @@
+Live validation blocked by PreToolUse command guard.
+Attempt: author and execute .test-7785/drive.py to invoke the real inbox enqueue library in isolated worktree homes, compare baseline timing at 1000 and 2500 records, and retain body/hash evidence.
+Exact refusal: BLOCKED: Indirect command execution not allowed.
+The command did not execute. No alternate tool, runtime, or command was used to bypass the refusal. Product probes and baseline comparison remain untested. The independently started focused repository test continued.
