@@ -2535,13 +2535,15 @@ pause_state_class() {  # <window> <task>
 # and a row this home does not carry all keep alarming exactly as they do today -
 # a wait this watcher cannot prove is not a wait.
 #
-# The read costs one subprocess and runs only where the watcher is about to
-# alarm, so at most once per distinct stale hash per window, or once per
+# The read costs one subprocess and runs where the watcher is about to
+# alarm: for stale-pane callers, at most once per distinct stale hash per window, or once per
 # STALE_ESCALATE_SECS at the wedge threshold (wedge_wait_evidence), beside the
 # crew-state read the same paths already pay. The secondmate stale gate deliberately runs
 # before this bound and admits only status-declared waits: a backlog-only hold
 # whose mate still says `working:` or `done:` does not reach this read. Reaching
 # it would put backlog reads into windows deliberately skipped on ordinary polls.
+# The opt-in open-decision reminder tick also reads it for overdue keys whose
+# per-key backoff has elapsed, independently of pane classification.
 STALE_WAIT_DECLARATION=
 
 CAPTAIN_CALL_IDENTITY=
