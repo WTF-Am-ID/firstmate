@@ -1445,7 +1445,7 @@ fm_pending_reply_detect_wrong_home() {  # <state-dir> <corr_id> <secondmate-home
 # stay evidence, not acknowledgement.
 fm_pending_reply_restatement_copy_same_basename() {  # <state-dir> <corr_id> <secondmate-home>
   local state=$1 corr=$2 sm_home=$3
-  local rec task_id parent_status stranded line
+  local rec task_id parent_status stranded line request_kind
   rec=$(fm_pending_reply_path "$state" "$corr")
   [ -f "$rec" ] || return 1
   [ -n "$sm_home" ] && [ -d "$sm_home" ] || return 1
@@ -1455,7 +1455,8 @@ fm_pending_reply_restatement_copy_same_basename() {  # <state-dir> <corr_id> <se
   stranded="$sm_home/state/${task_id}.status"
   [ -f "$stranded" ] && [ ! -L "$stranded" ] || return 1
   [ "$stranded" != "$parent_status" ] || return 1
-  line=$(fm_pending_reply_find_resolve_line "$stranded" "$corr")
+  request_kind=$(fm_pending_reply_get "$rec" request_kind)
+  line=$(fm_pending_reply_find_resolve_line "$stranded" "$corr" "$request_kind")
   [ -n "$line" ] || return 1
   # Deliberately undirected: bin/fm-parent-channel-lib.sh is expanded once at
   # the fm_pending_reply_detect_wrong_home site; each directed site would
