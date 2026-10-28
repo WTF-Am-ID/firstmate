@@ -18,7 +18,7 @@ fi
 
 extension_segment=${FM_EXTENSION_BINDING_SEGMENT:-all}
 case "$extension_segment" in
-  all|coordinator|early-bind|early-validation|early-handshake|early-integrity|matrix|matrix-runtime|lifecycle-flow|lifecycle-order|lifecycle-lock|lifecycle-runner|lifecycle-state|lifecycle-invocation-cleanup|remote-envelope|remote-activation|remote-lifecycle|remote-retirement|example|coordinator-fail|coordinator-wait|coordinator-stubborn|coordinator-pass|coordinator-late-pass|coordinator-scheduler-block|coordinator-scheduler-late) ;;
+  all|coordinator|early-bind|early-validation|early-handshake|early-integrity|matrix|matrix-runtime|lifecycle-flow|lifecycle-order|lifecycle-lock|lifecycle-runner|lifecycle-state|lifecycle-invocation-cleanup|lifecycle-orphan-readiness|remote-envelope|remote-activation|remote-lifecycle|remote-retirement|example|coordinator-fail|coordinator-wait|coordinator-stubborn|coordinator-pass|coordinator-late-pass|coordinator-scheduler-block|coordinator-scheduler-late) ;;
   *) printf 'unknown extension-binding segment: %s\n' "$extension_segment" >&2; exit 64 ;;
 esac
 
@@ -1917,6 +1917,99 @@ crash_cleanup_release=
 assert_absent "$H_INVOCATION_CLEANUP/config/extensions.d/org.example.invocation-cleanup.json" \
   "identity-safe retirement retained the recovered binding"
 pass "host-crash recovery retires only after exact invocation-group extinction"
+fi
+
+if section_enabled lifecycle-flow lifecycle-orphan-readiness; then
+# Ownerless readiness records have no source selector or signalling authority.
+# Use only private fixture groups, and keep an unrelated live PID as a reuse case.
+P_INVOCATION_CLEANUP="$PACKAGES/orphan-cleanup"
+make_package "$P_INVOCATION_CLEANUP" org.example.invocation-cleanup ext-invocation-cleanup
+H_ORPHAN_READY="$HOMES/orphan-ready"; new_home "$H_ORPHAN_READY"
+bind_package "$H_ORPHAN_READY" "$P_INVOCATION_CLEANUP" ext-invocation-cleanup >/dev/null
+for orphan_source in orphan-first orphan-second; do
+  FM_HOME="$H_ORPHAN_READY" "$PROCEVENT" register-extension ext-invocation-cleanup "$orphan_source" --config-ref silent-result >/dev/null
+done
+orphan_root="$H_ORPHAN_READY/state/extension-invocations"
+mkdir -p "$orphan_root"
+chmod 0700 "$orphan_root"
+orphan_token="sha256:$(printf 'a%.0s' {1..64})"
+orphan_ready="$orphan_root/${orphan_token#sha256:}.ready.json"
+write_orphan_ready() {  # <token> <pid> <identity>
+  node - "$orphan_ready" "$1" "$2" "$3" <<'JS'
+const fs = require("fs");
+const [file, token, pid, identity] = process.argv.slice(2);
+fs.writeFileSync(file, JSON.stringify({schema: "firstmate.extension-invocation-ready.v1",
+  token, group_pid: Number(pid), group_identity: identity}) + "\n", {mode: 0o600});
+JS
+}
+crash_cleanup_group_pid=$(node - "$ROOT/bin/fm-extension-launch-barrier.mjs" "$orphan_token" <<'JS'
+const {spawn} = require("child_process");
+const child = spawn(process.execPath, ["-e", "setInterval(() => {}, 1000)", ...process.argv.slice(2)],
+  {detached: true, stdio: "ignore"});
+console.log(child.pid);
+child.unref();
+JS
+)
+write_orphan_ready "$orphan_token" "$crash_cleanup_group_pid" "barrier-token:$orphan_token"
+expect_failure "process-cleanup-failed" env FM_HOME="$H_ORPHAN_READY" "$HOST" cleanup-invocations
+kill -0 -"$crash_cleanup_group_pid" 2>/dev/null || fail "ownerless cleanup signalled a live fixture group"
+assert_present "$orphan_ready" "ownerless cleanup discarded a live group's readiness"
+write_orphan_ready "$orphan_token" "$$" "barrier-token:$orphan_token"
+expect_failure "process-cleanup-failed" env FM_HOME="$H_ORPHAN_READY" "$HOST" cleanup-invocations
+kill -0 "$$" 2>/dev/null || fail "ownerless cleanup signalled a reused PID"
+kill -0 -"$crash_cleanup_group_pid" 2>/dev/null || fail "ownerless cleanup signalled an unrelated group"
+orphan_dead_pid=$crash_cleanup_group_pid
+kill -TERM -"$crash_cleanup_group_pid" 2>/dev/null || fail "cannot stop private orphan fixture group"
+for _ in $(seq 1 200); do
+  kill -0 -"$crash_cleanup_group_pid" 2>/dev/null || break
+  sleep 0.1
+done
+kill -0 -"$crash_cleanup_group_pid" 2>/dev/null && fail "private orphan fixture group did not exit"
+crash_cleanup_group_pid=
+write_orphan_ready "sha256:$(printf 'b%.0s' {1..64})" "$orphan_dead_pid" "barrier-token:$orphan_token"
+expect_failure "process-cleanup-failed" env FM_HOME="$H_ORPHAN_READY" "$HOST" cleanup-invocations
+write_orphan_ready "$orphan_token" "$orphan_dead_pid" "unprovable-identity"
+expect_failure "process-cleanup-failed" env FM_HOME="$H_ORPHAN_READY" "$HOST" cleanup-invocations
+write_orphan_ready "$orphan_token" "$orphan_dead_pid" "barrier-token:$orphan_token"
+chmod 0644 "$orphan_ready"
+expect_failure "private host-owned file" env FM_HOME="$H_ORPHAN_READY" "$HOST" cleanup-invocations
+chmod 0600 "$orphan_ready"
+mv "$orphan_ready" "$TMP_ROOT/orphan-outside.json"
+ln -s "$TMP_ROOT/orphan-outside.json" "$orphan_ready"
+expect_failure "private host-owned file" env FM_HOME="$H_ORPHAN_READY" "$HOST" cleanup-invocations
+assert_present "$TMP_ROOT/orphan-outside.json" "cleanup followed an unsafe readiness symlink"
+mv "$orphan_ready" "$TMP_ROOT/orphan-symlink"
+mv "$TMP_ROOT/orphan-outside.json" "$orphan_ready"
+orphan_cleaned=$(FM_HOME="$H_ORPHAN_READY" "$HOST" cleanup-invocations --source-id orphan-first)
+assert_contains "$orphan_cleaned" "cleaned-invocations: 1" "dead exact-token orphan readiness was not reclaimed"
+assert_absent "$orphan_ready" "dead orphan readiness survived successful cleanup"
+pass "ownerless readiness recovers only dead exact-token groups and refuses unsafe or unproved ownership"
+
+# One malformed residue must neither silently disable both sources nor wake on
+# every reconcile.
+write_orphan_ready "$orphan_token" "$orphan_dead_pid" "unprovable-identity"
+for _ in 1 2; do
+  orphan_reconcile=$(FM_HOME="$H_ORPHAN_READY" "$PROCEVENT" reconcile)
+  assert_contains "$orphan_reconcile" "uncertain=2" "unsafe residue did not preserve both sources"
+done
+for orphan_source in orphan-first orphan-second; do
+  orphan_wakes=$(wake_payloads "$H_ORPHAN_READY" | grep -c "source $orphan_source .*cleanup" || true)
+  [ "$orphan_wakes" -eq 1 ] || fail "cleanup uncertainty must wake once per source failure episode: $orphan_wakes"
+done
+write_orphan_ready "$orphan_token" "$orphan_dead_pid" "barrier-token:$orphan_token"
+orphan_reconcile=$(FM_HOME="$H_ORPHAN_READY" "$PROCEVENT" reconcile)
+assert_contains "$orphan_reconcile" "started=2" "dead orphan readiness blocked recovery of two extension sources"
+assert_contains "$orphan_reconcile" "uncertain=0" "recovered extension sources remained uncertain"
+for orphan_source in orphan-first orphan-second; do
+  for _ in $(seq 1 200); do
+    [ -f "$H_ORPHAN_READY/state/procevent-inbox/$orphan_source.1.handled" ] && break
+    sleep 0.05
+  done
+  assert_present "$H_ORPHAN_READY/state/procevent-inbox/$orphan_source.1.handled" \
+    "recovered source $orphan_source never handled its private result"
+done
+assert_absent "$orphan_ready" "reconcile did not reclaim dead orphan readiness"
+pass "reconcile durably announces cleanup uncertainty once and recovers both extension sources"
 fi
 
 # --- independent remote envelope, lifecycle, and retirement paths -----------
