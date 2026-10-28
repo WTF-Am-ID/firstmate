@@ -156,7 +156,10 @@ if (data.ok === false) {
 
 fm_backend_orca_run_json() {
   local out
-  out=$("$@") || return 1
+  out=$("$@") || {
+    printf '%s\n' "$out" >&2
+    return 1
+  }
   printf '%s' "$out" | fm_backend_orca_json_ok
 }
 

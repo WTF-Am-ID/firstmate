@@ -48,10 +48,10 @@ if [ "${1:-}" = status ] && [ "${FM_ORCA_STATUS_RESPONSE:-ready}" != sequence ];
 fi
 n=$next
 echo "$n" > "$COUNT_FILE"
+[ -f "$RESP/$n.out" ] && cat "$RESP/$n.out"
 if [ -f "$RESP/$n.exit" ]; then
   exit "$(cat "$RESP/$n.exit")"
 fi
-[ -f "$RESP/$n.out" ] && cat "$RESP/$n.out"
 exit 0
 SH
   chmod +x "$fb/orca"
@@ -981,6 +981,103 @@ test_teardown_preserves_metadata_when_orca_remove_error_json() {
   pass "fm-teardown.sh backend=orca: preserves metadata on remove ok:false JSON"
 }
 
+test_teardown_orca_nonzero_removal_requires_force_and_absent_path() {
+  local scenario id proj wt data state config neutral out rc removal response row before kind
+  for scenario in forced-absent unforced-absent unforced-scout forced-existing forced-file forced-symlink other-error malformed-error message-only; do
+    id="orca-$scenario"
+    orca_case "remove-nonzero-$scenario"
+    proj="$CASE_DIR/project"
+    wt="$CASE_DIR/worktree"
+    data="$CASE_DIR/home/data"
+    state="$CASE_DIR/home/state"
+    config="$CASE_DIR/home/config"
+    mkdir -p "$data/$id" "$state" "$config"
+    [ "$scenario" = forced-existing ] || fm_git_init_commit "$proj"
+    removal=2
+    case "$scenario" in
+      forced-existing)
+        fm_git_worktree "$proj" "$wt" "fm/$id"
+        printf '{"ok":true,"result":{"worktree":{"path":"%s"}}}\n' "$wt" > "$RESP/1.out"
+        removal=3 ;;
+      forced-file) : > "$wt" ;;
+      forced-symlink) ln -s "$CASE_DIR/missing" "$wt" ;;
+    esac
+    kind=ship
+    [ "$scenario" != unforced-scout ] || kind=scout
+    fm_write_meta "$state/$id.meta" \
+      "window=fm-$id" "endpoint_task_id=$id" "terminal=term-$id" \
+      "worktree=$wt" "project=$proj" "harness=codex" "kind=$kind" \
+      "mode=local-only" "yolo=off" "backend=orca" "orca_worktree_id=repo::$wt" \
+      "spawn_gen=remove-nonzero-$scenario"
+    if [ "$scenario" = unforced-scout ]; then
+      printf 'decisions_reviewed=1\ndecision_keys=\n' >> "$state/$id.meta"
+      printf 'report\n' > "$data/$id/report.md"
+    fi
+    printf '%s\n' '# Backlog' '' '## In flight' '' '## Queued' '' '## Done' > "$data/backlog.md"
+    tasks-axi add "$id" "Orca removal regression" --kind "$kind" --file "$data/backlog.md" >/dev/null
+    tasks-axi start "$id" --file "$data/backlog.md" >/dev/null
+    before=$(cat "$data/backlog.md")
+    response='{"ok":false,"error":{"code":"selector_not_found","message":"recorded selector is gone"}}'
+    case "$scenario" in
+      other-error) response='{"ok":false,"error":{"code":"runtime_unavailable","message":"selector_not_found is not the error code"}}' ;;
+      malformed-error) response='selector_not_found: invalid JSON' ;;
+      message-only) response='{"ok":false,"error":{"message":"selector_not_found"}}' ;;
+    esac
+    printf '%s\n' "$response" > "$RESP/$removal.out"
+    printf '1\n' > "$RESP/$removal.exit"
+    neutral=$(neutral_fm_root "$CASE_DIR/neutral")
+    set +e
+    case "$scenario" in
+      unforced-*)
+        out=$( PATH="$FB:$PATH" FM_ORCA_LOG="$LOG" FM_ORCA_RESPONSES="$RESP" \
+          FM_ROOT_OVERRIDE="$neutral" FM_STATE_OVERRIDE="$state" FM_DATA_OVERRIDE="$data" FM_CONFIG_OVERRIDE="$config" \
+          bash "$ROOT/bin/fm-teardown.sh" "$id" 2>&1 ) ;;
+      *)
+        out=$( PATH="$FB:$PATH" FM_ORCA_LOG="$LOG" FM_ORCA_RESPONSES="$RESP" \
+          FM_ROOT_OVERRIDE="$neutral" FM_STATE_OVERRIDE="$state" FM_DATA_OVERRIDE="$data" FM_CONFIG_OVERRIDE="$config" \
+          bash "$ROOT/bin/fm-teardown.sh" "$id" --force 2>&1 ) ;;
+    esac
+    rc=$?
+    set -e
+    row=$(tasks-axi show "$id" --file "$data/backlog.md" | sed -n 's/^  state: *//p' | head -1)
+    if [ "$scenario" = forced-absent ]; then
+      expect_code 0 "$rc" "forced teardown should accept an already-absent Orca selector"$'\n'"$out"
+      assert_contains "$out" "already absent" "accepted cleanup should report the already-absent outcome"
+      assert_absent "$state/$id.meta" "accepted cleanup should remove metadata"
+      assert_absent "$state/$id.backlog-close" "accepted cleanup should retire the retry marker"
+      [ "$row" = "done" ] || fail "accepted cleanup left backlog state $row"
+    else
+      [ "$rc" -ne 0 ] || fail "$scenario: teardown accepted an unsafe removal failure"
+      assert_not_contains "$out" "already absent" "$scenario: refusal reported success"
+      assert_present "$state/$id.meta" "$scenario: refusal lost retry metadata"
+      [ "$(cat "$data/backlog.md")" = "$before" ] || fail "$scenario: refusal changed the backlog"
+      case "$scenario" in
+        unforced-absent|forced-file|forced-symlink) ;;
+        *)
+          assert_contains "$out" "$response" "$scenario: teardown dropped the nonzero Orca error body"
+          assert_present "$state/$id.backlog-close" "$scenario: refusal lost its pending close marker" ;;
+      esac
+    fi
+  done
+  pass "fm-teardown.sh backend=orca: only force plus an absent path accepts structured selector_not_found"
+}
+
+test_remove_worktree_preserves_nonzero_stdout_error() {
+  local out rc response
+  orca_case remove-nonzero-error
+  response='{"ok":false,"error":{"code":"selector_not_found","message":"recorded selector is gone"}}'
+  printf '%s\n' "$response" > "$RESP/1.out"
+  printf '7\n' > "$RESP/1.exit"
+  set +e
+  out=$( PATH="$FB:$PATH" FM_ORCA_LOG="$LOG" FM_ORCA_RESPONSES="$RESP" \
+    bash -c '. "$0/bin/backends/orca.sh"; fm_backend_orca_remove_worktree repo::/missing' "$ROOT" 2>&1 )
+  rc=$?
+  set -e
+  [ "$rc" -ne 0 ] || fail "nonzero Orca removal unexpectedly succeeded"
+  assert_contains "$out" "$response" "backend helper dropped the nonzero stdout diagnostic"
+  pass "fm_backend_orca_remove_worktree: preserves stdout JSON on nonzero exit"
+}
+
 test_scout_teardown_refuses_orca_missing_report_when_path_missing() {
   local proj wt data state config id out rc neutral
   id="orcanoreportz4"
@@ -1401,3 +1498,5 @@ test_teardown_refuses_orca_worktree_without_terminal_handle
 test_secondmate_force_teardown_removes_orca_child_via_orca
 test_secondmate_force_teardown_refuses_orca_child_id_path_mismatch
 test_secondmate_force_teardown_refuses_partial_orca_child
+test_teardown_orca_nonzero_removal_requires_force_and_absent_path
+test_remove_worktree_preserves_nonzero_stdout_error

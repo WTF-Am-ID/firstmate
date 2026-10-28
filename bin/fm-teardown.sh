@@ -172,6 +172,8 @@
 # Orca tasks use the same safety checks, then close the recorded terminal and
 # remove the recorded worktree through `orca worktree rm`; teardown never guesses
 # an Orca target from ambient CLI state.
+# A structured selector_not_found removal error is already absent only with
+# --force and an absent recorded path; every other failure preserves retry records.
 # A Herdr presentation journal never authorizes cleanup. Teardown still closes
 # only the exact task pane from ordinary endpoint metadata and never calls
 # `workspace close`. It retires the non-authoritative journal only when a
@@ -3853,7 +3855,21 @@ if [ "$BACKEND" = orca ] && [ "$KIND" != secondmate ]; then
     fm_backend_kill "$BACKEND" "$T" "$(meta_value "$META" zellij_tab_id)" "fm-$ID" \
       || { endpoint_close_refusal "$ID" "$BACKEND" "$T" 0; exit 1; }
   fi
-  fm_backend_remove_worktree "$BACKEND" "$ORCA_WORKTREE_ID"
+  if orca_remove_error=$(fm_backend_remove_worktree "$BACKEND" "$ORCA_WORKTREE_ID" 2>&1); then
+    [ -z "$orca_remove_error" ] || printf '%s\n' "$orca_remove_error"
+  elif [ "$FORCE" = "--force" ] && [ -n "$WT" ] && [ ! -e "$WT" ] && [ ! -L "$WT" ] \
+    && printf '%s' "$orca_remove_error" | node -e '
+try {
+  const data = JSON.parse(require("fs").readFileSync(0, "utf8"));
+  process.exit(data.ok === false && data.error && data.error.code === "selector_not_found" ? 0 : 1);
+} catch (_) { process.exit(1); }
+'; then
+    echo "Orca worktree $ORCA_WORKTREE_ID already absent at $WT; continuing forced teardown."
+  else
+    printf '%s\n' "$orca_remove_error" >&2
+    echo "error: Orca worktree removal failed for $ID; preserving task records for retry." >&2
+    exit 1
+  fi
 elif [ "$KIND" != secondmate ] && ! teardown_owns_worktree; then
   :
 elif [ -d "$WT" ] && [ "$KIND" != secondmate ]; then
