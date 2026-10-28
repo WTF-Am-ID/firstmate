@@ -1,0 +1,15 @@
+{
+  ".count-primary_a_b": "99\n",
+  ".count-v2.primary%3aa_b": "2\n",
+  ".hash-v2.primary%3aa%2fb": "85ae1482ab0c852083f859c587b3131d",
+  ".hash-v2.primary%3aa_b": "9f5e57c71c896abc69240eb895ecc8c8",
+  ".stale-v2.primary%3aa_b": "9f5e57c71c896abc69240eb895ecc8c8",
+  ".stale-v2.primary%3aa%2fb": "85ae1482ab0c852083f859c587b3131d",
+  ".wake-queue.seq": "2\n",
+  ".hash-primary_a_b": "38813b2a6366400d678147244d942483",
+  ".count-v2.primary%3aa%2fb": "3\n",
+  ".wake-queue": "1793202855\t2\tstale\tprimary:a_b\tstale: primary:a_b\n",
+  ".stale-since-v2.primary%3aa%2fb": "1793202855\n",
+  ".churn-since-primary_a_b": "1\n",
+  ".stale-primary_a_b": "38813b2a6366400d678147244d942483"
+}

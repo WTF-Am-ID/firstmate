@@ -1,0 +1,40 @@
+LAB /tmp/fm-lab.Zt06dA revision=74aeb2a00febc791b9a5e2530d333211fde39f0f
+INITIAL primary:a/b
+
+  Hooks need review
+  4 hooks are new or changed.
+  Hooks can run outside the sandbox after you trust them.
+
+
+› 1. Review hooks
+  2. Trust all and continue
+  3. Continue without trusting (hooks won't run)
+
+  enter confirm · esc skip
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RESULT ERROR RuntimeError('Codex TUI did not render')
+CLEANED disposable lab /tmp/fm-lab.Zt06dA

@@ -1,0 +1,35 @@
+
+  >_ OpenAI Codex (v0.165.0)
+     ~/.no-mistakes-upstream-codex/worktrees/cc034ff811da/01M61FZB6TD49YFXWTGJTG14SG
+
+
+
+
+
+
+
+
+
+
+  Hooks
+  Lifecycle hooks from config and enabled plugins.
+
+  ⚠ 4 hooks need review before they can run.
+
+  Issues
+  ⚠ clamping SessionEnd hook timeout to 3s in
+  /Users/daddy/.codex/plugins/cache/openai-codex/codex/1.0.6/hooks/hooks.json
+
+  Event                 Installed   Active      Review      Description
+
+› PreToolUse            12          10          2           Before a tool executes
+  PermissionRequest     1           1           0           When permission is requested
+  PostToolUse           4           4           0           After a tool executes
+  PreCompact            1           1           0           Before context compaction
+  PostCompact           1           1           0           After context compaction
+  SessionStart          5           4           1           When a new session starts
+  SessionEnd            1           1           0           Right before a session ends
+  UserPromptSubmit      1           1           0           When the user submits a prompt
+↓
+
+  t trust all · enter review · esc close

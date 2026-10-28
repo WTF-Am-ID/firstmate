@@ -1,0 +1,50 @@
+FM_TEST_ONLY=test_colliding_endpoints_keep_independent_stale_history bin/fm-test-run.sh tests/fm-watch-triage.test.sh
+FM_TEST_BEGIN 2026-10-28T15:45:53Z tests/fm-watch-triage.test.sh family=watcher-wake-lock expected_gate_skip=none
+tests/wake-helpers.sh: line 342: 34314 Terminated: 15          PATH="$fakebin:$PATH" FM_STATE_OVERRIDE="$state" FM_CREW_STATE_BIN="$fakebin/fm-crew-state.sh" FM_POLL=1 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=999999 FM_HEARTBEAT=999999 FM_SECONDMATE_LIVENESS_SECS=99999999 "$@" "$WATCH" > "$out"
+tests/wake-helpers.sh: line 342: 35430 Terminated: 15          PATH="$fakebin:$PATH" FM_STATE_OVERRIDE="$state" FM_CREW_STATE_BIN="$fakebin/fm-crew-state.sh" FM_POLL=1 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=999999 FM_HEARTBEAT=999999 FM_SECONDMATE_LIVENESS_SECS=99999999 "$@" "$WATCH" > "$out"
+ok - legacy-colliding endpoints wake independently and never revert to legacy memory
+FM_TEST_END 2026-10-28T15:46:05Z tests/fm-watch-triage.test.sh exit=0 duration_ms=11889 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=11975
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=11889 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage.test.sh duration_ms=11889
+EXIT=0
+FM_TEST_ONLY=test_window_keys_encode_supported_endpoint_bytes bin/fm-test-run.sh tests/fm-watch-triage.test.sh
+FM_TEST_BEGIN 2026-10-28T15:46:05Z tests/fm-watch-triage.test.sh family=watcher-wake-lock expected_gate_skip=none
+ok - punctuation, percent escapes and Unicode have distinct stable filename keys
+FM_TEST_END 2026-10-28T15:46:06Z tests/fm-watch-triage.test.sh exit=0 duration_ms=519 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=601
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=519 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage.test.sh duration_ms=519
+EXIT=0
+FM_TEST_ONLY=test_turn_ended_colliding_window_key_surfaced bin/fm-test-run.sh tests/fm-watch-triage.test.sh
+FM_TEST_BEGIN 2026-10-28T15:46:06Z tests/fm-watch-triage.test.sh family=watcher-wake-lock expected_gate_skip=none
+ok - a turn-end with only an ambiguous legacy pane marker surfaces
+FM_TEST_END 2026-10-28T15:46:10Z tests/fm-watch-triage.test.sh exit=0 duration_ms=4115 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=4197
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=4115 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage.test.sh duration_ms=4115
+EXIT=0
+FM_TEST_ONLY=test_turn_ended_duplicate_endpoint_records_surfaced bin/fm-test-run.sh tests/fm-watch-triage.test.sh
+FM_TEST_BEGIN 2026-10-28T15:46:10Z tests/fm-watch-triage.test.sh family=watcher-wake-lock expected_gate_skip=none
+ok - two metadata records sharing one endpoint make churn evidence ambiguous
+FM_TEST_END 2026-10-28T15:46:15Z tests/fm-watch-triage.test.sh exit=0 duration_ms=4477 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=4561
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=4477 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage.test.sh duration_ms=4477
+EXIT=0
+FM_TEST_ONLY=test_turn_ended_churn_existing_marker_absorbed bin/fm-test-run.sh tests/fm-watch-triage.test.sh
+FM_TEST_BEGIN 2026-10-28T15:46:15Z tests/fm-watch-triage.test.sh family=watcher-wake-lock expected_gate_skip=none
+ok - a churning turn-end inside an already-open deferral window is absorbed without re-marking
+FM_TEST_END 2026-10-28T15:46:18Z tests/fm-watch-triage.test.sh exit=0 duration_ms=3528 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=3615
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=3528 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage.test.sh duration_ms=3528
+EXIT=0
+FM_TEST_ONLY=test_unknown_alive_stale_is_bounded_after_its_first_alarm bin/fm-test-run.sh tests/fm-watch-triage.test.sh
+FM_TEST_BEGIN 2026-10-28T15:46:18Z tests/fm-watch-triage.test.sh family=watcher-wake-lock expected_gate_skip=none
+ok - an unknown-but-alive pane with progress evidence alarms once per bounded pause-resurface window
+FM_TEST_END 2026-10-28T15:46:43Z tests/fm-watch-triage.test.sh exit=0 duration_ms=24410 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=24497
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=24410 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-watch-triage.test.sh duration_ms=24410
+EXIT=0

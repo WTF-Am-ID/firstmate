@@ -1,0 +1,13 @@
+{
+  ".count-primary_a_b": "99\n",
+  ".count-v2.primary%3aa_b": "1\n",
+  ".hash-v2.primary%3aa%2fb": "85ae1482ab0c852083f859c587b3131d",
+  ".hash-v2.primary%3aa_b": "9f5e57c71c896abc69240eb895ecc8c8",
+  ".stale-v2.primary%3aa%2fb": "85ae1482ab0c852083f859c587b3131d",
+  ".wake-queue.seq": "1\n",
+  ".hash-primary_a_b": "38813b2a6366400d678147244d942483",
+  ".count-v2.primary%3aa%2fb": "2\n",
+  ".wake-queue": "1793202851\t1\tstale\tprimary:a/b\tstale: primary:a/b\n",
+  ".churn-since-primary_a_b": "1\n",
+  ".stale-primary_a_b": "38813b2a6366400d678147244d942483"
+}

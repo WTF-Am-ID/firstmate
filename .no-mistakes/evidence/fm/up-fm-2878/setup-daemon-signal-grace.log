@@ -1,0 +1,1 @@
+Initial duplicate probe timed out at 30 seconds while default FM_SIGNAL_GRACE is 30 seconds. Re-drive explicitly sets FM_SIGNAL_GRACE=1, matching focused watcher fixtures. Disposable lab was removed.

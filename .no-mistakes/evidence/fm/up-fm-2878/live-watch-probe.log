@@ -1,0 +1,232 @@
+LAB /tmp/fm-lab.SN5EyZ revision=74aeb2a00febc791b9a5e2530d333211fde39f0f
+INITIAL primary:a/b
+
+  Hooks need review
+  4 hooks are new or changed.
+  Hooks can run outside the sandbox after you trust them.
+
+
+› 1. Review hooks
+  2. Trust all and continue
+  3. Continue without trusting (hooks won't run)
+
+  enter confirm · esc skip
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Using quiet Codex hook-review UI without accepting or disabling hooks
+INITIAL primary:a_b
+
+  Hooks need review
+  4 hooks are new or changed.
+  Hooks can run outside the sandbox after you trust them.
+
+
+› 1. Review hooks
+  2. Trust all and continue
+  3. Continue without trusting (hooks won't run)
+
+  enter confirm · esc skip
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Using quiet Codex hook-review UI without accepting or disabling hooks
+READY primary:a/b
+
+  >_ OpenAI Codex (v0.165.0)
+     ~/.no-mistakes-upstream-codex/worktrees/cc034ff811da/01M61FZB6TD49YFXWTGJTG14SG
+
+
+
+
+
+
+
+
+
+
+  Hooks
+  Lifecycle hooks from config and enabled plugins.
+
+  ⚠ 4 hooks need review before they can run.
+
+  Issues
+  ⚠ clamping SessionEnd hook timeout to 3s in
+  /Users/daddy/.codex/plugins/cache/openai-codex/codex/1.0.6/hooks/hooks.json
+
+  Event                 Installed   Active      Review      Description
+
+› PreToolUse            12          10          2           Before a tool executes
+  PermissionRequest     1           1           0           When permission is requested
+  PostToolUse           4           4           0           After a tool executes
+  PreCompact            1           1           0           Before context compaction
+  PostCompact           1           1           0           After context compaction
+  SessionStart          5           4           1           When a new session starts
+  SessionEnd            1           1           0           Right before a session ends
+  UserPromptSubmit      1           1           0           When the user submits a prompt
+↓
+
+  t trust all · enter review · esc close
+
+READY primary:a_b
+
+  Hooks need review
+  4 hooks are new or changed.
+  Hooks can run outside the sandbox after you trust them.
+
+
+› 1. Review hooks
+  2. Trust all and continue
+  3. Continue without trusting (hooks won't run)
+
+  enter confirm · esc skip
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+KEYS {"primary:a/b": "v2.primary%3aa%2fb", "primary:a_b": "v2.primary%3aa_b"}
+collision-round1 exit=0
+collision-round1 product output:
+stale: primary:a/b
+
+collision-round1-state {".count-primary_a_b": "99\n", ".count-v2.primary%3aa_b": "1\n", ".hash-v2.primary%3aa%2fb": "85ae1482ab0c852083f859c587b3131d", ".hash-v2.primary%3aa_b": "9f5e57c71c896abc69240eb895ecc8c8", ".stale-v2.primary%3aa%2fb": "85ae1482ab0c852083f859c587b3131d", ".wake-queue.seq": "1\n", ".hash-primary_a_b": "38813b2a6366400d678147244d942483", ".count-v2.primary%3aa%2fb": "2\n", ".wake-queue": "1793202851\t1\tstale\tprimary:a/b\tstale: primary:a/b\n", ".churn-since-primary_a_b": "1\n", ".stale-primary_a_b": "38813b2a6366400d678147244d942483"}
+DRAIN 1793202851	1	stale	primary:a/b	stale: primary:a/b
+
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 81578.1793202851.Vj0bBw
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  2 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  After draining queued wakes, repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WARNING: queued wakes pending - drain them with bin/fm-wake-drain.sh before anything else.
+
+ACK exit=0 
+collision-round2 exit=0
+collision-round2 product output:
+stale: primary:a_b
+
+collision-round2-state {".count-primary_a_b": "99\n", ".count-v2.primary%3aa_b": "2\n", ".hash-v2.primary%3aa%2fb": "85ae1482ab0c852083f859c587b3131d", ".hash-v2.primary%3aa_b": "9f5e57c71c896abc69240eb895ecc8c8", ".stale-v2.primary%3aa_b": "9f5e57c71c896abc69240eb895ecc8c8", ".stale-v2.primary%3aa%2fb": "85ae1482ab0c852083f859c587b3131d", ".wake-queue.seq": "2\n", ".hash-primary_a_b": "38813b2a6366400d678147244d942483", ".count-v2.primary%3aa%2fb": "3\n", ".wake-queue": "1793202855\t2\tstale\tprimary:a_b\tstale: primary:a_b\n", ".stale-since-v2.primary%3aa%2fb": "1793202855\n", ".churn-since-primary_a_b": "1\n", ".stale-primary_a_b": "38813b2a6366400d678147244d942483"}
+DRAIN 1793202855	2	stale	primary:a_b	stale: primary:a_b
+
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 95980.1793202855.mwDQBV
+WARNING: watcher still down (same stale episode; last beat: 2s ago, grace 300s) - full banner already printed this episode.
+WARNING: queued wakes pending - drain them with bin/fm-wake-drain.sh before anything else.
+
+ACK exit=0 
+sibling-removed remained alive across 4 beacon updates
+sibling-removed product output:
+
+sibling-removed-state {".count-primary_a_b": "99\n", ".count-v2.primary%3aa_b": "2\n", ".hash-v2.primary%3aa%2fb": "85ae1482ab0c852083f859c587b3131d", ".hash-v2.primary%3aa_b": "9f5e57c71c896abc69240eb895ecc8c8", ".stale-v2.primary%3aa_b": "9f5e57c71c896abc69240eb895ecc8c8", ".stale-v2.primary%3aa%2fb": "85ae1482ab0c852083f859c587b3131d", ".wake-queue.seq": "2\n", ".hash-primary_a_b": "38813b2a6366400d678147244d942483", ".count-v2.primary%3aa%2fb": "5\n", ".wake-queue": "", ".stale-since-v2.primary%3aa%2fb": "1793202855\n", ".churn-since-primary_a_b": "1\n", ".stale-primary_a_b": "38813b2a6366400d678147244d942483"}
+sibling-restored remained alive across 4 beacon updates
+sibling-restored product output:
+
+sibling-restored-state {".stale-since-v2.primary%3aa_b": "1793202862\n", ".count-primary_a_b": "99\n", ".count-v2.primary%3aa_b": "4\n", ".hash-v2.primary%3aa%2fb": "85ae1482ab0c852083f859c587b3131d", ".hash-v2.primary%3aa_b": "9f5e57c71c896abc69240eb895ecc8c8", ".stale-v2.primary%3aa_b": "9f5e57c71c896abc69240eb895ecc8c8", ".stale-v2.primary%3aa%2fb": "85ae1482ab0c852083f859c587b3131d", ".wake-queue.seq": "2\n", ".hash-primary_a_b": "38813b2a6366400d678147244d942483", ".count-v2.primary%3aa%2fb": "7\n", ".wake-queue": "", ".stale-since-v2.primary%3aa%2fb": "1793202855\n", ".churn-since-primary_a_b": "1\n", ".stale-primary_a_b": "38813b2a6366400d678147244d942483"}
+PASS independent live Codex stale histories, wake delivery, sibling churn, and ignored legacy markers
+legacy-turn-end exit=0
+legacy-turn-end product output:
+signal: /tmp/fm-lab.SN5EyZ/state/first.turn-ended
+
+legacy-turn-end-state {".stale-since-v2.primary%3aa_b": "1793202862\n", ".count-primary_a_b": "99\n", ".count-v2.primary%3aa_b": "4\n", ".stale-v2.primary%3aa_b": "9f5e57c71c896abc69240eb895ecc8c8", ".stale-v2.primary%3aa%2fb": "85ae1482ab0c852083f859c587b3131d", ".wake-queue.seq": "4\n", ".hash-primary_a_b": "38813b2a6366400d678147244d942483", ".count-v2.primary%3aa%2fb": "7\n", ".wake-queue": "1793202867\t3\tsignal\tfirst.turn-ended\tsignal: /tmp/fm-lab.SN5EyZ/state/first.turn-ended\n1793202867\t4\tsignal\tfirst.turn-ended\tsignal: /tmp/fm-lab.SN5EyZ/state/first.turn-ended\n", ".stale-since-v2.primary%3aa%2fb": "1793202855\n", ".churn-since-primary_a_b": "1\n", ".stale-primary_a_b": "38813b2a6366400d678147244d942483"}
+PASS legacy marker cannot absorb a live Codex turn-end
+DRAIN 1793202867	4	signal	first.turn-ended	signal: /tmp/fm-lab.SN5EyZ/state/first.turn-ended
+
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 13491.1793202867.OMSPaX
+WARNING: watcher still down (same stale episode; last beat: 4s ago, grace 300s) - full banner already printed this episode.
+WARNING: queued wakes pending - drain them with bin/fm-wake-drain.sh before anything else.
+
+ACK exit=0 
+unicode-round1 exit=0
+unicode-round1 product output:
+stale: primary:船/员%2f
+
+unicode-round1-state {".hash-v2.primary%3a船%2f员%252f": "85ae1482ab0c852083f859c587b3131d", ".stale-since-v2.primary%3aa_b": "1793202862\n", ".count-primary_a_b": "99\n", ".count-v2.primary%3aa_b": "4\n", ".stale-v2.primary%3a船%2f员%252f": "85ae1482ab0c852083f859c587b3131d", ".count-v2.primary%3a船_员%252f": "1\n", ".stale-v2.primary%3aa_b": "9f5e57c71c896abc69240eb895ecc8c8", ".stale-v2.primary%3aa%2fb": "85ae1482ab0c852083f859c587b3131d", ".wake-queue.seq": "5\n", ".count-v2.primary%3a船%2f员%252f": "2\n", ".hash-primary_a_b": "38813b2a6366400d678147244d942483", ".count-v2.primary%3aa%2fb": "7\n", ".wake-queue": "1793202877\t5\tstale\tprimary:船/员%2f\tstale: primary:船/员%2f\n", ".hash-v2.primary%3a船_员%252f": "9f5e57c71c896abc69240eb895ecc8c8", ".stale-since-v2.primary%3aa%2fb": "1793202855\n", ".churn-since-primary_a_b": "1\n", ".stale-primary_a_b": "38813b2a6366400d678147244d942483"}
+DRAIN 1793202877	5	stale	primary:船/员%2f	stale: primary:船/员%2f
+
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 5 --recovery-generation 22299.1793202877.vuldbm
+WARNING: watcher still down (same stale episode; last beat: 2s ago, grace 300s) - full banner already printed this episode.
+WARNING: queued wakes pending - drain them with bin/fm-wake-drain.sh before anything else.
+
+ACK exit=0 
+unicode-round2 exit=0
+unicode-round2 product output:
+stale: primary:船_员%2f
+
+unicode-round2-state {".hash-v2.primary%3a船%2f员%252f": "85ae1482ab0c852083f859c587b3131d", ".stale-since-v2.primary%3aa_b": "1793202862\n", ".count-primary_a_b": "99\n", ".count-v2.primary%3aa_b": "4\n", ".stale-since-v2.primary%3a船%2f员%252f": "1793202880\n", ".stale-v2.primary%3a船%2f员%252f": "85ae1482ab0c852083f859c587b3131d", ".count-v2.primary%3a船_员%252f": "2\n", ".stale-v2.primary%3aa_b": "9f5e57c71c896abc69240eb895ecc8c8", ".stale-v2.primary%3aa%2fb": "85ae1482ab0c852083f859c587b3131d", ".wake-queue.seq": "6\n", ".count-v2.primary%3a船%2f员%252f": "3\n", ".hash-primary_a_b": "38813b2a6366400d678147244d942483", ".count-v2.primary%3aa%2fb": "7\n", ".wake-queue": "1793202881\t6\tstale\tprimary:船_员%2f\tstale: primary:船_员%2f\n", ".hash-v2.primary%3a船_员%252f": "9f5e57c71c896abc69240eb895ecc8c8", ".stale-since-v2.primary%3aa%2fb": "1793202855\n", ".stale-v2.primary%3a船_员%252f": "9f5e57c71c896abc69240eb895ecc8c8", ".churn-since-primary_a_b": "1\n", ".stale-primary_a_b": "38813b2a6366400d678147244d942483"}
+DRAIN 1793202881	6	stale	primary:船_员%2f	stale: primary:船_员%2f
+
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 6 --recovery-generation 32238.1793202881.z0YjAW
+WARNING: watcher still down (same stale episode; last beat: 3s ago, grace 300s) - full banner already printed this episode.
+WARNING: queued wakes pending - drain them with bin/fm-wake-drain.sh before anything else.
+
+ACK exit=0 
+PASS real watcher persists distinct stable keys for Unicode, literal percent escapes, slash, underscore and colon
+PASS production daemon handoff and cleanup consumed live watcher v2 markers; task key stayed first
+RESULT PASS
+CLEANED disposable lab /tmp/fm-lab.SN5EyZ

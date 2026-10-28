@@ -1,0 +1,48 @@
+REAL CODEX TUI
+
+  Hooks need review
+  4 hooks are new or changed.
+  Hooks can run outside the sandbox after you trust them.
+
+
+› 1. Review hooks
+  2. Trust all and continue
+  3. Continue without trusting (hooks won't run)
+
+  enter confirm · esc skip
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+signal: /tmp/fm-lab.qDZqX9/state/first.turn-ended
+
+duplicate-live-state {".hash-v2.primary%3aa%2fb": "a2dcd021571eaa391421514a610f98e3", ".wake-queue.seq": "2\n", ".wake-queue": "1793202837\t1\tsignal\tfirst.turn-ended\tsignal: /tmp/fm-lab.qDZqX9/state/first.turn-ended\n1793202837\t2\tsignal\tfirst.turn-ended\tsignal: /tmp/fm-lab.qDZqX9/state/first.turn-ended\n"}
+PASS duplicate endpoint records surface live turn-end instead of absorbing ambiguous progress
+PASS executed daemon migrates watcher pause into task-key marker
+daemon-paused-live-state {".stale-v2.primary%3aa%2fb": "3\n", ".subsuper-paused-first": "1793202838\n", ".paused-v2.primary%3aa%2fb": "3\n", ".stale-since-v2.primary%3aa%2fb": "3\n", ".wedge-escalations-v2.primary%3aa%2fb": "3\n"}
+PASS executed daemon reconciles resumed status and removes v2 watcher tracking
+daemon-resumed-live-state {".subsuper-seen-status-first": "v2\tr1:3334007374726f6e673a31363737373233343a3538393531383731393a313739333230323833372e37353835383633393300526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65\t34@strong:16777234:589518719:1793202837.758586393", ".subsuper-last-scan": "1793202839\n", ".subsuper-last-housekeep": "1793202839\n"}
+DAEMON exit=0
+RESULT PASS
+CLEANED /tmp/fm-lab.qDZqX9

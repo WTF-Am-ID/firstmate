@@ -1,0 +1,3 @@
+LAB /tmp/fm-lab.GtphRt revision=74aeb2a00febc791b9a5e2530d333211fde39f0f
+RESULT ERROR RuntimeError("tmux ('capture-pane', '-p', '-t', 'primary:a.b'): can't find window: a\n")
+CLEANED disposable lab /tmp/fm-lab.GtphRt

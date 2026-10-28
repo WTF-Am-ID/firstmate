@@ -1,0 +1,1 @@
+A command guard refused indirect execution of a filtered daemon fixture suite. That fixture-selection path was stopped without retry or guard changes. No t3 fixture command from that rejected batch ran. The independent public-interface probe executes bin/fm-supervise-daemon.sh normally and its product/state evidence is in live-daemon-probe.log.
