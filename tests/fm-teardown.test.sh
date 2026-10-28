@@ -5945,8 +5945,86 @@ test_status_archive_nested_secondmate_children() {
   pass "forced secondmate retirement preserves two descendant levels and refuses linked child directories"
 }
 
+# Exercise the real teardown entry point with real refs and fake pool commands.
+# No running backend or shared worktree pool is touched.
+test_task_branch_cleanup_outcomes() {
+  local backend=tmux scenario case_dir rc head ref=refs/heads/fm/task-x1
+    for scenario in removed detach-fails delete-fails detached delete-noop legacy-retry; do
+      case_dir=$(make_case "branch-$backend-$scenario")
+      write_meta "$case_dir" local-only ship
+      if [ "$scenario" != legacy-retry ]; then
+        printf 'branch=fm/task-x1\n' >> "$case_dir/state/task-x1.meta"
+      fi
+      head=$(git -C "$case_dir/wt" rev-parse HEAD)
+      git -C "$case_dir/wt" update-ref refs/no-mistakes/recover/test "$head"
+      git -C "$case_dir/wt" update-ref refs/remotes/no-mistakes/fm/task-x1 "$head"
+      if [ "$scenario" = detached ]; then
+        git -C "$case_dir/wt" checkout --detach -q
+      fi
+      cat > "$case_dir/fakebin/treehouse" <<'SH'
+#!/usr/bin/env bash
+printf '%s\n' "$*" >> "${FM_BRANCH_CASE:?}/backend.log"
+SH
+      cat > "$case_dir/fakebin/git" <<'SH'
+#!/usr/bin/env bash
+case " $* " in
+  *' checkout --detach '*)
+    if [ "${FM_BRANCH_FAILURE:-}" = detach-fails ]; then
+      echo 'synthetic detach failure' >&2
+      exit 1
+    fi ;;
+  *' branch -D '*)
+    case "${FM_BRANCH_FAILURE:-}" in
+      delete-fails|legacy-retry) echo 'synthetic deletion failure' >&2; exit 1 ;;
+      delete-noop) exit 0 ;;
+    esac ;;
+esac
+exec "${REAL_GIT_FOR_TEST:?}" "$@"
+SH
+      chmod +x "$case_dir/fakebin/git" "$case_dir/fakebin/treehouse"
+      set +e
+      FM_BRANCH_CASE="$case_dir" FM_BRANCH_FAILURE="$scenario" \
+        run_teardown "$case_dir" --force > "$case_dir/stdout" 2> "$case_dir/stderr"
+      rc=$?
+      set -e
+      case "$scenario" in
+        removed|detached)
+          expect_code 0 "$rc" "branch-$backend-$scenario: teardown should succeed: $(cat "$case_dir/stderr")"
+          ! git -C "$case_dir/project" show-ref --verify --quiet "$ref" \
+            || fail "branch-$backend-$scenario: task ref survived completion"
+          assert_absent "$case_dir/state/task-x1.meta" "completed cleanup kept metadata"
+          ;;
+        *)
+          [ "$rc" -ne 0 ] || fail "branch-$backend-$scenario: teardown hid a retained ref"
+          git -C "$case_dir/project" show-ref --verify --quiet "$ref" \
+            || fail "branch-$backend-$scenario: failure lost the task ref"
+          assert_contains "$(cat "$case_dir/stderr")" "$ref" "failure must name the retained ref"
+          ! grep -q 'teardown task-x1 complete' "$case_dir/stdout" \
+            || fail "branch-$backend-$scenario: failure reported complete"
+          assert_present "$case_dir/state/task-x1.meta" "failure must preserve retry metadata"
+          ! grep -Eq '(^return |^worktree rm )' "$case_dir/backend.log" 2>/dev/null \
+            || fail "branch-$backend-$scenario: released worktree after failed ref cleanup"
+          if [ "$scenario" = legacy-retry ]; then
+            FM_BRANCH_CASE="$case_dir" FM_BRANCH_FAILURE='' \
+              run_teardown "$case_dir" --force > "$case_dir/retry-out" 2> "$case_dir/retry-err" \
+              || fail "branch-$backend-$scenario: detached retry failed"
+            ! git -C "$case_dir/project" show-ref --verify --quiet "$ref" \
+              || fail "branch-$backend-$scenario: retry forgot the ref after detaching"
+            assert_absent "$case_dir/state/task-x1.teardown-branch" "completed retry kept its legacy branch identity"
+          fi
+          ;;
+      esac
+      [ "$(git -C "$case_dir/project" rev-parse refs/no-mistakes/recover/test)" = "$head" ] \
+        || fail "branch-$backend-$scenario: cleanup erased a recovery ref"
+      [ "$(git -C "$case_dir/project" rev-parse refs/remotes/no-mistakes/fm/task-x1)" = "$head" ] \
+        || fail "branch-$backend-$scenario: cleanup erased a staging ref"
+    done
+  pass "task branch cleanup proves absence or refuses with the retained ref and retry records on the ordinary path"
+}
+
 test_hidden_untracked_work_refuses_before_return
 test_content_fallback_git_capability_boundary
+test_task_branch_cleanup_outcomes
 test_status_archive_opt_in
 test_record_export_config_absent_never_reads_the_exporter
 test_record_export_unopted_symlinked_config_does_not_block_teardown
