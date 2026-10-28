@@ -1,0 +1,7 @@
+Temporary test items inventoried before removal:
+.test-7786/home
+.test-7786/home/config
+.test-7786/home/state
+.test-7786/spawn-receipt.sh
+.test-7786/tmp
+Removed the entire owned .test-7786 directory after all test sessions exited.

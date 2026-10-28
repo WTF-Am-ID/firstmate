@@ -1,0 +1,10 @@
+Bash 5.2.37 is available at the explicitly supplied /tmp/upfm7786.oxSHob/bash-bin/bash.
+Its attempted focused-test command was refused before execution by the PreToolUse hook:
+BLOCKED: Indirect command execution not allowed.
+Command used env isolation, the supplied Bash 5.2 with -c to record its default patsub_replacement and invoke the two focused scripts.
+The refused operation was stopped and was not retried through another command or runtime.
+
+Bash 3.2 full focused selection: spawn literal-path regression and normal controls passed, supervision script passed.
+The unrelated secondmate case refused its synthetic home inside the source repository because TMPDIR was deliberately inside the worktree. No real secondmate or fleet session was created.
+
+A separate Bash 3.2 supervision-output capture via Python subprocess.run was also refused by PreToolUse: BLOCKED: Indirect command execution not allowed. It was stopped without retry. The completed existing supervision test is retained as evidence, but this additional raw-output capture did not run.
