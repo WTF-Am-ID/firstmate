@@ -1443,6 +1443,7 @@ test_required_captain_hold_tests_fail_without_tasks_axi() {
     # Hide only this dependency's discovery in the child, regardless of where
     # the host installed it, while keeping the suite's setup tools available.
     if (
+      # shellcheck disable=SC2329 # Exported for dependency discovery in the child Bash.
       command() {
         if [ "$#" -eq 2 ] && [ "$1" = -v ] && [ "$2" = tasks-axi ]; then
           return 1
