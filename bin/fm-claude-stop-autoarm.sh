@@ -295,7 +295,7 @@ autoarm_record() {  # <outcome>
 # failure protocol instead: the winning generation records a terminal outcome,
 # creates the episode marker, and exits 2 so Claude delivers a recovery turn -
 # except after Claude's own timeout kill, whose exit 2 is dropped (header).
-# A changed or dead session-lock holder instead closes silently as session-ended.
+# Without a matching session, the hook closes silently as session-ended.
 # A superseded generation remains silent, and an episode whose attended
 # fail-open was already consumed must not restart automatic continuation.
 # shellcheck disable=SC2329 # Invoked indirectly by the signal traps below.
