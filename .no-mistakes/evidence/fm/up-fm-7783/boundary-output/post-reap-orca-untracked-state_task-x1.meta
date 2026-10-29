@@ -1,0 +1,12 @@
+window=fm-task-x1
+endpoint_task_id=task-x1
+worktree=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-orca-untracked/wt
+project=/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-orca-untracked/project
+kind=ship
+mode=no-mistakes
+spawn_gen=teardown-test-task-x1
+decisions_reviewed=1
+decision_keys=
+backend=orca
+terminal=term-test
+orca_worktree_id=wt-test::/orca/wt-test

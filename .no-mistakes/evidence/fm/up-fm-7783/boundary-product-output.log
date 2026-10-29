@@ -1,0 +1,316 @@
+
+artifact=post-reap-orca-clean-stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+artifact=post-reap-orca-commit-stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-orca-commit/wt has work not on any remote and not landed.
+unpushed commits:
+dfcae18 late worker commit
+Push the branch, land its PR, or get the captain's explicit OK to discard, then --force.
+
+artifact=post-reap-orca-force-stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+artifact=post-reap-orca-reap-refusal-stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: cannot determine leaked processes under /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-orca-reap-refusal/wt for task-x1 (lsof failed); preserving the worktree/tasktmp for manual inspection or retry.
+
+artifact=post-reap-orca-scout-stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+artifact=post-reap-orca-tracked-stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-orca-tracked/wt has uncommitted changes.
+uncommitted changes present (includes tracked edits)
+Commit them (or get the captain's explicit OK to discard, then --force).
+
+artifact=post-reap-orca-untracked-stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-orca-untracked/wt has uncommitted changes.
+uncommitted changes present (untracked-only leftovers)
+untracked paths (up to 10):
+  late.txt
+Commit them (or get the captain's explicit OK to discard, then --force).
+
+artifact=post-reap-tmux-clean-stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+artifact=post-reap-tmux-commit-stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-tmux-commit/wt has work not on any remote and not landed.
+unpushed commits:
+0cce0b4 late worker commit
+Push the branch, land its PR, or get the captain's explicit OK to discard, then --force.
+
+artifact=post-reap-tmux-force-stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+artifact=post-reap-tmux-reap-refusal-stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: cannot determine leaked processes under /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-tmux-reap-refusal/wt for task-x1 (lsof failed); preserving the worktree/tasktmp for manual inspection or retry.
+
+artifact=post-reap-tmux-scout-stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+artifact=post-reap-tmux-tracked-stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-tmux-tracked/wt has uncommitted changes.
+uncommitted changes present (includes tracked edits)
+Commit them (or get the captain's explicit OK to discard, then --force).
+
+artifact=post-reap-tmux-untracked-stderr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-tmux-untracked/wt has uncommitted changes.
+uncommitted changes present (untracked-only leftovers)
+untracked paths (up to 10):
+  late.txt
+Commit them (or get the captain's explicit OK to discard, then --force).
+
+artifact=post-reap-orca-clean-stdout
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-orca-clean/project: already current
+teardown task-x1 complete (window term-test, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-orca-clean/wt)
+Backlog: task-x1 is closed in /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-orca-clean/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+
+artifact=post-reap-orca-commit-stdout
+
+artifact=post-reap-orca-force-stdout
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-orca-force/project: already current
+teardown task-x1 complete (window term-test, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-orca-force/wt)
+Backlog: task-x1 is closed in /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-orca-force/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+
+artifact=post-reap-orca-reap-refusal-stdout
+
+artifact=post-reap-orca-scout-stdout
+teardown task-x1 complete (window term-test, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-orca-scout/wt)
+Backlog: task-x1 is closed in /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-orca-scout/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+
+artifact=post-reap-orca-tracked-stdout
+
+artifact=post-reap-orca-untracked-stdout
+
+artifact=post-reap-tmux-clean-stdout
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-tmux-clean/project: already current
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-tmux-clean/wt)
+Backlog: task-x1 is closed in /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-tmux-clean/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+
+artifact=post-reap-tmux-commit-stdout
+
+artifact=post-reap-tmux-force-stdout
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-tmux-force/project: already current
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-tmux-force/wt)
+Backlog: task-x1 is closed in /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-tmux-force/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+
+artifact=post-reap-tmux-reap-refusal-stdout
+
+artifact=post-reap-tmux-scout-stdout
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-tmux-scout/wt)
+Backlog: task-x1 is closed in /Users/daddy/.no-mistakes-upstream-codex/worktrees/886e3ba0b655/01M636E4MW7DKNM6Z77QBENS9V/.local-test-up7783-refresh/test-phase/tmp/fm-teardown-tests.3eZH8F/post-reap-tmux-scout/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+
+artifact=post-reap-tmux-tracked-stdout
+
+artifact=post-reap-tmux-untracked-stdout
+
+artifact=post-reap-orca-clean-data_backlog.md
+# Backlog
+
+## In flight
+## Queued
+## Done
+- [x] task-x1 - teardown fixture task (kind: ship) (done 2026-10-29)
+
+artifact=post-reap-orca-commit-data_backlog.md
+# Backlog
+
+## In flight
+- [ ] task-x1 - teardown fixture task (kind: ship) (since 2026-10-29)
+
+## Queued
+## Done
+
+artifact=post-reap-orca-force-data_backlog.md
+# Backlog
+
+## In flight
+## Queued
+## Done
+- [x] task-x1 - teardown fixture task (kind: ship) (done 2026-10-29)
+
+artifact=post-reap-orca-reap-refusal-data_backlog.md
+# Backlog
+
+## In flight
+- [ ] task-x1 - teardown fixture task (kind: ship) (since 2026-10-29)
+
+## Queued
+## Done
+
+artifact=post-reap-orca-scout-data_backlog.md
+# Backlog
+
+## In flight
+## Queued
+## Done
+- [x] task-x1 - teardown fixture task data/task-x1/report.md (kind: scout) (reported 2026-10-29)
+
+artifact=post-reap-orca-tracked-data_backlog.md
+# Backlog
+
+## In flight
+- [ ] task-x1 - teardown fixture task (kind: ship) (since 2026-10-29)
+
+## Queued
+## Done
+
+artifact=post-reap-orca-untracked-data_backlog.md
+# Backlog
+
+## In flight
+- [ ] task-x1 - teardown fixture task (kind: ship) (since 2026-10-29)
+
+## Queued
+## Done
+
+artifact=post-reap-tmux-clean-data_backlog.md
+# Backlog
+
+## In flight
+## Queued
+## Done
+- [x] task-x1 - teardown fixture task (kind: ship) (done 2026-10-29)
+
+artifact=post-reap-tmux-commit-data_backlog.md
+# Backlog
+
+## In flight
+- [ ] task-x1 - teardown fixture task (kind: ship) (since 2026-10-29)
+
+## Queued
+## Done
+
+artifact=post-reap-tmux-force-data_backlog.md
+# Backlog
+
+## In flight
+## Queued
+## Done
+- [x] task-x1 - teardown fixture task (kind: ship) (done 2026-10-29)
+
+artifact=post-reap-tmux-reap-refusal-data_backlog.md
+# Backlog
+
+## In flight
+- [ ] task-x1 - teardown fixture task (kind: ship) (since 2026-10-29)
+
+## Queued
+## Done
+
+artifact=post-reap-tmux-scout-data_backlog.md
+# Backlog
+
+## In flight
+## Queued
+## Done
+- [x] task-x1 - teardown fixture task data/task-x1/report.md (kind: scout) (reported 2026-10-29)
+
+artifact=post-reap-tmux-tracked-data_backlog.md
+# Backlog
+
+## In flight
+- [ ] task-x1 - teardown fixture task (kind: ship) (since 2026-10-29)
+
+## Queued
+## Done
+
+artifact=post-reap-tmux-untracked-data_backlog.md
+# Backlog
+
+## In flight
+- [ ] task-x1 - teardown fixture task (kind: ship) (since 2026-10-29)
+
+## Queued
+## Done
