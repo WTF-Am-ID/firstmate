@@ -1,0 +1,611 @@
++ set -u
+++ dirname tests/fm-watch-triage.test.sh
++ . tests/watch-triage-helpers.sh
+++ set -u
+++ '[' -n '' ']'
+++ FM_WATCH_TRIAGE_HELPERS_SOURCED=1
++++ dirname tests/watch-triage-helpers.sh
+++ . tests/wake-helpers.sh
+++++ dirname tests/wake-helpers.sh
++++ . tests/lib.sh
+++++ '[' -n '' ']'
+++++ FM_TEST_LIB_SOURCED=1
+++++ umask 022
++++++ dirname tests/lib.sh
+++++ . tests/git-config-helpers.sh
++++++ export GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_NOSYSTEM=1
++++++ GIT_CONFIG_GLOBAL=/dev/null
++++++ GIT_CONFIG_NOSYSTEM=1
++++++ unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_COMMON_DIR
+++++ export FM_GATE_REFUSE_BYPASS=1
+++++ FM_GATE_REFUSE_BYPASS=1
+++++ export FM_TEST_SEAM=1
+++++ FM_TEST_SEAM=1
+++++ unset FM_TASK_ID
+++++ unset TASKS_AXI_FILE TASKS_AXI_BACKEND
+++++ unset REX_SESSION REX_BLOCK
+++++++ dirname tests/lib.sh
++++++ cd tests/..
++++++ pwd
+++++ ROOT=/Users/daddy/.no-mistakes-upstream-codex/worktrees/39a4e6ae17a6/01M62XF4Q3DGEC9GRDXAEPH7VS
++++++ fm_test_tmpdir
++++++ local base=/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/ physical
++++++ base=/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++++ '[' -n /var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T ']'
++++++ case "$base" in
+++++++ CDPATH=
+++++++ cd -- /var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
+++++++ pwd -P
++++++ physical=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++++ base=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++++ '[' -e /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.git ']'
++++++ printf '%s\n' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
+++++ FM_TEST_TMPDIR=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
+++++ FM_TEST_CLEANUP_DIRS=()
++++++ mktemp /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.fm-test-cleanup.7974.XXXXXX
+++++ FM_TEST_CLEANUP_REGISTRY=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.fm-test-cleanup.7974.tvaBrs
++++++ fm_test_pid_identity 7974
++++++ local pid=7974
++++++ FM_STATE_OVERRIDE=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++++ bash -c '. "$1"; fm_pid_identity "$2"' _ /Users/daddy/.no-mistakes-upstream-codex/worktrees/39a4e6ae17a6/01M62XF4Q3DGEC9GRDXAEPH7VS/bin/fm-wake-lib.sh 7974
+++++ FM_TEST_OWNER_IDENTITY='Thu Oct 29 04:11:32 2026     bash -x tests/fm-watch-triage.test.sh'
++++++ mktemp /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.fm-test-procevent.7974.XXXXXX
+++++ FM_TEST_PROCEVENT_REGISTRY=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.fm-test-procevent.7974.xiVT63
++++++ mktemp /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.fm-test-watcher.7974.XXXXXX
+++++ FM_TEST_WATCHER_REGISTRY=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.fm-test-watcher.7974.i2X9a7
+++++ FM_TEST_STUB_MAX_BLOCK_SECONDS=120
+++++ export FM_TEST_STUB_MAX_BLOCK_SECONDS
+++++ FM_TEST_SUITE_PID=7974
+++++ export FM_TEST_SUITE_PID
+++++ trap fm_test_cleanup EXIT
+++++ trap 'fm_test_cleanup; exit 130' INT
+++++ trap 'fm_test_cleanup; exit 143' TERM
+++++ trap 'fm_test_cleanup; exit 129' HUP
+++++ trap 'fm_test_cleanup; exit 131' QUIT
+++++ FM_TEST_ORPHAN_MAX_AGE_SECONDS=3600
+++++ '[' 1 '!=' 1 ']'
++++ '[' -z '' ']'
+++++ fm_test_tmproot fm-wake-tangle-root
+++++ local prefix=fm-wake-tangle-root root tmp_base
++++++ fm_test_tmpdir
++++++ local base=/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/ physical
++++++ base=/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++++ '[' -n /var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T ']'
++++++ case "$base" in
+++++++ CDPATH=
+++++++ cd -- /var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
+++++++ pwd -P
++++++ physical=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++++ base=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++++ '[' -e /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.git ']'
++++++ printf '%s\n' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
+++++ tmp_base=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
+++++ tmp_base=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++++ mktemp -d /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.XXXXXX
+++++ root=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl
++++++ cd -P -- /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl
++++++ pwd -P
+++++ root=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl
+++++ printf '%s\n%s\n' 7974 'Thu Oct 29 04:11:32 2026     bash -x tests/fm-watch-triage.test.sh'
+++++ printf '%s\n' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl
+++++ printf '%s\n' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl
++++ FM_ROOT_OVERRIDE=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl
++++ export FM_ROOT_OVERRIDE
+++++ fm_test_tmproot fm-wedge-rec
+++++ local prefix=fm-wedge-rec root tmp_base
++++++ fm_test_tmpdir
++++++ local base=/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/ physical
++++++ base=/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++++ '[' -n /var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T ']'
++++++ case "$base" in
+++++++ CDPATH=
+++++++ cd -- /var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
+++++++ pwd -P
++++++ physical=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++++ base=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++++ '[' -e /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.git ']'
++++++ printf '%s\n' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
+++++ tmp_base=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
+++++ tmp_base=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++++ mktemp -d /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.XXXXXX
+++++ root=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA
++++++ cd -P -- /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA
++++++ pwd -P
+++++ root=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA
+++++ printf '%s\n%s\n' 7974 'Thu Oct 29 04:11:32 2026     bash -x tests/fm-watch-triage.test.sh'
+++++ printf '%s\n' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA
+++++ printf '%s\n' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA
++++ _fm_wedge_rec_dir=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA
++++ cat
++++ chmod +x /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA/rec
++++ export FM_WEDGE_ALARM_EXEC=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA/rec
++++ FM_WEDGE_ALARM_EXEC=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA/rec
+++ . /Users/daddy/.no-mistakes-upstream-codex/worktrees/39a4e6ae17a6/01M62XF4Q3DGEC9GRDXAEPH7VS/bin/fm-classify-lib.sh
+++++ d=/Users/daddy/.no-mistakes-upstream-codex/worktrees/39a4e6ae17a6/01M62XF4Q3DGEC9GRDXAEPH7VS/bin
+++++ '[' /Users/daddy/.no-mistakes-upstream-codex/worktrees/39a4e6ae17a6/01M62XF4Q3DGEC9GRDXAEPH7VS/bin '!=' /Users/daddy/.no-mistakes-upstream-codex/worktrees/39a4e6ae17a6/01M62XF4Q3DGEC9GRDXAEPH7VS/bin/fm-classify-lib.sh ']'
+++++ cd /Users/daddy/.no-mistakes-upstream-codex/worktrees/39a4e6ae17a6/01M62XF4Q3DGEC9GRDXAEPH7VS/bin
+++++ pwd
++++ _FM_CLASSIFY_LIB_DIR=/Users/daddy/.no-mistakes-upstream-codex/worktrees/39a4e6ae17a6/01M62XF4Q3DGEC9GRDXAEPH7VS/bin
+++++ uname -s
++++ _FM_CLASSIFY_UNAME_S=Darwin
++++ FM_CREW_STATE_BIN=/Users/daddy/.no-mistakes-upstream-codex/worktrees/39a4e6ae17a6/01M62XF4Q3DGEC9GRDXAEPH7VS/bin/fm-crew-state.sh
++++ case $- in
++++ _fm_classify_nounset=on
++++ . /Users/daddy/.no-mistakes-upstream-codex/worktrees/39a4e6ae17a6/01M62XF4Q3DGEC9GRDXAEPH7VS/bin/fm-timeout-lib.sh
+++++ set -u
++++ '[' on = on ']'
++++ unset _fm_classify_nounset
++++ FM_CLASSIFY_CAPTAIN_RE_DEFAULT='done:|needs-decision:|blocked:|failed:|PR ready|checks green|ready in branch|merged'
++++ FM_CLASSIFY_PAUSED_VERB_DEFAULT=paused
++++ FM_PAUSE_RESURFACE_SECS_DEFAULT=14400
++++ FM_CLASSIFY_RESOLVE_VERB_DEFAULT=resolved
++++ FM_CLASSIFY_CAPTAIN_HELD_VERB_DEFAULT=captain-held
++++ FM_CLASSIFY_EVENT_WINDOW_LINES=200
++++ FM_CLASSIFY_RESERVED_KEY_PREFIXES_DEFAULT=pending-reply-
++++ FM_OPEN_DECISIONS_FOLD_VERSION=9
++++ FM_STATUS_SNAPSHOT_EVENT_LINE=
++++ FM_STATUS_SNAPSHOT_EVENT_MTIME=
++++ FM_STATUS_SNAPSHOT_EVENT_ENDPOINT=
++++ STATUS_PRESENTATION_REPORTED=
++++ STATUS_PRESENTATION_CLASSIFIED=
++++ _FM_CLASSIFY_KEYLESS_PHASE=$'\036default'
++++ FM_GATE_HUMAN_DECISION='ask-user: authority decision'
++++ FM_WORKTREE_WRITE_PRUNE='.git node_modules .venv venv __pycache__ .mypy_cache .pytest_cache .ruff_cache .tox target dist build .next .cache vendor'
++++ FM_WORKTREE_WRITE_MAXDEPTH=6
++++ FM_WORKTREE_WRITE_TIMEOUT=10
+++ WATCH=/Users/daddy/.no-mistakes-upstream-codex/worktrees/39a4e6ae17a6/01M62XF4Q3DGEC9GRDXAEPH7VS/bin/fm-watch.sh
+++ DRAIN=/Users/daddy/.no-mistakes-upstream-codex/worktrees/39a4e6ae17a6/01M62XF4Q3DGEC9GRDXAEPH7VS/bin/fm-wake-drain.sh
+++ fm_test_tmproot fm-watch-triage-tests
+++ local prefix=fm-watch-triage-tests root tmp_base
++++ fm_test_tmpdir
++++ local base=/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/ physical
++++ base=/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++ '[' -n /var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T ']'
++++ case "$base" in
+++++ CDPATH=
+++++ cd -- /var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
+++++ pwd -P
++++ physical=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++ base=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++ '[' -e /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.git ']'
++++ printf '%s\n' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
+++ tmp_base=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
+++ tmp_base=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T
++++ mktemp -d /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.XXXXXX
+++ root=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj
++++ cd -P -- /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj
++++ pwd -P
+++ root=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj
+++ printf '%s\n%s\n' 7974 'Thu Oct 29 04:11:32 2026     bash -x tests/fm-watch-triage.test.sh'
+++ printf '%s\n' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj
+++ printf '%s\n' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj
++ TMP_ROOT=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj
++ WEDGE_GUARD_CRITICAL='printf "%s\n" "{\"name\":\"ticket\",\"status\":\"CRITICAL\",\"recommendation\":\"ticket 7 is held by a live job\"}"'
++ '[' -n '' ']'
++ '[' -n test_heartbeat_backstop_surfaces_unsurfaced_status ']'
++ test_heartbeat_backstop_surfaces_unsurfaced_status
++ local dir state fakebin out drain_out sig pid
+++ make_case heartbeat-backstop
+++ local name=heartbeat-backstop dir fakebin
+++ dir=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop
+++ fakebin=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/fakebin
+++ mkdir -p /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/fakebin
+++ fm_test_track_watcher_state /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state
+++ '[' -n /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state ']'
+++ printf '%s\n' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state
+++ cat
+++ chmod +x /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/fakebin/tmux
+++ make_fake_crew_state /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/fakebin
+++ local fakebin=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/fakebin
+++ cat
+++ chmod +x /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/fakebin/fm-crew-state.sh
+++ printf '%s\n' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/fakebin/fm-crew-state.sh
+++ printf '%s\n' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop
++ dir=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop
++ state=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state
++ fakebin=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/fakebin
++ out=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/watch.out
++ drain_out=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/drain.out
++ printf 'done: PR https://example.test/pr/5\n'
+++ seen_sig /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
+++ local reported size ident
+++ case "$1" in
++++ status_observed_signature /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
++++ local f=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status size= ident= path_state link_target=- access kind encoded
+++++ _status_observed_path_state /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
+++++ '[' Darwin = Darwin ']'
+++++ LC_ALL=C
+++++ /usr/bin/stat -f %HT:%p /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
++++ path_state='Regular File:100644'
++++ '[' -L /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status ']'
++++ '[' '!' -e /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status ']'
++++ '[' '!' -f /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status ']'
++++ '[' -r /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status ']'
++++ kind=readable
++++ '[' -z '' ']'
+++++ _fm_status_file_size /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
+++++ local f=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
+++++ '[' -n '' ']'
+++++ '[' Darwin = Darwin ']'
+++++ LC_ALL=C
+++++ /usr/bin/stat -f %z /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
++++ size=35
++++ size=35
++++ case "$size" in
++++ '[' -z '' ']'
+++++ _fm_open_decisions_file_ident /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
+++++ local f=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status epoch birth ident
+++++ '[' -n '' ']'
+++++ '[' Darwin = Darwin ']'
++++++ LC_ALL=C
++++++ /usr/bin/stat -f %d:%i /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
+++++ ident=16777234:595514495
++++++ LC_ALL=C
++++++ /usr/bin/stat -f %B /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
+++++ epoch=1793247092
+++++ '[' 1793247092 '!=' 0 ']'
++++++ LC_ALL=C
++++++ /usr/bin/stat -f %FB /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
+++++ birth=1793247092.383260051
+++++ case "$ident$birth" in
+++++ '[' -n 1793247092.383260051 ']'
+++++ printf strong:%s:%s 16777234:595514495 1793247092.383260051
++++ ident=strong:16777234:595514495:1793247092.383260051
++++ '[' -n strong:16777234:595514495:1793247092.383260051 ']'
++++ '[' -r /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status ']'
++++ access=readable
+++++ printf '%s\0%s\0%s\0%s\0%s\0%s' 35 strong:16777234:595514495:1793247092.383260051 'Regular File:100644' - readable readable
+++++ LC_ALL=C
+++++ od -An -v -tx1
+++++ tr -d ' \n'
++++ encoded=3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65
++++ printf r1:%s 3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65
+++ reported=r1:3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65
++++ size_of /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
++++ LC_ALL=C
++++ wc -c
++++ tr -d '[:space:]'
+++ size=35
++++ _fm_open_decisions_file_ident /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
++++ local f=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status epoch birth ident
++++ '[' -n '' ']'
++++ '[' Darwin = Darwin ']'
+++++ LC_ALL=C
+++++ /usr/bin/stat -f %d:%i /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
++++ ident=16777234:595514495
+++++ LC_ALL=C
+++++ /usr/bin/stat -f %B /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
++++ epoch=1793247092
++++ '[' 1793247092 '!=' 0 ']'
+++++ LC_ALL=C
+++++ /usr/bin/stat -f %FB /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
++++ birth=1793247092.383260051
++++ case "$ident$birth" in
++++ '[' -n 1793247092.383260051 ']'
++++ printf strong:%s:%s 16777234:595514495 1793247092.383260051
+++ ident=strong:16777234:595514495:1793247092.383260051
+++ printf 'v2\t%s\t%s@%s' r1:3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65 35 strong:16777234:595514495:1793247092.383260051
++ sig='v2	r1:3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65	35@strong:16777234:595514495:1793247092.383260051'
++ printf %s 'v2	r1:3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65	35@strong:16777234:595514495:1793247092.383260051'
++ printf '3\n'
++ touch /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/.last-heartbeat
+++ date +%s
++ set_mtime 1793247062 /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/.last-heartbeat
++ local epoch=1793247062 f=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/.last-heartbeat stamp
+++ date -r 1793247062 +%Y%m%d%H%M.%S
++ stamp=202610290011.02
++ touch -t 202610290011.02 /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/.last-heartbeat
++ pid=8074
++ wait_for_exit 8074 100
++ local pid=8074 limit=100 i=0
++ '[' 0 -lt 100 ']'
++ is_live_non_zombie 8074
++ local pid=8074 stat
++ kill -0 8074
++ PATH=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/fakebin:/opt/homebrew/Caskroom/codex/0.165.0/codex-path:/Users/daddy/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/usr/local/MacGPG2/bin:/Users/daddy/.codex/tmp/arg0-macos/codex-arg0tskr0V:/opt/homebrew/Caskroom/codex/0.165.0/codex-path:/Users/daddy/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/daddy/go/bin:/Users/daddy/.cargo/bin:/Users/daddy/bin:/usr/local/sbin:/Users/daddy/.local/bin
++ FM_STATE_OVERRIDE=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state
++ FM_POLL=1
++ FM_SIGNAL_GRACE=1
++ FM_CHECK_INTERVAL=999999
++ FM_HEARTBEAT=1
++ /Users/daddy/.no-mistakes-upstream-codex/worktrees/39a4e6ae17a6/01M62XF4Q3DGEC9GRDXAEPH7VS/bin/fm-watch.sh
+++ ps -p 8074 -o stat=
++ stat='R   '
++ case "$stat" in
++ return 0
++ sleep 0.1
++ i=1
++ '[' 1 -lt 100 ']'
++ is_live_non_zombie 8074
++ local pid=8074 stat
++ kill -0 8074
+++ ps -p 8074 -o stat=
++ stat='S   '
++ case "$stat" in
++ return 0
++ sleep 0.1
++ i=2
++ '[' 2 -lt 100 ']'
++ is_live_non_zombie 8074
++ local pid=8074 stat
++ kill -0 8074
+++ ps -p 8074 -o stat=
++ stat='S   '
++ case "$stat" in
++ return 0
++ sleep 0.1
++ i=3
++ '[' 3 -lt 100 ']'
++ is_live_non_zombie 8074
++ local pid=8074 stat
++ kill -0 8074
+++ ps -p 8074 -o stat=
++ stat='S   '
++ case "$stat" in
++ return 0
++ sleep 0.1
++ i=4
++ '[' 4 -lt 100 ']'
++ is_live_non_zombie 8074
++ local pid=8074 stat
++ kill -0 8074
+++ ps -p 8074 -o stat=
++ stat='S   '
++ case "$stat" in
++ return 0
++ sleep 0.1
++ i=5
++ '[' 5 -lt 100 ']'
++ is_live_non_zombie 8074
++ local pid=8074 stat
++ kill -0 8074
+++ ps -p 8074 -o stat=
++ stat='S   '
++ case "$stat" in
++ return 0
++ sleep 0.1
++ i=6
++ '[' 6 -lt 100 ']'
++ is_live_non_zombie 8074
++ local pid=8074 stat
++ kill -0 8074
++ return 1
++ wait 8074
++ return 0
+++ cat /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/.heartbeat-streak
++ '[' 0 = 0 ']'
++ awk -F '\t' '$3 == "heartbeat" && $4 == "heartbeat" { found=1 } END { exit !found }' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/.wake-queue
++ grep -Fx heartbeat /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/watch.out
+++ status_presentation_marker_offset /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/.hb-surfaced-miss /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
+++ local raw classified offset ident current
++++ cat /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/.hb-surfaced-miss
+++ raw='v2	r1:3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65	35@strong:16777234:595514495:1793247092.383260051'
+++ status_presentation_marker_parse 'v2	r1:3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65	35@strong:16777234:595514495:1793247092.383260051'
+++ local 'raw=v2	r1:3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65	35@strong:16777234:595514495:1793247092.383260051' rest reported classified
+++ STATUS_PRESENTATION_REPORTED=
+++ STATUS_PRESENTATION_CLASSIFIED=
+++ case "$raw" in
+++ rest='r1:3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65	35@strong:16777234:595514495:1793247092.383260051'
+++ case "$rest" in
+++ reported=r1:3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65
+++ classified=35@strong:16777234:595514495:1793247092.383260051
+++ case "$classified" in
+++ _status_presentation_signature_valid r1:3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65
+++ local value=r1:3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65 size ident encoded
+++ '[' r1:3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65 = unverifiable ']'
+++ case "$value" in
+++ encoded=3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65
+++ case "$encoded" in
+++ return 0
+++ '[' 35@strong:16777234:595514495:1793247092.383260051 '!=' - ']'
+++ _status_presentation_signature_valid 35@strong:16777234:595514495:1793247092.383260051
+++ local value=35@strong:16777234:595514495:1793247092.383260051 size ident encoded
+++ '[' 35@strong:16777234:595514495:1793247092.383260051 = unverifiable ']'
+++ case "$value" in
+++ case "$value" in
+++ size=35
+++ ident=strong:16777234:595514495:1793247092.383260051
+++ case "$size" in
+++ case "$ident" in
+++ case "$classified" in
+++ STATUS_PRESENTATION_REPORTED=r1:3335007374726f6e673a31363737373233343a3539353531343439353a313739333234373039322e33383332363030353100526567756c61722046696c653a313030363434002d007265616461626c65007265616461626c65
+++ STATUS_PRESENTATION_CLASSIFIED=35@strong:16777234:595514495:1793247092.383260051
+++ classified=35@strong:16777234:595514495:1793247092.383260051
+++ '[' 35@strong:16777234:595514495:1793247092.383260051 '!=' - ']'
+++ offset=35
+++ ident=strong:16777234:595514495:1793247092.383260051
++++ _fm_open_decisions_file_ident /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
++++ local f=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status epoch birth ident
++++ '[' -n '' ']'
++++ '[' Darwin = Darwin ']'
+++++ LC_ALL=C
+++++ /usr/bin/stat -f %d:%i /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
++++ ident=16777234:595514495
+++++ LC_ALL=C
+++++ /usr/bin/stat -f %B /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
++++ epoch=1793247092
++++ '[' 1793247092 '!=' 0 ']'
+++++ LC_ALL=C
+++++ /usr/bin/stat -f %FB /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
++++ birth=1793247092.383260051
++++ case "$ident$birth" in
++++ '[' -n 1793247092.383260051 ']'
++++ printf strong:%s:%s 16777234:595514495 1793247092.383260051
+++ current=strong:16777234:595514495:1793247092.383260051
+++ '[' strong:16777234:595514495:1793247092.383260051 = strong:16777234:595514495:1793247092.383260051 ']'
+++ printf %s 35
+++ size_of /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/miss.status
+++ LC_ALL=C
+++ wc -c
+++ tr -d '[:space:]'
++ '[' 35 = 35 ']'
++ FM_STATE_OVERRIDE=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state
++ /Users/daddy/.no-mistakes-upstream-codex/worktrees/39a4e6ae17a6/01M62XF4Q3DGEC9GRDXAEPH7VS/bin/fm-wake-drain.sh
+++ printf '\theartbeat\theartbeat\t'
++ grep '	heartbeat	heartbeat	' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/drain.out
++ pass 'heartbeat backstop fail-safe surfaces a captain-relevant status the per-wake path missed'
++ printf 'ok - %s\n' 'heartbeat backstop fail-safe surfaces a captain-relevant status the per-wake path missed'
+ok - heartbeat backstop fail-safe surfaces a captain-relevant status the per-wake path missed
++ exit 0
++ fm_test_cleanup
++ local d
++ fm_test_reap_watchers
++ local state lock_home 'seen=
+'
++ '[' -f /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.fm-test-watcher.7974.i2X9a7 ']'
++ IFS=
++ read -r state
++ '[' -n /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state ']'
++ case "$seen" in
++ seen+='/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state
+'
++ '[' -f /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/heartbeat-backstop/state/.watch.lock/pid ']'
++ continue
++ IFS=
++ read -r state
++ rm -f /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.fm-test-watcher.7974.i2X9a7
++ fm_test_reap_procevent_homes
++ local home claim_root 'seen=
+'
++ '[' -f /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.fm-test-procevent.7974.xiVT63 ']'
++ IFS='	'
++ read -r home claim_root
++ rm -f /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.fm-test-procevent.7974.xiVT63
++ for d in '"${FM_TEST_CLEANUP_DIRS[@]:-}"'
++ '[' -n '' ']'
++ '[' -f /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.fm-test-cleanup.7974.tvaBrs ']'
++ IFS=
++ read -r d
++ '[' -n /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl ']'
++ fm_test_reap_root_processes /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl
++ local root=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl chain pid pids signal i
++ '[' -n /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl ']'
++ '[' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl '!=' / ']'
++ chain=' '
++ pid=7974
++ '[' -n 7974 ']'
++ '[' 7974 -gt 1 ']'
++ chain=' 7974 '
+++ ps -o ppid= -p 7974
+++ tr -d '[:space:]'
++ pid=42058
++ '[' -n 42058 ']'
++ '[' 42058 -gt 1 ']'
++ chain=' 7974 42058 '
+++ ps -o ppid= -p 42058
+++ tr -d '[:space:]'
++ pid=11519
++ '[' -n 11519 ']'
++ '[' 11519 -gt 1 ']'
++ chain=' 7974 42058 11519 '
+++ ps -o ppid= -p 11519
+++ tr -d '[:space:]'
++ pid=1
++ '[' -n 1 ']'
++ '[' 1 -gt 1 ']'
++ for signal in TERM KILL
++ i=0
++ '[' 0 -lt 20 ']'
+++ ps -ww -eo pid=,args=
+++ FM_TEST_REAP_ROOT=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl/
+++ awk -v 'chain= 7974 42058 11519 ' 'index($0, ENVIRON["FM_TEST_REAP_ROOT"]) && index(chain, " " $1 " ") == 0 { print $1 }'
++ pids=
++ '[' -n '' ']'
++ return 0
++ fm_test_remove_tree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl
++ local dir=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl
++ '[' -d /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl ']'
++ '[' '!' -L /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl ']'
++ find /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl -type d -exec chmod u+rwx '{}' +
++ rm -rf /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wake-tangle-root.g7hZRl
++ IFS=
++ read -r d
++ '[' -n /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA ']'
++ fm_test_reap_root_processes /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA
++ local root=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA chain pid pids signal i
++ '[' -n /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA ']'
++ '[' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA '!=' / ']'
++ chain=' '
++ pid=7974
++ '[' -n 7974 ']'
++ '[' 7974 -gt 1 ']'
++ chain=' 7974 '
+++ ps -o ppid= -p 7974
+++ tr -d '[:space:]'
++ pid=42058
++ '[' -n 42058 ']'
++ '[' 42058 -gt 1 ']'
++ chain=' 7974 42058 '
+++ ps -o ppid= -p 42058
+++ tr -d '[:space:]'
++ pid=11519
++ '[' -n 11519 ']'
++ '[' 11519 -gt 1 ']'
++ chain=' 7974 42058 11519 '
+++ ps -o ppid= -p 11519
+++ tr -d '[:space:]'
++ pid=1
++ '[' -n 1 ']'
++ '[' 1 -gt 1 ']'
++ for signal in TERM KILL
++ i=0
++ '[' 0 -lt 20 ']'
+++ ps -ww -eo pid=,args=
+++ FM_TEST_REAP_ROOT=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA/
+++ awk -v 'chain= 7974 42058 11519 ' 'index($0, ENVIRON["FM_TEST_REAP_ROOT"]) && index(chain, " " $1 " ") == 0 { print $1 }'
++ pids=
++ '[' -n '' ']'
++ return 0
++ fm_test_remove_tree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA
++ local dir=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA
++ '[' -d /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA ']'
++ '[' '!' -L /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA ']'
++ find /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA -type d -exec chmod u+rwx '{}' +
++ rm -rf /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-wedge-rec.IUV8LA
++ IFS=
++ read -r d
++ '[' -n /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj ']'
++ fm_test_reap_root_processes /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj
++ local root=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj chain pid pids signal i
++ '[' -n /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj ']'
++ '[' /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj '!=' / ']'
++ chain=' '
++ pid=7974
++ '[' -n 7974 ']'
++ '[' 7974 -gt 1 ']'
++ chain=' 7974 '
+++ ps -o ppid= -p 7974
+++ tr -d '[:space:]'
++ pid=42058
++ '[' -n 42058 ']'
++ '[' 42058 -gt 1 ']'
++ chain=' 7974 42058 '
+++ ps -o ppid= -p 42058
+++ tr -d '[:space:]'
++ pid=11519
++ '[' -n 11519 ']'
++ '[' 11519 -gt 1 ']'
++ chain=' 7974 42058 11519 '
+++ ps -o ppid= -p 11519
+++ tr -d '[:space:]'
++ pid=1
++ '[' -n 1 ']'
++ '[' 1 -gt 1 ']'
++ for signal in TERM KILL
++ i=0
++ '[' 0 -lt 20 ']'
+++ ps -ww -eo pid=,args=
+++ FM_TEST_REAP_ROOT=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj/
+++ awk -v 'chain= 7974 42058 11519 ' 'index($0, ENVIRON["FM_TEST_REAP_ROOT"]) && index(chain, " " $1 " ") == 0 { print $1 }'
++ pids=
++ '[' -n '' ']'
++ return 0
++ fm_test_remove_tree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj
++ local dir=/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj
++ '[' -d /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj ']'
++ '[' '!' -L /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj ']'
++ find /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj -type d -exec chmod u+rwx '{}' +
++ rm -rf /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-watch-triage-tests.NbpIsj
++ IFS=
++ read -r d
++ rm -f /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/.fm-test-cleanup.7974.tvaBrs
