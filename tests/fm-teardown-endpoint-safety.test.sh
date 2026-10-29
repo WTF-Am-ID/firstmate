@@ -1230,12 +1230,10 @@ test_failed_endpoint_close_refuses_before_removing_the_record() {
   # thing naming what survived, so it has to outlive the refusal.
   assert_present "$dir/home/state/$id.meta" \
     "teardown deleted the only durable record naming an endpoint it could not close"
-  # That retention is this run's, not a durable one - a task carrying a backlog
-  # transition has the next session's pending-close replay remove the retained
-  # record - so the refusal has to say so instead of sending the operator away
-  # trusting it.
-  assert_grep "not durable across a session start" "$dir/failed.err" \
-    "the refusal promised a retention teardown does not own"
+  # bin/fm-backlog-transition-lib.sh owns replay eligibility and record lifetime.
+  # The refusal must make that condition clear before the operator relies on retention.
+  assert_grep "only if its pending close is eligible for replay; unresolved branch cleanup keeps the record for retry" "$dir/failed.err" \
+    "the refusal did not condition record retirement on replay eligibility"
   isolated_tmux_window_exists "$dir" "$socket" "$session" "fm-$id" \
     || fail "the surviving endpoint disappeared, so this case no longer proves the hazard"
   isolated_tmux_window_exists "$dir" "$socket" "$session" control \
