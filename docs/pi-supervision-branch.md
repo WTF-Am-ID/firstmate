@@ -34,7 +34,7 @@ Once a Pi primary session owns this home's fleet lock, the branch handles two ki
 
 - Eligible task-local rows from ordinary actionable wakes.
   A row is one queued wake entry.
-- Fleet-wide heartbeat reviews that pass [heartbeat routing](#heartbeat-routing).
+- Heartbeat scans that the cheap bash-level scan flags as possibly captain-relevant.
 
 The branch then merges each outcome back into the captain conversation's transcript.
 
@@ -469,9 +469,8 @@ Main can read the durable outcome store on demand through its `fm_branch_outcome
 
 ## Heartbeat routing
 
-The [`bin/fm-watch.sh` header](../bin/fm-watch.sh) owns heartbeat scan classification and emitted wake reasons.
-An actionable heartbeat backstop emits a check wake, which remains main-owned while attended under [check-row ownership](#co-present-main-owned-rows).
-Only a bare `heartbeat` wake uses the fleet-wide offer below.
+The cheap bash-level heartbeat scan absorbs a genuinely no-op pass before it reaches Pi, unchanged from before.
+Only a scan already flagged as possibly captain-relevant emits the bare `heartbeat` wake.
 `.pi/extensions/fm-primary-pi-watch.ts` flags that offer `heartbeat: true`.
 The branch accepts it without a project only when every branch-ownable row observed in the unread-queue eligibility check is one of these:
 

@@ -4546,9 +4546,9 @@ test_heartbeat_backstop_surfaces_a_masked_status() {
   wait_for_exit "$pid" 100 \
     || fail "heartbeat backstop missed a decision hidden behind a later working: line"
   [ "$(cat "$state/.heartbeat-streak")" = 0 ] || fail "actionable backstop did not reset idle heartbeat backoff"
-  awk -F '\t' '$3 == "check" && $4 == "heartbeat-backstop" { found=1 } END { exit !found }' \
-    "$state/.wake-queue" || fail "actionable backstop did not enqueue a check wake"
-  grep -Fx "check: heartbeat-backstop" "$out" >/dev/null || fail "backstop did not exit with a check wake"
+  awk -F '\t' '$3 == "heartbeat" && $4 == "heartbeat" { found=1 } END { exit !found }' \
+    "$state/.wake-queue" || fail "actionable backstop did not preserve the heartbeat wake"
+  grep -Fx heartbeat "$out" >/dev/null || fail "backstop did not preserve its heartbeat wake reason"
   [ "$(status_presentation_marker_offset "$state/.hb-surfaced-miss" "$state/miss.status")" = \
     "$(size_of "$state/miss.status")" ] \
     || fail "backstop did not record the masked status as surfaced through its end"
@@ -4573,14 +4573,14 @@ test_heartbeat_backstop_surfaces_unsurfaced_status() {
   pid=$!
   wait_for_exit "$pid" 100 || fail "heartbeat backstop did not surface an unsurfaced captain-relevant status"
   [ "$(cat "$state/.heartbeat-streak")" = 0 ] || fail "actionable backstop did not reset idle heartbeat backoff"
-  awk -F '\t' '$3 == "check" && $4 == "heartbeat-backstop" { found=1 } END { exit !found }' \
-    "$state/.wake-queue" || fail "actionable backstop did not enqueue a check wake"
-  grep -Fx "check: heartbeat-backstop" "$out" >/dev/null || fail "backstop did not exit with a check wake"
+  awk -F '\t' '$3 == "heartbeat" && $4 == "heartbeat" { found=1 } END { exit !found }' \
+    "$state/.wake-queue" || fail "actionable backstop did not preserve the heartbeat wake"
+  grep -Fx heartbeat "$out" >/dev/null || fail "backstop did not preserve its heartbeat wake reason"
   [ "$(status_presentation_marker_offset "$state/.hb-surfaced-miss" "$state/miss.status")" = \
     "$(size_of "$state/miss.status")" ] \
     || fail "backstop did not record the status as surfaced through its end (would re-fire next heartbeat)"
   FM_STATE_OVERRIDE="$state" "$DRAIN" > "$drain_out" 2>/dev/null || fail "drain after the backstop heartbeat failed"
-  grep "$(printf '\tcheck\theartbeat-backstop\t')" "$drain_out" >/dev/null || fail "backstop check was not drained"
+  grep "$(printf '\theartbeat\theartbeat\t')" "$drain_out" >/dev/null || fail "backstop heartbeat was not drained"
   pass "heartbeat backstop fail-safe surfaces a captain-relevant status the per-wake path missed"
 }
 
