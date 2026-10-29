@@ -7,6 +7,20 @@
 # room for marker prefixes within a 255-byte filename. The dot cannot occur in a
 # legacy key; legacy and v2 evidence is ignored, never migrated or revived.
 # Identity depends only on endpoint bytes, never on other recorded windows.
+# docs/configuration.md's watcher-marker upgrade note owns the intentional
+# one-time cache reset and its notification-only effects.
+#
+# Obsolete markers are not garbage-collected automatically. For optional cleanup,
+# stop both the watcher and away daemon, then archive the obsolete files outside
+# STATE (or remove the reviewed files). Limit this to per-endpoint marker families:
+# .hash-, .count-, .stale-, .stale-since-, .churn-since-, .dead-reported-,
+# .wedge-escalations-, .wedge-permanent-, .wedge-terminal-queued-,
+# .wedge-rollback-failed-, .paused-, .paused-rechecked-, .paused-resurfaced-,
+# .waiting-resurfaced-, .writing-since-, .writing-resurfaced-, .validating-since-,
+# .validating-resurfaced-, and .guard-deferrals-. Preserve every current filename
+# containing -v3.; only legacy/v2 suffixes in those families are obsolete.
+# Do not bulk-clear STATE: task records, wake queues, and task-keyed .subsuper-*
+# markers are outside this cleanup. Leaving obsolete files in place is safe.
 window_key() {  # <window>
   local digest
   if command -v shasum >/dev/null 2>&1; then
