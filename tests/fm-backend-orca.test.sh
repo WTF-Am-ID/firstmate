@@ -1045,7 +1045,7 @@ test_ship_teardown_removes_orca_worktree_when_id_path_matches() {
   local proj wt data state config id out rc neutral scenario ref head
   local real_git
   real_git=$(command -v git)
-  for scenario in removed detach-fails delete-fails detached; do
+  for scenario in removed detach-fails delete-fails detached present-on-other absent-on-other; do
   id="orcashipmatchz2"
   proj="$TMP_ROOT/ship-match-$scenario-project"
   wt="$TMP_ROOT/ship-match-$scenario-wt"
@@ -1065,6 +1065,12 @@ test_ship_teardown_removes_orca_worktree_when_id_path_matches() {
   git -C "$wt" update-ref refs/no-mistakes/recover/test "$head"
   git -C "$wt" update-ref refs/remotes/no-mistakes/task "$head"
   [ "$scenario" != detached ] || git -C "$wt" checkout --detach -q
+  case "$scenario" in
+    present-on-other|absent-on-other)
+      git -C "$wt" checkout -q -b startup
+      [ "$scenario" != absent-on-other ] || git -C "$wt" branch -D "fm/$id" >/dev/null
+      ;;
+  esac
   orca_case "ship-match-$scenario"
   printf '{"ok":true,"result":{"worktree":{"id":"wt-ship-match::/orca/wt-ship-match","path":"%s"}}}\n' "$wt" > "$RESP/1.out"
   cat > "$FB/git" <<'SH'
@@ -1111,6 +1117,12 @@ SH
   assert_contains "$(cat "$LOG")" $'orca\x1f''worktree'$'\x1f''rm'$'\x1f''--worktree'$'\x1f''id:wt-ship-match::/orca/wt-ship-match'$'\x1f''--force'$'\x1f''--json' \
     "teardown did not remove the matched Orca worktree"
   assert_absent "$state/$id.meta" "successful matched teardown should remove task metadata"
+  case "$scenario" in
+    present-on-other|absent-on-other)
+      [ "$(git -C "$proj" rev-parse refs/heads/startup)" = "$head" ] \
+        || fail "Orca $scenario altered the unrelated checkout branch"
+      ;;
+  esac
       ;;
   esac
   [ "$(git -C "$proj" rev-parse refs/no-mistakes/recover/test)" = "$head" ] \

@@ -5,9 +5,10 @@
 # scout tasks before reporting success (a secondmate teardown transitions none,
 # since secondmates are not backlog items), then refresh/prune the project's
 # clone for PR-based ship tasks.
-# Local task-branch cleanup must prove the recorded refs/heads/ ref absent
-# before declaring cleanup complete. A detach, delete, or verification
-# failure names the retained ref and preserves task metadata for retry, even
+# A captured task Git namespace must prove the recorded refs/heads/ ref absent
+# before declaring branch cleanup complete. When the namespace cannot be
+# established, cleanup finishes with a named retained ref and unverified removal.
+# A detach, delete, or Git verification failure preserves metadata for retry, even
 # under --force. Task branch and Git identity are saved in state/<id>.teardown-branch,
 # bound to the recorded paths, Git identity and spawn generation until cleanup completes,
 # without changing record export snapshots. Staging, remote-tracking, and recovery refs are
@@ -3773,15 +3774,27 @@ if [ "$TEARDOWN_BACKLOG_APPLIES" = 0 ] && [ "$KIND" != secondmate ]; then
     TEARDOWN_RECORDS_ONLY_STAMP=1
   fi
 fi
-# Roll the accepted legacy incarnation's stamp back to the record's exact
-# pre-stamp bytes. Uses perl - already in the teardown lifecycle's curated PATH
-# (truncate is not, and is absent on stock macOS) - and verifies the restored
-# size before reporting success, so a rollback that cannot be proven complete
-# is reported as not rolled back.
+# Roll the prepended incarnation back to the exact original bytes, including
+# an unterminated final field. Publish the unstamped copy atomically rather
+# than modifying the live record while copying it.
 teardown_legacy_stamp_rollback() {
+  local tmp
   [ "$TEARDOWN_LEGACY_PRESTAMP_SIZE" -gt 0 ] 2>/dev/null || return 1
-  perl -e 'truncate($ARGV[0], $ARGV[1]) or exit 1' -- \
-    "$META" "$TEARDOWN_LEGACY_PRESTAMP_SIZE" || return 1
+  tmp=$(mktemp "$STATE/.$ID.teardown-unstamp.XXXXXX") || return 1
+  if ! perl -e '
+      open my $in, "<", $ARGV[0] or exit 1;
+      binmode $in; binmode STDOUT;
+      my $prefix = <$in>;
+      defined($prefix) && $prefix eq "spawn_gen=$ARGV[1]\n" or exit 1;
+      my ($n, $buf);
+      while (($n = read($in, $buf, 65536)) > 0) { print $buf or exit 1; }
+      defined($n) && close($in) or exit 1;
+    ' -- "$META" "$TEARDOWN_META_SPAWN_GEN" > "$tmp" \
+     || [ "$(wc -c < "$tmp" | tr -d ' ')" != "$TEARDOWN_LEGACY_PRESTAMP_SIZE" ] \
+     || ! fm_backlog_atomic_transition publish "$tmp" "$META" "unstamped task record" "$STATE"; then
+    rm -f -- "$tmp"
+    return 1
+  fi
   [ "$(wc -c < "$META" | tr -d ' ')" = "$TEARDOWN_LEGACY_PRESTAMP_SIZE" ]
 }
 
@@ -3796,15 +3809,16 @@ teardown_legacy_stamp_rollback() {
      && [ -z "$TEARDOWN_LEGACY_RETAINED_STAMP" ]; then
     TEARDOWN_LEGACY_PRESTAMP_SIZE=$(wc -c < "$META" | tr -d ' ')
     TEARDOWN_LEGACY_STAMP_FAILED=
-    if [ -s "$META" ] && [ -n "$(tail -c 1 -- "$META" 2>/dev/null)" ]; then
-      printf '\n' >> "$META" || TEARDOWN_LEGACY_STAMP_FAILED=newline
+    # PR metadata has a terminal pr=/pr_head= block. Prepending the owned
+    # generation preserves that authenticated layout and every original byte.
+    TEARDOWN_LEGACY_STAMP_TMP=$(mktemp "$STATE/.$ID.teardown-stamp.XXXXXX") || exit 1
+    if ! { printf 'spawn_gen=%s\n' "$TEARDOWN_META_SPAWN_GEN" && cat "$META"; } > "$TEARDOWN_LEGACY_STAMP_TMP" \
+       || ! fm_backlog_atomic_transition publish "$TEARDOWN_LEGACY_STAMP_TMP" "$META" "stamped task record" "$STATE"; then
+      rm -f -- "$TEARDOWN_LEGACY_STAMP_TMP"
+      echo "error: could not publish task $ID's incarnation stamp; preserving its record for retry" >&2
+      exit 1
     fi
-    if [ -z "$TEARDOWN_LEGACY_STAMP_FAILED" ]; then
-      printf 'spawn_gen=%s\n' "$TEARDOWN_META_SPAWN_GEN" >> "$META" \
-        || TEARDOWN_LEGACY_STAMP_FAILED=append
-    fi
-    if [ -z "$TEARDOWN_LEGACY_STAMP_FAILED" ] \
-       && ! fm_backlog_meta_spawn_gen "$META" "$STATE"; then
+    if ! fm_backlog_meta_spawn_gen "$META" "$STATE"; then
       TEARDOWN_LEGACY_STAMP_FAILED=validate
     fi
     if [ -n "$TEARDOWN_LEGACY_STAMP_FAILED" ]; then
@@ -3846,11 +3860,13 @@ fi
 
 # Both providers use the same local-ref postcondition. The ordinary return's
 # existing lock retry runs before verification; capture only identity before it.
-# Retain the task record until Git proves branch cleanup succeeded.
+# Git failures retain retry records; an unavailable namespace is an explicit
+# retained-ref finish rather than a claim that branch removal was verified.
 TEARDOWN_TASK_BRANCH=
 TEARDOWN_TASK_GIT_COMMON=
 TEARDOWN_TASK_GIT_WORKTREE=
 TEARDOWN_TASK_SPAWN_GEN=
+TEARDOWN_TASK_RETAINED_REF=
 teardown_task_branch() {
   local branch current='' ref rc identity="$STATE/$ID.teardown-branch" tmp
   local common='' captured_wt='' live_common='' spawn_gen recorded_wt recorded_project
@@ -3898,10 +3914,6 @@ teardown_task_branch() {
           echo "error: cannot identify the task branch for $ID: HEAD is detached or unreadable and metadata has no branch; preserving task records" >&2
           return 1
         fi
-        if [ -n "$current" ] && [ "$current" != "$branch" ]; then
-          echo "error: retained ref refs/heads/$branch for $ID: worktree is on $current; preserving task records" >&2
-          return 1
-        fi
         common=$(git -C "$WT" rev-parse --path-format=absolute --git-common-dir) || return 1
         common=$(canonical_existing_dir "$common") || return 1
         captured_wt=$(canonical_existing_dir "$WT") || return 1
@@ -3912,8 +3924,14 @@ teardown_task_branch() {
       else
         # Current project/slot state cannot establish the old task's namespace
         # after its copy is gone or reassigned. Never substitute PROJ's refs.
-        echo "error: retained ref refs/heads/$branch for $ID: task repository identity is unavailable; preserving task records" >&2
-        return 1
+        ref="refs/heads/$branch"
+        git check-ref-format "$ref" >/dev/null 2>&1 || {
+          echo "error: invalid task ref $ref for $ID; preserving task records" >&2
+          return 1
+        }
+        TEARDOWN_TASK_RETAINED_REF=$ref
+        echo "warning: retained ref $ref for $ID: task repository identity is unavailable; finishing task cleanup without verifying branch removal" >&2
+        return 0
       fi
     fi
     ref="refs/heads/$branch"
@@ -4112,7 +4130,7 @@ if [ "$KIND" != secondmate ]; then
   teardown_task_branch || exit 1
 fi
 if [ "$BACKLOG_CLOSED" = 1 ]; then
-  # Only a proved branch outcome releases startup's pending-completion barrier.
+  # Verified removal or explicit retention releases the pending-completion barrier.
   fm_backlog_close_marker_write "$STATE" "$ID" "$DATA" "$META_SPAWN_GEN" \
     "${BACKLOG_TRANSITION_FLAGS[@]+"${BACKLOG_TRANSITION_FLAGS[@]}"}" \
     "${BACKLOG_DONE_ARGS[@]+"${BACKLOG_DONE_ARGS[@]}"}" || {
@@ -4411,6 +4429,8 @@ if [ -d "$STATE" ]; then
 fi
 if [ "$TEARDOWN_POOL_SLOT_LOST" = 1 ]; then
   echo "teardown $ID finished its cleanup and removed its task record, but a returned pool slot did not come back clean (see the warning above); clear those paths so the pool can reuse the slot" >&2
+elif [ -n "$TEARDOWN_TASK_RETAINED_REF" ]; then
+  echo "teardown $ID finished with retained ref $TEARDOWN_TASK_RETAINED_REF (task repository identity unavailable; branch removal unverified)"
 elif [ "$TEARDOWN_LEGACY_ACCEPTED" = 1 ]; then
   echo "teardown $ID complete (window ${T:-none}, worktree $WT, legacy record accepted without spawn_gen: endpoint $TEARDOWN_LEGACY_ENDPOINT, incarnation $TEARDOWN_META_SPAWN_GEN)"
 elif teardown_owns_worktree; then

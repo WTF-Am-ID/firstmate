@@ -2321,7 +2321,7 @@ test_legacy_record_rolls_the_stamp_back_when_the_marker_write_fails() {
   pass "--legacy-record teardown rolls its stamp back when the close marker write fails"
 }
 
-# Override fakebin/perl so ONLY the stamp rollback's truncate fails; every other
+# Override fakebin/perl so ONLY the stamp rollback on this metadata fails; every other
 # perl call in the lifecycle still runs the real interpreter, so the abandoned
 # attempt leaves its stamp behind for exactly the reason under test.
 add_failing_truncate_perl() {
@@ -2329,9 +2329,10 @@ add_failing_truncate_perl() {
   real=$(command -v perl)
   cat > "$case_dir/fakebin/perl" <<SH
 #!/usr/bin/env bash
-case "\$*" in
-  *truncate*) exit 1 ;;
-esac
+if [ "\$#" -eq 5 ] && [ "\$1" = -e ] && [ "\$3" = -- ] \
+   && [ "\$4" = "$case_dir/state/task-x1.meta" ]; then
+  exit 1
+fi
 exec "$real" "\$@"
 SH
   chmod +x "$case_dir/fakebin/perl"
@@ -6501,8 +6502,92 @@ SH
   pass "control exit preserves retry identity and manual/no-backlog completion recovers before task ID reuse"
 }
 
+test_task_branch_failed_launch_and_retained_finish() {
+  local case_dir scenario mode wt rc head problems=0 args=()
+  local ref=refs/heads/fm/task-x1
+  for scenario in absent-on-other present-on-other missing-copy reassigned-copy; do
+    for mode in normal force; do
+      case_dir=$(make_case "branch-finish-$scenario-$mode")
+      wt="$case_dir/wt"
+      head=$(git -C "$case_dir/project" rev-parse HEAD)
+      git -C "$case_dir/project" update-ref refs/no-mistakes/recover/finish "$head"
+      git -C "$case_dir/project" update-ref refs/remotes/no-mistakes/finish "$head"
+      case "$scenario" in
+        absent-on-other|present-on-other)
+          git -C "$wt" checkout -q -b startup
+          [ "$scenario" != absent-on-other ] || git -C "$wt" branch -D fm/task-x1 >/dev/null
+          ;;
+        missing-copy)
+          git -C "$case_dir/project" worktree remove --force "$wt"
+          ;;
+        reassigned-copy)
+          mkdir -p "$case_dir/pool/1"
+          git -C "$case_dir/project" worktree move "$wt" "$case_dir/pool/1/project"
+          wt="$case_dir/pool/1/project"
+          printf '{"worktrees":[{"name":"1","path":"%s"}]}\n' "$wt" > "$case_dir/pool/treehouse-state.json"
+          printf 'task=new-holder\nhome=%s\n' "$case_dir" > "$case_dir/pool/1/.fm-slot-owner"
+          cp "$case_dir/pool/1/.fm-slot-owner" "$case_dir/claim-before"
+          printf 'new holder bytes\n' > "$wt/sentinel"
+          add_review_branch_delete_failure "$case_dir"
+          touch "$case_dir/forbid-slot" "$case_dir/allow-delete"
+          ;;
+      esac
+      write_meta "$case_dir" local-only ship "$wt"
+      printf 'branch=fm/task-x1\n' >> "$case_dir/state/task-x1.meta"
+      cat > "$case_dir/fakebin/tmux" <<'SH'
+#!/usr/bin/env bash
+printf '%s\n' "$*" >> "$FM_HOME/tmux-calls"
+exit 0
+SH
+      cat > "$case_dir/fakebin/treehouse" <<'SH'
+#!/usr/bin/env bash
+printf '%s\n' "$*" >> "$FM_HOME/pool-calls"
+exit 0
+SH
+      chmod +x "$case_dir/fakebin/tmux" "$case_dir/fakebin/treehouse"
+      args=()
+      [ "$mode" != force ] || args=(--force)
+      rc=0
+      FM_HOME="$case_dir" run_teardown "$case_dir" "${args[@]+"${args[@]}"}" \
+        > "$case_dir/out" 2> "$case_dir/err" || rc=$?
+      if [ "$rc" -ne 0 ]; then
+        printf 'red finish: %s/%s stranded cleanup: %s\n' "$scenario" "$mode" "$(cat "$case_dir/err")" >&2
+        problems=$((problems + 1))
+        continue
+      fi
+      assert_absent "$case_dir/state/task-x1.meta" "finished cleanup retained task metadata"
+      assert_absent "$case_dir/state/task-x1.teardown-branch" "finished cleanup stranded retry identity"
+      assert_absent "$case_dir/state/task-x1.backlog-close" "finished cleanup stranded completion intent"
+      assert_grep 'kill-window' "$case_dir/tmux-calls" "finished cleanup never closed its endpoint"
+      case "$scenario" in
+        absent-on-other|present-on-other)
+          ! git -C "$case_dir/project" show-ref --verify --quiet "$ref" || fail "finished cleanup retained its checkable task branch"
+          [ "$(git -C "$wt" symbolic-ref --short HEAD)" = startup ] || fail "cleanup detached an unrelated branch"
+          [ "$(git -C "$case_dir/project" rev-parse refs/heads/startup)" = "$head" ] || fail "cleanup altered the unrelated branch"
+          assert_grep 'return' "$case_dir/pool-calls" "finished launch cleanup never returned its copy"
+          ;;
+        *)
+          [ "$(git -C "$case_dir/project" rev-parse "$ref")" = "$head" ] || fail "cleanup guessed the task's unavailable Git namespace"
+          assert_contains "$(cat "$case_dir/out")" "retained ref $ref" "finished cleanup hid its retained ref"
+          assert_contains "$(cat "$case_dir/out")" 'finished' "retained-ref cleanup omitted its finish outcome"
+          if [ "$scenario" = reassigned-copy ]; then
+            [ ! -s "$case_dir/slot-reads" ] || fail "cleanup inspected the new holder's worktree"
+            cmp -s "$case_dir/claim-before" "$case_dir/pool/1/.fm-slot-owner" || fail "cleanup changed the new holder's claim"
+            assert_contains "$(cat "$wt/sentinel")" 'new holder bytes' "cleanup altered the new holder's copy"
+          fi
+          ;;
+      esac
+      [ "$(git -C "$case_dir/project" rev-parse refs/no-mistakes/recover/finish)" = "$head" ] || fail "cleanup erased a recovery ref"
+      [ "$(git -C "$case_dir/project" rev-parse refs/remotes/no-mistakes/finish)" = "$head" ] || fail "cleanup erased a staging ref"
+    done
+  done
+  [ "$problems" -eq 0 ] || fail "$problems failed-launch or unavailable-identity cleanup dead ends remain"
+  pass "failed launches check the recorded ref independently of HEAD and unavailable namespaces finish with named retained refs"
+}
+
 test_hidden_untracked_work_refuses_before_return
 test_content_fallback_git_capability_boundary
+test_task_branch_failed_launch_and_retained_finish
 test_task_branch_stable_identity_and_manual_recovery
 test_task_branch_identity_replay
 test_task_branch_review_regressions

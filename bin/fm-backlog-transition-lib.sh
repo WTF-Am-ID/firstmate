@@ -56,7 +56,8 @@
 # first applies any supported retained artifact from the validated record, then
 # replay simply retires the record.
 # `branch_cleanup_pending=1` preserves the marker and matching metadata during
-# replay until teardown verifies its task ref and republishes the ready marker.
+# replay until teardown verifies its task ref or reports retention and republishes
+# the ready marker.
 # The generation check still retires a stale marker for another incarnation.
 # Marker retirement also removes the branch retry identity only when its
 # spawn generation matches the marker, preserving a replacement's identity.
