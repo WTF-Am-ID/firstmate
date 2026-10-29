@@ -6,8 +6,10 @@
 # since secondmates are not backlog items), then refresh/prune the project's
 # clone for PR-based ship tasks.
 # A captured task Git namespace must prove the recorded refs/heads/ ref absent
-# before declaring branch cleanup complete. When the namespace cannot be
-# established, cleanup finishes with a named retained ref and unverified removal.
+# before declaring branch cleanup complete. If the task namespace is unavailable,
+# cleanup may finish with a named retained ref only after proving that ref exists
+# in the recorded project, without a checkout. This finish reports branch removal
+# as unverified; an unproved ref preserves metadata for retry.
 # A detach, delete, or Git verification failure preserves metadata for retry, even
 # under --force. Task branch and Git identity are saved in state/<id>.teardown-branch,
 # bound to the recorded paths, Git identity and spawn generation until cleanup completes,
@@ -3860,8 +3862,7 @@ fi
 
 # Both providers use the same local-ref postcondition. The ordinary return's
 # existing lock retry runs before verification; capture only identity before it.
-# Git failures retain retry records; an unavailable namespace is an explicit
-# retained-ref finish rather than a claim that branch removal was verified.
+# The header owns the retained-ref finish and its required existence proof.
 TEARDOWN_TASK_BRANCH=
 TEARDOWN_TASK_GIT_COMMON=
 TEARDOWN_TASK_GIT_WORKTREE=
