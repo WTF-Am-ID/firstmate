@@ -1,0 +1,3 @@
+revision=ad46f56ce5b637e236fdf75dae5d5db1e250a72c
+command=bash tests/fm-pr-check-security.test.sh
+exit=0
