@@ -1,0 +1,54 @@
+Candidate 6965ca1cc1b3140ce4744c1e4a69519de6ef08ba. Real public cleanup/reconcile commands, disposable private home.
+
+Live ownerless group must refuse without signalling
+$ /Users/daddy/.no-mistakes-upstream-codex/worktrees/c5035e022bd2/01M63ACQMAT3BRXZAV7NWA2YRK/bin/fm-extension.mjs cleanup-invocations
+
+error[process-cleanup-failed]: ownerless extension readiness process group cannot be proved gone
+exit=1
+Observed private live group and readiness still present.
+
+Reused live PID must refuse without signalling the unrelated process
+$ /Users/daddy/.no-mistakes-upstream-codex/worktrees/c5035e022bd2/01M63ACQMAT3BRXZAV7NWA2YRK/bin/fm-extension.mjs cleanup-invocations
+
+error[process-cleanup-failed]: ownerless extension readiness process group cannot be proved gone
+exit=1
+Observed unrelated PID and private live group both alive.
+
+Mismatched filename token must refuse
+$ /Users/daddy/.no-mistakes-upstream-codex/worktrees/c5035e022bd2/01M63ACQMAT3BRXZAV7NWA2YRK/bin/fm-extension.mjs cleanup-invocations
+
+error[process-cleanup-failed]: extension invocation readiness identity is invalid
+exit=1
+
+Unprovable ownership must refuse
+$ /Users/daddy/.no-mistakes-upstream-codex/worktrees/c5035e022bd2/01M63ACQMAT3BRXZAV7NWA2YRK/bin/fm-extension.mjs cleanup-invocations
+
+error[process-cleanup-failed]: ownerless extension readiness process group cannot be proved gone
+exit=1
+
+Unsafe file permissions must refuse
+$ /Users/daddy/.no-mistakes-upstream-codex/worktrees/c5035e022bd2/01M63ACQMAT3BRXZAV7NWA2YRK/bin/fm-extension.mjs cleanup-invocations
+
+error[process-cleanup-failed]: extension invocation readiness is not one private host-owned file
+exit=1
+
+Symlink readiness must refuse and leave its target intact
+$ /Users/daddy/.no-mistakes-upstream-codex/worktrees/c5035e022bd2/01M63ACQMAT3BRXZAV7NWA2YRK/bin/fm-extension.mjs cleanup-invocations
+
+error[process-cleanup-failed]: extension invocation readiness is not one private host-owned file
+exit=1
+
+Dead exact-token residue must recover even under a source selector
+$ /Users/daddy/.no-mistakes-upstream-codex/worktrees/c5035e022bd2/01M63ACQMAT3BRXZAV7NWA2YRK/bin/fm-extension.mjs cleanup-invocations --source-id private-first
+cleaned-invocations: 1
+
+exit=0
+Observed readiness removed after PID/group extinction.
+$ /Users/daddy/.no-mistakes-upstream-codex/worktrees/c5035e022bd2/01M63ACQMAT3BRXZAV7NWA2YRK/bin/fm-extension.mjs bind <fixture>/package --adapter file-signal --trust-same-user-code --consent artifact-references
+
+error[binding-failed]: error[path-unsafe]: package source must not be inside a Git project or task copy
+exit=1
+$ /Users/daddy/.no-mistakes-upstream-codex/worktrees/c5035e022bd2/01M63ACQMAT3BRXZAV7NWA2YRK/bin/fm-procevent.sh sweep-home
+swept: attempted=0
+
+exit=0
