@@ -3929,6 +3929,10 @@ teardown_task_branch() {
           echo "error: invalid task ref $ref for $ID; preserving task records" >&2
           return 1
         }
+        if ! git -C "$PROJ" show-ref --verify --quiet "$ref"; then
+          echo "error: cannot prove retained ref $ref exists in the recorded project for $ID; preserving task records for retry" >&2
+          return 1
+        fi
         TEARDOWN_TASK_RETAINED_REF=$ref
         echo "warning: retained ref $ref for $ID: task repository identity is unavailable; finishing task cleanup without verifying branch removal" >&2
         return 0
