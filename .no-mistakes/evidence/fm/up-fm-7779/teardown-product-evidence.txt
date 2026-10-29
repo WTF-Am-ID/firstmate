@@ -1,0 +1,53 @@
+Live teardown fixture observations from the targeted test runner
+Candidate: ba06d2875ea5eb95d2d641b3a3067dd86683c750
+
+Scenario: hidden-untracked-dirty
+stdout:
+
+stderr:
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-test-run.o0sYTO/w2/tmp/fm-teardown-tests.cD6N6E/hidden-untracked-dirty/wt has uncommitted changes.
+uncommitted changes present (untracked-only leftovers)
+untracked paths (up to 10):
+  "new directory/newfile.txt"
+Commit them (or get the captain's explicit OK to discard, then --force).
+
+pool_return_recorded=False
+task_metadata_exists=True
+unadded_file_bytes="unadded work\n"
+task_metadata_byte_identical=True
+$ git config --get status.showUntrackedFiles
+no
+
+$ git status --porcelain
+(empty output)
+$ git status --porcelain --untracked-files=all
+?? "new directory/newfile.txt"
+
+$ git rev-parse --abbrev-ref HEAD
+fm/task-x1
+
+
+Scenario: hidden-untracked-clean
+stdout:
+/private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-test-run.o0sYTO/w2/tmp/fm-teardown-tests.cD6N6E/hidden-untracked-clean/project: already current
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-test-run.o0sYTO/w2/tmp/fm-teardown-tests.cD6N6E/hidden-untracked-clean/wt)
+Backlog: task-x1 just finished (this home keeps no markdown backlog at /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-test-run.o0sYTO/w2/tmp/fm-teardown-tests.cD6N6E/hidden-untracked-clean/data/backlog.md). Update /private/var/folders/gn/m0fr4_4962q75gpmcl14_z0w0000gn/T/fm-test-run.o0sYTO/w2/tmp/fm-teardown-tests.cD6N6E/hidden-untracked-clean/data/backlog.md - move task-x1 to Done, keep Done to the 10 most recent, then re-scan Queued and dispatch only work whose blockers are gone and date is due.
+
+stderr:
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+pool_return_recorded=True
+task_metadata_exists=False
