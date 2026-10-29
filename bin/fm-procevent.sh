@@ -94,9 +94,8 @@
 #            human makes for a group that lost its leader, which `start`
 #            reports as owned and which the next cycle reclaims on its own
 #            once that group is empty.
-#            Extension invocation cleanup refusals also announce once per source
-#            failure episode, ending when cleanup succeeds, with the command
-#            that exposes the cleanup diagnostic instead of a silent uncertain=.
+#            Extension invocation cleanup refusals count as `uncertain`;
+#            docs/configuration.md owns their failure-wake and recovery policy.
 # handled    Durably and idempotently record that a captured result has been
 #            fully handled: <source-id> <sequence>. Prints "handled: id seq"
 #            the first time for that exact source-and-sequence generation and
