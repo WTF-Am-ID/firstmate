@@ -69,8 +69,11 @@
 # teardown refuses rather than risk discarding unlanded work.
 # A merge-tree option or execution error reports the content-landed proof as
 # unavailable. The merge-tree --write-tree proof requires Git 2.38 or newer.
-# Uncommitted changes are never landed; dirty refusals distinguish untracked-only
-# leftovers from tracked edits and list at most ten non-exempt untracked paths.
+# Uncommitted changes are never landed. Before return, the dirty check explicitly
+# requests all untracked files, even when status.showUntrackedFiles hides them.
+# Dirty refusals distinguish untracked-only leftovers from tracked edits and list
+# at most ten non-exempt untracked paths. tests/fm-teardown.test.sh covers hidden
+# untracked work and the clean return control.
 # local-only projects additionally accept work merged into the local default
 # branch (firstmate performs that merge after configured approval) as a fallback
 # for the common case where there is no remote at all.
