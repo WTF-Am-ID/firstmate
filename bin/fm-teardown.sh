@@ -3453,10 +3453,9 @@ preflight_firstmate_home_herdr_children() {  # <home>
 # than override it, and would contradict the adjacent Herdr child gate that
 # stops forced cleanup for this same hazard.
 #
-# What is retained is this run's records, not a durable guarantee: a task
-# carrying a backlog transition already wrote its pending-close marker, and the
-# next session start replays that marker and removes the retained record. The
-# message says so rather than promising a retention teardown does not own.
+# bin/fm-backlog-transition-lib.sh's header owns startup replay eligibility and
+# retained-record lifetime. An endpoint-close refusal alone does not establish
+# whether replay may retire the task's records.
 endpoint_close_refusal() {  # <subject> <backend> <target> <honors-force>
   local subject=$1 backend=$2 target=$3 honors_force=$4
   echo "error: the $backend endpoint $target for $subject could not be closed, so it may still be live." >&2

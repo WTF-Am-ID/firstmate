@@ -405,7 +405,6 @@ Keeping the refusal but dropping the exact re-read makes an already-exited endpo
 Letting an unreadable inventory pass for absence makes the unreadable case complete and remove the record while the window is still there.
 Removing the `--force` arm makes the forced generic case refuse; honoring `--force` at the child sites makes forced secondmate cleanup continue past a child endpoint it could not close, and honoring it at the Orca site makes that forced cleanup abort on the missing CLI after announcing that it was continuing.
 Restoring `fm_backend_orca_kill`'s swallowed tool check makes the CLI-absent adapter case report success.
-Dropping the retention-is-not-durable line makes the refusal claim a retention teardown does not own.
 
 ## Kimi folder prompt
 
