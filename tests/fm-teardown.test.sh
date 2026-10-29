@@ -6639,8 +6639,70 @@ SH
   pass "failed launches check recorded refs and unavailable namespaces finish only with proved retained refs"
 }
 
+test_recorded_task_branch_work_is_checked_before_cleanup() {
+  local case_dir mode checkout outcome baseline task_head rc args=()
+  for mode in local-only no-mistakes; do
+    for checkout in other-branch detached; do
+      for outcome in unfinished pushed force; do
+        case_dir=$(make_case "recorded-work-$mode-$checkout-$outcome")
+        baseline=$(git -C "$case_dir/wt" rev-parse HEAD)
+        printf 'unfinished recorded task work\n' > "$case_dir/wt/task-work.txt"
+        git -C "$case_dir/wt" add task-work.txt
+        git -C "$case_dir/wt" -c user.email=t@t -c user.name=t commit -q -m 'task work'
+        task_head=$(git -C "$case_dir/wt" rev-parse HEAD)
+        [ "$outcome" != pushed ] || add_fork_with_pushed_branch "$case_dir"
+        if [ "$checkout" = other-branch ]; then
+          git -C "$case_dir/wt" checkout -q -b startup "$baseline"
+        else
+          git -C "$case_dir/wt" checkout --detach -q "$baseline"
+        fi
+        write_meta "$case_dir" "$mode" ship
+        printf 'branch=fm/task-x1\n' >> "$case_dir/state/task-x1.meta"
+        cat > "$case_dir/fakebin/tmux" <<'SH'
+#!/usr/bin/env bash
+printf '%s\n' "$*" >> "$FM_HOME/backend-calls"
+exit 0
+SH
+        cat > "$case_dir/fakebin/treehouse" <<'SH'
+#!/usr/bin/env bash
+printf '%s\n' "$*" >> "$FM_HOME/pool-calls"
+exit 0
+SH
+        chmod +x "$case_dir/fakebin/tmux" "$case_dir/fakebin/treehouse"
+        args=()
+        [ "$outcome" != force ] || args=(--force)
+        rc=0
+        FM_HOME="$case_dir" run_teardown "$case_dir" "${args[@]+"${args[@]}"}" \
+          > "$case_dir/out" 2> "$case_dir/err" || rc=$?
+        if [ "$outcome" = unfinished ]; then
+          expect_code 1 "$rc" "unfinished recorded branch must refuse: $mode/$checkout"
+          [ "$(git -C "$case_dir/project" rev-parse refs/heads/fm/task-x1)" = "$task_head" ] \
+            || fail 'cleanup discarded the unfinished recorded task ref'
+          assert_present "$case_dir/state/task-x1.meta" 'refusal lost retry metadata'
+          assert_contains "$(cat "$case_dir/err")" 'refs/heads/fm/task-x1' 'refusal omitted the retained task ref'
+          [ ! -s "$case_dir/backend-calls" ] || fail 'refusal closed the task endpoint'
+          [ ! -s "$case_dir/pool-calls" ] || fail 'refusal returned the task copy'
+        else
+          expect_code 0 "$rc" "permitted recorded branch cleanup failed: $mode/$checkout/$outcome"
+          ! git -C "$case_dir/project" show-ref --verify --quiet refs/heads/fm/task-x1 \
+            || fail 'permitted cleanup retained the recorded task branch'
+          assert_absent "$case_dir/state/task-x1.meta" 'permitted cleanup retained metadata'
+        fi
+        [ "$(git -C "$case_dir/wt" rev-parse HEAD)" = "$baseline" ] || fail 'cleanup changed the unrelated HEAD'
+        if [ "$checkout" = other-branch ]; then
+          [ "$(git -C "$case_dir/wt" symbolic-ref --short HEAD)" = startup ] || fail 'cleanup detached the unrelated branch'
+        else
+          ! git -C "$case_dir/wt" symbolic-ref --quiet HEAD || fail 'cleanup attached the unrelated detached HEAD'
+        fi
+      done
+    done
+  done
+  pass 'recorded task work is protected independently of HEAD, while pushed work and explicit force remain eligible'
+}
+
 test_hidden_untracked_work_refuses_before_return
 test_content_fallback_git_capability_boundary
+test_recorded_task_branch_work_is_checked_before_cleanup
 test_task_branch_failed_launch_and_retained_finish
 test_task_branch_stable_identity_and_manual_recovery
 test_task_branch_identity_replay
