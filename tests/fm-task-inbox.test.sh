@@ -557,6 +557,70 @@ test_idempotent_write_prefilter_error_preserves_retry() {
   pass "inbox: a prefilter error falls back without duplicating an exact retry"
 }
 
+test_idempotent_write_follows_ack_before_prefilter_open() {
+  local state dir mode rec handled result text log before after count
+  text=$'acknowledge before grep opens pending\nexact body\n\n'
+  for mode in '' fire-and-forget; do
+    state="$TMP_ROOT/idem-ack-before-grep-${mode:-ordinary}/state"
+    dir="$state/t1.inbox"
+    mkdir -p "$dir/handled"
+    rec=$(inbox_lib "$state" fm_task_inbox_write "$state" t1 "$text" "$mode") \
+      || fail "prefilter race fixture write failed"
+    handled="$dir/handled/${rec##*/}"
+    # Keep unrelated history in both directories so even a reversed scan has
+    # real files to inspect. Compare record bytes independently of the ack move.
+    inbox_lib "$state" fm_task_inbox_write "$state" t1 'unrelated pending' >/dev/null
+    result=$(inbox_lib "$state" fm_task_inbox_write "$state" t1 'unrelated handled')
+    mv "$result" "$dir/handled/"
+    before=$(find "$dir" -name '*.msg' -exec cksum {} + | awk '{print $1, $2}' | LC_ALL=C sort)
+    log="$state/prefilter-order"
+    result=$(FM_STATE_OVERRIDE="$state" bash -c '
+      . "$1"
+      pending=$4
+      inbox=${pending%/*}
+      handled="$inbox/handled/${pending##*/}"
+      log=$6
+      grep() {
+        [ "${1:-}" = -lFx ] || { command grep "$@"; return $?; }
+        local arg location= saw_pending=0 rc=0
+        for arg in "$@"; do
+          case "${arg%/*}" in
+            "$inbox") location=pending ;;
+            "$inbox/handled") location=handled ;;
+          esac
+          [ "$arg" != "$pending" ] || saw_pending=1
+        done
+        printf "%s\n" "$location" >> "$log"
+        if [ "$location" = pending ]; then
+          # The actual grep argument list already contains the pending path,
+          # but command grep has not opened it yet. Acknowledge at that boundary.
+          [ "$saw_pending" = 1 ] && [ -f "$pending" ] && [ ! -e "$handled" ] || return 99
+          mv "$pending" "$handled" || return 99
+          printf "ack-before-open\n" >> "$log"
+        fi
+        command grep "$@" || rc=$?
+        if [ "$location" = pending ] && [ "$rc" = 2 ] && [ ! -e "$pending" ] && [ -f "$handled" ]; then
+          printf "pending-open-missed\n" >> "$log"
+        fi
+        return "$rc"
+      }
+      fm_task_inbox_write_idempotent "$2" t1 "$3" "$5"
+    ' _ "$ROOT/bin/fm-task-inbox-lib.sh" "$state" "$text" "$rec" "$mode" "$log") \
+      || fail "retry failed during acknowledgement before prefilter open ($mode)"
+    [ "$(cat "$log")" = $'pending\nack-before-open\npending-open-missed\nhandled' ] \
+      || fail "prefilter did not scan pending before handled across the ack boundary ($mode): $(cat "$log")"
+    [ "$result" = "$handled" ] || fail "retry did not return the acknowledged record ($mode): $result"
+    inbox_lib "$state" fm_task_inbox_body "$handled" > "$state/body"
+    printf '%s' "$text" > "$state/expected-body"
+    cmp -s "$state/expected-body" "$state/body" || fail "ack race changed the exact body ($mode)"
+    count=$(find "$dir" -name '*.msg' | wc -l | tr -d ' ')
+    [ "$count" = 3 ] || fail "ack race created or removed a record ($mode): $count"
+    after=$(find "$dir" -name '*.msg' -exec cksum {} + | awk '{print $1, $2}' | LC_ALL=C sort)
+    [ "$before" = "$after" ] || fail "ack race changed durable record history ($mode)"
+  done
+  pass "inbox: pending prefilter precedes handled and finds an ack before grep opens the record in both modes"
+}
+
 test_idempotent_write_follows_concurrent_ack() {
   local state rec result count text
   state="$TMP_ROOT/idem-ack-race/state"; mkdir -p "$state"
@@ -1317,6 +1381,7 @@ test_idempotent_write_dedups_exact_body
 test_idempotent_write_prefilters_history
 test_idempotent_write_prefilter_preserves_exact_bodies
 test_idempotent_write_prefilter_error_preserves_retry
+test_idempotent_write_follows_ack_before_prefilter_open
 test_idempotent_write_follows_concurrent_ack
 test_handled_mv_dedups_by_sequence
 test_concurrent_writers_never_clobber
