@@ -13,7 +13,8 @@
 # .wake-rows.consume.*, .wake-queue.retire.*, .wake-queue.ack.*,
 # .wake-queue.actor-view.*) is created and removed under the queue lock, so one
 # found while taking that lock was left by a drain that died mid-write; each
-# locked drain rotates such leftovers away before doing anything else.
+# drain rotates such leftovers under that lock after any initial
+# acknowledgement-generation check.
 # FM_STATUS_PRESENTATION_LOCK_TIMEOUT sets the positive whole-second wait for
 # presentation-path locks (default 10); queue mutation locks remain blocking.
 set -u
