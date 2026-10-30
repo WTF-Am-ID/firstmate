@@ -1,0 +1,41 @@
+Independent Test phase, issue #4302 / ci-1
+Candidate revision: 733b6a1a1e26bef2267cc7b8567b6cea2c1accca
+Working copy: /Users/daddy/.no-mistakes-upstream-codex/worktrees/21760474d773/01M6162Q8DPJNV9961SWZHZ5QZ
+Reviewer identity supplied by runtime instructions: OpenAI Codex, GPT-6. Exact backend variant is not exposed to this agent. No other model or harness was invoked.
+
+Production CLI evidence:
+python3 /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py
+Exit 0. Transcript: current-live-ack-transcript.log.
+The driver uses production fm-wake-drain.sh, fm-wake-grant.sh, fm-wake-lib.sh and fm-inactive-reconcile.sh. It holds the real receipt lock and observes the real receipt child waiting before changing the generation. No lock primitives, CLI, model or receipt implementation are mocked. Disposable homes are under this worktree and removed in finally.
+Both actors reject stale partial acknowledgements without changing queue/marker/claims and accept current partial acknowledgements without consuming the other actor's rows. Empty stale acknowledgements reject, current acknowledgements retire the marker, repeats succeed.
+Direct and replayed main acknowledgements with absent and existing claims reject after a generation change and preserve exact prior claims, including absence. A later grant of row 2 succeeds. Presented main and branch acknowledgements also reject safely. Stable direct/presented/branch acknowledgements persist the intended inactive receipt and consume only eligible cutoff rows. Handoff arrivals remain queued and unclaimed, retain their pending receipt, and can be branch-granted. A branch grant installed during the handoff wins over the unpublished main projection.
+At pre-fix revision 355ba33b8930f4c29a8d098ca24d7879cfcb2192, the same direct/replay x absent/existing cases reject but publish main claims and make a later branch grant exit 3. That drain's blob exactly equals candidate-parent c1d3c09ab1d835bcab3257210bfb4f8469e8b3cf's drain. Only the historical drain is materialized; unchanged libraries come from the candidate.
+current-original-regression.log separately records stale partial acknowledgement against base 05196e30ead54796dfbe986db61abe9d8df9e3d2 and candidate 733b6a1a. Base incorrectly exits 0 and removes row 1. Candidate exits 1 and preserves all queue/marker/claims bytes. Disposable homes removed.
+
+Initial focused command:
+env TMPDIR="$PWD/.test-phase/tmp" bash bin/fm-test-run.sh --jobs 1 tests/fm-wake-queue.test.sh tests/fm-watch-arm.test.sh
+Exit 1. Output: current-focused-tests.log.
+All issue-specific generation and real-lock cases passed before the queue script reached an unrelated secondmate fixture requiring a home outside the repository. The local TMPDIR placement caused this setup error. The rerun uses the unchanged normal toolchain temporary location, as permitted by the workspace instructions.
+The watch-arm script then hit the already declined byte-identical re-append fixture failure. No source, clock fixture, budget, coverage limit or timeout was changed to address it.
+
+To exercise the changed watcher generation case beyond that unrelated early failure, a disposable tests/fm-4302-targeted.test.sh was constructed from tests/fm-watch-arm.test.sh's unchanged definitions preceding its first top-level invocation, then these existing cases were called:
+test_moved_generation_acknowledgement_is_self_healing
+test_handling_delivered_accepts_already_acked_generation
+test_handling_delivered_rejects_a_superseded_generation
+This selects actual existing behavioral tests and does not replace their production watcher/arm/drain commands.
+
+No linters, static analysis, full suite, pipeline control, publication, or operator fleet/home mutation were performed. CLI-only change: reviewer-visible CLI/state transcripts are provided; no graphical UI screenshot is applicable.
+Cleanup limitation: attempted recursive removal of .test-phase was refused by the command guard with 'rm -f style commands are not permitted. Use a safer approach'. The denied removal was stopped without changing tools or commands to bypass it. Read-only du reports 0B; retained empty directory path is /Users/daddy/.no-mistakes-upstream-codex/worktrees/21760474d773/01M6162Q8DPJNV9961SWZHZ5QZ/.test-phase.
+
+Final closure command, with normal toolchain temp location:
+bash bin/fm-test-run.sh --jobs 1 tests/fm-wake-queue.test.sh tests/fm-4302-targeted.test.sh
+Exit 0, recorded in current-closure-exit.txt. Complete output: current-closure-tests.log.
+FM_TEST_END 2026-10-30T02:36:14Z tests/fm-wake-queue.test.sh exit=0 duration_ms=250131 gate_skip=false
+FM_TEST_END 2026-10-30T02:36:22Z tests/fm-4302-targeted.test.sh exit=0 duration_ms=8434 gate_skip=false
+The selected existing watcher tests report:
+ok - watch-arm: a moved recovery generation refuses consumption and names its remedy
+ok - watch-arm: an already-acknowledged handling confirmation succeeds as a no-op
+ok - watch-arm: a churned generation's handling confirmation reports a mismatch and an arm check keeps it
+
+The disposable test selector was deleted after execution. No tracked source/test changes remain. All probe homes were removed. Only the empty .test-phase/tmp directory hierarchy is retained because its removal was refused. No operator fleet or home was mutated.
+Result: required issue and ci-1 scenarios demonstrated against candidate production commands. The previously declined watcher clock fixture is unchanged and remains excluded from this issue's blocking findings.

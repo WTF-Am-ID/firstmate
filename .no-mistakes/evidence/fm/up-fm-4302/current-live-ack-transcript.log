@@ -1,0 +1,672 @@
+Revision: 733b6a1a1e26bef2267cc7b8567b6cea2c1accca
+Worktree: /Users/daddy/.no-mistakes-upstream-codex/worktrees/21760474d773/01M6162Q8DPJNV9961SWZHZ5QZ
+Reviewer: OpenAI Codex, GPT-6; exact backend variant not exposed to this agent.
+
+SCENARIO main stale partial acknowledgement
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal other signal: other
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal earlier signal: earlier
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal later signal: later
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 1
+exit=0
+$ bash ./bin/fm-wake-drain.sh
+exit=0
+1793327360	2	signal	earlier	signal: earlier
+1793327360	3	signal	later	signal: later
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 3 --recovery-generation 40704.1793327360.n5UzEw
+$ bash ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation stale
+exit=1
+wake drain: nothing was acknowledged through 2 (recovery generation does not match); the current wake is row 3: run bin/fm-wake-drain.sh --ack-through 3 --recovery-generation 40704.1793327360.n5UzEw after handling it
+$ bash ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 40704.1793327360.n5UzEw
+exit=0
+After current partial ack, other actor and later row remain
+.wake-queue = b'1793327360\t1\tsignal\tother\tsignal: other\n1793327360\t3\tsignal\tlater\tsignal: later\n'
+.watcher-down = b'pending:handling:40704.1793327360.n5UzEw\n'
+.main-eligible-rows = b'3\n'
+.branch-eligible-rows = b'1\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+PASS stale refusal and matching actor-scoped partial consumption
+
+SCENARIO branch stale partial acknowledgement
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal other signal: other
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal earlier signal: earlier
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal later signal: later
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 2 3
+exit=0
+$ bash ./bin/fm-wake-drain.sh
+exit=0
+1793327361	1	signal	other	signal: other
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 43006.1793327361.taBZf3
+$ bash ./bin/fm-wake-drain.sh
+exit=0
+1793327362	2	signal	earlier	signal: earlier
+1793327362	3	signal	later	signal: later
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 3 --recovery-generation 43006.1793327361.taBZf3
+$ bash ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation stale
+exit=1
+wake drain: nothing was acknowledged through 2 (recovery generation does not match); the current wake is row 3: run bin/fm-wake-drain.sh --ack-through 3 --recovery-generation 43006.1793327361.taBZf3 after handling it
+$ bash ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 43006.1793327361.taBZf3
+exit=0
+After current partial ack, other actor and later row remain
+.wake-queue = b'1793327361\t1\tsignal\tother\tsignal: other\n1793327362\t3\tsignal\tlater\tsignal: later\n'
+.watcher-down = b'pending:handling:43006.1793327361.taBZf3\n'
+.main-eligible-rows = b'1\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+PASS stale refusal and matching actor-scoped partial consumption
+$ bash -c . "$1"; shift; fm_recovery_marker_publish "$STATE/.watcher-down" handling _ ./bin/fm-wake-lib.sh
+exit=0
+$ bash ./bin/fm-wake-drain.sh --ack-through 0 --recovery-generation stale
+exit=1
+wake drain: recovery generation does not match; nothing was acknowledged; re-run bin/fm-wake-drain.sh and use the new WAKE_ACK_REQUIRED command
+$ bash ./bin/fm-wake-drain.sh --ack-through 0 --recovery-generation 45666.1793327363.FTm9Nw
+exit=0
+$ bash ./bin/fm-wake-drain.sh --ack-through 0 --recovery-generation 45666.1793327363.FTm9Nw
+exit=0
+Empty current ack retires matching marker and can be replayed
+.wake-queue = b''
+.watcher-down = b'acked:handling:45666.1793327363.FTm9Nw\n'
+.main-eligible-rows = None
+.branch-eligible-rows = None
+.branch-eligible-owner = None
+
+SCENARIO candidate-direct-absent
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:aa inactive receipt
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal candidate unclaimed candidate
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal branch existing branch row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal main existing main row
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 3
+exit=0
+Before acknowledgement
+.wake-queue = b'1793327364\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327364\t2\tsignal\tcandidate\tunclaimed candidate\n1793327364\t3\tsignal\tbranch\texisting branch row\n1793327364\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:downtime:46677.1793327364.YbHNv8\n'
+.main-eligible-rows = None
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+Observed real receipt writer blocked on held receipt lock.
+$ bash -c . "$1"; shift; fm_lock_acquire_wait "$FM_WAKE_QUEUE_LOCK"; fm_recovery_marker_publish "$STATE/.watcher-down" handling; fm_lock_release "$FM_WAKE_QUEUE_LOCK" _ ./bin/fm-wake-lib.sh
+exit=0
+$ bash ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 46677.1793327364.YbHNv8
+exit=1
+wake drain: recovery generation does not match; nothing was acknowledged; re-run bin/fm-wake-drain.sh and use the new WAKE_ACK_REQUIRED command
+
+After acknowledgement
+.wake-queue = b'1793327364\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327364\t2\tsignal\tcandidate\tunclaimed candidate\n1793327364\t3\tsignal\tbranch\texisting branch row\n1793327364\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:56721.1793327366.i6PFQi\n'
+.main-eligible-rows = None
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+$ bash ./bin/fm-wake-grant.sh release probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 2
+exit=0
+PASS: rejected ack preserves exact prior claims, queue and new marker. Later branch grant succeeds where applicable.
+
+SCENARIO candidate-direct-existing
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:aa inactive receipt
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal candidate unclaimed candidate
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal branch existing branch row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal main existing main row
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 3
+exit=0
+Before acknowledgement
+.wake-queue = b'1793327367\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327367\t2\tsignal\tcandidate\tunclaimed candidate\n1793327367\t3\tsignal\tbranch\texisting branch row\n1793327367\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:downtime:60924.1793327367.46zgDY\n'
+.main-eligible-rows = b'4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+Observed real receipt writer blocked on held receipt lock.
+$ bash -c . "$1"; shift; fm_lock_acquire_wait "$FM_WAKE_QUEUE_LOCK"; fm_recovery_marker_publish "$STATE/.watcher-down" handling; fm_lock_release "$FM_WAKE_QUEUE_LOCK" _ ./bin/fm-wake-lib.sh
+exit=0
+$ bash ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 60924.1793327367.46zgDY
+exit=1
+wake drain: nothing was acknowledged through 2 (recovery generation does not match); the current wake is row 4: run bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 68393.1793327368.gWyxqO after handling it
+
+After acknowledgement
+.wake-queue = b'1793327367\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327367\t2\tsignal\tcandidate\tunclaimed candidate\n1793327367\t3\tsignal\tbranch\texisting branch row\n1793327367\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:68393.1793327368.gWyxqO\n'
+.main-eligible-rows = b'4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+$ bash ./bin/fm-wake-grant.sh release probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 2
+exit=0
+PASS: rejected ack preserves exact prior claims, queue and new marker. Later branch grant succeeds where applicable.
+
+SCENARIO candidate-replay-absent
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:aa inactive receipt
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal candidate unclaimed candidate
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal branch existing branch row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal main existing main row
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 1 2
+exit=0
+$ bash ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 70792.1793327369.BKUXTs
+exit=0
+$ bash ./bin/fm-wake-grant.sh release probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 3
+exit=0
+Before acknowledgement
+.wake-queue = b'1793327369\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327369\t2\tsignal\tcandidate\tunclaimed candidate\n1793327369\t3\tsignal\tbranch\texisting branch row\n1793327369\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:downtime:70792.1793327369.BKUXTs\n'
+.main-eligible-rows = None
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+Observed real receipt writer blocked on held receipt lock.
+$ bash -c . "$1"; shift; fm_lock_acquire_wait "$FM_WAKE_QUEUE_LOCK"; fm_recovery_marker_publish "$STATE/.watcher-down" handling; fm_lock_release "$FM_WAKE_QUEUE_LOCK" _ ./bin/fm-wake-lib.sh
+exit=0
+$ bash ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 70792.1793327369.BKUXTs
+exit=1
+wake drain: recovery generation does not match; nothing was acknowledged; re-run bin/fm-wake-drain.sh and use the new WAKE_ACK_REQUIRED command
+
+After acknowledgement
+.wake-queue = b'1793327369\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327369\t2\tsignal\tcandidate\tunclaimed candidate\n1793327369\t3\tsignal\tbranch\texisting branch row\n1793327369\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:78589.1793327372.KWAxki\n'
+.main-eligible-rows = None
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+$ bash ./bin/fm-wake-grant.sh release probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 2
+exit=0
+PASS: rejected ack preserves exact prior claims, queue and new marker. Later branch grant succeeds where applicable.
+
+SCENARIO candidate-replay-existing
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:aa inactive receipt
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal candidate unclaimed candidate
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal branch existing branch row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal main existing main row
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 1 2
+exit=0
+$ bash ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 79179.1793327372.GNmeYj
+exit=0
+$ bash ./bin/fm-wake-grant.sh release probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 3
+exit=0
+Before acknowledgement
+.wake-queue = b'1793327372\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327372\t2\tsignal\tcandidate\tunclaimed candidate\n1793327373\t3\tsignal\tbranch\texisting branch row\n1793327373\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:downtime:79179.1793327372.GNmeYj\n'
+.main-eligible-rows = b'4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+Observed real receipt writer blocked on held receipt lock.
+$ bash -c . "$1"; shift; fm_lock_acquire_wait "$FM_WAKE_QUEUE_LOCK"; fm_recovery_marker_publish "$STATE/.watcher-down" handling; fm_lock_release "$FM_WAKE_QUEUE_LOCK" _ ./bin/fm-wake-lib.sh
+exit=0
+$ bash ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 79179.1793327372.GNmeYj
+exit=1
+wake drain: nothing was acknowledged through 2 (recovery generation does not match); the current wake is row 4: run bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 81017.1793327374.dDfB4u after handling it
+
+After acknowledgement
+.wake-queue = b'1793327372\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327372\t2\tsignal\tcandidate\tunclaimed candidate\n1793327373\t3\tsignal\tbranch\texisting branch row\n1793327373\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:81017.1793327374.dDfB4u\n'
+.main-eligible-rows = b'4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+$ bash ./bin/fm-wake-grant.sh release probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 2
+exit=0
+PASS: rejected ack preserves exact prior claims, queue and new marker. Later branch grant succeeds where applicable.
+
+SCENARIO candidate-presented-moved
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:aa inactive receipt
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal candidate unclaimed candidate
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal branch existing branch row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal main existing main row
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 3
+exit=0
+$ bash ./bin/fm-wake-drain.sh
+exit=0
+1793327374	1	check	inactive-outcome:aa	inactive receipt
+1793327374	2	signal	candidate	unclaimed candidate
+1793327375	4	signal	main	existing main row
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 81843.1793327374.xUl0Z5
+Before acknowledgement
+.wake-queue = b'1793327374\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327374\t2\tsignal\tcandidate\tunclaimed candidate\n1793327375\t3\tsignal\tbranch\texisting branch row\n1793327375\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:81843.1793327374.xUl0Z5\n'
+.main-eligible-rows = b'1\n2\n4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+Observed real receipt writer blocked on held receipt lock.
+$ bash -c . "$1"; shift; fm_lock_acquire_wait "$FM_WAKE_QUEUE_LOCK"; fm_recovery_marker_publish "$STATE/.watcher-down" handling; fm_lock_release "$FM_WAKE_QUEUE_LOCK" _ ./bin/fm-wake-lib.sh
+exit=0
+$ bash ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 81843.1793327374.xUl0Z5
+exit=1
+wake drain: nothing was acknowledged through 2 (recovery generation does not match); the current wake is row 4: run bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 83644.1793327376.7YBvV7 after handling it
+
+After acknowledgement
+.wake-queue = b'1793327374\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327374\t2\tsignal\tcandidate\tunclaimed candidate\n1793327375\t3\tsignal\tbranch\texisting branch row\n1793327375\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:83644.1793327376.7YBvV7\n'
+.main-eligible-rows = b'1\n2\n4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+PASS: rejected ack preserves exact prior claims, queue and new marker. Later branch grant succeeds where applicable.
+
+SCENARIO candidate-presented-stable
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:aa inactive receipt
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal candidate unclaimed candidate
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal branch existing branch row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal main existing main row
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 3
+exit=0
+$ bash ./bin/fm-wake-drain.sh
+exit=0
+1793327376	1	check	inactive-outcome:aa	inactive receipt
+1793327376	2	signal	candidate	unclaimed candidate
+1793327377	4	signal	main	existing main row
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 84037.1793327376.IYR3Xu
+Before acknowledgement
+.wake-queue = b'1793327376\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327376\t2\tsignal\tcandidate\tunclaimed candidate\n1793327377\t3\tsignal\tbranch\texisting branch row\n1793327377\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:84037.1793327376.IYR3Xu\n'
+.main-eligible-rows = b'1\n2\n4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+Observed real receipt writer blocked on held receipt lock.
+$ bash ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 84037.1793327376.IYR3Xu
+exit=0
+
+After acknowledgement
+.wake-queue = b'1793327377\t3\tsignal\tbranch\texisting branch row\n1793327377\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:84037.1793327376.IYR3Xu\n'
+.main-eligible-rows = b'4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+PASS: current generation consumes only eligible snapshot rows and persists handled receipt.
+
+SCENARIO candidate-direct-stable
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:aa inactive receipt
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal candidate unclaimed candidate
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal branch existing branch row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal main existing main row
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 3
+exit=0
+Before acknowledgement
+.wake-queue = b'1793327378\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327378\t2\tsignal\tcandidate\tunclaimed candidate\n1793327378\t3\tsignal\tbranch\texisting branch row\n1793327379\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:downtime:86644.1793327378.lDWPyG\n'
+.main-eligible-rows = b'4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+Observed real receipt writer blocked on held receipt lock.
+$ bash ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 86644.1793327378.lDWPyG
+exit=0
+
+After acknowledgement
+.wake-queue = b'1793327378\t3\tsignal\tbranch\texisting branch row\n1793327379\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:downtime:86644.1793327378.lDWPyG\n'
+.main-eligible-rows = b'4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+PASS: current generation consumes only eligible snapshot rows and persists handled receipt.
+
+SCENARIO candidate-direct-arrival
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:aa inactive receipt
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal candidate unclaimed candidate
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal branch existing branch row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal main existing main row
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 3
+exit=0
+Before acknowledgement
+.wake-queue = b'1793327380\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327380\t2\tsignal\tcandidate\tunclaimed candidate\n1793327380\t3\tsignal\tbranch\texisting branch row\n1793327380\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:downtime:88096.1793327380.zah0hT\n'
+.main-eligible-rows = b'4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+Observed real receipt writer blocked on held receipt lock.
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:bb arriving during handoff
+exit=0
+$ bash ./bin/fm-wake-drain.sh --ack-through 8 --recovery-generation 88096.1793327380.zah0hT
+exit=0
+
+After acknowledgement
+.wake-queue = b'1793327380\t3\tsignal\tbranch\texisting branch row\n1793327381\t5\tcheck\tinactive-outcome:bb\tarriving during handoff\n'
+.watcher-down = b'pending:downtime:88096.1793327380.zah0hT\n'
+.main-eligible-rows = None
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+$ bash ./bin/fm-wake-grant.sh release probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 5
+exit=0
+PASS: current generation consumes only eligible snapshot rows and persists handled receipt.
+
+SCENARIO candidate-direct-grant
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:aa inactive receipt
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal candidate unclaimed candidate
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal branch existing branch row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal main existing main row
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 3
+exit=0
+Before acknowledgement
+.wake-queue = b'1793327382\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327382\t2\tsignal\tcandidate\tunclaimed candidate\n1793327382\t3\tsignal\tbranch\texisting branch row\n1793327382\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:downtime:90747.1793327382.ZR1fFt\n'
+.main-eligible-rows = b'4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+Observed real receipt writer blocked on held receipt lock.
+$ bash ./bin/fm-wake-grant.sh release probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 2 3
+exit=0
+$ bash ./bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 90747.1793327382.ZR1fFt
+exit=0
+
+After acknowledgement
+.wake-queue = b'1793327382\t2\tsignal\tcandidate\tunclaimed candidate\n1793327382\t3\tsignal\tbranch\texisting branch row\n1793327382\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:downtime:90747.1793327382.ZR1fFt\n'
+.main-eligible-rows = b'4\n'
+.branch-eligible-rows = b'2\n3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+PASS: current generation consumes only eligible snapshot rows and persists handled receipt.
+
+SCENARIO candidate-branch-moved
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:aa inactive receipt
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal candidate unclaimed candidate
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal branch existing branch row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal main existing main row
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 1 3
+exit=0
+$ bash ./bin/fm-wake-drain.sh
+exit=0
+1793327384	2	signal	candidate	unclaimed candidate
+1793327384	4	signal	main	existing main row
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 93553.1793327384.zLhg25
+Before acknowledgement
+.wake-queue = b'1793327384\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327384\t2\tsignal\tcandidate\tunclaimed candidate\n1793327384\t3\tsignal\tbranch\texisting branch row\n1793327384\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:93553.1793327384.zLhg25\n'
+.main-eligible-rows = b'2\n4\n'
+.branch-eligible-rows = b'1\n3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+Observed real receipt writer blocked on held receipt lock.
+$ bash -c . "$1"; shift; fm_lock_acquire_wait "$FM_WAKE_QUEUE_LOCK"; fm_recovery_marker_publish "$STATE/.watcher-down" handling; fm_lock_release "$FM_WAKE_QUEUE_LOCK" _ ./bin/fm-wake-lib.sh
+exit=0
+$ bash ./bin/fm-wake-drain.sh --ack-through 3 --recovery-generation 93553.1793327384.zLhg25
+exit=1
+wake drain: recovery generation does not match; nothing was acknowledged; re-run bin/fm-wake-drain.sh and use the new WAKE_ACK_REQUIRED command
+
+After acknowledgement
+.wake-queue = b'1793327384\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327384\t2\tsignal\tcandidate\tunclaimed candidate\n1793327384\t3\tsignal\tbranch\texisting branch row\n1793327384\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:95739.1793327386.ZYN02G\n'
+.main-eligible-rows = b'2\n4\n'
+.branch-eligible-rows = b'1\n3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+PASS: rejected ack preserves exact prior claims, queue and new marker. Later branch grant succeeds where applicable.
+
+SCENARIO candidate-branch-stable
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:aa inactive receipt
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal candidate unclaimed candidate
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal branch existing branch row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal main existing main row
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 1 3
+exit=0
+$ bash ./bin/fm-wake-drain.sh
+exit=0
+1793327386	2	signal	candidate	unclaimed candidate
+1793327386	4	signal	main	existing main row
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 96209.1793327386.KzMN4F
+Before acknowledgement
+.wake-queue = b'1793327386\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327386\t2\tsignal\tcandidate\tunclaimed candidate\n1793327386\t3\tsignal\tbranch\texisting branch row\n1793327386\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:96209.1793327386.KzMN4F\n'
+.main-eligible-rows = b'2\n4\n'
+.branch-eligible-rows = b'1\n3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+Observed real receipt writer blocked on held receipt lock.
+$ bash ./bin/fm-wake-drain.sh --ack-through 3 --recovery-generation 96209.1793327386.KzMN4F
+exit=0
+
+After acknowledgement
+.wake-queue = b'1793327386\t2\tsignal\tcandidate\tunclaimed candidate\n1793327386\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:96209.1793327386.KzMN4F\n'
+.main-eligible-rows = b'2\n4\n'
+.branch-eligible-rows = None
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+PASS: current generation consumes only eligible snapshot rows and persists handled receipt.
+
+Baseline 355ba33b drain isolated with unchanged production libraries.
+
+SCENARIO baseline-direct-absent
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:aa inactive receipt
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal candidate unclaimed candidate
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal branch existing branch row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal main existing main row
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 3
+exit=0
+Before acknowledgement
+.wake-queue = b'1793327388\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327388\t2\tsignal\tcandidate\tunclaimed candidate\n1793327388\t3\tsignal\tbranch\texisting branch row\n1793327389\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:downtime:99388.1793327388.vRplpL\n'
+.main-eligible-rows = None
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+Observed real receipt writer blocked on held receipt lock.
+$ bash -c . "$1"; shift; fm_lock_acquire_wait "$FM_WAKE_QUEUE_LOCK"; fm_recovery_marker_publish "$STATE/.watcher-down" handling; fm_lock_release "$FM_WAKE_QUEUE_LOCK" _ ./bin/fm-wake-lib.sh
+exit=0
+$ bash ./.ack-live-rs8d2b1m/baseline-bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 99388.1793327388.vRplpL
+exit=1
+wake drain: recovery generation does not match; nothing was acknowledged; re-run bin/fm-wake-drain.sh and use the new WAKE_ACK_REQUIRED command
+
+After acknowledgement
+.wake-queue = b'1793327388\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327388\t2\tsignal\tcandidate\tunclaimed candidate\n1793327388\t3\tsignal\tbranch\texisting branch row\n1793327389\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:1134.1793327389.E5SJiM\n'
+.main-eligible-rows = b'1\n2\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+$ bash ./bin/fm-wake-grant.sh release probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 2
+exit=3
+BASELINE RED: refused ack published main claims and blocked later branch grant.
+
+SCENARIO baseline-direct-existing
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:aa inactive receipt
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal candidate unclaimed candidate
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal branch existing branch row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal main existing main row
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 3
+exit=0
+Before acknowledgement
+.wake-queue = b'1793327390\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327390\t2\tsignal\tcandidate\tunclaimed candidate\n1793327390\t3\tsignal\tbranch\texisting branch row\n1793327390\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:downtime:1823.1793327390.r1frPB\n'
+.main-eligible-rows = b'4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+Observed real receipt writer blocked on held receipt lock.
+$ bash -c . "$1"; shift; fm_lock_acquire_wait "$FM_WAKE_QUEUE_LOCK"; fm_recovery_marker_publish "$STATE/.watcher-down" handling; fm_lock_release "$FM_WAKE_QUEUE_LOCK" _ ./bin/fm-wake-lib.sh
+exit=0
+$ bash ./.ack-live-rs8d2b1m/baseline-bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 1823.1793327390.r1frPB
+exit=1
+wake drain: nothing was acknowledged through 2 (recovery generation does not match); the current wake is row 4: run bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 3378.1793327391.R8ipc7 after handling it
+
+After acknowledgement
+.wake-queue = b'1793327390\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327390\t2\tsignal\tcandidate\tunclaimed candidate\n1793327390\t3\tsignal\tbranch\texisting branch row\n1793327390\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:3378.1793327391.R8ipc7\n'
+.main-eligible-rows = b'1\n2\n4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+$ bash ./bin/fm-wake-grant.sh release probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 2
+exit=3
+BASELINE RED: refused ack published main claims and blocked later branch grant.
+
+SCENARIO baseline-replay-absent
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:aa inactive receipt
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal candidate unclaimed candidate
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal branch existing branch row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal main existing main row
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 1 2
+exit=0
+$ bash ./.ack-live-rs8d2b1m/baseline-bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 4098.1793327391.TX7nKT
+exit=0
+grep: /Users/daddy/.no-mistakes-upstream-codex/worktrees/21760474d773/01M6162Q8DPJNV9961SWZHZ5QZ/.ack-live-rs8d2b1m/baseline-replay-absent/state/.main-eligible-rows: No such file or directory
+grep: /Users/daddy/.no-mistakes-upstream-codex/worktrees/21760474d773/01M6162Q8DPJNV9961SWZHZ5QZ/.ack-live-rs8d2b1m/baseline-replay-absent/state/.main-eligible-rows: No such file or directory
+$ bash ./bin/fm-wake-grant.sh release probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 3
+exit=0
+Before acknowledgement
+.wake-queue = b'1793327391\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327391\t2\tsignal\tcandidate\tunclaimed candidate\n1793327391\t3\tsignal\tbranch\texisting branch row\n1793327391\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:downtime:4098.1793327391.TX7nKT\n'
+.main-eligible-rows = None
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+Observed real receipt writer blocked on held receipt lock.
+$ bash -c . "$1"; shift; fm_lock_acquire_wait "$FM_WAKE_QUEUE_LOCK"; fm_recovery_marker_publish "$STATE/.watcher-down" handling; fm_lock_release "$FM_WAKE_QUEUE_LOCK" _ ./bin/fm-wake-lib.sh
+exit=0
+$ bash ./.ack-live-rs8d2b1m/baseline-bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 4098.1793327391.TX7nKT
+exit=1
+wake drain: recovery generation does not match; nothing was acknowledged; re-run bin/fm-wake-drain.sh and use the new WAKE_ACK_REQUIRED command
+
+After acknowledgement
+.wake-queue = b'1793327391\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327391\t2\tsignal\tcandidate\tunclaimed candidate\n1793327391\t3\tsignal\tbranch\texisting branch row\n1793327391\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:5817.1793327393.EI8INv\n'
+.main-eligible-rows = b'1\n2\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+$ bash ./bin/fm-wake-grant.sh release probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 2
+exit=3
+BASELINE RED: refused ack published main claims and blocked later branch grant.
+
+SCENARIO baseline-replay-existing
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh check inactive-outcome:aa inactive receipt
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal candidate unclaimed candidate
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal branch existing branch row
+exit=0
+$ bash -c . "$1"; shift; fm_wake_append "$1" "$2" "$3" _ ./bin/fm-wake-lib.sh signal main existing main row
+exit=0
+$ bash ./bin/fm-wake-grant.sh activate 40655 probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 1 2
+exit=0
+$ bash ./.ack-live-rs8d2b1m/baseline-bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 6570.1793327393.4vfBXL
+exit=0
+grep: /Users/daddy/.no-mistakes-upstream-codex/worktrees/21760474d773/01M6162Q8DPJNV9961SWZHZ5QZ/.ack-live-rs8d2b1m/baseline-replay-existing/state/.main-eligible-rows: No such file or directory
+grep: /Users/daddy/.no-mistakes-upstream-codex/worktrees/21760474d773/01M6162Q8DPJNV9961SWZHZ5QZ/.ack-live-rs8d2b1m/baseline-replay-existing/state/.main-eligible-rows: No such file or directory
+$ bash ./bin/fm-wake-grant.sh release probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 3
+exit=0
+Before acknowledgement
+.wake-queue = b'1793327393\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327393\t2\tsignal\tcandidate\tunclaimed candidate\n1793327393\t3\tsignal\tbranch\texisting branch row\n1793327393\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:downtime:6570.1793327393.4vfBXL\n'
+.main-eligible-rows = b'4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+Observed real receipt writer blocked on held receipt lock.
+$ bash -c . "$1"; shift; fm_lock_acquire_wait "$FM_WAKE_QUEUE_LOCK"; fm_recovery_marker_publish "$STATE/.watcher-down" handling; fm_lock_release "$FM_WAKE_QUEUE_LOCK" _ ./bin/fm-wake-lib.sh
+exit=0
+$ bash ./.ack-live-rs8d2b1m/baseline-bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 6570.1793327393.4vfBXL
+exit=1
+wake drain: nothing was acknowledged through 2 (recovery generation does not match); the current wake is row 4: run bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 8935.1793327395.G71114 after handling it
+
+After acknowledgement
+.wake-queue = b'1793327393\t1\tcheck\tinactive-outcome:aa\tinactive receipt\n1793327393\t2\tsignal\tcandidate\tunclaimed candidate\n1793327393\t3\tsignal\tbranch\texisting branch row\n1793327393\t4\tsignal\tmain\texisting main row\n'
+.watcher-down = b'pending:handling:8935.1793327395.G71114\n'
+.main-eligible-rows = b'1\n2\n4\n'
+.branch-eligible-rows = b'3\n'
+.branch-eligible-owner = b'fm-branch-eligible-owner-v1\n40655\nFri Oct 30 02:29:20 2026     /opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /Users/daddy/.no-mistakes-upstream-codex/evidence/01M6162Q8DPJNV9961SWZHZ5QZ/current-live-ack-probe.py\nprobe\n'
+$ bash ./bin/fm-wake-grant.sh release probe
+exit=0
+$ bash ./bin/fm-wake-grant.sh publish probe 2
+exit=3
+BASELINE RED: refused ack published main claims and blocked later branch grant.
+
+ALL LIVE PROBES PASSED; all four pre-fix regression cases reproduced.
+Removed disposable workspace /Users/daddy/.no-mistakes-upstream-codex/worktrees/21760474d773/01M6162Q8DPJNV9961SWZHZ5QZ/.ack-live-rs8d2b1m

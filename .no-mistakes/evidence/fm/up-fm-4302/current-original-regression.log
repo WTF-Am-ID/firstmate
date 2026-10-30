@@ -1,0 +1,14 @@
+base command=bash fm-wake-drain.sh --ack-through 1 --recovery-generation stale exit=0
+wake drain: acknowledged wakes through 1 (1 row(s) consumed), but a newer recovery episode is pending; re-run bin/fm-wake-drain.sh and use the new WAKE_ACK_REQUIRED command
+
+.wake-queue before=b'1793327519\t1\tsignal\tearlier\tearlier\n1793327519\t2\tsignal\tlater\tlater\n' after=b'1793327519\t2\tsignal\tlater\tlater\n'
+.watcher-down before=b'pending:handling:74896.1793327519.LdJkUi\n' after=b'pending:handling:74896.1793327519.LdJkUi\n'
+.main-eligible-rows before=b'1\n2\n' after=b'2\n'
+candidate command=bash fm-wake-drain.sh --ack-through 1 --recovery-generation stale exit=1
+wake drain: nothing was acknowledged through 1 (recovery generation does not match); the current wake is row 2: run bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 75686.1793327520.uGintS after handling it
+
+.wake-queue before=b'1793327520\t1\tsignal\tearlier\tearlier\n1793327520\t2\tsignal\tlater\tlater\n' after=b'1793327520\t1\tsignal\tearlier\tearlier\n1793327520\t2\tsignal\tlater\tlater\n'
+.watcher-down before=b'pending:handling:75686.1793327520.uGintS\n' after=b'pending:handling:75686.1793327520.uGintS\n'
+.main-eligible-rows before=b'1\n2\n' after=b'1\n2\n'
+Confirmed original stale-generation regression RED at 05196e30, GREEN at 733b6a1a.
+Disposable homes removed.
