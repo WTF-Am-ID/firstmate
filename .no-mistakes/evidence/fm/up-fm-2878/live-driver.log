@@ -1,0 +1,7 @@
+PASS S1 independent histories and wakes ignore ambiguous legacy evidence
+PASS S2 sibling removal and restoration preserve identity without replay
+PASS S3 punctuation Unicode percent slash and underscore remain distinct
+PASS S4 248-byte endpoint persists bounded history and wakes
+PASS S5 duplicate endpoint records surface changed-pane turn end
+PASS S6 real daemon adopts pauses and clears resumed terminal tracking with separate task keys
+{"labs_removed": true, "private_socket_directories_removed": true, "processes_reaped": true}

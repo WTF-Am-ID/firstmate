@@ -1,0 +1,41 @@
+{
+  "revision": "83be67b1f06096a77f755f9429386ff0288b92f9",
+  "status_porcelain": "",
+  "scratch_paths": {
+    ".issue2878-daemon-live.py": {
+      "tracked": false,
+      "on_disk": false
+    },
+    ".issue2878-live.py": {
+      "tracked": false,
+      "on_disk": false
+    },
+    ".test-daemon-lab-2878/.fm-lab-home": {
+      "tracked": false,
+      "on_disk": false
+    },
+    ".test-daemon-lab-2878/daemon.out": {
+      "tracked": false,
+      "on_disk": false
+    },
+    ".test-lab-2878/.fm-lab-home": {
+      "tracked": false,
+      "on_disk": false
+    },
+    ".test-lab-2878/watch.err": {
+      "tracked": false,
+      "on_disk": false
+    },
+    ".test-lab-2878/watch.out": {
+      "tracked": false,
+      "on_disk": false
+    },
+    "tests/fm-issue2878-daemon-focus.test.sh": {
+      "tracked": false,
+      "on_disk": false
+    }
+  },
+  "cleanup_commit_only_deletes_these_eight_paths": true,
+  "base_diff_stat": " bin/fm-supervise-daemon.sh                         |   8 +-\n bin/fm-watch-key-lib.sh                            |  32 +++\n bin/fm-watch.sh                                    |  22 +-\n docs/architecture.md                               |   3 +-\n docs/configuration.md                              |  11 +\n docs/scripts.md                                    |   1 +\n tests/fm-backend-t3code.test.sh                    |   4 +-\n tests/fm-daemon.test.sh                            |   6 +-\n tests/fm-wake-queue.test.sh                        |   4 +-\n tests/fm-watch-triage-pause.test.sh                |  52 ++---\n tests/fm-watch-triage-wedge-defer.test.sh          |  37 +--\n tests/fm-watch-triage.test.sh                      | 253 ++++++++++++++++-----\n tests/fm-watch-wedge-cap-live.test.sh              |   4 +-\n .../fm-watch-wedge-cap-unconfigured-parity.test.sh |   3 +-\n tests/fm-watch-wedge-cap.test.sh                   |  54 ++---\n tests/wake-helpers.sh                              |  13 ++\n tests/watch-triage-helpers.sh                      |   2 +-\n 17 files changed, 349 insertions(+), 160 deletions(-)\n",
+  "base_diff_names": "M\tbin/fm-supervise-daemon.sh\nA\tbin/fm-watch-key-lib.sh\nM\tbin/fm-watch.sh\nM\tdocs/architecture.md\nM\tdocs/configuration.md\nM\tdocs/scripts.md\nM\ttests/fm-backend-t3code.test.sh\nM\ttests/fm-daemon.test.sh\nM\ttests/fm-wake-queue.test.sh\nM\ttests/fm-watch-triage-pause.test.sh\nM\ttests/fm-watch-triage-wedge-defer.test.sh\nM\ttests/fm-watch-triage.test.sh\nM\ttests/fm-watch-wedge-cap-live.test.sh\nM\ttests/fm-watch-wedge-cap-unconfigured-parity.test.sh\nM\ttests/fm-watch-wedge-cap.test.sh\nM\ttests/wake-helpers.sh\nM\ttests/watch-triage-helpers.sh\n"
+}

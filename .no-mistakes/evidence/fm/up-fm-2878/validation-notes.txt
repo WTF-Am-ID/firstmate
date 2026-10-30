@@ -1,0 +1,10 @@
+Validation notes
+
+Candidate 83be67b1f06096a77f755f9429386ff0288b92f9.
+The final strengthened probe also made the real watcher create its pause marker before real daemon adoption. All six required scenarios passed against actual bin/fm-watch.sh and bin/fm-supervise-daemon.sh processes using private tmux cat-backed endpoint fixtures. No authenticated Codex session was launched or claimed. That optional scenario remains unrun under the recorded scope ruling.
+
+Private tmux used a nonzero 120x40 grid. The private tmux server, socket directory, all five marked lab homes, and all started product processes were removed or reaped by the driver. Evidence and its repeatable driver remain here intentionally. No source, tests, hooks, credentials, accounts, tool configuration, fleet or pipeline state was edited.
+
+Setup corrections: tmux treats a dot as a pane selector, so the real collision probe uses s:a.0 and s:a_0. The existing focused regression independently drives the exact requested fake s:a.b and s:a_b spellings. The daemon supervisor uses ordinary s:a_0 because its endpoint-membership check refused s:a.0. These were disposable setup changes, with protections unchanged. The final complete driver exited zero. Supported-byte checks exercise both live pane histories for representable tmux IDs and the actual shared key function for all 13 requested punctuation/Unicode byte strings.
+
+This is a CLI/marker-state change, with no rendered UI change. Evidence consists of product wake output, durable queue rows, persisted marker state, daemon logs, and candidate integrity checks. No screenshot was needed. No linter, formatter, full suite, provider CLI, remote API, or other gate phase ran.

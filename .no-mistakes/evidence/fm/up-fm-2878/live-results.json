@@ -1,0 +1,299 @@
+{
+  "revision": "83be67b1f06096a77f755f9429386ff0288b92f9",
+  "scenarios": [
+    {
+      "name": "S1 independent histories and wakes ignore ambiguous legacy evidence",
+      "result": "pass",
+      "wakes": [
+        "stale: s:a.0",
+        "stale: s:a_0"
+      ],
+      "queues": [
+        "1793329066\t1\tstale\ts:a.0\tstale: s:a.0\n",
+        "1793329068\t2\tstale\ts:a_0\tstale: s:a_0\n"
+      ],
+      "histories": [
+        {
+          "endpoint": "s:a.0",
+          "key": "v3.1bce09d8a1b8556a38766fe56138b26bb6222dc907fbc9aa3478f694a3de2edd",
+          "hash": "10f34e43c34c91e68e6a0e5162350b36",
+          "count": "3",
+          "stale": "10f34e43c34c91e68e6a0e5162350b36",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        },
+        {
+          "endpoint": "s:a_0",
+          "key": "v3.a0e8626a4a666ebf2fe3ef36ad8fcd96cfb6694d2fc4b03f0de213387b901dca",
+          "hash": "02a3ea1c69f00d61901a71fd82acdd54",
+          "count": "2",
+          "stale": "02a3ea1c69f00d61901a71fd82acdd54",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        }
+      ]
+    },
+    {
+      "name": "S2 sibling removal and restoration preserve identity without replay",
+      "result": "pass",
+      "histories": [
+        {
+          "endpoint": "s:a.0",
+          "key": "v3.1bce09d8a1b8556a38766fe56138b26bb6222dc907fbc9aa3478f694a3de2edd",
+          "hash": "10f34e43c34c91e68e6a0e5162350b36",
+          "count": "7",
+          "stale": "10f34e43c34c91e68e6a0e5162350b36",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        },
+        {
+          "endpoint": "s:a_0",
+          "key": "v3.a0e8626a4a666ebf2fe3ef36ad8fcd96cfb6694d2fc4b03f0de213387b901dca",
+          "hash": "02a3ea1c69f00d61901a71fd82acdd54",
+          "count": "4",
+          "stale": "02a3ea1c69f00d61901a71fd82acdd54",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        }
+      ],
+      "legacy_count": "99"
+    },
+    {
+      "name": "S3 punctuation Unicode percent slash and underscore remain distinct",
+      "result": "pass",
+      "histories": [
+        {
+          "endpoint": "s:a.0",
+          "key": "v3.1bce09d8a1b8556a38766fe56138b26bb6222dc907fbc9aa3478f694a3de2edd",
+          "hash": "10f34e43c34c91e68e6a0e5162350b36",
+          "count": "2",
+          "stale": "10f34e43c34c91e68e6a0e5162350b36",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        },
+        {
+          "endpoint": "s:a_0",
+          "key": "v3.a0e8626a4a666ebf2fe3ef36ad8fcd96cfb6694d2fc4b03f0de213387b901dca",
+          "hash": "02a3ea1c69f00d61901a71fd82acdd54",
+          "count": "2",
+          "stale": "02a3ea1c69f00d61901a71fd82acdd54",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        },
+        {
+          "endpoint": "s:a/b",
+          "key": "v3.8b66032c60329ffd54ebfd25c1ebf7096895114b82feb04b1cec44efe0792dc4",
+          "hash": "9ca34ff17521c367f042212a7962ef7e",
+          "count": "2",
+          "stale": "9ca34ff17521c367f042212a7962ef7e",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        },
+        {
+          "endpoint": "s:a%2fb",
+          "key": "v3.5d8158ccb2ac132935faa8252ddac8528947da8df279776391945d2cc9beb347",
+          "hash": "6e93e55360cba0097864fd08ee721be4",
+          "count": "2",
+          "stale": "6e93e55360cba0097864fd08ee721be4",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        },
+        {
+          "endpoint": "s:a%2eb",
+          "key": "v3.7297eae6210d7db5ca62ff61c52b2ca2afb17ce1485c7223f8cb2e8ebde7dd7e",
+          "hash": "301d6702db88389c5ee072bfa5c9b110",
+          "count": "2",
+          "stale": "301d6702db88389c5ee072bfa5c9b110",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        },
+        {
+          "endpoint": "s:a%25b",
+          "key": "v3.96464fcfa59d8564bea68444cc0816618c8ca2f709493be3ba6e2edf9f99f47a",
+          "hash": "53b6dce1e37d4d2d32bffee8e299e5f8",
+          "count": "2",
+          "stale": "53b6dce1e37d4d2d32bffee8e299e5f8",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        },
+        {
+          "endpoint": "s:a%b",
+          "key": "v3.07e50db0ebfd77831fe9e36dba2b44a8e947a6f9b751fb95a1761d5654a0a03f",
+          "hash": "f403059100088ea2c5ac2185d71248cf",
+          "count": "2",
+          "stale": "f403059100088ea2c5ac2185d71248cf",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        },
+        {
+          "endpoint": "s:a-b",
+          "key": "v3.7fb137cd3a9e0d485e47b52aa721ab2244688fe9baa5806b8eb1a6bc4b4b69f1",
+          "hash": "742059fe2f70862aea69d9f783800390",
+          "count": "2",
+          "stale": "742059fe2f70862aea69d9f783800390",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        },
+        {
+          "endpoint": "s:a b",
+          "key": "v3.22f9c879132a9280e7c67248d3dbe8ca66f81f95639219b2e5b3ba66167fcd77",
+          "hash": "c5bf83e96e98e46767631e614fb81245",
+          "count": "2",
+          "stale": "c5bf83e96e98e46767631e614fb81245",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        },
+        {
+          "endpoint": "s:a!b",
+          "key": "v3.15fa0cbe9878c305d8f67ddc4b8d0c040a0e2f0d5c1f753ce683f78776b49f74",
+          "hash": "621557daf8b56436ac2a6ca7b7034d24",
+          "count": "2",
+          "stale": "621557daf8b56436ac2a6ca7b7034d24",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        },
+        {
+          "endpoint": "s:船员",
+          "key": "v3.ca580098ed8a25eae3d43148a9a0ce56679a67473f4e1c3cffd8cb40e3148dcb",
+          "hash": "235b69d33eb8787aa8dcdbc0af8faf4b",
+          "count": "2",
+          "stale": "235b69d33eb8787aa8dcdbc0af8faf4b",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        },
+        {
+          "endpoint": "s:船_员",
+          "key": "v3.239de396d1503cc9190aab82787770897cac09b1b6bc4cbfd49c5dd1b2ed53a9",
+          "hash": "64bee36d331a881958f72f1a33944de8",
+          "count": "2",
+          "stale": "64bee36d331a881958f72f1a33944de8",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        }
+      ],
+      "additional_endpoint_keys": {
+        "s:a.b": "v3.bb489d87f44708d5757f1873bb42e650966926f5c30daf77d4340111b6a86531",
+        "s:a_b": "v3.17bc19b69b329c36d0bc1e248c3314b3b63100bee95200be2000222d488200e3",
+        "s:a/b": "v3.8b66032c60329ffd54ebfd25c1ebf7096895114b82feb04b1cec44efe0792dc4",
+        "s:a:b": "v3.8a3c9fa9c0c54e67ae7df2ed6f55667cba68f1a72a81b0a93d51377dbd996d9c",
+        "s:a%2fb": "v3.5d8158ccb2ac132935faa8252ddac8528947da8df279776391945d2cc9beb347",
+        "s:a%2eb": "v3.7297eae6210d7db5ca62ff61c52b2ca2afb17ce1485c7223f8cb2e8ebde7dd7e",
+        "s:a%25b": "v3.96464fcfa59d8564bea68444cc0816618c8ca2f709493be3ba6e2edf9f99f47a",
+        "s:a%b": "v3.07e50db0ebfd77831fe9e36dba2b44a8e947a6f9b751fb95a1761d5654a0a03f",
+        "s:a-b": "v3.7fb137cd3a9e0d485e47b52aa721ab2244688fe9baa5806b8eb1a6bc4b4b69f1",
+        "s:a b": "v3.22f9c879132a9280e7c67248d3dbe8ca66f81f95639219b2e5b3ba66167fcd77",
+        "s:a!b": "v3.15fa0cbe9878c305d8f67ddc4b8d0c040a0e2f0d5c1f753ce683f78776b49f74",
+        "s:船.员": "v3.ddb810daacfe3bfa0bd179442a0fcb1418828d6f54339e5dc089cfba4d04776d",
+        "s:船_员": "v3.239de396d1503cc9190aab82787770897cac09b1b6bc4cbfd49c5dd1b2ed53a9"
+      }
+    },
+    {
+      "name": "S4 248-byte endpoint persists bounded history and wakes",
+      "result": "pass",
+      "wake": "stale: ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss:fm-tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+      "queue": "1793329085\t1\tstale\tssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss:fm-tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt\tstale: ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss:fm-tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt\n",
+      "histories": [
+        {
+          "endpoint": "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss:fm-tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+          "key": "v3.f4c9ce885e04740cb0a7e8b180ab1a58bdff8d6b9a3d513ac6bf2940b2aa8936",
+          "hash": "56355ce65e83a332635775777b3ec80e",
+          "count": "2",
+          "stale": "56355ce65e83a332635775777b3ec80e",
+          "filename_bytes": {
+            "hash": 73,
+            "count": 74,
+            "stale": 74
+          }
+        }
+      ]
+    },
+    {
+      "name": "S5 duplicate endpoint records surface changed-pane turn end",
+      "result": "pass",
+      "wake": "signal: /Users/daddy/.no-mistakes-upstream-codex/evidence/01M65BBAJGNPDVJZG917JA4X8V/lab-duplicates/state/first.turn-ended",
+      "queue": "1793329088\t2\tsignal\tfirst.turn-ended\tsignal: /Users/daddy/.no-mistakes-upstream-codex/evidence/01M65BBAJGNPDVJZG917JA4X8V/lab-duplicates/state/first.turn-ended\n",
+      "churn_deferral_created": false
+    },
+    {
+      "name": "S6 real daemon adopts pauses and clears resumed terminal tracking with separate task keys",
+      "result": "pass",
+      "adoption": {
+        "task_marker": ".subsuper-paused-held_task",
+        "endpoint_marker": ".paused-v3.aa9a27724646e050891b250698ea44bf6f9c3ac497751497556d7cead80ad7ef",
+        "task_marker_value": "1793329097",
+        "watcher_created_pause": true,
+        "watcher_pause_histories": [
+          {
+            "endpoint": "s:fm-pause",
+            "key": "v3.aa9a27724646e050891b250698ea44bf6f9c3ac497751497556d7cead80ad7ef",
+            "hash": "5dc78db306203b63960d33b165a964c1",
+            "count": "2",
+            "stale": "5dc78db306203b63960d33b165a964c1",
+            "filename_bytes": {
+              "hash": 73,
+              "count": 74,
+              "stale": 74
+            }
+          }
+        ]
+      },
+      "resumed_cleanup": true,
+      "terminal_cleanup": true,
+      "log": "[2026-10-29T22:58:17-0400] daemon starting (pid 85319); target=s:a_0; target_source=FM_SUPERVISOR_TARGET; backend=tmux; backend_source=FM_SUPERVISOR_BACKEND; afk=off; inject_skip='heartbeat'; stale_escalate=240s; batch=90s\n[2026-10-29T22:58:19-0400] daemon shutting down\n[2026-10-29T22:58:19-0400] daemon starting (pid 86849); target=s:a_0; target_source=FM_SUPERVISOR_TARGET; backend=tmux; backend_source=FM_SUPERVISOR_BACKEND; afk=off; inject_skip='heartbeat'; stale_escalate=240s; batch=90s\n[2026-10-29T22:58:20-0400] daemon shutting down\n"
+    }
+  ],
+  "optional_authenticated_codex": "unrun, outside the accepted endpoint-fixture contract",
+  "cleanup": {
+    "labs_removed": true,
+    "private_socket_directories_removed": true,
+    "processes_reaped": true
+  }
+}
