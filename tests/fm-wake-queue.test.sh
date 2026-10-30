@@ -3813,7 +3813,145 @@ SH
   pass "wake drain: generation changes during the receipt handoff refuse consumption"
 }
 
+# Drive the production drain/grant CLIs against a live-held receipt lock. The
+# child process proves the ack reached receipt recording, rather than relying
+# on a sleep or replacing a lock primitive to simulate the handoff.
+generation_claim_handoff_case() (
+  local mode=$1 previous=$2 change=$3 dir state generation ack_pid='' receipt_pid='' rc=0 i failures='' cutoff=2 actor=main
+  dir=$(make_case "claim-handoff-$mode-$previous-$change")
+  state="$dir/state"
+  export FM_HOME="$dir" FM_STATE_OVERRIDE="$state" FM_ROOT_OVERRIDE="$dir" FM_SUPERVISION_ACTOR=main
+  # shellcheck source=bin/fm-wake-lib.sh
+  . "$ROOT/bin/fm-wake-lib.sh"
+  trap '[ -z "$ack_pid" ] || { kill "$ack_pid" 2>/dev/null || true; wait "$ack_pid" 2>/dev/null || true; }; fm_lock_release "$STATE/.inactive-outcome-reconcile.lock"; fm_lock_release "$FM_WAKE_QUEUE_LOCK"' EXIT
+  mkdir -p "$state/terminal-outcomes"
+  printf 'phase=presentation\n' > "$state/terminal-outcomes/aa.pending"
+  append_wake "$state" check inactive-outcome:aa 'inactive receipt' || fail "receipt append failed"
+  append_wake "$state" signal candidate 'unclaimed candidate' || fail "candidate append failed"
+  append_wake "$state" signal branch 'existing branch row' || fail "branch append failed"
+  append_wake "$state" signal main 'existing main row' || fail "main append failed"
+  generation=$(cat "$state/.watcher-down")
+  generation=${generation##*:}
+  bash "$GRANT" activate "$$" claims || fail "branch activation failed"
+  if [ "$mode" = replay ]; then
+    bash "$GRANT" publish claims 1 2 || fail "initial replay grant failed"
+    bash "$DRAIN" --ack-through 2 --recovery-generation "$generation" > "$dir/replay.out" 2> "$dir/replay.err" \
+      || fail "initial replay ack failed"
+    bash "$GRANT" release claims || fail "initial replay release failed"
+  fi
+  if [ "$mode" = branch ]; then
+    bash "$GRANT" publish claims 1 3 || fail "existing branch grant failed"
+    actor=branch
+    cutoff=3
+  else
+    bash "$GRANT" publish claims 3 || fail "existing branch grant failed"
+  fi
+  [ "$change" != arrival ] || cutoff=8
+  if [ "$previous" = existing ]; then printf '4\n' > "$state/.main-eligible-rows"; fi
+  if [ "$mode" = presented ] || [ "$mode" = branch ]; then
+    bash "$DRAIN" > "$dir/present.out" 2> "$dir/present.err" || fail "main presentation failed"
+  fi
+  cp "$state/.wake-queue" "$dir/queue.before"
+  cp "$state/.branch-eligible-rows" "$dir/branch.before"
+  cp "$state/.branch-eligible-owner" "$dir/owner.before"
+  if [ -e "$state/.main-eligible-rows" ]; then cp "$state/.main-eligible-rows" "$dir/main.before"; fi
+  fm_lock_acquire_wait "$state/.inactive-outcome-reconcile.lock" || fail "receipt lock failed"
+  FM_SUPERVISION_ACTOR="$actor" bash "$DRAIN" --ack-through "$cutoff" --recovery-generation "$generation" > "$dir/ack.out" 2> "$dir/ack.err" &
+  ack_pid=$!
+  i=0
+  while [ "$i" -lt 200 ]; do
+    receipt_pid=$(ps -ww -eo pid=,ppid=,args= | awk -v pid="$ack_pid" '$2 == pid && /fm-inactive-reconcile.sh acknowledge aa/ { print $1; exit }')
+    if [ -n "$receipt_pid" ] && ps -ww -eo ppid=,args= | awk -v pid="$receipt_pid" '$1 == pid && /sleep 0.1$/ { found=1 } END { exit !found }'; then break; fi
+    kill -0 "$ack_pid" 2>/dev/null || fail "ack exited before receipt handoff"
+    sleep 0.05
+    i=$((i + 1))
+  done
+  [ "$i" -lt 200 ] || fail "ack did not contend for the real receipt lock"
+  # Queue/marker mutations complete while the receipt writer remains blocked.
+  fm_lock_acquire_wait "$FM_WAKE_QUEUE_LOCK" || fail "handoff kept queue locked"
+  if [ "$change" = moved ]; then
+    fm_recovery_marker_publish "$state/.watcher-down" handling || fail "generation publication failed"
+    [ "${FM_RECOVERY_MARKER_TOKEN##*:}" != "$generation" ] || fail "fixture did not change generation"
+  fi
+  if [ "$change" = arrival ]; then
+    printf 'phase=presentation\n' > "$state/terminal-outcomes/bb.pending"
+    fm_wake_append_locked check inactive-outcome:bb 'receipt arriving during handoff' || fail "handoff append failed"
+    tail -n 1 "$state/.wake-queue" > "$dir/arrival"
+  fi
+  cp "$state/.watcher-down" "$dir/marker.after"
+  fm_lock_release "$FM_WAKE_QUEUE_LOCK"
+  if [ "$change" = grant ]; then
+    bash "$GRANT" release claims || fail "handoff release failed"
+    bash "$GRANT" publish claims 2 3 || fail "handoff grant of uncommitted candidate failed"
+    cp "$state/.branch-eligible-rows" "$dir/branch.before"
+  fi
+  fm_lock_release "$state/.inactive-outcome-reconcile.lock"
+  wait "$ack_pid" || rc=$?
+  ack_pid=''
+  if [ "$change" = moved ]; then
+    [ "$rc" -ne 0 ] || fail "raced ack accepted a new generation"
+    assert_grep 'recovery generation does not match' "$dir/ack.err" "raced ack did not report generation rejection"
+    cmp -s "$state/.wake-queue" "$dir/queue.before" || fail "raced ack changed queue bytes"
+    if [ -e "$dir/main.before" ]; then
+      cmp -s "$state/.main-eligible-rows" "$dir/main.before" || failures="main claim bytes changed; "
+    else
+      { [ ! -e "$state/.main-eligible-rows" ] && [ ! -L "$state/.main-eligible-rows" ]; } || failures="absent main claim was created; "
+    fi
+    cmp -s "$state/.watcher-down" "$dir/marker.after" || fail "raced ack changed newer marker"
+    cmp -s "$state/.branch-eligible-rows" "$dir/branch.before" || fail "raced ack changed branch rows"
+    cmp -s "$state/.branch-eligible-owner" "$dir/owner.before" || fail "raced ack changed branch owner"
+    if [ "$mode" = direct ] || [ "$mode" = replay ]; then
+      bash "$GRANT" release claims || fail "branch release failed"
+      bash "$GRANT" publish claims 2 > "$dir/grant.out" 2> "$dir/grant.err" \
+        || failures="${failures}formerly unclaimed row refused by branch grant; "
+    fi
+    [ -z "$failures" ] || fail "$mode/$previous: $failures"
+  else
+    [ "$rc" -eq 0 ] || fail "matching ack failed"
+    if [ "$actor" = branch ]; then
+      awk -F '\t' '$2 != 1 && $2 != 3' "$dir/queue.before" > "$dir/queue.after"
+      [ ! -e "$state/.branch-eligible-rows" ] || fail "branch ack retained consumed grant"
+      cmp -s "$state/.main-eligible-rows" "$dir/main.before" || fail "branch ack changed main ownership"
+    else
+      awk -F '\t' -v cutoff="$cutoff" -v grant="$dir/branch.before" '
+        BEGIN { while ((getline seq < grant) > 0) reserved[seq]=1 }
+        $2 > cutoff || $2 in reserved { print }
+      ' "$dir/queue.before" > "$dir/queue.after"
+      if [ "$change" = arrival ]; then
+        cat "$dir/arrival" >> "$dir/queue.after"
+        [ -f "$state/terminal-outcomes/bb.pending" ] || fail "ack receipted an unseen handoff arrival"
+        bash "$GRANT" release claims || fail "arrival grant release failed"
+        bash "$GRANT" publish claims 5 || fail "handoff arrival was claimed by main"
+      else
+        cmp -s "$state/.branch-eligible-rows" "$dir/branch.before" || fail "matching ack changed branch grant"
+      fi
+    fi
+    cmp -s "$state/.wake-queue" "$dir/queue.after" || fail "matching ack lost cutoff, arrival or branch exclusion semantics"
+    [ -f "$state/terminal-outcomes/aa.presented" ] || fail "matching ack lost inactive receipt"
+  fi
+  pass "real receipt-lock handoff: $mode/$previous/$change preserves acknowledgement ownership"
+)
+
+test_generation_claim_publication_handoff() {
+  local mode previous change rc=0
+  for mode in direct replay; do
+    for previous in absent existing; do
+      for change in moved stable; do
+        generation_claim_handoff_case "$mode" "$previous" "$change" || rc=1
+      done
+    done
+  done
+  generation_claim_handoff_case presented existing moved || rc=1
+  generation_claim_handoff_case presented existing stable || rc=1
+  generation_claim_handoff_case direct existing arrival || rc=1
+  generation_claim_handoff_case direct existing grant || rc=1
+  generation_claim_handoff_case branch existing moved || rc=1
+  generation_claim_handoff_case branch existing stable || rc=1
+  [ "$rc" -eq 0 ] || fail "generation-bound main claim publication failed"
+}
+
 test_branch_grant_requires_lock_acquisition
+test_generation_claim_publication_handoff
 test_generation_bound_ack_preserves_rows_and_marker
 test_generation_bound_empty_ack
 test_generation_change_during_ack_lock_handoff

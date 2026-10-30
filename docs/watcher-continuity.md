@@ -326,7 +326,8 @@ Failing the whole drain would strand the usable rows too.
 | Main `--ack-through <SEQ>` | Only claimed main rows at or below the cutoff. |
 | Branch | Only claimed branch rows at or below its cutoff. |
 
-A main acknowledgement first claims every unreserved row at or below its cutoff, so none is stranded.
+A main acknowledgement first selects every unreserved row at or below its cutoff, so none is stranded.
+It publishes those claims only after the final generation check under the queue and marker locks, excluding any intervening branch grant and leaving rows that arrived during receipt recording unclaimed.
 It leaves a row above the cutoff that arrived after presentation unowned, so an away-session grant can still take it rather than handing every later wake back to main.
 
 Every settled branch prompt releases any residual grant.

@@ -48,6 +48,7 @@ ACK_REMOVED=0
 PRESENTED_MAX=0
 ACK_FINGERPRINTS=
 ACK_NOTICE_FINGERPRINTS=
+ACK_MAIN_ROWS=
 PRESENTATION_LOCK_TIMEOUT=${FM_STATUS_PRESENTATION_LOCK_TIMEOUT:-10}
 BRANCH_OUTCOMES_RC=0
 case "$PRESENTATION_LOCK_TIMEOUT" in ''|*[!0-9]*|0) PRESENTATION_LOCK_TIMEOUT=10 ;; esac
@@ -160,22 +161,30 @@ write_rows_file_locked() { # <target> <source>
   _fm_atomic_replace "$source" "$target"
 }
 
-# claim_main_rows_locked [<cutoff>]: claim every unreserved queued row for main,
-# or with a cutoff only the unreserved rows at or below it. Rows main already
-# owns stay owned either way.
-claim_main_rows_locked() {
+# Prepare main's row projection without publishing it. An optional snapshot
+# limits new claims to rows selected before the receipt-lock handoff; a branch
+# grant published during that handoff still excludes its rows. Existing main
+# claims survive either way.
+prepare_main_rows_locked() { # [<cutoff> [<snapshot>]]
   DRAIN_TMP=$(mktemp "$STATE/.main-eligible-rows.tmp.XXXXXX") || return 1
-  awk -F '\t' -v branch="$ELIGIBLE_ROWS_FILE" -v main="$MAIN_ROWS_FILE" -v cutoff="${1:-}" '
+  awk -F '\t' -v branch="$ELIGIBLE_ROWS_FILE" -v main="$MAIN_ROWS_FILE" -v cutoff="${1:-}" \
+    -v staged="${2+x}" '
     BEGIN {
       while ((getline line < branch) > 0) reserved[line]=1
       while ((getline line < main) > 0) owned[line]=1
     }
+    FILENAME == "-" { eligible[$0]=1; next }
     NF >= 5 && $2 ~ /^[0-9]+$/ {
       present[$2]=1
-      if (!($2 in reserved) && (cutoff == "" || $2 + 0 <= cutoff + 0)) owned[$2]=1
+      if (!($2 in reserved) && (cutoff == "" || $2 + 0 <= cutoff + 0) && (staged == "" || $2 in eligible)) owned[$2]=1
     }
     END { for (seq in owned) if (seq in present) print seq }
-  ' "$FM_WAKE_QUEUE" | LC_ALL=C sort -n > "$DRAIN_TMP" || return 1
+  ' - "$FM_WAKE_QUEUE" <<< "${2-}" | LC_ALL=C sort -n > "$DRAIN_TMP" || return 1
+}
+
+# Claim every unreserved row, or only rows through the cutoff when given.
+claim_main_rows_locked() {
+  prepare_main_rows_locked "$@" || return 1
   write_rows_file_locked "$MAIN_ROWS_FILE" "$DRAIN_TMP" || return 1
   DRAIN_TMP=
 }
@@ -886,13 +895,15 @@ if [ -n "$ACK_THROUGH" ]; then
   if [ "$ACTOR" = main ]; then
     # Preserve main's original whole-cutoff acknowledgement contract: a direct
     # or replayed main ack still owns every unreserved row through its cutoff,
-    # so claim those again under the queue lock and none is stranded merely
+    # so select those again under the queue lock and none is stranded merely
     # because it was not present during the earlier drain. A row above the
     # cutoff arrived after presentation and was never shown to main, so it
     # stays unowned for whichever actor presents it next; claiming it here
     # would hand every later away-session wake back to main. A live branch
-    # grant remains excluded by claim_main_rows_locked.
-    claim_main_rows_locked "$ACK_THROUGH" || exit 1
+    # grant remains excluded. Keep this projection private until the final
+    # generation check, so a refused ack never publishes new main ownership.
+    prepare_main_rows_locked "$ACK_THROUGH" || exit 1
+    ACK_MAIN_ROWS=$(cat "$DRAIN_TMP") || exit 1
   fi
   if [ "$ACTOR" = branch ]; then
     # An away-posture grant can name check-kind rows - the attended
@@ -905,13 +916,14 @@ if [ -n "$ACK_THROUGH" ]; then
     ACK_FINGERPRINTS=$(inactive_outcome_fingerprints "$ACK_THROUGH" 'inactive-outcome:' "$ELIGIBLE_ROWS_FILE") || exit 1
     ACK_NOTICE_FINGERPRINTS=$(inactive_outcome_fingerprints "$ACK_THROUGH" 'inactive-reconcile:' "$ELIGIBLE_ROWS_FILE") || exit 1
   else
-    if { [ -e "$MAIN_ROWS_FILE" ] || [ -L "$MAIN_ROWS_FILE" ]; } \
-      && ! rows_file_valid "$MAIN_ROWS_FILE"; then
+    if [ -s "$DRAIN_TMP" ] && ! rows_file_valid "$DRAIN_TMP"; then
       echo "wake drain: main acknowledgement has an invalid presented-row claim" >&2
       exit 1
     fi
-    ACK_FINGERPRINTS=$(inactive_outcome_fingerprints "$ACK_THROUGH" 'inactive-outcome:' "$MAIN_ROWS_FILE") || exit 1
-    ACK_NOTICE_FINGERPRINTS=$(inactive_outcome_fingerprints "$ACK_THROUGH" 'inactive-reconcile:' "$MAIN_ROWS_FILE") || exit 1
+    ACK_FINGERPRINTS=$(inactive_outcome_fingerprints "$ACK_THROUGH" 'inactive-outcome:' "$DRAIN_TMP") || exit 1
+    ACK_NOTICE_FINGERPRINTS=$(inactive_outcome_fingerprints "$ACK_THROUGH" 'inactive-reconcile:' "$DRAIN_TMP") || exit 1
+    rm -f -- "$DRAIN_TMP" || exit 1
+    DRAIN_TMP=
   fi
   fm_lock_release "$FM_WAKE_QUEUE_LOCK"
   DRAIN_LOCK_HELD=false
@@ -925,6 +937,9 @@ if [ -n "$ACK_THROUGH" ]; then
   # Receipt recording releases the queue lock. Validate again, and keep the
   # marker locked through consumption so a newer episode cannot be acknowledged.
   lock_ack_generation || exit 1
+  if [ "$ACTOR" = main ]; then
+    claim_main_rows_locked "$ACK_THROUGH" "$ACK_MAIN_ROWS" || exit 1
+  fi
   DRAIN_TMP=$(mktemp "$STATE/.wake-queue.ack.XXXXXX") || exit 1
   chmod 0600 "$DRAIN_TMP" || exit 1
   if [ "$ACTOR" = branch ]; then
