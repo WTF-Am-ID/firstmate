@@ -1,0 +1,155 @@
+/Users/daddy/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz
+A new version of treehouse is available: v3.1.7 → v3.1.8
+Run "treehouse update" to update
+
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/pool/.treehouse/demo-3dc5d9/1/demo. Run 'treehouse return ~/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/pool/.treehouse/demo-3dc5d9/1/demo' to release it.
+
+SCENARIO clean
+Before cleanup:
+A new version of treehouse is available: v3.1.7 → v3.1.8
+Run "treehouse update" to update
+
+base  main  (repository default)
+1     leased       ~/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/pool/.treehouse/demo-3dc5d9/1/demo  [fm/live-clean]
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/daddy/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+A new version of treehouse is available: v3.1.7 → v3.1.8
+Run "treehouse update" to update
+
+🌳 Worktree returned to pool.
+teardown live-clean complete (window primary:fm-live-clean, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/pool/.treehouse/demo-3dc5d9/1/demo)
+Backlog: live-clean is closed in /Users/daddy/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+cleanup_exit=0
+VERIFIED: real task endpoint stopped on private fm-lab socket
+After cleanup:
+task:
+  id: live-clean
+  title: Live clean cleanup
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: "-"
+  closed: 2026-11-03
+  deps: none
+  links: none
+  body: local main
+A new version of treehouse is available: v3.1.7 → v3.1.8
+Run "treehouse update" to update
+
+base  main  (repository default)
+1     available    ~/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/pool/.treehouse/demo-3dc5d9/1/demo  (detached)
+VERIFIED: clean copy, removed branch and retry records, completed backlog transition
+A new version of treehouse is available: v3.1.7 → v3.1.8
+Run "treehouse update" to update
+
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/pool/.treehouse/demo-3dc5d9/1/demo. Run 'treehouse return ~/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/pool/.treehouse/demo-3dc5d9/1/demo' to release it.
+
+SCENARIO force
+Before cleanup:
+ M worker.txt
+?? nested/
+A new version of treehouse is available: v3.1.7 → v3.1.8
+Run "treehouse update" to update
+
+base  main  (repository default)
+1     leased       ~/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/pool/.treehouse/demo-3dc5d9/1/demo  [fm/live-force]
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/daddy/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+A new version of treehouse is available: v3.1.7 → v3.1.8
+Run "treehouse update" to update
+
+🌳 Worktree returned to pool.
+teardown live-force complete (window primary:fm-live-force, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/pool/.treehouse/demo-3dc5d9/1/demo)
+Backlog: live-force is closed in /Users/daddy/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+cleanup_exit=0
+VERIFIED: real task endpoint stopped on private fm-lab socket
+After cleanup:
+task:
+  id: live-force
+  title: Live force cleanup
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: "-"
+  closed: 2026-11-03
+  deps: none
+  links: none
+  body: local main
+A new version of treehouse is available: v3.1.7 → v3.1.8
+Run "treehouse update" to update
+
+base  main  (repository default)
+1     available    ~/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/pool/.treehouse/demo-3dc5d9/1/demo  (detached)
+VERIFIED: clean copy, removed branch and retry records, completed backlog transition
+A new version of treehouse is available: v3.1.7 → v3.1.8
+Run "treehouse update" to update
+
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/pool/.treehouse/demo-3dc5d9/1/demo. Run 'treehouse return ~/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/pool/.treehouse/demo-3dc5d9/1/demo' to release it.
+
+SCENARIO scout
+Before cleanup:
+ M worker.txt
+?? nested/
+A new version of treehouse is available: v3.1.7 → v3.1.8
+Run "treehouse update" to update
+
+base  main  (repository default)
+1     leased       ~/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/pool/.treehouse/demo-3dc5d9/1/demo  [fm/live-scout]
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/daddy/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+A new version of treehouse is available: v3.1.7 → v3.1.8
+Run "treehouse update" to update
+
+🌳 Worktree returned to pool.
+teardown live-scout complete (window primary:fm-live-scout, worktree /Users/daddy/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/pool/.treehouse/demo-3dc5d9/1/demo)
+Backlog: live-scout is closed in /Users/daddy/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+cleanup_exit=0
+VERIFIED: real task endpoint stopped on private fm-lab socket
+After cleanup:
+task:
+  id: live-scout
+  title: Live scout cleanup data/live-scout/report.md
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: scout
+  repo: "-"
+  priority: "-"
+  created: "-"
+  closed: 2026-11-03
+  deps: none
+  links: "report:data/live-scout/report.md"
+  body: ""
+A new version of treehouse is available: v3.1.7 → v3.1.8
+Run "treehouse update" to update
+
+base  main  (repository default)
+1     available    ~/.no-mistakes-upstream-codex/worktrees/809f8997b687/01M6FXHRYH31ZKSRYWYT26KKH6/.tools/phase-validation/fm-lab.rVjfVz/pool/.treehouse/demo-3dc5d9/1/demo  (detached)
+VERIFIED: clean copy, removed branch and retry records, completed backlog transition

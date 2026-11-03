@@ -1,0 +1,17 @@
+Candidate: 1f64ff7ded5d4f25d31e3619fece5393e78d9033
+Baseline: f641b44b7266022b8cfb6961a636904b20485bd9
+
+Baseline reproduction: git archive of bin/, tests/, and .tasks.toml into .tools/phase-validation/baseline. The candidate teardown test definitions replaced the scratch baseline's test file, with only test_work_written_at_reap_boundary_is_preserved appended to the final invocation list. The existing suite prelude also ran. The baseline canonical runner exited 1. Fake reaper boundaries reproduced wrongly accepted tracked edits, untracked files, and commits on both ordinary and Orca paths. Reap refusal followed by replay removed metadata and closed the task. See baseline-race.log and baseline-race.json.
+
+Candidate focused command: bash bin/fm-test-run.sh tests/fm-teardown.test.sh tests/fm-teardown-endpoint-safety.test.sh --json <evidence>/targeted-tests.json
+
+Live CLI command: bash .tools/phase-validation/live-cli.sh
+The final recipe is retained in live-cli-recipe.sh. Its output is live-cli.log. All three cases used real treehouse, tasks-axi, tmux and idle Codex processes with a 120x40 terminal. No model turn was submitted. A first pool-only check did not pass the private tmux socket to the cleanup command. The corrected run passed the real socket through TMUX and asserted the live endpoint disappeared. initial-cli-pool-only.log is retained as setup history only.
+
+Herdr: named helper prepare and teardown for fm-lab-up7783-test succeeded, with helper records inside .tools/phase-validation/herdr-state. No session was provisioned, no pane was driven, and this is not live close-order evidence. Exact-pane close/refusal behavior is exercised by the canonical synthetic teardown suite. No lab-scaffolded worker brief was supplied in this phase. The previously declined live limitations remain unchanged.
+
+Live termination race: canonical fake-boundary tests were exercised, not an independent terminating worker. The earlier recorded PreToolUse refusal (Indirect command execution not allowed) remains binding. No alternate tool or command was used to work around it.
+
+Cleanup: both real CLI lab homes and their private tmux servers/socket directories were removed by the test recipe. A later direct removal of the disposable baseline snapshot was rejected by command policy (rm -f style commands are not permitted. Use a safer approach). No alternative deletion was attempted. .tools/phase-validation remains at 22 MB, containing the baseline snapshot, live-cli.sh and empty herdr-state directory. Candidate tracked files are unchanged.
+
+Final outcomes: candidate canonical runner exit 0; both requested suites ran without gate skips. Baseline boundary runner exit 1 as expected. Corrected live CLI driver exit 0. Helper prepare exit 0 and absent-session teardown exit 0. Three live controls passed; tracked/untracked/commit termination races, failed-reap replay and Herdr exact-pane close/refusal remain synthetic-only. No new product failure was found. Tracked diff remains empty at the exact candidate revision. No pipeline controls, publication, lint, or full-suite run was performed.
