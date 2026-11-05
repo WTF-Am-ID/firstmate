@@ -1,0 +1,836 @@
+COMMAND [PosixPath('{run-worktree}/bin/fm-lab-home.sh'), 'create', PosixPath('{run-worktree}/.validation-8153/parent')] FM_HOME=None fixture-root=False
+EXIT 0
+{run-worktree}/.validation-8153/parent
+
+
+COMMAND [PosixPath('{run-worktree}/bin/fm-lab-home.sh'), 'create', PosixPath('{run-worktree}/.validation-8153/generated')] FM_HOME=None fixture-root=False
+EXIT 0
+{run-worktree}/.validation-8153/generated
+
+
+COMMAND [PosixPath('{run-worktree}/bin/fm-lab-home.sh'), 'create', PosixPath('{run-worktree}/.validation-8153/supplied')] FM_HOME=None fixture-root=False
+EXIT 0
+{run-worktree}/.validation-8153/supplied
+
+
+COMMAND [PosixPath('{run-worktree}/bin/fm-fleet-snapshot.sh'), '--secondmate-home-summary'] FM_HOME={run-worktree}/.validation-8153/generated fixture-root=True
+EXIT 0
+{
+  "schema": "fm-secondmate-home-summary.v1",
+  "hold_classifier_schema": "fm-captain-hold-buckets.v1",
+  "contributions": {
+    "known": 0,
+    "checked": 0,
+    "counts": {
+      "captain": 0,
+      "fleet": 0,
+      "maintainer": 0,
+      "nobody": 0
+    },
+    "unmeasured": 0,
+    "complete": true,
+    "proven_clear": true,
+    "stale_verdicts": 0,
+    "missing_verdicts": 0,
+    "unreadable_records": 0,
+    "valid_until": 900,
+    "captain": [],
+    "captain_omitted": 0
+  },
+  "generated": "2026-11-05T01:38:40Z",
+  "generated_epoch": 1793842720,
+  "home": "{run-worktree}/.validation-8153/generated",
+  "valid": true,
+  "reason": null,
+  "invalidity": {
+    "kind": null,
+    "ids": []
+  },
+  "state": "captain_decision",
+  "active_children": [],
+  "decisions_open": [
+    {
+      "id": "scope-call",
+      "key": "scope-call",
+      "verb": "captain-hold",
+      "summary": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record",
+      "reason": "Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains a…",
+      "question": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "hold_until": null,
+      "hold_bucket": "live",
+      "hold_age_days": null,
+      "source": "backlog"
+    },
+    {
+      "id": "report-call",
+      "key": "report-call",
+      "verb": "captain-hold",
+      "summary": "Review proposal",
+      "reason": "data/proposal/report.md",
+      "question": "Review proposal: data/proposal/report.md",
+      "hold_until": null,
+      "hold_bucket": "live",
+      "hold_age_days": null,
+      "source": "backlog"
+    }
+  ],
+  "holds": [
+    {
+      "id": "scope-call",
+      "title": "Choose the release route while preserving the current workflow and its recorded alternativ…",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "reason": "Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification an…",
+      "source": "backlog"
+    },
+    {
+      "id": "dated-call",
+      "title": "Choose the release route while preserving the current workflow and its recorded alternativ…",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "reason": "Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification an…",
+      "source": "backlog"
+    },
+    {
+      "id": "report-call",
+      "title": "Review proposal",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "reason": "data/proposal/report.md",
+      "source": "backlog"
+    }
+  ],
+  "queued": [
+    {
+      "id": "dated-call",
+      "title": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review an…",
+      "question": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "blocked_reason": null,
+      "hold_reason": "Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains a…",
+      "hold_kind": "captain",
+      "hold_until": "2099-01-01",
+      "hold_bucket": "dated",
+      "hold_age_days": null,
+      "captain_actionable": false,
+      "repo": "sample",
+      "kind": "captain",
+      "since": null
+    },
+    {
+      "id": "scope-call",
+      "title": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review an…",
+      "question": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "blocked_reason": null,
+      "hold_reason": "Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains a…",
+      "hold_kind": "captain",
+      "hold_until": null,
+      "hold_bucket": "live",
+      "hold_age_days": null,
+      "captain_actionable": true,
+      "repo": "sample",
+      "kind": "captain",
+      "since": null
+    },
+    {
+      "id": "report-call",
+      "title": "Review proposal",
+      "question": "Review proposal: data/proposal/report.md",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "blocked_reason": null,
+      "hold_reason": "data/proposal/report.md",
+      "hold_kind": "captain",
+      "hold_until": null,
+      "hold_bucket": "live",
+      "hold_age_days": null,
+      "captain_actionable": true,
+      "repo": "sample",
+      "kind": "captain",
+      "since": null
+    }
+  ],
+  "landed": [],
+  "endpoints": [],
+  "counts": {
+    "active_children": 0,
+    "decisions_open": 2,
+    "holds": 3,
+    "queued": 3,
+    "landed": 0,
+    "endpoints": 0
+  },
+  "omitted": []
+}
+
+
+COMMAND [PosixPath('{run-worktree}/bin/fm-fleet-snapshot.sh'), '--secondmate-home-summary'] FM_HOME={run-worktree}/.validation-8153/supplied fixture-root=True
+EXIT 0
+{
+  "schema": "fm-secondmate-home-summary.v1",
+  "hold_classifier_schema": "fm-captain-hold-buckets.v1",
+  "contributions": {
+    "known": 0,
+    "checked": 0,
+    "counts": {
+      "captain": 0,
+      "fleet": 0,
+      "maintainer": 0,
+      "nobody": 0
+    },
+    "unmeasured": 0,
+    "complete": true,
+    "proven_clear": true,
+    "stale_verdicts": 0,
+    "missing_verdicts": 0,
+    "unreadable_records": 0,
+    "valid_until": 900,
+    "captain": [],
+    "captain_omitted": 0
+  },
+  "generated": "2026-11-05T01:38:41Z",
+  "generated_epoch": 1793842721,
+  "home": "{run-worktree}/.validation-8153/supplied",
+  "valid": true,
+  "reason": null,
+  "invalidity": {
+    "kind": null,
+    "ids": []
+  },
+  "state": "captain_decision",
+  "active_children": [],
+  "decisions_open": [
+    {
+      "id": "scope-call",
+      "key": "scope-call",
+      "verb": "captain-hold",
+      "summary": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record",
+      "reason": "Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains a…",
+      "question": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "hold_until": null,
+      "hold_bucket": "live",
+      "hold_age_days": null,
+      "source": "backlog"
+    },
+    {
+      "id": "report-call",
+      "key": "report-call",
+      "verb": "captain-hold",
+      "summary": "Review proposal",
+      "reason": "data/proposal/report.md",
+      "question": "Review proposal: data/proposal/report.md",
+      "hold_until": null,
+      "hold_bucket": "live",
+      "hold_age_days": null,
+      "source": "backlog"
+    }
+  ],
+  "holds": [
+    {
+      "id": "scope-call",
+      "title": "Choose the release route while preserving the current workflow and its recorded alternativ…",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "reason": "Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification an…",
+      "source": "backlog"
+    },
+    {
+      "id": "dated-call",
+      "title": "Choose the release route while preserving the current workflow and its recorded alternativ…",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "reason": "Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification an…",
+      "source": "backlog"
+    },
+    {
+      "id": "report-call",
+      "title": "Review proposal",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "reason": "data/proposal/report.md",
+      "source": "backlog"
+    }
+  ],
+  "queued": [
+    {
+      "id": "dated-call",
+      "title": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review an…",
+      "question": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "blocked_reason": null,
+      "hold_reason": "Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains a…",
+      "hold_kind": "captain",
+      "hold_until": "2099-01-01",
+      "hold_bucket": "dated",
+      "hold_age_days": null,
+      "captain_actionable": false,
+      "repo": "sample",
+      "kind": "captain",
+      "since": null
+    },
+    {
+      "id": "scope-call",
+      "title": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review an…",
+      "question": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "blocked_reason": null,
+      "hold_reason": "Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains a…",
+      "hold_kind": "captain",
+      "hold_until": null,
+      "hold_bucket": "live",
+      "hold_age_days": null,
+      "captain_actionable": true,
+      "repo": "sample",
+      "kind": "captain",
+      "since": null
+    },
+    {
+      "id": "report-call",
+      "title": "Review proposal",
+      "question": "Review proposal: data/proposal/report.md",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "blocked_reason": null,
+      "hold_reason": "data/proposal/report.md",
+      "hold_kind": "captain",
+      "hold_until": null,
+      "hold_bucket": "live",
+      "hold_age_days": null,
+      "captain_actionable": true,
+      "repo": "sample",
+      "kind": "captain",
+      "since": null
+    }
+  ],
+  "landed": [],
+  "endpoints": [],
+  "counts": {
+    "active_children": 0,
+    "decisions_open": 2,
+    "holds": 3,
+    "queued": 3,
+    "landed": 0,
+    "endpoints": 0
+  },
+  "omitted": []
+}
+
+
+COMMAND [PosixPath('{run-worktree}/bin/fm-bearings-snapshot.sh'), '--json'] FM_HOME={run-worktree}/.validation-8153/parent fixture-root=True
+EXIT 0
+{
+  "schema": "fm-bearings.v1",
+  "home": ".validation-8153/parent",
+  "generated": "2026-11-05T01:38:41Z",
+  "prs": "not_requested (run: /bearings include PRs)",
+  "contributions": {
+    "scope": "owned contributions per home",
+    "known": 0,
+    "checked": 0,
+    "counts": {
+      "captain": 0,
+      "fleet": 0,
+      "maintainer": 0,
+      "nobody": 0
+    },
+    "complete": true,
+    "proven_clear": true,
+    "unmeasured_homes": 0,
+    "unreadable_records": 0,
+    "unmeasured": 0,
+    "stale_verdicts": 0,
+    "missing_verdicts": 0,
+    "captain_omitted": 0,
+    "captain": []
+  },
+  "in_flight": [],
+  "secondmates": [
+    {
+      "id": "generated",
+      "state": "captain_decision",
+      "doing": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review an…",
+      "provenance": "structured-home",
+      "freshness": "fresh",
+      "age_seconds": 1,
+      "contradiction": false,
+      "reason": "-"
+    },
+    {
+      "id": "supplied",
+      "state": "captain_decision",
+      "doing": "Supplied legacy question; ; Review supplied report; Compact supplied summary",
+      "provenance": "structured-home",
+      "freshness": "fresh",
+      "age_seconds": 0,
+      "contradiction": false,
+      "reason": "-"
+    }
+  ],
+  "secondmate_reconcile": [
+    {
+      "id": "generated",
+      "spawn_gen": null,
+      "host": null,
+      "kind": null,
+      "ids": []
+    },
+    {
+      "id": "supplied",
+      "spawn_gen": null,
+      "host": null,
+      "kind": null,
+      "ids": []
+    }
+  ],
+  "decisions_open": [
+    {
+      "id": "scope-call",
+      "key": "scope-call",
+      "verb": "captain-hold",
+      "summary": "Choose the release route while preserving the current workflow and its recorded alternativ…",
+      "question": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "owner": "(main)"
+    },
+    {
+      "id": "report-call",
+      "key": "report-call",
+      "verb": "captain-hold",
+      "summary": "Review proposal: data/proposal/report.md",
+      "question": "Review proposal: data/proposal/report.md",
+      "owner": "(main)"
+    },
+    {
+      "id": "generated/scope-call",
+      "key": "scope-call",
+      "verb": "captain-hold",
+      "summary": "Choose the release route while preserving the current workflow and its recorded alternativ…",
+      "question": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "owner": "generated"
+    },
+    {
+      "id": "generated/report-call",
+      "key": "report-call",
+      "verb": "captain-hold",
+      "summary": "Review proposal: data/proposal/report.md",
+      "question": "Review proposal: data/proposal/report.md",
+      "owner": "generated"
+    },
+    {
+      "id": "supplied/legacy",
+      "key": "legacy",
+      "verb": "captain-hold",
+      "summary": "Supplied legacy question: Which route should proceed? A: retain the supported workflow unt…",
+      "question": "Supplied legacy question: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "owner": "supplied"
+    },
+    {
+      "id": "supplied/minimal",
+      "key": null,
+      "verb": "captain-hold",
+      "summary": "minimal: captain decision pending",
+      "question": "minimal: captain decision pending",
+      "owner": "supplied"
+    },
+    {
+      "id": "supplied/report",
+      "key": "report",
+      "verb": "captain-hold",
+      "summary": "Review supplied report: data/supplied/report.md",
+      "question": "Review supplied report: data/supplied/report.md",
+      "owner": "supplied"
+    },
+    {
+      "id": "supplied/explicit",
+      "key": "explicit",
+      "verb": "captain-hold",
+      "summary": "Compact supplied summary: Compact supplied reason",
+      "question": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "owner": "supplied"
+    }
+  ],
+  "landed": [],
+  "gates": [
+    {
+      "id": "dated-call",
+      "title": "Choose the release route while preserving the current workfl…",
+      "blocked_by": "-",
+      "reason": "until 2099-01-01: Which route should pro…",
+      "owner": "(main)",
+      "filed": null
+    },
+    {
+      "id": "dated-call",
+      "title": "Choose the release route while preserving the current workfl…",
+      "blocked_by": "-",
+      "reason": "until 2099-01-01: Which route should pro…",
+      "owner": "generated",
+      "filed": null
+    },
+    {
+      "id": "deferred",
+      "title": "Supplied deferred question",
+      "blocked_by": "-",
+      "reason": "until 2099-01-01: Which route should pro…",
+      "owner": "supplied",
+      "filed": null
+    }
+  ],
+  "reports": [],
+  "recorded_prs": [],
+  "omitted": [
+    {
+      "surface": "backlog item bodies",
+      "reveal": "--fields bodies"
+    },
+    {
+      "surface": "task paths",
+      "reveal": "--fields paths"
+    },
+    {
+      "surface": "watch/steer actions",
+      "reveal": "--fields actions"
+    },
+    {
+      "surface": "healthy endpoint detail",
+      "reveal": "--fields endpoints"
+    },
+    {
+      "surface": "full scout-report inventory",
+      "reveal": "--all-reports"
+    },
+    {
+      "surface": "captain holds bucketed blocked, dated, or aged: 3",
+      "reveal": "--all-decisions"
+    },
+    {
+      "surface": "live PR discovery + checks",
+      "reveal": "--include-prs"
+    }
+  ]
+}
+
+
+COMMAND [PosixPath('{run-worktree}/bin/fm-bearings-snapshot.sh'), '--json', '--all-decisions'] FM_HOME={run-worktree}/.validation-8153/parent fixture-root=True
+EXIT 0
+{
+  "schema": "fm-bearings.v1",
+  "home": ".validation-8153/parent",
+  "generated": "2026-11-05T01:38:43Z",
+  "prs": "not_requested (run: /bearings include PRs)",
+  "contributions": {
+    "scope": "owned contributions per home",
+    "known": 0,
+    "checked": 0,
+    "counts": {
+      "captain": 0,
+      "fleet": 0,
+      "maintainer": 0,
+      "nobody": 0
+    },
+    "complete": true,
+    "proven_clear": true,
+    "unmeasured_homes": 0,
+    "unreadable_records": 0,
+    "unmeasured": 0,
+    "stale_verdicts": 0,
+    "missing_verdicts": 0,
+    "captain_omitted": 0,
+    "captain": []
+  },
+  "in_flight": [],
+  "secondmates": [
+    {
+      "id": "generated",
+      "state": "captain_decision",
+      "doing": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review an…",
+      "provenance": "structured-home",
+      "freshness": "fresh",
+      "age_seconds": 3,
+      "contradiction": false,
+      "reason": "-"
+    },
+    {
+      "id": "supplied",
+      "state": "captain_decision",
+      "doing": "Supplied legacy question; ; Review supplied report; Compact supplied summary",
+      "provenance": "structured-home",
+      "freshness": "fresh",
+      "age_seconds": 2,
+      "contradiction": false,
+      "reason": "-"
+    }
+  ],
+  "secondmate_reconcile": [
+    {
+      "id": "generated",
+      "spawn_gen": null,
+      "host": null,
+      "kind": null,
+      "ids": []
+    },
+    {
+      "id": "supplied",
+      "spawn_gen": null,
+      "host": null,
+      "kind": null,
+      "ids": []
+    }
+  ],
+  "decisions_open": [
+    {
+      "id": "scope-call",
+      "key": "scope-call",
+      "verb": "captain-hold",
+      "summary": "Choose the release route while preserving the current workflow and its recorded alternativ…",
+      "question": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "owner": "(main)"
+    },
+    {
+      "id": "dated-call",
+      "key": "dated-call",
+      "verb": "captain-hold",
+      "summary": "Choose the release route while pre…: until 2099-01-01: Which route should proceed? A: ret…",
+      "question": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "owner": "(main)"
+    },
+    {
+      "id": "report-call",
+      "key": "report-call",
+      "verb": "captain-hold",
+      "summary": "Review proposal: data/proposal/report.md",
+      "question": "Review proposal: data/proposal/report.md",
+      "owner": "(main)"
+    },
+    {
+      "id": "generated/scope-call",
+      "key": "scope-call",
+      "verb": "captain-hold",
+      "summary": "Choose the release route while preserving the current workflow and its recorded alternativ…",
+      "question": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "owner": "generated"
+    },
+    {
+      "id": "generated/report-call",
+      "key": "report-call",
+      "verb": "captain-hold",
+      "summary": "Review proposal: data/proposal/report.md",
+      "question": "Review proposal: data/proposal/report.md",
+      "owner": "generated"
+    },
+    {
+      "id": "generated/dated-call",
+      "key": "dated-call",
+      "verb": "captain-hold",
+      "summary": "Choose the release route while pre…: until 2099-01-01: Which route should proceed? A: ret…",
+      "question": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "owner": "generated"
+    },
+    {
+      "id": "supplied/legacy",
+      "key": "legacy",
+      "verb": "captain-hold",
+      "summary": "Supplied legacy question: Which route should proceed? A: retain the supported workflow unt…",
+      "question": "Supplied legacy question: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "owner": "supplied"
+    },
+    {
+      "id": "supplied/minimal",
+      "key": null,
+      "verb": "captain-hold",
+      "summary": "minimal: captain decision pending",
+      "question": "minimal: captain decision pending",
+      "owner": "supplied"
+    },
+    {
+      "id": "supplied/report",
+      "key": "report",
+      "verb": "captain-hold",
+      "summary": "Review supplied report: data/supplied/report.md",
+      "question": "Review supplied report: data/supplied/report.md",
+      "owner": "supplied"
+    },
+    {
+      "id": "supplied/explicit",
+      "key": "explicit",
+      "verb": "captain-hold",
+      "summary": "Compact supplied summary: Compact supplied reason",
+      "question": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "owner": "supplied"
+    },
+    {
+      "id": "supplied/deferred",
+      "key": "deferred",
+      "verb": "captain-hold",
+      "summary": "Supplied deferred question: until 2099-01-01: Which route should proceed? A: ret…",
+      "question": "Supplied deferred question: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "owner": "supplied"
+    }
+  ],
+  "landed": [],
+  "gates": [],
+  "reports": [],
+  "recorded_prs": [],
+  "omitted": [
+    {
+      "surface": "backlog item bodies",
+      "reveal": "--fields bodies"
+    },
+    {
+      "surface": "task paths",
+      "reveal": "--fields paths"
+    },
+    {
+      "surface": "watch/steer actions",
+      "reveal": "--fields actions"
+    },
+    {
+      "surface": "healthy endpoint detail",
+      "reveal": "--fields endpoints"
+    },
+    {
+      "surface": "full scout-report inventory",
+      "reveal": "--all-reports"
+    },
+    {
+      "surface": "live PR discovery + checks",
+      "reveal": "--include-prs"
+    }
+  ]
+}
+
+
+COMMAND [PosixPath('{run-worktree}/bin/fm-bearings-snapshot.sh'), '--all-decisions'] FM_HOME={run-worktree}/.validation-8153/parent fixture-root=True
+EXIT 0
+schema: fm-bearings.v1
+home: .validation-8153/parent
+generated: "2026-11-05T01:38:44Z"
+prs: "not_requested (run: /bearings include PRs)"
+contributions: 
+  scope: owned contributions per home
+  known: 0
+  checked: 0
+  counts: 
+    captain: 0
+    fleet: 0
+    maintainer: 0
+    nobody: 0
+  complete: true
+  proven_clear: true
+  unmeasured_homes: 0
+  unreadable_records: 0
+  unmeasured: 0
+  stale_verdicts: 0
+  missing_verdicts: 0
+  captain_omitted: 0
+  captain: []
+in_flight: []
+secondmates[2]{id,state,doing,provenance,freshness,age_seconds,contradiction,reason}:
+  generated,captain_decision,Choose the release route while preserving the current workflow and its recorded alternatives through the final review an…,structured-home,fresh,4,false,"-"
+  supplied,captain_decision,Supplied legacy question; ; Review supplied report; Compact supplied summary,structured-home,fresh,3,false,"-"
+secondmate_reconcile[2]{id,spawn_gen,host,kind,ids}:
+  generated,null,null,null,"[]"
+  supplied,null,null,null,"[]"
+decisions_open[11]{id,key,verb,summary,question,owner}:
+  scope-call,scope-call,captain-hold,Choose the release route while preserving the current workflow and its recorded alternativ…,"Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",(main)
+  dated-call,dated-call,captain-hold,"Choose the release route while pre…: until 2099-01-01: Which route should proceed? A: ret…","Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",(main)
+  report-call,report-call,captain-hold,"Review proposal: data/proposal/report.md","Review proposal: data/proposal/report.md",(main)
+  generated/scope-call,scope-call,captain-hold,Choose the release route while preserving the current workflow and its recorded alternativ…,"Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",generated
+  generated/report-call,report-call,captain-hold,"Review proposal: data/proposal/report.md","Review proposal: data/proposal/report.md",generated
+  generated/dated-call,dated-call,captain-hold,"Choose the release route while pre…: until 2099-01-01: Which route should proceed? A: ret…","Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",generated
+  supplied/legacy,legacy,captain-hold,"Supplied legacy question: Which route should proceed? A: retain the supported workflow unt…","Supplied legacy question: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",supplied
+  supplied/minimal,null,captain-hold,"minimal: captain decision pending","minimal: captain decision pending",supplied
+  supplied/report,report,captain-hold,"Review supplied report: data/supplied/report.md","Review supplied report: data/supplied/report.md",supplied
+  supplied/explicit,explicit,captain-hold,"Compact supplied summary: Compact supplied reason","Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",supplied
+  supplied/deferred,deferred,captain-hold,"Supplied deferred question: until 2099-01-01: Which route should proceed? A: ret…","Supplied deferred question: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",supplied
+landed: []
+gates: []
+reports: []
+recorded_prs: []
+omitted[6]{surface,reveal}:
+  backlog item bodies,"--fields bodies"
+  task paths,"--fields paths"
+  watch/steer actions,"--fields actions"
+  healthy endpoint detail,"--fields endpoints"
+  full scout-report inventory,"--all-reports"
+  live PR discovery + checks,"--include-prs"
+
+
+COMMAND [PosixPath('{run-worktree}/bin/fm-lab-home.sh'), 'create', PosixPath('{run-worktree}/.validation-8153/board-local')] FM_HOME=None fixture-root=False
+EXIT 0
+{run-worktree}/.validation-8153/board-local
+
+
+COMMAND [PosixPath('{run-worktree}/bin/fm-bearings-board.sh'), 'build', PosixPath('{run-worktree}/.validation-8153/board-local/payload.json')] FM_HOME={run-worktree}/.validation-8153/board-local fixture-root=False
+EXIT 0
+board: {run-worktree}/.validation-8153/board-local/.lavish/bearings-board.html
+session:
+  file: {run-worktree}/.validation-8153/board-local/.lavish/bearings-board.html
+  url: "http://127.0.0.1:49183/session/9c5dd0cdfaa2e26e"
+  status: opened
+next_step: "Do not respond to the user just yet. Now you must run `lavish-axi poll {run-worktree}/.validation-8153/board-local/.lavish/bearings-board.html`. This command long-polls until the user sends feedback, ends the session, or leaves every review window disconnected past the reconnect grace period, and it stays silent the whole time - that is normal, never kill it. Layout issues the browser detects do not return this poll; they wait in the user's Layout issues inbox until the user queues them, then arrive as an ordinary tag \"layout-warnings\" prompt. Do not pass --timeout-ms during normal agent use. Keep the poll in the foreground by default and let it return the feedback directly to the agent. A background poll is allowed only through a harness-native tracked background-job facility whose completion result is guaranteed to resume or notify the same agent. Never use `nohup`, shell `&`, `disown`, redirected fire-and-forget processes, or a detached terminal without an explicit verified callback merely to keep polling alive. If the harness has no completion-aware background facility, use the foreground poll or first wire a verified wake callback into the surrounding supervisor. Do not tell the user the artifact is being monitored until that wake path is live. If the poll gets killed or times out before feedback arrives, re-run it - feedback remains queued until delivery. Poll delivery consumes the response, so read it completely. If it returns browser_disconnected, the review window stayed disconnected past its reconnect grace period but the session remains resumable; ask the user whether to reopen or end it, and do neither uninvited. Codex detected: completed background tasks may not resume Codex automatically, so keep the poll attached to the active turn. After applying feedback, run `lavish-axi poll {run-worktree}/.validation-8153/board-local/.lavish/bearings-board.html --agent-reply \"<message for the user>\"` without --timeout-ms to show a concise response in Lavish Editor and keep waiting for more feedback. If instead you are handing back a result without starting another long-poll, run `lavish-axi reply {run-worktree}/.validation-8153/board-local/.lavish/bearings-board.html --agent-reply \"<message for the user>\"` to get an acceptance receipt. Keep the reply concise. Only when a longer reply is genuinely necessary, use Markdown structure - blank-line paragraphs, `- ` / `1. ` lists, `## ` headings - so it renders scannably instead of a wall of text, and pass that body with `--agent-reply-file <path>` (`-` reads stdin) so newlines survive quoting. The Conversation panel's Markdown subset is in `lavish-axi poll --help` and README. If the user ends the session, stop polling and do not reopen it by re-running `lavish-axi {run-worktree}/.validation-8153/board-local/.lavish/bearings-board.html` unless the user asks for further review or something genuinely important needs their visual attention - deliver routine updates directly in this conversation instead. When reopening is warranted, run `lavish-axi {run-worktree}/.validation-8153/board-local/.lavish/bearings-board.html --reopen`."
+session: live
+served: {run-worktree}/.validation-8153/board-local/.lavish/bearings-board.html
+bound: lavish-9c5dd0cdfaa2e26e
+armed: lavish-9c5dd0cdfaa2e26e
+
+
+COMMAND [PosixPath('{run-worktree}/bin/fm-lab-home.sh'), 'create', PosixPath('{run-worktree}/.validation-8153/board-generated')] FM_HOME=None fixture-root=False
+EXIT 0
+{run-worktree}/.validation-8153/board-generated
+
+
+COMMAND [PosixPath('{run-worktree}/bin/fm-bearings-board.sh'), 'build', PosixPath('{run-worktree}/.validation-8153/board-generated/payload.json')] FM_HOME={run-worktree}/.validation-8153/board-generated fixture-root=False
+EXIT 0
+board: {run-worktree}/.validation-8153/board-generated/.lavish/bearings-board.html
+session:
+  file: {run-worktree}/.validation-8153/board-generated/.lavish/bearings-board.html
+  url: "http://127.0.0.1:49183/session/01ad0b2eeca7e880"
+  status: opened
+next_step: "Do not respond to the user just yet. Now you must run `lavish-axi poll {run-worktree}/.validation-8153/board-generated/.lavish/bearings-board.html`. This command long-polls until the user sends feedback, ends the session, or leaves every review window disconnected past the reconnect grace period, and it stays silent the whole time - that is normal, never kill it. Layout issues the browser detects do not return this poll; they wait in the user's Layout issues inbox until the user queues them, then arrive as an ordinary tag \"layout-warnings\" prompt. Do not pass --timeout-ms during normal agent use. Keep the poll in the foreground by default and let it return the feedback directly to the agent. A background poll is allowed only through a harness-native tracked background-job facility whose completion result is guaranteed to resume or notify the same agent. Never use `nohup`, shell `&`, `disown`, redirected fire-and-forget processes, or a detached terminal without an explicit verified callback merely to keep polling alive. If the harness has no completion-aware background facility, use the foreground poll or first wire a verified wake callback into the surrounding supervisor. Do not tell the user the artifact is being monitored until that wake path is live. If the poll gets killed or times out before feedback arrives, re-run it - feedback remains queued until delivery. Poll delivery consumes the response, so read it completely. If it returns browser_disconnected, the review window stayed disconnected past its reconnect grace period but the session remains resumable; ask the user whether to reopen or end it, and do neither uninvited. Codex detected: completed background tasks may not resume Codex automatically, so keep the poll attached to the active turn. After applying feedback, run `lavish-axi poll {run-worktree}/.validation-8153/board-generated/.lavish/bearings-board.html --agent-reply \"<message for the user>\"` without --timeout-ms to show a concise response in Lavish Editor and keep waiting for more feedback. If instead you are handing back a result without starting another long-poll, run `lavish-axi reply {run-worktree}/.validation-8153/board-generated/.lavish/bearings-board.html --agent-reply \"<message for the user>\"` to get an acceptance receipt. Keep the reply concise. Only when a longer reply is genuinely necessary, use Markdown structure - blank-line paragraphs, `- ` / `1. ` lists, `## ` headings - so it renders scannably instead of a wall of text, and pass that body with `--agent-reply-file <path>` (`-` reads stdin) so newlines survive quoting. The Conversation panel's Markdown subset is in `lavish-axi poll --help` and README. If the user ends the session, stop polling and do not reopen it by re-running `lavish-axi {run-worktree}/.validation-8153/board-generated/.lavish/bearings-board.html` unless the user asks for further review or something genuinely important needs their visual attention - deliver routine updates directly in this conversation instead. When reopening is warranted, run `lavish-axi {run-worktree}/.validation-8153/board-generated/.lavish/bearings-board.html --reopen`."
+session: live
+served: {run-worktree}/.validation-8153/board-generated/.lavish/bearings-board.html
+bound: lavish-01ad0b2eeca7e880
+armed: lavish-01ad0b2eeca7e880
+
+
+COMMAND [PosixPath('{run-worktree}/bin/fm-lab-home.sh'), 'create', PosixPath('{run-worktree}/.validation-8153/board-supplied')] FM_HOME=None fixture-root=False
+EXIT 0
+{run-worktree}/.validation-8153/board-supplied
+
+
+COMMAND [PosixPath('{run-worktree}/bin/fm-bearings-board.sh'), 'build', PosixPath('{run-worktree}/.validation-8153/board-supplied/payload.json')] FM_HOME={run-worktree}/.validation-8153/board-supplied fixture-root=False
+EXIT 0
+board: {run-worktree}/.validation-8153/board-supplied/.lavish/bearings-board.html
+session:
+  file: {run-worktree}/.validation-8153/board-supplied/.lavish/bearings-board.html
+  url: "http://127.0.0.1:49183/session/56f43b7f21d4ec84"
+  status: opened
+next_step: "Do not respond to the user just yet. Now you must run `lavish-axi poll {run-worktree}/.validation-8153/board-supplied/.lavish/bearings-board.html`. This command long-polls until the user sends feedback, ends the session, or leaves every review window disconnected past the reconnect grace period, and it stays silent the whole time - that is normal, never kill it. Layout issues the browser detects do not return this poll; they wait in the user's Layout issues inbox until the user queues them, then arrive as an ordinary tag \"layout-warnings\" prompt. Do not pass --timeout-ms during normal agent use. Keep the poll in the foreground by default and let it return the feedback directly to the agent. A background poll is allowed only through a harness-native tracked background-job facility whose completion result is guaranteed to resume or notify the same agent. Never use `nohup`, shell `&`, `disown`, redirected fire-and-forget processes, or a detached terminal without an explicit verified callback merely to keep polling alive. If the harness has no completion-aware background facility, use the foreground poll or first wire a verified wake callback into the surrounding supervisor. Do not tell the user the artifact is being monitored until that wake path is live. If the poll gets killed or times out before feedback arrives, re-run it - feedback remains queued until delivery. Poll delivery consumes the response, so read it completely. If it returns browser_disconnected, the review window stayed disconnected past its reconnect grace period but the session remains resumable; ask the user whether to reopen or end it, and do neither uninvited. Codex detected: completed background tasks may not resume Codex automatically, so keep the poll attached to the active turn. After applying feedback, run `lavish-axi poll {run-worktree}/.validation-8153/board-supplied/.lavish/bearings-board.html --agent-reply \"<message for the user>\"` without --timeout-ms to show a concise response in Lavish Editor and keep waiting for more feedback. If instead you are handing back a result without starting another long-poll, run `lavish-axi reply {run-worktree}/.validation-8153/board-supplied/.lavish/bearings-board.html --agent-reply \"<message for the user>\"` to get an acceptance receipt. Keep the reply concise. Only when a longer reply is genuinely necessary, use Markdown structure - blank-line paragraphs, `- ` / `1. ` lists, `## ` headings - so it renders scannably instead of a wall of text, and pass that body with `--agent-reply-file <path>` (`-` reads stdin) so newlines survive quoting. The Conversation panel's Markdown subset is in `lavish-axi poll --help` and README. If the user ends the session, stop polling and do not reopen it by re-running `lavish-axi {run-worktree}/.validation-8153/board-supplied/.lavish/bearings-board.html` unless the user asks for further review or something genuinely important needs their visual attention - deliver routine updates directly in this conversation instead. When reopening is warranted, run `lavish-axi {run-worktree}/.validation-8153/board-supplied/.lavish/bearings-board.html --reopen`."
+session: live
+served: {run-worktree}/.validation-8153/board-supplied/.lavish/bearings-board.html
+bound: lavish-56f43b7f21d4ec84
+armed: lavish-56f43b7f21d4ec84
+
+
+COMMAND ['git', 'rev-parse', 'HEAD'] FM_HOME=None fixture-root=False
+EXIT 0
+4cce427ed353799ea3d71e223b8252727b73a363
+
+

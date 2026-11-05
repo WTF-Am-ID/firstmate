@@ -1,0 +1,106 @@
+[
+  {
+    "category": "local",
+    "key": "scope-call",
+    "exactQuestion": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+    "rendered": {
+      "text": "DECISION\nsample\nscope-call\nDECIDE\nChoose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.\nRetain workflow\nDefer migration\nWait for final review\nReconcile\nRe-check the latest state, then close this with evidence or keep it open with a note\nQueue answer",
+      "width": 547,
+      "scrollWidth": 547,
+      "height": 604,
+      "scrollHeight": 604
+    },
+    "screenshot": "~/.no-mistakes-upstream-codex/evidence/01M6MNFPC5933VBYSY2D40PSZ9/local-card-1.png"
+  },
+  {
+    "category": "local",
+    "key": "report-call",
+    "exactQuestion": "Review proposal: data/proposal/report.md",
+    "rendered": {
+      "text": "DECISION\nsample\nreport-call\nDECIDE\nReview proposal: data/proposal/report.md\nRetain workflow\nDefer migration\nWait for final review\nReconcile\nRe-check the latest state, then close this with evidence or keep it open with a note\nQueue answer",
+      "width": 547,
+      "scrollWidth": 547,
+      "height": 436,
+      "scrollHeight": 436
+    },
+    "screenshot": "~/.no-mistakes-upstream-codex/evidence/01M6MNFPC5933VBYSY2D40PSZ9/local-card-2.png"
+  },
+  {
+    "category": "generated",
+    "key": "generated.scope-call",
+    "exactQuestion": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+    "rendered": {
+      "text": "DECISION\nsample\ngenerated/scope-call\nDECIDE\nChoose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.\nRetain workflow\nDefer migration\nWait for final review\nReconcile\nRe-check the latest state, then close this with evidence or keep it open with a note\nQueue answer",
+      "width": 547,
+      "scrollWidth": 547,
+      "height": 604,
+      "scrollHeight": 604
+    },
+    "screenshot": "~/.no-mistakes-upstream-codex/evidence/01M6MNFPC5933VBYSY2D40PSZ9/generated-card-1.png"
+  },
+  {
+    "category": "generated",
+    "key": "generated.report-call",
+    "exactQuestion": "Review proposal: data/proposal/report.md",
+    "rendered": {
+      "text": "DECISION\nsample\ngenerated/report-call\nDECIDE\nReview proposal: data/proposal/report.md\nRetain workflow\nDefer migration\nWait for final review\nReconcile\nRe-check the latest state, then close this with evidence or keep it open with a note\nQueue answer",
+      "width": 547,
+      "scrollWidth": 547,
+      "height": 436,
+      "scrollHeight": 436
+    },
+    "screenshot": "~/.no-mistakes-upstream-codex/evidence/01M6MNFPC5933VBYSY2D40PSZ9/generated-card-2.png"
+  },
+  {
+    "category": "supplied",
+    "key": "supplied.legacy",
+    "exactQuestion": "Supplied legacy question: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+    "rendered": {
+      "text": "DECISION\nsample\nsupplied/legacy\nDECIDE\nSupplied legacy question: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.\nRetain workflow\nDefer migration\nWait for final review\nReconcile\nRe-check the latest state, then close this with evidence or keep it open with a note\nQueue answer",
+      "width": 547,
+      "scrollWidth": 547,
+      "height": 562,
+      "scrollHeight": 562
+    },
+    "screenshot": "~/.no-mistakes-upstream-codex/evidence/01M6MNFPC5933VBYSY2D40PSZ9/supplied-card-1.png"
+  },
+  {
+    "category": "supplied",
+    "key": "supplied.minimal",
+    "exactQuestion": "minimal: captain decision pending",
+    "rendered": {
+      "text": "DECISION\nsample\nsupplied/minimal\nDECIDE\nminimal: captain decision pending\nRetain workflow\nDefer migration\nWait for final review\nReconcile\nRe-check the latest state, then close this with evidence or keep it open with a note\nQueue answer",
+      "width": 547,
+      "scrollWidth": 547,
+      "height": 436,
+      "scrollHeight": 436
+    },
+    "screenshot": "~/.no-mistakes-upstream-codex/evidence/01M6MNFPC5933VBYSY2D40PSZ9/supplied-card-2.png"
+  },
+  {
+    "category": "supplied",
+    "key": "supplied.report",
+    "exactQuestion": "Review supplied report: data/supplied/report.md",
+    "rendered": {
+      "text": "DECISION\nsample\nsupplied/report\nDECIDE\nReview supplied report: data/supplied/report.md\nRetain workflow\nDefer migration\nWait for final review\nReconcile\nRe-check the latest state, then close this with evidence or keep it open with a note\nQueue answer",
+      "width": 547,
+      "scrollWidth": 547,
+      "height": 436,
+      "scrollHeight": 436
+    },
+    "screenshot": "~/.no-mistakes-upstream-codex/evidence/01M6MNFPC5933VBYSY2D40PSZ9/supplied-card-3.png"
+  },
+  {
+    "category": "supplied",
+    "key": "supplied.explicit",
+    "exactQuestion": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+    "rendered": {
+      "text": "DECISION\nsample\nsupplied/explicit\nDECIDE\nChoose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.\nRetain workflow\nDefer migration\nWait for final review\nReconcile\nRe-check the latest state, then close this with evidence or keep it open with a note\nQueue answer",
+      "width": 547,
+      "scrollWidth": 547,
+      "height": 604,
+      "scrollHeight": 604
+    },
+    "screenshot": "~/.no-mistakes-upstream-codex/evidence/01M6MNFPC5933VBYSY2D40PSZ9/supplied-card-4.png"
+  }
+]

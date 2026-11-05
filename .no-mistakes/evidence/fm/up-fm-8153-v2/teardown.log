@@ -1,0 +1,29 @@
+['{run-worktree}/bin/fm-procevent-lavish.sh', 'retire', '{run-worktree}/.validation-8153/board-local/.lavish/bearings-board.html']
+EXIT 0
+retired: lavish-9c5dd0cdfaa2e26e
+
+LIST EXIT 0
+no sources registered
+
+['{run-worktree}/bin/fm-procevent-lavish.sh', 'retire', '{run-worktree}/.validation-8153/board-generated/.lavish/bearings-board.html']
+EXIT 0
+retired: lavish-01ad0b2eeca7e880
+
+LIST EXIT 0
+no sources registered
+
+['{run-worktree}/bin/fm-procevent-lavish.sh', 'retire', '{run-worktree}/.validation-8153/board-supplied/.lavish/bearings-board.html']
+EXIT 0
+retired: lavish-56f43b7f21d4ec84
+
+LIST EXIT 0
+no sources registered
+
+LAVISH STOP EXIT 0
+server:
+  status: stopped
+  port: 49183
+
+Disposable Lavish TCP port 49183 is closed. All three board registrations retired.
+Backlog hashes still match after browser navigation. Browser task space 2 closed.
+Inventoried own scratch .validation-8153: 1855 entries, 22696093 regular-file bytes. Removed local dependency installation, baseline copies, synthetic homes and drivers.

@@ -1,0 +1,52 @@
+schema: fm-bearings.v1
+home: .validation-8153/parent
+generated: "2026-11-05T01:38:44Z"
+prs: "not_requested (run: /bearings include PRs)"
+contributions: 
+  scope: owned contributions per home
+  known: 0
+  checked: 0
+  counts: 
+    captain: 0
+    fleet: 0
+    maintainer: 0
+    nobody: 0
+  complete: true
+  proven_clear: true
+  unmeasured_homes: 0
+  unreadable_records: 0
+  unmeasured: 0
+  stale_verdicts: 0
+  missing_verdicts: 0
+  captain_omitted: 0
+  captain: []
+in_flight: []
+secondmates[2]{id,state,doing,provenance,freshness,age_seconds,contradiction,reason}:
+  generated,captain_decision,Choose the release route while preserving the current workflow and its recorded alternatives through the final review an…,structured-home,fresh,4,false,"-"
+  supplied,captain_decision,Supplied legacy question; ; Review supplied report; Compact supplied summary,structured-home,fresh,3,false,"-"
+secondmate_reconcile[2]{id,spawn_gen,host,kind,ids}:
+  generated,null,null,null,"[]"
+  supplied,null,null,null,"[]"
+decisions_open[11]{id,key,verb,summary,question,owner}:
+  scope-call,scope-call,captain-hold,Choose the release route while preserving the current workflow and its recorded alternativ…,"Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",(main)
+  dated-call,dated-call,captain-hold,"Choose the release route while pre…: until 2099-01-01: Which route should proceed? A: ret…","Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",(main)
+  report-call,report-call,captain-hold,"Review proposal: data/proposal/report.md","Review proposal: data/proposal/report.md",(main)
+  generated/scope-call,scope-call,captain-hold,Choose the release route while preserving the current workflow and its recorded alternativ…,"Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",generated
+  generated/report-call,report-call,captain-hold,"Review proposal: data/proposal/report.md","Review proposal: data/proposal/report.md",generated
+  generated/dated-call,dated-call,captain-hold,"Choose the release route while pre…: until 2099-01-01: Which route should proceed? A: ret…","Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",generated
+  supplied/legacy,legacy,captain-hold,"Supplied legacy question: Which route should proceed? A: retain the supported workflow unt…","Supplied legacy question: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",supplied
+  supplied/minimal,null,captain-hold,"minimal: captain decision pending","minimal: captain decision pending",supplied
+  supplied/report,report,captain-hold,"Review supplied report: data/supplied/report.md","Review supplied report: data/supplied/report.md",supplied
+  supplied/explicit,explicit,captain-hold,"Compact supplied summary: Compact supplied reason","Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",supplied
+  supplied/deferred,deferred,captain-hold,"Supplied deferred question: until 2099-01-01: Which route should proceed? A: ret…","Supplied deferred question: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",supplied
+landed: []
+gates: []
+reports: []
+recorded_prs: []
+omitted[6]{surface,reveal}:
+  backlog item bodies,"--fields bodies"
+  task paths,"--fields paths"
+  watch/steer actions,"--fields actions"
+  healthy endpoint detail,"--fields endpoints"
+  full scout-report inventory,"--all-reports"
+  live PR discovery + checks,"--include-prs"

@@ -1,0 +1,21 @@
+{
+  "baseline_revision": "4bd1e3aa72c85ae4ba7a7c7f69bc3168702b28da",
+  "target_revision": "4cce427ed353799ea3d71e223b8252727b73a363",
+  "baseline": {
+    "id": "scope-call",
+    "key": "scope-call",
+    "verb": "captain-hold",
+    "summary": "Choose the release route while preserving the current workflow and its recorded alternativ…",
+    "owner": "(main)"
+  },
+  "target": {
+    "id": "scope-call",
+    "key": "scope-call",
+    "verb": "captain-hold",
+    "summary": "Choose the release route while preserving the current workflow and its recorded alternativ…",
+    "question": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+    "owner": "(main)"
+  },
+  "baseline_exit": 0,
+  "regression": "The real baseline snapshot omits the final option and has no full question. The candidate carries every option and preserves the same compact summary and call order."
+}

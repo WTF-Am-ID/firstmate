@@ -1,0 +1,99 @@
+{
+  "schema": "fm-bearings-board.v1",
+  "home": "8153-supplied",
+  "generated": "2026-11-05T01:38:41Z",
+  "prs_live": false,
+  "captains_call": [
+    {
+      "key": "supplied.legacy",
+      "type": "decision",
+      "repo": "sample",
+      "title": "supplied/legacy",
+      "decide": "Supplied legacy question: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "allow_freeform": true,
+      "options": [
+        {
+          "value": "retain",
+          "label": "Retain workflow"
+        },
+        {
+          "value": "defer",
+          "label": "Defer migration"
+        },
+        {
+          "value": "wait",
+          "label": "Wait for final review"
+        }
+      ]
+    },
+    {
+      "key": "supplied.minimal",
+      "type": "decision",
+      "repo": "sample",
+      "title": "supplied/minimal",
+      "decide": "minimal: captain decision pending",
+      "allow_freeform": true,
+      "options": [
+        {
+          "value": "retain",
+          "label": "Retain workflow"
+        },
+        {
+          "value": "defer",
+          "label": "Defer migration"
+        },
+        {
+          "value": "wait",
+          "label": "Wait for final review"
+        }
+      ]
+    },
+    {
+      "key": "supplied.report",
+      "type": "decision",
+      "repo": "sample",
+      "title": "supplied/report",
+      "decide": "Review supplied report: data/supplied/report.md",
+      "allow_freeform": true,
+      "options": [
+        {
+          "value": "retain",
+          "label": "Retain workflow"
+        },
+        {
+          "value": "defer",
+          "label": "Defer migration"
+        },
+        {
+          "value": "wait",
+          "label": "Wait for final review"
+        }
+      ]
+    },
+    {
+      "key": "supplied.explicit",
+      "type": "decision",
+      "repo": "sample",
+      "title": "supplied/explicit",
+      "decide": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+      "allow_freeform": true,
+      "options": [
+        {
+          "value": "retain",
+          "label": "Retain workflow"
+        },
+        {
+          "value": "defer",
+          "label": "Defer migration"
+        },
+        {
+          "value": "wait",
+          "label": "Wait for final review"
+        }
+      ]
+    }
+  ],
+  "underway": [],
+  "landed": [],
+  "charted": []
+}

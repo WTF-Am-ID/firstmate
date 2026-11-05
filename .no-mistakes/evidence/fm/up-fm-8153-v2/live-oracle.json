@@ -1,0 +1,41 @@
+{
+  "revision": "4cce427ed353799ea3d71e223b8252727b73a363",
+  "title": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record",
+  "reason": "Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+  "options": [
+    "A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review.",
+    "B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration.",
+    "C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option."
+  ],
+  "expected_default_order": [
+    "scope-call",
+    "report-call",
+    "generated/scope-call",
+    "generated/report-call",
+    "supplied/legacy",
+    "supplied/minimal",
+    "supplied/report",
+    "supplied/explicit"
+  ],
+  "expected_questions": {
+    "scope-call": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+    "report-call": "Review proposal: data/proposal/report.md",
+    "generated/scope-call": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+    "generated/report-call": "Review proposal: data/proposal/report.md",
+    "supplied/legacy": "Supplied legacy question: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option.",
+    "supplied/minimal": "minimal: captain decision pending",
+    "supplied/report": "Review supplied report: data/supplied/report.md",
+    "supplied/explicit": "Choose the release route while preserving the current workflow and its recorded alternatives through the final review and the complete approval record: Which route should proceed? A: retain the supported workflow until every dependency completes its staged verification and the full downstream contract remains available for review. B: defer the independent migration through its observation period while retaining the rollback route and every currently supported integration. C: wait for the final café / 東京 / 🚢 approval and preserve the complete late option."
+  },
+  "backlog_hashes_before": {
+    "{run-worktree}/.validation-8153/parent": "f240926666e6e75341d57a917a31262245158179a10034fb157393f57f99b4bc",
+    "{run-worktree}/.validation-8153/generated": "f240926666e6e75341d57a917a31262245158179a10034fb157393f57f99b4bc",
+    "{run-worktree}/.validation-8153/supplied": "f240926666e6e75341d57a917a31262245158179a10034fb157393f57f99b4bc"
+  },
+  "backlog_hashes_after": {
+    "{run-worktree}/.validation-8153/parent": "f240926666e6e75341d57a917a31262245158179a10034fb157393f57f99b4bc",
+    "{run-worktree}/.validation-8153/generated": "f240926666e6e75341d57a917a31262245158179a10034fb157393f57f99b4bc",
+    "{run-worktree}/.validation-8153/supplied": "f240926666e6e75341d57a917a31262245158179a10034fb157393f57f99b4bc"
+  },
+  "assertions": "exact full text, late option after 200, Unicode, report-only text, missing fields fallback, explicit supplied question, compact bounds, default order and dated reveal, no backlog mutations"
+}
