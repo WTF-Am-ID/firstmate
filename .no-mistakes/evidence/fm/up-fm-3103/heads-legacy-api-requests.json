@@ -78,8 +78,8 @@
     "variables": {}
   },
   {
-    "method": "POST",
-    "path": "/api/v4/usage_data/track_event",
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7/approval_state",
     "query": "",
     "variables": {}
   },
@@ -90,8 +90,8 @@
     "variables": {}
   },
   {
-    "method": "POST",
-    "path": "/api/v4/usage_data/track_event",
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7/approval_state",
     "query": "",
     "variables": {}
   },
@@ -102,8 +102,8 @@
     "variables": {}
   },
   {
-    "method": "POST",
-    "path": "/api/v4/usage_data/track_event",
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7/approval_state",
     "query": "",
     "variables": {}
   },
@@ -114,8 +114,8 @@
     "variables": {}
   },
   {
-    "method": "POST",
-    "path": "/api/v4/usage_data/track_event",
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7/approval_state",
     "query": "",
     "variables": {}
   },
@@ -126,8 +126,8 @@
     "variables": {}
   },
   {
-    "method": "POST",
-    "path": "/api/v4/usage_data/track_event",
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7/approval_state",
     "query": "",
     "variables": {}
   },
@@ -169,13 +169,13 @@
   },
   {
     "method": "GET",
-    "path": "/api/v1/repos/lab/project/commits/4e540f414f6c8d018e6eebc084012cad9c6bdaad/status?limit=50&page=1",
+    "path": "/api/v1/repos/lab/project/commits/900d027fa93fe03ee9f983e98b55f4c549467409/status?limit=50&page=1",
     "query": "",
     "variables": {}
   },
   {
     "method": "GET",
-    "path": "/api/v1/repos/lab/project/commits/4e540f414f6c8d018e6eebc084012cad9c6bdaad/status?limit=50&page=2",
+    "path": "/api/v1/repos/lab/project/commits/900d027fa93fe03ee9f983e98b55f4c549467409/status?limit=50&page=2",
     "query": "",
     "variables": {}
   },

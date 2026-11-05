@@ -24,7 +24,7 @@ EXIT 0
 ●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
 ●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
 ●  This is a supervision warning only; the guarded operation WILL still run.
-●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
 ●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 armed: state/task.check.sh
 

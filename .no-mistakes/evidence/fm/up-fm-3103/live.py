@@ -2,7 +2,7 @@ import os, sys, ssl, json, subprocess, threading, pathlib, http.server, shutil
 
 ROOT = pathlib.Path.cwd()
 SCRATCH = ROOT / '.validation-3103'
-EVIDENCE = pathlib.Path('~/.no-mistakes-upstream-codex/evidence/01M6MWKH6MN5A6C7BJ2SC0KNQM')
+EVIDENCE = pathlib.Path('~/.no-mistakes-upstream-codex/evidence/01M6N19YYZJ6V2K5VKRNHE7D1C')
 HEAD = 'a' * 40
 STATE = dict(base='main', state='OPEN', unreadable=False, retarget=False, merges=0)
 requests = []

@@ -3,12 +3,12 @@
 scaffolded: {run-worktree}/.validation-3103/spawn-home/data/default-task/brief.md (ship, mode=direct-PR; replace {TASK} and {FIRSTMATE_SPEC})
 fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktree}/.validation-3103/spawn-home
 notice: default-task ships mode=direct-PR while the standing posture for spawn-project is no-mistakes - less rigor than the captain's standing posture; proceed only on a current explicit captain instruction or an intake judgment you can state
-spawned default-task harness=codex kind=ship mode=direct-PR yolo=off window=primary:fm-default-task worktree={run-worktree}/.validation-3103/spawn-pool/.treehouse/spawn-project-b76689/1/spawn-project
+spawned default-task harness=codex kind=ship mode=direct-PR yolo=off window=primary:fm-default-task worktree={run-worktree}/.validation-3103/spawn-pool/.treehouse/spawn-project-e3cde4/1/spawn-project
 
 TASK METADATA default-task
 window=primary:fm-default-task
 endpoint_task_id=default-task
-worktree={run-worktree}/.validation-3103/spawn-pool/.treehouse/spawn-project-b76689/1/spawn-project
+worktree={run-worktree}/.validation-3103/spawn-pool/.treehouse/spawn-project-e3cde4/1/spawn-project
 project={run-worktree}/.validation-3103/spawn-project
 harness=codex
 approval_mode=bypass
@@ -20,7 +20,7 @@ tasktmp=/tmp/fm-default-task
 expected_base=master
 model=default
 effort=default
-spawn_gen=s1793852709.70743.20211
+spawn_gen=s1793855316.58212.17579
 
 LAUNCH DESTINATION default-task
 # Expected pull request destination
@@ -33,16 +33,16 @@ fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktr
 ●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
 ●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
 ●  This is a supervision warning only; the guarded operation WILL still run.
-●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
 ●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 warn: no registry at {run-worktree}/.validation-3103/spawn-home/data/projects.md; defaulting spawn-project to no-mistakes off
 notice: named-task ships mode=direct-PR while the standing posture for spawn-project is no-mistakes - less rigor than the captain's standing posture; proceed only on a current explicit captain instruction or an intake judgment you can state
-spawned named-task harness=codex kind=ship mode=direct-PR yolo=off window=primary:fm-named-task worktree={run-worktree}/.validation-3103/spawn-pool/.treehouse/spawn-project-b76689/2/spawn-project
+spawned named-task harness=codex kind=ship mode=direct-PR yolo=off window=primary:fm-named-task worktree={run-worktree}/.validation-3103/spawn-pool/.treehouse/spawn-project-e3cde4/2/spawn-project
 
 TASK METADATA named-task
 window=primary:fm-named-task
 endpoint_task_id=named-task
-worktree={run-worktree}/.validation-3103/spawn-pool/.treehouse/spawn-project-b76689/2/spawn-project
+worktree={run-worktree}/.validation-3103/spawn-pool/.treehouse/spawn-project-e3cde4/2/spawn-project
 project={run-worktree}/.validation-3103/spawn-project
 harness=codex
 approval_mode=bypass
@@ -55,7 +55,7 @@ base_branch=integration/release
 expected_base=integration/release
 model=default
 effort=default
-spawn_gen=s1793852715.78406.1449
+spawn_gen=s1793855321.79876.22433
 
 LAUNCH DESTINATION named-task
 # Expected pull request destination
@@ -71,7 +71,7 @@ LIVE WORKER default-task
 
   Folder access
   {run-worktree}/.validation-3103/spawn-po
-  ol/.treehouse/spawn-project-b76689/1/spawn-project
+  ol/.treehouse/spawn-project-e3cde4/1/spawn-project
 
   Note: You’re in a subdirectory of a Git project. Trusting will apply to the repository root:
   {run-worktree}/.validation-3103/spawn-pr
@@ -113,7 +113,7 @@ LIVE WORKER named-task
 
   Folder access
   {run-worktree}/.validation-3103/spawn-po
-  ol/.treehouse/spawn-project-b76689/2/spawn-project
+  ol/.treehouse/spawn-project-e3cde4/2/spawn-project
 
   Note: You’re in a subdirectory of a Git project. Trusting will apply to the repository root:
   {run-worktree}/.validation-3103/spawn-pr

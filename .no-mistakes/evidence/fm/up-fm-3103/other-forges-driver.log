@@ -4,6 +4,17 @@ EXIT 0
 {run-worktree}/.validation-3103/live-home
 
 
+CASE configure isolated emulator CA
+COMMAND glab config set ca_cert {run-worktree}/.validation-3103/cert.pem --host gitlab.example
+EXIT 0
+
+
+CASE real glab reads local MR
+COMMAND glab mr view 7 -R https://gitlab.example/lab/project -F json
+EXIT 0
+{"id":7,"iid":7,"target_branch":"main","source_branch":"fm/lab","project_id":1,"title":"Synthetic destination check","state":"opened","imported":false,"imported_from":"","created_at":null,"updated_at":null,"upvotes":0,"downvotes":0,"author":{"id":1,"username":"lab","name":"Lab","state":"","locked":false,"created_at":null,"avatar_url":"","web_url":""},"assignee":null,"assignees":[],"reviewers":[],"source_project_id":0,"target_project_id":0,"labels":[],"label_details":null,"description":"","draft":false,"milestone":null,"merge_when_pipeline_succeeds":false,"detailed_merge_status":"mergeable","merge_user":null,"merged_at":null,"merge_after":null,"prepared_at":null,"closed_by":null,"closed_at":null,"sha":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","merge_commit_sha":"","squash_commit_sha":"","user_notes_count":0,"should_remove_source_branch":false,"force_remove_source_branch":false,"allow_collaboration":false,"allow_maintainer_to_push":false,"web_url":"https://gitlab.example/lab/project/-/merge_requests/7","references":null,"discussion_locked":false,"time_stats":null,"squash":false,"squash_on_merge":false,"task_completion_status":null,"has_conflicts":false,"blocking_discussions_resolved":true,"merged_by":null,"merge_error":"","subscribed":false,"changes_count":"","user":{"can_merge":true},"latest_build_started_at":null,"latest_build_finished_at":null,"first_deployed_to_production_at":null,"pipeline":null,"head_pipeline":{"id":1,"iid":0,"project_id":0,"status":"success","source":"","ref":"","name":"","sha":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","before_sha":"","tag":false,"yaml_errors":"","user":null,"updated_at":null,"created_at":null,"started_at":null,"finished_at":null,"committed_at":null,"duration":0,"queued_duration":0,"coverage":"","web_url":"","detailed_status":null},"diff_refs":{"base_sha":"","head_sha":"","start_sha":""},"rebase_in_progress":false,"diverged_commits_count":0,"first_contribution":false,"work_in_progress":false}
+
+
 CASE commit synthetic task content
 COMMAND git -C {run-worktree}/.validation-3103/repo -c user.name=Lab -c user.email=lab@example.invalid commit --allow-empty -qm synthetic
 EXIT 0
@@ -12,11 +23,11 @@ EXIT 0
 CASE read synthetic HEAD
 COMMAND git -C {run-worktree}/.validation-3103/repo rev-parse HEAD
 EXIT 0
-4e540f414f6c8d018e6eebc084012cad9c6bdaad
+900d027fa93fe03ee9f983e98b55f4c549467409
 
 
 CASE record synthetic published branch
-COMMAND git -C {run-worktree}/.validation-3103/repo update-ref refs/remotes/origin/main 4e540f414f6c8d018e6eebc084012cad9c6bdaad
+COMMAND git -C {run-worktree}/.validation-3103/repo update-ref refs/remotes/origin/main 900d027fa93fe03ee9f983e98b55f4c549467409
 EXIT 0
 
 
@@ -42,7 +53,7 @@ EXIT 0
 ●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
 ●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
 ●  This is a supervision warning only; the guarded operation WILL still run.
-●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
 ●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 armed: state/task.check.sh
 
@@ -82,18 +93,57 @@ COMMAND bash {run-worktree}/.validation-3103/live-home/state/task.check.sh
 EXIT 0
 
 
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 54661)
 CASE gitlab unreadable base refuses registration
 COMMAND bin/fm-pr-check.sh task https://gitlab.example/lab/project/-/merge_requests/7
 EXIT 1
 error: expected PR base main, actual base unavailable
 
 
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py", line 694, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py", line 359, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py", line 763, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/lib/python3.15/http/server.py", line 474, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/lib/python3.15/http/server.py", line 462, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "{run-worktree}/.validation-3103/live.py", line 16, in do_CONNECT
+    self.connection = ctx.wrap_socket(self.connection, server_side=True)
+                      ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/lib/python3.15/ssl.py", line 469, in wrap_socket
+    return self.sslsocket_class._create(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sock=sock,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        session=session
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/lib/python3.15/ssl.py", line 1103, in _create
+    self.do_handshake()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/lib/python3.15/ssl.py", line 1434, in do_handshake
+    self._sslobj.do_handshake()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+ConnectionResetError: [Errno 54] Connection reset by peer
+----------------------------------------
 CASE gitlab retarget after readiness refuses merge
 COMMAND bin/fm-pr-merge.sh task https://gitlab.example/lab/project/-/merge_requests/7
 EXIT 1
 WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
 armed: state/task.check.sh
-verified: https://gitlab.example/lab/project/-/merge_requests/7 is open and mergeable, with a successful pipeline at head 4e540f414f6c8d018e6eebc084012cad9c6bdaad
+verified: https://gitlab.example/lab/project/-/merge_requests/7 is open and mergeable, with a successful pipeline at head 900d027fa93fe03ee9f983e98b55f4c549467409
 error: expected PR base main, actual base other
 
 
@@ -102,7 +152,7 @@ COMMAND bin/fm-pr-merge.sh task https://gitlab.example/lab/project/-/merge_reque
 EXIT 0
 WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
 armed: state/task.check.sh
-verified: https://gitlab.example/lab/project/-/merge_requests/7 is open and mergeable, with a successful pipeline at head 4e540f414f6c8d018e6eebc084012cad9c6bdaad
+verified: https://gitlab.example/lab/project/-/merge_requests/7 is open and mergeable, with a successful pipeline at head 900d027fa93fe03ee9f983e98b55f4c549467409
 ! No pipeline running on fm/lab
 ✓ Merged!
 https://gitlab.example/lab/project/-/merge_requests/7
@@ -163,7 +213,7 @@ EXIT 1
 WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
 WARNING: queued wakes pending - drain them with bin/fm-wake-drain.sh before anything else.
 armed: state/task.check.sh
-verified: https://forge.example/lab/project/pulls/7 is open and mergeable, with a successful combined status at head 4e540f414f6c8d018e6eebc084012cad9c6bdaad
+verified: https://forge.example/lab/project/pulls/7 is open and mergeable, with a successful combined status at head 900d027fa93fe03ee9f983e98b55f4c549467409
 error: expected PR base main, actual base other
 
 
@@ -173,7 +223,7 @@ EXIT 0
 WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
 WARNING: queued wakes pending - drain them with bin/fm-wake-drain.sh before anything else.
 armed: state/task.check.sh
-verified: https://forge.example/lab/project/pulls/7 is open and mergeable, with a successful combined status at head 4e540f414f6c8d018e6eebc084012cad9c6bdaad
+verified: https://forge.example/lab/project/pulls/7 is open and mergeable, with a successful combined status at head 900d027fa93fe03ee9f983e98b55f4c549467409
 
 
 CASE real gerrit-axi detail includes branch
@@ -198,7 +248,7 @@ EXIT 0
       "submittable": true,
       "blocked_on": "",
       "patch_set": 1,
-      "revision": "4e540f414f6c8d018e6eebc084012cad9c6bdaad",
+      "revision": "900d027fa93fe03ee9f983e98b55f4c549467409",
       "ref": "refs/changes/07/7/1",
       "updated": null,
       "created": null,

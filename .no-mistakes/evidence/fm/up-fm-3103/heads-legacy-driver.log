@@ -7,7 +7,7 @@ EXIT 0
 CASE read synthetic repository head
 COMMAND git -C {run-worktree}/.validation-3103/repo rev-parse HEAD
 EXIT 0
-4e540f414f6c8d018e6eebc084012cad9c6bdaad
+900d027fa93fe03ee9f983e98b55f4c549467409
 
 
 CASE github matching named integration base registration
@@ -18,7 +18,7 @@ EXIT 0
 ●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
 ●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
 ●  This is a supervision warning only; the guarded operation WILL still run.
-●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
 ●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 armed: state/task.check.sh
 
@@ -29,7 +29,7 @@ EXIT 1
 WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
 armed: state/task.check.sh
 error: refusing to merge https://github.com/lab/project/pull/7
-  - the live head is "4e540f414f6c8d018e6eebc084012cad9c6bdaad", not the expected head bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+  - the live head is "900d027fa93fe03ee9f983e98b55f4c549467409", not the expected head bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 
 
 CASE gitlab matching named integration base registration
@@ -45,7 +45,7 @@ EXIT 1
 WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
 armed: state/task.check.sh
 error: refusing to merge https://gitlab.example/lab/project/-/merge_requests/7
-  - the live head is "4e540f414f6c8d018e6eebc084012cad9c6bdaad", not the expected head bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+  - the live head is "900d027fa93fe03ee9f983e98b55f4c549467409", not the expected head bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 
 
 CASE forgejo matching named integration base registration
@@ -61,7 +61,7 @@ EXIT 1
 WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
 armed: state/task.check.sh
 error: refusing to merge https://forge.example/lab/project/pulls/7
-  - the live head is "4e540f414f6c8d018e6eebc084012cad9c6bdaad", not the expected head bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+  - the live head is "900d027fa93fe03ee9f983e98b55f4c549467409", not the expected head bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 
 
 CASE legacy default without destination proof refuses registration

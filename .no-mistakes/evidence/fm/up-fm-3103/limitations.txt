@@ -1,0 +1,5 @@
+Real Codex relaunch was not attempted in this run. The prior Test phase recorded a PreToolUse guard refusal of that lifecycle operation. The refused operation was not retried through another route. The two existing stub-provider relaunch regressions passed in selected-and-corrected-tests.log and are not live Codex restart proof.
+
+The canonical merge file has a previously reproduced baseline Forgejo fixture failure, recorded in the earlier Test decision T1. That known case was not rerun or fixed here. This run exercised real tea against the localhost emulator. No claim is made that the full canonical merge file is green.
+
+The real Codex spawn driver completed both launches and captured the private 120x40 panes. Both workers remained at folder trust prompts, which were not accepted. The driver exited 1 only during removal of read-only test git-hook directories, after killing its private tmux server and completing lab socket teardown. No permission change or alternate deletion route was attempted for those protected paths.

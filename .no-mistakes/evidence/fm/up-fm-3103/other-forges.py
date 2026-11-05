@@ -10,6 +10,9 @@ try:
     env['GLAB_CONFIG_DIR']=str(SCRATCH/'glab-config')
     env['GITLAB_TOKEN']='synthetic-local-only'
     env['GLAB_CHECK_UPDATE']='false'
+    env['GITLAB_CA_CERT_FILE']=str(SCRATCH/'cert.pem')
+    run('configure isolated emulator CA',['glab','config','set','ca_cert',str(SCRATCH/'cert.pem'),'--host','gitlab.example'])
+    run('real glab reads local MR',['glab','mr','view','7','-R','https://gitlab.example/lab/project','-F','json'])
     run('commit synthetic task content',['git','-C',str(SCRATCH/'repo'),'-c','user.name=Lab','-c','user.email=lab@example.invalid','commit','--allow-empty','-qm','synthetic'])
     lab.HEAD=run('read synthetic HEAD',['git','-C',str(SCRATCH/'repo'),'rev-parse','HEAD']).stdout.strip()
     run('record synthetic published branch',['git','-C',str(SCRATCH/'repo'),'update-ref','refs/remotes/origin/main',lab.HEAD])

@@ -1,0 +1,185 @@
+FM_TEST_BEGIN 2026-11-05T05:06:07Z tests/fm-pr-check-security.test.sh family=pr-forge expected_gate_skip=none
+ok - registration refuses a PR on the wrong destination
+ok - destination proof fails closed through readiness, polling, restart, and legacy task records
+ok - raw-byte parser accepts canonical URLs and rejects the complete adversarial matrix
+ok - GitHub Enterprise config resolves override, home, then the library code root
+ok - GitHub Enterprise hosts are accepted only when the home names them and their host reaches every forge call
+ok - GitLab merge requests are followed on any instance and never wake falsely
+ok - Forgejo poll reads one pull request by number through tea api and wakes only on merged true
+ok - Forgejo login match parses tea's JSON in every line shape, in the helper and the static poll
+ok - the Gerrit watch wakes only on an explicit merged status and never on submittability
+ok - Gerrit arming records no patch set revision and the merge path refuses to submit
+ok - Gerrit arming accepts a published HEAD only by the change's current patch set tree
+ok - a no-mistakes Gerrit ready report requires the pipeline's fixes recovered into the published copy
+ok - validated merged polls notify once and retire before the next watcher cycle
+ok - a repeat identical merged poll for an already-notified task is absorbed, never queued as a main-blocking row
+ok - a failed upward merge report keeps its poll armed for repair and retry
+ok - staged self-merge and poll interleavings are never silent
+ok - queued merges retain their away authority after captain return
+ok - poll distinguishes attended authorization from external landing
+ok - accepted merge authority refuses rebound task metadata
+ok - accepted merge authority persists under the lifecycle lock
+ok - teardown cannot race merged-poll authority consumption
+ok - poll retirement preserves a replacement authority record
+ok - a merge detected by the poll is reported upward from a secondmate home exactly once
+ok - a different merged PR for the same task gets its own first notification
+ok - a merged poll on a persistent secondmate retires silently: no outcome, marker, or wake, and every lifecycle artifact preserved
+ok - queue, receipt, and every fixed-path removal crash point recover without loss or repeated execution
+ok - open/red, closed-unmerged, malformed, and forge errors remain armed until an exact merged transition
+ok - replacement, nonterminal, tampered, and custom results receive no deletion authority
+ok - queue failure and untrusted receipts preserve canonical poll evidence
+ok - GitHub and GitLab exact merged results share one retirement path
+ok - PR and teardown entrypoints reject invalid arguments before every side effect
+ok - arming refuses a draft pull request, naming it, and arms a ready or unreadable one
+ok - fm-pr-check refuses to record a PR or arm a merge watch on a secondmate record
+ok - fm-pr-check refuses to register a PR whose named head is only in the worker copy
+ok - fm-pr-check refuses a direct-PR registration while a later commit is only in the copy
+ok - the scan records the PR a done line reports and leaves prose, scouts and recorded PRs alone
+ok - the scan reports a refused registration once and records the PR on a later retry
+ok - the scan retries a refused task within two sweeps despite a hanging registration
+ok - the scan starts a later sweep at a different task so a hanging registration cannot starve it
+ok - the scan publishes the poll of a task whose pr= has none
+ok - the scan keeps a PR the supervisor recorded during its registration
+ok - the scan leaves a merged task's retired poll alone
+ok - the scan arms a replacement PR despite an older PR's merge marker
+ok - the watcher sweep scans only with config/pr-register-scan present, then records a reported PR and queues a refusal
+ok - valid direct and merge flows record exact metadata and reject multiline head metadata
+ok - rejected metacharacter bytes remain inert at generation and watcher time
+ok - static poll is silent except for one merged line and remains watcher-bounded
+ok - interrupted atomic preparation cleans private temporaries and publishes nothing
+ok - concurrent watchers observe only complete private poll publications
+ok - poll publication paths refuse symlinks and directories
+ok - live poll and custom-check artifacts require private single-link files
+ok - registered generations survive template updates and relaunch metadata without executing sidecar code or trusting forged bytes
+ok - a poll armed before a volume renumber is re-recorded under the control lock and keeps detecting merges
+ok - a renumbered registration is never re-recorded around a tampered artifact: swapped-check altered-check swapped-sidecar altered-sidecar altered-template-hash wrong-mode hardlinked-check split-device (foreign-device not exercisable on Darwin), or a pending retirement
+ok - direct re-arm publication waits without replacing an armed poll
+ok - device re-record publication waits without rewriting its registration
+ok - post-rename poll validation faults revoke both names and allow a clean retry
+ok - bootstrap does not rewrite unauthenticated checks or emit retired migration diagnostics
+ok - watcher signals promptly stop custom checks and clean private state
+ok - returned custom check descendants are drained on installed and fallback timeout paths
+ok - a timed-out custom check surfaces its timeout and earlier output on installed and fallback timeout paths
+ok - teardown removes safe poll artifacts and refuses directory-shaped check files without traversal
+FM_TEST_END 2026-11-05T05:13:04Z tests/fm-pr-check-security.test.sh exit=0 duration_ms=416588 gate_skip=false
+FM_TEST_BEGIN 2026-11-05T05:13:04Z tests/fm-dod-lib.test.sh family=pure-contract-unit expected_gate_skip=none
+ok - a canonical PR requires destination metadata even when its head is published
+ok - scout done: is not gated
+ok - unpushed ship done: is refused
+ok - no-mistakes pre-validation done: is not gated
+ok - named head on a remote-tracking ref is accepted
+ok - a moved remote branch that lacks the named head is refused
+ok - a 40-hex token in the note is not the named head
+ok - a recorded merged PR satisfies the gate after prune
+ok - the merged-PR short-circuit applies only to the recorded PR the done line names
+ok - a forge-recorded head for the named PR is accepted without a local object
+ok - a direct-PR recorded head does not cover a later unpushed commit
+ok - CI-ready notes require checks green and an actual PR reference
+ok - no-mistakes CI-ready done: with extra text is gated
+ok - keyed and spaced ship done: lines are gated
+ok - local-only linked named branch is reachable from the project clone
+ok - local-only detached HEAD only in the disposable copy is refused
+ok - standalone local-only done: requires the named head in the project clone
+ok - non-done lines are not gated
+ok - fenced and indented Captain lines are not authorized intent
+ok - PR-based DoD draft check uses gh-axi
+ok - promotion keeps a scout's recorded base branch and refuses local-only for it
+ok - forge=external composes with direct-PR only and refuses a base branch
+ok - external rule one forbids origin and task-prefixed pushes and names only the backup copy
+ok - external DoD renders the contract, the review grammar, and the adapter, and refuses without one
+ok - external review done: accepted on a canonical URL alone without a backup; PR, non-https, query, fragment, forge, and pattern mismatches refused
+ok - external review done with a backup: refused until HEAD is under refs/remotes/backup/backup/, then accepted
+ok - worker role names the skill and its fallback skill file
+all fm-dod-lib tests passed
+FM_TEST_END 2026-11-05T05:13:10Z tests/fm-dod-lib.test.sh exit=0 duration_ms=5392 gate_skip=false
+FM_TEST_BEGIN 2026-11-05T05:13:10Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+ok - fm-brief: scaffolds leave the worker role scope to the launch boundary and keep the secondmate contract
+ok - fm-brief.sh: bash -n succeeds
+{run-worktree}/.validation-3103/tmp/fm-brief.uLB7aj/heredoc-in-substitution.sh:2
+ok - fm-brief.sh: no heredoc is nested inside a command substitution (Bash 3.2 parse-safe)
+ok - fm-brief.sh: --help renders the complete header
+ok - fm-brief.sh: no-mistakes/direct-PR/local-only briefs generate cleanly
+ok - fm-brief.sh: --forge forgejo names tea in Rule 3, the direct-PR DOD, and the draft read-back, marks the delivery contract, and the closed set refuses everything else
+ok - fm-brief.sh: --forge external renders the no-push rule, the review contract, and the adapter, and refuses every impossible shape
+ok - fm-brief.sh: ship --mode is required and closed-set validated
+ok - fm-brief.sh: the explicit ship mode wins over the registered posture
+ok - fm-brief.sh: --yolo and scout/secondmate --mode are refused, never silently dropped
+ok - fm-brief.sh: faster paths use configured authority without stacked review
+ok - fm-brief.sh: no-mistakes DOD keeps its apostrophe prose and bans --yes outright
+ok - fm-brief.sh: no-mistakes DOD detects a green PR from the drive call, not a status poll
+ok - fm-brief.sh: PR-based done requires a non-draft PR; a deliberate draft declares a wait
+ok - fm-brief.sh: no-mistakes ask-user findings use one event plus a verbatim snapshot
+ok - fm-brief.sh: ship project-memory wording bounds edits to corrections of wrong information
+ok - fm-brief.sh: --herdr-lab emits the complete hard safety contract
+ok - fm-brief.sh: --herdr-lab uses its quoted Firstmate-owned helper path
+ok - fm-brief.sh: ship and scout scaffolds make omitted Herdr intent fail-visible
+ok - fm-brief.sh: the documented {TASK} and {FIRSTMATE_SPEC} fills cannot corrupt the Herdr safety gate
+ok - fm-brief.sh: Herdr lab contract covers scouts and rejects secondmate misuse
+ok - fm-brief.sh: --no-projects scaffolds a project-less charter and guards misuse
+ok - fm-brief.sh: marked requests avoid generic acknowledgements and preserve material reporting
+ok - fm-brief.sh: relative directory inputs ignore CDPATH, render stable absolute charter paths, or fail loudly
+ok - fm-brief.sh: custom pause verb renders in every scaffold
+ok - fm-brief.sh: ship and scout scaffolds declare a validation-round pause once, then hold it
+ok - fm-brief.sh: investigation and visual-review completions load the shared decision policy
+ok - fm-brief.sh: scouts may attest only their own empty inventory through the guarded command
+ok - fm-brief: scout and secondmate code paths still scaffold well-formed briefs
+ok - fm-brief.sh: scout Lavish hosting follows the bootstrap lavish-axi floor
+ok - fm-brief: inbox listing is silent on empty/absent inbox and numerically ordered
+ok - fm-brief: workers end the turn on a decision, wait in one bounded shell command, and never poll
+ok - fm-brief: without config/wait-no-turns the brief and drive text stay as they were
+ok - fm-brief: inbox guidance explains marked synthetic terminators in every scaffold
+ok - fm-brief.sh: the home brief include lands last on ship and scout, verbatim, and fails closed
+ok - fm-brief.sh: --base-branch records the base, targets the PR at it, and is refused where no PR carries it
+ok - fm-brief.sh: --branch-prefix omitted defaults every ship mode to fm/<task-id>
+ok - fm-brief.sh: a --branch-prefix override renders identically across every generated section
+ok - fm-brief.sh: an empty --branch-prefix override resolves to a bare <task-id> branch
+ok - fm-brief.sh: --branch-prefix is refused on scout and secondmate scaffolds
+ok - fm-brief.sh: --branch-prefix value is validated against embedded spaces and a leading dash
+not ok - a ref-format-valid metacharacter prefix should scaffold safely
+FM_TEST_END 2026-11-05T05:13:26Z tests/fm-brief.test.sh exit=1 duration_ms=16268 gate_skip=false
+FM_TEST_BEGIN 2026-11-05T05:13:26Z tests/fm-spawn-pool-base-freshen.test.sh family=standalone expected_gate_skip=none
+ok - a remote-seeded secondmate home allocates and launches from its Treehouse pool
+ok - a Treehouse slot claim names the launched task, refuses when unclaimable, and is dropped by a locked abort
+ok - a launch refused after its slot claim leaves the pool for a retry and a second task
+ok - a refused polytoken launch leaves its per-id paths alone while another spawn holds the per-id lock
+ok - a non-polytoken launch refused after its slot claim keeps main's abort behavior
+ok - the treehouse-get isolation refusal points only at what survives the abort
+ok - linked spawning home: primary preserves the primary before any refresh
+ok - linked spawning home: primary-alias preserves the primary before any refresh
+ok - linked spawning home: spawning preserves the primary before any refresh
+ok - linked spawning home: scout preserves the primary before any refresh
+ok - a stale pooled worktree refreshes to current origin/main before a crew branch is created
+ok - --base-branch picks the copy's starting point and is recorded; a missing or local-only base refuses
+ok - a spawn refuses when --base-branch and the brief's Base branch lines disagree
+ok - a Base branch line in the captain's intent neither blocks nor redirects a spawn
+ok - a based scout on a forge=gerrit project is refused at spawn
+ok - a stale pooled worktree resolves and refreshes a non-main default branch
+ok - direct-PR ships and scouts both refresh stale pooled worktrees before launch
+ok - a dirty pooled worktree is refused without discarding its local work
+ok - an unresolved remote default branch refuses the pooled worktree
+ok - an unreachable origin refuses a potentially stale pooled worktree
+ok - an origin-less pooled worktree launches as-is, skipping the freshness gate
+ok - a dirty origin-less pooled worktree is refused without discarding its local work
+ok - an origin configuration without a URL refuses the pooled worktree
+ok - an empty origin configuration section refuses the pooled worktree
+ok - an empty-only included origin section documents the accepted detection boundary
+ok - an inactive conditional origin include leaves the pooled worktree origin-less
+ok - an origin-less pool with a stale submodule pin refuses while naming both pins and no remedy
+ok - an unpushed submodule commit keeps the uncommitted-work refusal and survives it
+ok - work inside a submodule is still refused as uncommitted work, not called stale
+ok - a stale pin carrying real work is refused conservatively, never called stale
+ok - a stale pin beside other dirt yields the conservative refusal alone, with no stale-pin line
+ok - without the opt-in a local-only ship or a scout still starts from origin's tip while the primary leads
+ok - with the opt-in only a local-only ship or a scout leaves origin's tip, for a primary that strictly contains it, and the review starts where the slot did
+ok - with the opt-in a named base branch still starts from origin's copy
+ok - with the opt-in an unclean slot is still refused, untouched, before any base is chosen
+# all fm-spawn-pool-base-freshen tests passed
+FM_TEST_END 2026-11-05T05:16:49Z tests/fm-spawn-pool-base-freshen.test.sh exit=0 duration_ms=203298 gate_skip=false
+FM_TEST_SUMMARY total=4 failed=1 skipped_gate=0 duration_ms=641693
+FM_TEST_SUMMARY_FAMILY family=pr-forge count=1 duration_ms=416588 failed=0
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=2 duration_ms=21660 failed=1
+FM_TEST_SUMMARY_FAMILY family=standalone count=1 duration_ms=203298 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-pr-check-security.test.sh duration_ms=416588
+FM_TEST_SLOWEST rank=2 script=tests/fm-spawn-pool-base-freshen.test.sh duration_ms=203298
+FM_TEST_SLOWEST rank=3 script=tests/fm-brief.test.sh duration_ms=16268
+FM_TEST_SLOWEST rank=4 script=tests/fm-dod-lib.test.sh duration_ms=5392
