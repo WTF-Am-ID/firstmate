@@ -1,0 +1,71 @@
+{run-worktree}/.test-phase/promotion-lab
+
+COMMAND: FM_HOME=<disposable-lab> bin/fm-promote.sh default --mode direct-PR --yolo off
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+promoted default to ship mode=direct-PR yolo=off (teardown protection restored)
+wrote ship instructions for mode=direct-PR: {run-worktree}/.test-phase/promotion-lab/data/default/ship-instructions.md
+next: FM_HOME={run-worktree}/.test-phase/promotion-lab bin/fm-send.sh fm-default "$(cat {run-worktree}/.test-phase/promotion-lab/data/default/ship-instructions.md)"
+Expected PR base: main
+Expected PR base: main
+persisted metadata:
+window=firstmate:fm-default
+worktree={run-worktree}/.test-phase/promotion-lab/projects/default
+expected_base=main
+kind=ship
+mode=direct-PR
+yolo=off
+branch=fm/default
+
+COMMAND: FM_HOME=<disposable-lab> bin/fm-promote.sh pipeline --mode no-mistakes --yolo off
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+promoted pipeline to ship mode=no-mistakes yolo=off (teardown protection restored)
+wrote ship instructions for mode=no-mistakes: {run-worktree}/.test-phase/promotion-lab/data/pipeline/ship-instructions.md
+next: FM_HOME={run-worktree}/.test-phase/promotion-lab bin/fm-send.sh fm-pipeline "$(cat {run-worktree}/.test-phase/promotion-lab/data/pipeline/ship-instructions.md)"
+Expected PR base: main
+Expected PR base: main
+persisted metadata:
+window=firstmate:fm-pipeline
+worktree={run-worktree}/.test-phase/promotion-lab/projects/pipeline
+expected_base=main
+kind=ship
+mode=no-mistakes
+yolo=off
+branch=fm/pipeline
+
+COMMAND: FM_HOME=<disposable-lab> bin/fm-promote.sh named --mode direct-PR --yolo off
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+promoted named to ship mode=direct-PR yolo=off (teardown protection restored)
+wrote ship instructions for mode=direct-PR: {run-worktree}/.test-phase/promotion-lab/data/named/ship-instructions.md
+next: FM_HOME={run-worktree}/.test-phase/promotion-lab bin/fm-send.sh fm-named "$(cat {run-worktree}/.test-phase/promotion-lab/data/named/ship-instructions.md)"
+Expected PR base: integration/hub
+Expected PR base: integration/hub
+persisted metadata:
+window=firstmate:fm-named
+worktree={run-worktree}/.test-phase/promotion-lab/projects/named
+base_branch=integration/hub
+kind=ship
+mode=direct-PR
+yolo=off
+branch=fm/named
+
+COMMAND: FM_HOME=<disposable-lab> bin/fm-promote.sh local --mode local-only --yolo off
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+promoted local to ship mode=local-only yolo=off (teardown protection restored)
+wrote ship instructions for mode=local-only: {run-worktree}/.test-phase/promotion-lab/data/local/ship-instructions.md
+next: FM_HOME={run-worktree}/.test-phase/promotion-lab bin/fm-send.sh fm-local "$(cat {run-worktree}/.test-phase/promotion-lab/data/local/ship-instructions.md)"
+ship-instructions.md: no PR destination in local-only contract
+brief.md: no PR destination in local-only contract
+persisted metadata:
+window=firstmate:fm-local
+worktree={run-worktree}/.test-phase/promotion-lab/projects/local
+expected_base=main
+kind=ship
+mode=local-only
+yolo=off
+branch=fm/local

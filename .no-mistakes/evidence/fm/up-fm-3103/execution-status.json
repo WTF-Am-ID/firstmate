@@ -1,0 +1,11 @@
+{
+  "candidate": "843369d704383f4ac9aeadc320e17afbceb6c702",
+  "focused_runner_exit": 0,
+  "destination_runner_exit": 1,
+  "destination_runner_failure": "canonical fm-control-relaunch case: missing pi and BSD sed incompatibility",
+  "promotion_live_driver_exit": 0,
+  "local_pi_install_exit": 0,
+  "targeted_relaunch_rerun_exit": 0,
+  "remaining_matching_processes": [],
+  "source_edits": false
+}

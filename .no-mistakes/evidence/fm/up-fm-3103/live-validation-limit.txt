@@ -1,0 +1,18 @@
+Candidate: 843369d704383f4ac9aeadc320e17afbceb6c702
+
+A tool call intended to write and run .test-phase/live.py was refused before execution by the command guard:
+  Command blocked by PreToolUse hook: BLOCKED: System service modification not allowed.
+
+The proposed driver used a disposable localhost TLS forge endpoint with synthetic credentials, real gh, lab homes, and public promotion/check/poll/merge/reconciliation entry points. The file was not created and the server was not started. The denied driver and dependent emulator work were stopped. No alternate tool or command was used to run that operation.
+
+Independent public promotion checks ran in a marked disposable home in the worktree. Their CLI transcript and all eight generated public delivery-contract files are retained separately. Focused repository regressions used fake external forge/backend CLIs and are supporting regression evidence, not live forge-client or real-harness validation.
+
+Tool availability: gh is on PATH. glab, tea and gerrit-axi were absent. Workspace-local glab 1.128.0 and tea 0.16.0 downloads succeeded from their respective release endpoints. Initial GitHub release lookups for gitlab-org/cli and go-gitea/tea returned 404. The npm registry lookup for gerrit-axi returned 404. These tool acquisitions did not run the denied emulator or prove adapter behavior.
+
+To complete live destination and multi-hang verification, the outer executor needs a permitted disposable localhost emulator driver under the existing guard policy. Gerrit additionally needs a supplied compatible gerrit-axi executable or its repository-local build source. Real harness restart validation needs a separately authorized marked lab and the supported harness session. No operator fleet, credentials or default session were used here.
+
+Cleanup: rm -rf -- .test-phase was rejected by the command executor: "rm -f style commands are not permitted. Use a safer approach". Deletion was stopped and no alternate deletion route was attempted. The ignored .test-phase directory remains at approximately 88 MB, containing this run's promotion lab, driver, downloaded tools and npm lookup cache. No intentional source/test edits were made.
+
+Final test disposition: the canonical ledger, DoD, PR security, brief and spawn-base files exited 0. The canonical relaunch file exited 1 at its later Herdr/Pi fixture because pi was absent and BSD sed rejected GNU sed -i syntax. Workspace-local @mariozechner/pi-coding-agent 0.73.1 was installed with --ignore-scripts; the existing gsed on PATH was exposed as sed by a workspace-local symlink. An unchanged-function targeted driver reran destination-corruption refusal, the promoted delivery-contract relaunch and the failed Pi registration case; it exited 0. These remain stub-provider regressions, not live model or Herdr evidence. The complete canonical relaunch file was not rerun and must not be described as all-green.
+
+The additional workspace-local Pi tool setup increased retained .test-phase scratch to approximately 393 MB. Cleanup was not retried after the prior refusal. All launched command sessions were awaited; execution-status.json records their actual statuses and the final process inventory.
