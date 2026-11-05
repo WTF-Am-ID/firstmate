@@ -1,0 +1,251 @@
+CASE mint multi-forge lab
+COMMAND bin/fm-lab-home.sh create {run-worktree}/.validation-3103/live-home
+EXIT 0
+{run-worktree}/.validation-3103/live-home
+
+
+CASE commit synthetic task content
+COMMAND git -C {run-worktree}/.validation-3103/repo -c user.name=Lab -c user.email=lab@example.invalid commit --allow-empty -qm synthetic
+EXIT 0
+
+
+CASE read synthetic HEAD
+COMMAND git -C {run-worktree}/.validation-3103/repo rev-parse HEAD
+EXIT 0
+4e540f414f6c8d018e6eebc084012cad9c6bdaad
+
+
+CASE record synthetic published branch
+COMMAND git -C {run-worktree}/.validation-3103/repo update-ref refs/remotes/origin/main 4e540f414f6c8d018e6eebc084012cad9c6bdaad
+EXIT 0
+
+
+CASE real tea reads isolated synthetic login
+COMMAND tea login list --output json
+EXIT 0
+[
+  {
+    "name": "local-forge",
+    "url": "https://forge.example",
+    "ssh_host": "forge.example",
+    "user": "lab",
+    "default": "true"
+  }
+]
+
+
+CASE gitlab matching registration
+COMMAND bin/fm-pr-check.sh task https://gitlab.example/lab/project/-/merge_requests/7
+EXIT 0
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+armed: state/task.check.sh
+
+
+CASE gitlab other base refuses registration
+COMMAND bin/fm-pr-check.sh task https://gitlab.example/lab/project/-/merge_requests/7
+EXIT 1
+error: expected PR base main, actual base other
+
+
+CASE gitlab other base refuses merge
+COMMAND bin/fm-pr-merge.sh task https://gitlab.example/lab/project/-/merge_requests/7
+EXIT 1
+error: expected PR base main, actual base other
+
+
+CASE gitlab absent base refuses registration
+COMMAND bin/fm-pr-check.sh task https://gitlab.example/lab/project/-/merge_requests/7
+EXIT 1
+error: expected PR base main, actual base unavailable
+
+
+CASE gitlab absent base refuses merge
+COMMAND bin/fm-pr-merge.sh task https://gitlab.example/lab/project/-/merge_requests/7
+EXIT 1
+error: expected PR base main, actual base unavailable
+
+
+CASE gitlab matching merged poll
+COMMAND bash {run-worktree}/.validation-3103/live-home/state/task.check.sh
+EXIT 0
+merged
+
+
+CASE gitlab retargeted merged poll silent
+COMMAND bash {run-worktree}/.validation-3103/live-home/state/task.check.sh
+EXIT 0
+
+
+CASE gitlab unreadable base refuses registration
+COMMAND bin/fm-pr-check.sh task https://gitlab.example/lab/project/-/merge_requests/7
+EXIT 1
+error: expected PR base main, actual base unavailable
+
+
+CASE gitlab retarget after readiness refuses merge
+COMMAND bin/fm-pr-merge.sh task https://gitlab.example/lab/project/-/merge_requests/7
+EXIT 1
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+armed: state/task.check.sh
+verified: https://gitlab.example/lab/project/-/merge_requests/7 is open and mergeable, with a successful pipeline at head 4e540f414f6c8d018e6eebc084012cad9c6bdaad
+error: expected PR base main, actual base other
+
+
+CASE gitlab matching destination merge
+COMMAND bin/fm-pr-merge.sh task https://gitlab.example/lab/project/-/merge_requests/7
+EXIT 0
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+armed: state/task.check.sh
+verified: https://gitlab.example/lab/project/-/merge_requests/7 is open and mergeable, with a successful pipeline at head 4e540f414f6c8d018e6eebc084012cad9c6bdaad
+! No pipeline running on fm/lab
+✓ Merged!
+https://gitlab.example/lab/project/-/merge_requests/7
+
+
+CASE forgejo matching registration
+COMMAND bin/fm-pr-check.sh task https://forge.example/lab/project/pulls/7
+EXIT 0
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+WARNING: queued wakes pending - drain them with bin/fm-wake-drain.sh before anything else.
+armed: state/task.check.sh
+
+
+CASE forgejo other base refuses registration
+COMMAND bin/fm-pr-check.sh task https://forge.example/lab/project/pulls/7
+EXIT 1
+error: expected PR base main, actual base other
+
+
+CASE forgejo other base refuses merge
+COMMAND bin/fm-pr-merge.sh task https://forge.example/lab/project/pulls/7
+EXIT 1
+error: expected PR base main, actual base other
+
+
+CASE forgejo absent base refuses registration
+COMMAND bin/fm-pr-check.sh task https://forge.example/lab/project/pulls/7
+EXIT 1
+error: expected PR base main, actual base unavailable
+
+
+CASE forgejo absent base refuses merge
+COMMAND bin/fm-pr-merge.sh task https://forge.example/lab/project/pulls/7
+EXIT 1
+error: expected PR base main, actual base unavailable
+
+
+CASE forgejo matching merged poll
+COMMAND bash {run-worktree}/.validation-3103/live-home/state/task.check.sh
+EXIT 0
+merged
+
+
+CASE forgejo retargeted merged poll silent
+COMMAND bash {run-worktree}/.validation-3103/live-home/state/task.check.sh
+EXIT 0
+
+
+CASE forgejo unreadable base refuses registration
+COMMAND bin/fm-pr-check.sh task https://forge.example/lab/project/pulls/7
+EXIT 1
+error: expected PR base main, actual base unavailable
+
+
+CASE forgejo retarget after readiness refuses merge
+COMMAND bin/fm-pr-merge.sh task https://forge.example/lab/project/pulls/7
+EXIT 1
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+WARNING: queued wakes pending - drain them with bin/fm-wake-drain.sh before anything else.
+armed: state/task.check.sh
+verified: https://forge.example/lab/project/pulls/7 is open and mergeable, with a successful combined status at head 4e540f414f6c8d018e6eebc084012cad9c6bdaad
+error: expected PR base main, actual base other
+
+
+CASE forgejo matching destination merge
+COMMAND bin/fm-pr-merge.sh task https://forge.example/lab/project/pulls/7
+EXIT 0
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+WARNING: queued wakes pending - drain them with bin/fm-wake-drain.sh before anything else.
+armed: state/task.check.sh
+verified: https://forge.example/lab/project/pulls/7 is open and mergeable, with a successful combined status at head 4e540f414f6c8d018e6eebc084012cad9c6bdaad
+
+
+CASE real gerrit-axi detail includes branch
+COMMAND gerrit-axi show 7 --host review.local --json
+EXIT 0
+{
+  "ok": true,
+  "op": "show",
+  "count": 1,
+  "missing": [],
+  "changes": [
+    {
+      "change": 7,
+      "subject": "Synthetic change",
+      "project": "lab/project",
+      "branch": "main",
+      "topic": null,
+      "owner": null,
+      "status": "NEW",
+      "wip": false,
+      "submit": "OK",
+      "submittable": true,
+      "blocked_on": "",
+      "patch_set": 1,
+      "revision": "4e540f414f6c8d018e6eebc084012cad9c6bdaad",
+      "ref": "refs/changes/07/7/1",
+      "updated": null,
+      "created": null,
+      "url": "https://review.local/c/lab/project/+/7"
+    }
+  ],
+  "labels": [],
+  "votes": [],
+  "depends_on": [],
+  "needed_by": []
+}
+
+
+CASE gerrit matching registration
+COMMAND bin/fm-pr-check.sh task https://review.local/c/lab/project/+/7
+EXIT 0
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+WARNING: queued wakes pending - drain them with bin/fm-wake-drain.sh before anything else.
+armed: state/task.check.sh
+
+
+CASE gerrit matching merged poll
+COMMAND bash {run-worktree}/.validation-3103/live-home/state/task.check.sh
+EXIT 0
+merged
+
+
+CASE gerrit retargeted merged poll silent
+COMMAND bash {run-worktree}/.validation-3103/live-home/state/task.check.sh
+EXIT 0
+
+
+CASE gerrit wrong destination registration refused
+COMMAND bin/fm-pr-check.sh task https://review.local/c/lab/project/+/7
+EXIT 1
+error: expected PR base main, actual base other
+
+
+CASE gerrit missing destination refused
+COMMAND bin/fm-pr-check.sh task https://review.local/c/lab/project/+/7
+EXIT 1
+error: expected PR base main, actual base unavailable
+
+
+CASE gerrit submit remains refused
+COMMAND bin/fm-pr-merge.sh task https://review.local/c/lab/project/+/7
+EXIT 2
+error: firstmate does not submit a Gerrit change: submitting requires an attributed human approval it must not manufacture, so a human submits the change on the server
+
+

@@ -1,0 +1,222 @@
+[
+  {
+    "method": "POST",
+    "path": "/graphql",
+    "query": "\n\tquery PullRequestByNumber($owner: String!, $repo: String!, $pr_number: Int!) {\n\t\trepository(owner: $owner, name: $repo) {\n\t\t\tpullRequest(number: $pr_number) {isDraft,id,number}\n\t\t}\n\t}",
+    "variables": {
+      "owner": "lab",
+      "pr_number": 7,
+      "repo": "project"
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/graphql",
+    "query": "\n\tquery PullRequestByNumber($owner: String!, $repo: String!, $pr_number: Int!) {\n\t\trepository(owner: $owner, name: $repo) {\n\t\t\tpullRequest(number: $pr_number) {baseRefName,id,number}\n\t\t}\n\t}",
+    "variables": {
+      "owner": "lab",
+      "pr_number": 7,
+      "repo": "project"
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/graphql",
+    "query": "\n\tquery PullRequestByNumber($owner: String!, $repo: String!, $pr_number: Int!) {\n\t\trepository(owner: $owner, name: $repo) {\n\t\t\tpullRequest(number: $pr_number) {headRefOid,id,number}\n\t\t}\n\t}",
+    "variables": {
+      "owner": "lab",
+      "pr_number": 7,
+      "repo": "project"
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/graphql",
+    "query": "\n\tquery PullRequestByNumber($owner: String!, $repo: String!, $pr_number: Int!) {\n\t\trepository(owner: $owner, name: $repo) {\n\t\t\tpullRequest(number: $pr_number) {baseRefName,id,number}\n\t\t}\n\t}",
+    "variables": {
+      "owner": "lab",
+      "pr_number": 7,
+      "repo": "project"
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/graphql",
+    "query": "\n\tquery PullRequestByNumber($owner: String!, $repo: String!, $pr_number: Int!) {\n\t\trepository(owner: $owner, name: $repo) {\n\t\t\tpullRequest(number: $pr_number) {headRefOid,id,number}\n\t\t}\n\t}",
+    "variables": {
+      "owner": "lab",
+      "pr_number": 7,
+      "repo": "project"
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/graphql",
+    "query": "\n\tquery PullRequestByNumber($owner: String!, $repo: String!, $pr_number: Int!) {\n\t\trepository(owner: $owner, name: $repo) {\n\t\t\tpullRequest(number: $pr_number) {state,isDraft,mergeable,mergeStateStatus,headRefOid,baseRefName,statusCheckRollup: commits(last: 1) {nodes {commit {statusCheckRollup {contexts(first:100) {nodes {__typename...on StatusContext {context,state,targetUrl,createdAt,description},...on CheckRun {name,checkSuite{workflowRun{workflow{name}}},status,conclusion,startedAt,completedAt,detailsUrl}},pageInfo{hasNextPage,endCursor}}}}}},id,number}\n\t\t}\n\t}",
+    "variables": {
+      "owner": "lab",
+      "pr_number": 7,
+      "repo": "project"
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/repos/lab/project/branches/integration%2Frelease",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/repos/lab/project/rules/branches/integration%2Frelease?per_page=100",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/commits/4e540f414f6c8d018e6eebc084012cad9c6bdaad/status?limit=50&page=1",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/commits/4e540f414f6c8d018e6eebc084012cad9c6bdaad/status?limit=50&page=2",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/graphql",
+    "query": "\n\tquery PullRequestByNumber($owner: String!, $repo: String!, $pr_number: Int!) {\n\t\trepository(owner: $owner, name: $repo) {\n\t\t\tpullRequest(number: $pr_number) {isDraft,id,number}\n\t\t}\n\t}",
+    "variables": {
+      "owner": "lab",
+      "pr_number": 7,
+      "repo": "project"
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/graphql",
+    "query": "\n\tquery PullRequestByNumber($owner: String!, $repo: String!, $pr_number: Int!) {\n\t\trepository(owner: $owner, name: $repo) {\n\t\t\tpullRequest(number: $pr_number) {isDraft,id,number}\n\t\t}\n\t}",
+    "variables": {
+      "owner": "lab",
+      "pr_number": 7,
+      "repo": "project"
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/graphql",
+    "query": "\n\tquery PullRequestByNumber($owner: String!, $repo: String!, $pr_number: Int!) {\n\t\trepository(owner: $owner, name: $repo) {\n\t\t\tpullRequest(number: $pr_number) {baseRefName,id,number}\n\t\t}\n\t}",
+    "variables": {
+      "owner": "lab",
+      "pr_number": 7,
+      "repo": "project"
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/graphql",
+    "query": "\n\tquery PullRequestByNumber($owner: String!, $repo: String!, $pr_number: Int!) {\n\t\trepository(owner: $owner, name: $repo) {\n\t\t\tpullRequest(number: $pr_number) {headRefOid,id,number}\n\t\t}\n\t}",
+    "variables": {
+      "owner": "lab",
+      "pr_number": 7,
+      "repo": "project"
+    }
+  }
+]

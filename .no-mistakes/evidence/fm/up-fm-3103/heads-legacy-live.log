@@ -1,0 +1,84 @@
+CASE mint head and legacy lab
+COMMAND bin/fm-lab-home.sh create {run-worktree}/.validation-3103/live-home
+EXIT 0
+{run-worktree}/.validation-3103/live-home
+
+
+CASE read synthetic repository head
+COMMAND git -C {run-worktree}/.validation-3103/repo rev-parse HEAD
+EXIT 0
+4e540f414f6c8d018e6eebc084012cad9c6bdaad
+
+
+CASE github matching named integration base registration
+COMMAND bin/fm-pr-check.sh task https://github.com/lab/project/pull/7
+EXIT 0
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+armed: state/task.check.sh
+
+
+CASE github moved head refuses merge
+COMMAND bin/fm-pr-merge.sh task https://github.com/lab/project/pull/7 --expected-head bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+EXIT 1
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+armed: state/task.check.sh
+error: refusing to merge https://github.com/lab/project/pull/7
+  - the live head is "4e540f414f6c8d018e6eebc084012cad9c6bdaad", not the expected head bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+
+github: supplied old head refused; zero merge mutations.
+
+CASE gitlab matching named integration base registration
+COMMAND bin/fm-pr-check.sh task https://gitlab.example/lab/project/-/merge_requests/7
+EXIT 0
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+armed: state/task.check.sh
+
+
+CASE gitlab moved head refuses merge
+COMMAND bin/fm-pr-merge.sh task https://gitlab.example/lab/project/-/merge_requests/7 --expected-head bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+EXIT 1
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+armed: state/task.check.sh
+error: refusing to merge https://gitlab.example/lab/project/-/merge_requests/7
+  - the live head is "4e540f414f6c8d018e6eebc084012cad9c6bdaad", not the expected head bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+
+gitlab: supplied old head refused; zero merge mutations.
+
+CASE forgejo matching named integration base registration
+COMMAND bin/fm-pr-check.sh task https://forge.example/lab/project/pulls/7
+EXIT 0
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+armed: state/task.check.sh
+
+
+CASE forgejo moved head refuses merge
+COMMAND bin/fm-pr-merge.sh task https://forge.example/lab/project/pulls/7 --expected-head bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+EXIT 1
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+armed: state/task.check.sh
+error: refusing to merge https://forge.example/lab/project/pulls/7
+  - the live head is "4e540f414f6c8d018e6eebc084012cad9c6bdaad", not the expected head bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+
+forgejo: supplied old head refused; zero merge mutations.
+
+CASE legacy default without destination proof refuses registration
+COMMAND bin/fm-pr-check.sh task https://github.com/lab/project/pull/7
+EXIT 1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+
+
+CASE legacy destination restored from authorized synthetic launch evidence registers
+COMMAND bin/fm-pr-check.sh task https://github.com/lab/project/pull/7
+EXIT 0
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+armed: state/task.check.sh
+

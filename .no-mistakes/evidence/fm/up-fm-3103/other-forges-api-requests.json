@@ -1,0 +1,416 @@
+[
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "PUT",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7/merge",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v4/projects/lab%2Fproject/merge_requests/7?include_diverged_commits_count=true&include_rebase_in_progress=true&render_html=true",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v4/usage_data/track_event",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/commits/4e540f414f6c8d018e6eebc084012cad9c6bdaad/status?limit=50&page=1",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/commits/4e540f414f6c8d018e6eebc084012cad9c6bdaad/status?limit=50&page=2",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/commits/4e540f414f6c8d018e6eebc084012cad9c6bdaad/status?limit=50&page=1",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/commits/4e540f414f6c8d018e6eebc084012cad9c6bdaad/status?limit=50&page=2",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/repos/lab/project/pulls/7/merge",
+    "query": "",
+    "variables": {}
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/repos/lab/project/pulls/7",
+    "query": "",
+    "variables": {}
+  }
+]

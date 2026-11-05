@@ -1,0 +1,186 @@
+{run-worktree}/.validation-3103/spawn-home
+'origin/HEAD' is unchanged and points to 'master'
+scaffolded: {run-worktree}/.validation-3103/spawn-home/data/default-task/brief.md (ship, mode=direct-PR; replace {TASK} and {FIRSTMATE_SPEC})
+fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktree}/.validation-3103/spawn-home
+notice: default-task ships mode=direct-PR while the standing posture for spawn-project is no-mistakes - less rigor than the captain's standing posture; proceed only on a current explicit captain instruction or an intake judgment you can state
+spawned default-task harness=codex kind=ship mode=direct-PR yolo=off window=primary:fm-default-task worktree={run-worktree}/.validation-3103/spawn-pool/.treehouse/spawn-project-b76689/1/spawn-project
+
+TASK METADATA default-task
+window=primary:fm-default-task
+endpoint_task_id=default-task
+worktree={run-worktree}/.validation-3103/spawn-pool/.treehouse/spawn-project-b76689/1/spawn-project
+project={run-worktree}/.validation-3103/spawn-project
+harness=codex
+approval_mode=bypass
+kind=ship
+mode=direct-PR
+yolo=off
+branch=fm/default-task
+tasktmp=/tmp/fm-default-task
+expected_base=master
+model=default
+effort=default
+spawn_gen=s1793852709.70743.20211
+
+LAUNCH DESTINATION default-task
+# Expected pull request destination
+Expected PR base: master
+Verify the live PR base equals this branch and inspect its task-only diff before reporting ready.
+scaffolded: {run-worktree}/.validation-3103/spawn-home/data/named-task/brief.md (ship, mode=direct-PR; replace {TASK} and {FIRSTMATE_SPEC})
+fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktree}/.validation-3103/spawn-home
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+warn: no registry at {run-worktree}/.validation-3103/spawn-home/data/projects.md; defaulting spawn-project to no-mistakes off
+notice: named-task ships mode=direct-PR while the standing posture for spawn-project is no-mistakes - less rigor than the captain's standing posture; proceed only on a current explicit captain instruction or an intake judgment you can state
+spawned named-task harness=codex kind=ship mode=direct-PR yolo=off window=primary:fm-named-task worktree={run-worktree}/.validation-3103/spawn-pool/.treehouse/spawn-project-b76689/2/spawn-project
+
+TASK METADATA named-task
+window=primary:fm-named-task
+endpoint_task_id=named-task
+worktree={run-worktree}/.validation-3103/spawn-pool/.treehouse/spawn-project-b76689/2/spawn-project
+project={run-worktree}/.validation-3103/spawn-project
+harness=codex
+approval_mode=bypass
+kind=ship
+mode=direct-PR
+yolo=off
+branch=fm/named-task
+tasktmp=/tmp/fm-named-task
+base_branch=integration/release
+expected_base=integration/release
+model=default
+effort=default
+spawn_gen=s1793852715.78406.1449
+
+LAUNCH DESTINATION named-task
+# Expected pull request destination
+Expected PR base: integration/release
+Verify the live PR base equals this branch and inspect its task-only diff before reporting ready.
+
+PRIVATE LAB WINDOWS
+primary:codex codex 120x40
+primary:fm-default-task codex 120x40
+primary:fm-named-task codex 120x40
+
+LIVE WORKER default-task
+
+  Folder access
+  {run-worktree}/.validation-3103/spawn-po
+  ol/.treehouse/spawn-project-b76689/1/spawn-project
+
+  Note: You’re in a subdirectory of a Git project. Trusting will apply to the repository root:
+  {run-worktree}/.validation-3103/spawn-pr
+  oject
+
+  Trust this folder? Codex can read, edit, and run files here, subject to your permission settings. Folder settings
+  can run code automatically, even without a model request. Continue only if you trust these files. Your trust
+  decision will be saved.
+
+› 1. Trust and continue
+  2. Quit
+
+  enter continue · esc quit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+LIVE WORKER named-task
+
+  Folder access
+  {run-worktree}/.validation-3103/spawn-po
+  ol/.treehouse/spawn-project-b76689/2/spawn-project
+
+  Note: You’re in a subdirectory of a Git project. Trusting will apply to the repository root:
+  {run-worktree}/.validation-3103/spawn-pr
+  oject
+
+  Trust this folder? Codex can read, edit, and run files here, subject to your permission settings. Folder settings
+  can run code automatically, even without a model request. Continue only if you trust these files. Your trust
+  decision will be saved.
+
+› 1. Trust and continue
+  2. Quit
+
+  enter continue · esc quit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks/pre-rebase: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks/pre-applypatch: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks/pre-auto-gc: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks/pre-merge-commit: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks/post-commit: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks/sendemail-validate: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks/applypatch-msg: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks/prepare-commit-msg: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks/post-checkout: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks/post-applypatch: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks/post-rewrite: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks/commit-msg: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks/pre-push: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks/post-merge: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks/pre-commit: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/default-task.git-hooks: Directory not empty
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks/pre-rebase: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks/pre-applypatch: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks/pre-auto-gc: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks/pre-merge-commit: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks/post-commit: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks/sendemail-validate: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks/applypatch-msg: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks/prepare-commit-msg: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks/post-checkout: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks/post-applypatch: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks/post-rewrite: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks/commit-msg: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks/pre-push: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks/post-merge: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks/pre-commit: Permission denied
+rm: {run-worktree}/.validation-3103/spawn-home/state/named-task.git-hooks: Directory not empty
+rm: {run-worktree}/.validation-3103/spawn-home/state: Directory not empty
+rm: {run-worktree}/.validation-3103/spawn-home: Directory not empty

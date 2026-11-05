@@ -1,0 +1,120 @@
+CASE mint isolated lab
+COMMAND bin/fm-lab-home.sh create {run-worktree}/.validation-3103/live-home
+EXIT 0
+{run-worktree}/.validation-3103/live-home
+
+
+CASE initialize synthetic task repository
+COMMAND git -C {run-worktree}/.validation-3103/repo init -q -b fm/lab
+EXIT 0
+warning: re-init: ignored --initial-branch=fm/lab
+
+
+CASE real gh reads local GraphQL
+COMMAND gh pr view https://github.com/lab/project/pull/7 --json baseRefName,headRefOid -q [.baseRefName,.headRefOid] | @tsv
+EXIT 0
+main	aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+CASE matching registration
+COMMAND bin/fm-pr-check.sh task https://github.com/lab/project/pull/7
+EXIT 0
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+armed: state/task.check.sh
+
+
+CASE matching readiness
+COMMAND bash -c . bin/fm-dod-lib.sh; fm_dod_accept_ship_done ship no-mistakes "$1" "$1" "done: PR https://github.com/lab/project/pull/7 checks green" "$2/state" task "$2/state/task.meta" bash {run-worktree}/.validation-3103/repo {run-worktree}/.validation-3103/live-home
+EXIT 0
+
+
+CASE retargeted readiness
+COMMAND bash -c . bin/fm-dod-lib.sh; fm_dod_accept_ship_done ship no-mistakes "$1" "$1" "done: PR https://github.com/lab/project/pull/7 checks green" "$2/state" task "$2/state/task.meta" bash {run-worktree}/.validation-3103/repo {run-worktree}/.validation-3103/live-home
+EXIT 1
+error: expected PR base main, actual base other
+
+
+CASE mismatching registration
+COMMAND bin/fm-pr-check.sh task https://github.com/lab/project/pull/7
+EXIT 1
+error: expected PR base main, actual base other
+
+
+CASE wrong destination merged poll remains silent
+COMMAND bash {run-worktree}/.validation-3103/live-home/state/task.check.sh
+EXIT 0
+
+
+CASE matching merged poll emits merged
+COMMAND bash {run-worktree}/.validation-3103/live-home/state/task.check.sh
+EXIT 0
+merged
+
+
+CASE unreadable forge readiness
+COMMAND bash -c . bin/fm-dod-lib.sh; fm_dod_accept_ship_done ship no-mistakes "$1" "$1" "done: PR https://github.com/lab/project/pull/7 checks green" "$2/state" task "$2/state/task.meta" bash {run-worktree}/.validation-3103/repo {run-worktree}/.validation-3103/live-home
+EXIT 1
+error: expected PR base main, actual base unavailable
+
+
+CASE unreadable forge registration
+COMMAND bin/fm-pr-check.sh task https://github.com/lab/project/pull/7
+EXIT 1
+error: expected PR base main, actual base unavailable
+
+
+CASE absent actual base readiness
+COMMAND bash -c . bin/fm-dod-lib.sh; fm_dod_accept_ship_done ship no-mistakes "$1" "$1" "done: PR https://github.com/lab/project/pull/7 checks green" "$2/state" task "$2/state/task.meta" bash {run-worktree}/.validation-3103/repo {run-worktree}/.validation-3103/live-home
+EXIT 1
+error: expected PR base main, actual base unavailable
+
+
+CASE missing task destination
+COMMAND bash -c . bin/fm-dod-lib.sh; fm_dod_accept_ship_done ship no-mistakes "$1" "$1" "done: PR https://github.com/lab/project/pull/7 checks green" "$2/state" task "$2/state/task.meta" bash {run-worktree}/.validation-3103/repo {run-worktree}/.validation-3103/live-home
+EXIT 1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+
+
+CASE legacy named base registration
+COMMAND bin/fm-pr-check.sh task https://github.com/lab/project/pull/7
+EXIT 0
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+armed: state/task.check.sh
+
+
+CASE duplicate expected destination
+COMMAND bash -c . bin/fm-dod-lib.sh; fm_dod_accept_ship_done ship no-mistakes "$1" "$1" "done: PR https://github.com/lab/project/pull/7 checks green" "$2/state" task "$2/state/task.meta" bash {run-worktree}/.validation-3103/repo {run-worktree}/.validation-3103/live-home
+EXIT 1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+
+
+CASE conflicting destination metadata
+COMMAND bash -c . bin/fm-dod-lib.sh; fm_dod_accept_ship_done ship no-mistakes "$1" "$1" "done: PR https://github.com/lab/project/pull/7 checks green" "$2/state" task "$2/state/task.meta" bash {run-worktree}/.validation-3103/repo {run-worktree}/.validation-3103/live-home
+EXIT 1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+
+
+CASE retarget during merge verification
+COMMAND bin/fm-pr-merge.sh task https://github.com/lab/project/pull/7
+EXIT 1
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+armed: state/task.check.sh
+verified: https://github.com/lab/project/pull/7 is open and mergeable, with every unwaived required check reported and every unwaived check green at head aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+error: expected PR base main, actual base other
+
+
+CASE matching destination merge
+COMMAND bin/fm-pr-merge.sh task https://github.com/lab/project/pull/7
+EXIT 0
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+armed: state/task.check.sh
+verified: https://github.com/lab/project/pull/7 is open and mergeable, with every unwaived required check reported and every unwaived check green at head aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+verified: https://github.com/lab/project/pull/7 is merged (state=MERGED, merged=true, isInMergeQueue=false)
+
+

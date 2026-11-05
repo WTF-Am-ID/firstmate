@@ -1,0 +1,8 @@
+gerrit query --format=JSON --current-patch-set --all-approvals --submit-records --dependencies change:7 limit:1
+gerrit query --format=JSON --current-patch-set --all-approvals --submit-records --dependencies change:7 limit:1
+gerrit query --format=JSON --current-patch-set --all-approvals --submit-records --dependencies change:7 limit:1
+gerrit query --format=JSON --current-patch-set --all-approvals --submit-records --dependencies change:7 limit:1
+gerrit query --format=JSON --current-patch-set --all-approvals --submit-records --dependencies change:7 limit:1
+gerrit query --format=JSON --current-patch-set --all-approvals --submit-records --dependencies change:7 limit:1
+gerrit query --format=JSON --current-patch-set --all-approvals --submit-records --dependencies change:7 limit:1
+gerrit query --format=JSON --current-patch-set --all-approvals --submit-records --dependencies change:7 limit:1

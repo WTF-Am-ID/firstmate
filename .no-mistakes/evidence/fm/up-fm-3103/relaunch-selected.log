@@ -1,0 +1,2 @@
+ok - relaunch preserves and refuses conflicting, duplicate, and empty expected destinations
+ok - fm-control relaunch: a same-harness relaunch replaces the agent in the same endpoint and worktree

@@ -1,0 +1,21 @@
+Candidate: ed73d49101be6d036ff225e132c9f8cc98f80ef2
+Comparison base: 7c6170e2399ac205facbd5c17ed353a1b00cb597
+No tracked source changes were made in this phase.
+
+Live product evidence:
+Real fm-brief/fm-spawn and Treehouse launched Codex in a private tmux server with 120x40 panes. The synthetic default was master and named base integration/release. Metadata and delivered launch briefs pinned those exact destinations. Codex remained at folder trust prompts, which were not accepted. The spawn driver returned 1 during cleanup after successful scenario completion.
+
+Real gh 2.103.2, glab 1.128.0 and tea 0.15.1 used synthetic credentials against a localhost HTTPS forge emulator. Matching registration and merges passed. Wrong, missing or unreadable destination proof refused registration/readiness. Reexecuted persisted polls emitted merged only for matching destinations. Retargeting during verification refused before merge mutation. Old expected head SHAs refused across all three merge adapters. Named integration bases registered. Legacy default records refused without proof, explicit legacy base_branch registered, and restoration from authorized synthetic launch evidence rearmed registration.
+
+Real gerrit-axi 0.5.0 and the system SSH client consumed raw Gerrit query records from a localhost SSH server. Show output included branch. Matching registration and merged polling passed. Wrong or missing branch proof refused registration, and Gerrit submission remained refused.
+These are local synthetic scenarios, not tenant or production proofs.
+
+Focused checks, serial:
+bin/fm-test-run.sh --jobs 1 tests/fm-pr-check-security.test.sh tests/fm-dod-lib.test.sh tests/fm-pr-merge.test.sh returned 1. Security and DoD returned 0. Merge stopped at its first positive Forgejo case, reporting combined commit status unreadable.
+The existing test_forgejo_url_resolves_and_merges case selected from an unmodified base snapshot also returned 1 at the same assertion. That baseline assertion did not expose stderr, so its underlying diagnostic remains unestablished.
+Selected test_relaunch_refuses_corrupt_expected_destination and test_same_harness_relaunch_keeps_identity_and_reuses_the_endpoint passed. Their session providers are stubbed, so they are not live restart proof.
+bin/fm-test-run.sh --jobs 1 tests/fm-brief.test.sh tests/fm-spawn-pool-base-freshen.test.sh returned 1. Pool/base freshness returned 0. Brief failed its shell-safety fixture because a dot-prefixed worktree component from TMPDIR became part of a Git ref. Git check-ref-format returned 1 for that path and 0 for an ordinary temporary path.
+TMPDIR=/tmp bin/fm-test-run.sh --jobs 1 tests/fm-brief.test.sh returned 0 after correcting only temporary-directory setup.
+
+Live restart was blocked by PreToolUse and was not retried through another route. Final deletion of scratch was also refused. See guard-and-cleanup.txt. All required checks have terminated, and all local HTTP/SSH servers and the private tmux server were stopped.
+The known Forgejo fixture failure remains disclosed. No new product regression was demonstrated. No lint, full suite, pipeline control, external forge write, PR phase or CI phase was executed.

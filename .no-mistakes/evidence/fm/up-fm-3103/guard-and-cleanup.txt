@@ -1,0 +1,15 @@
+Live restart validation was not executed. PreToolUse rejected its proposed compound command before execution:
+Command blocked by PreToolUse hook: BLOCKED: Indirect command execution not allowed
+170:172: syntax error: A unknown token can't go after this quote. (-2740).
+The denied operation and dependent live restart work were stopped. No alternative tool or runtime was used to perform them.
+
+The earlier, completed spawn lab used a private fm-lab tmux socket with 120x40 panes. Its cleanup killed that server and completed fm-lab-home teardown before removal encountered read-only per-task git-hook directories. Codex remained at folder trust prompts, which were not accepted.
+Remaining protected fixture directories:
+.validation-3103/spawn-home/state/default-task.git-hooks
+.validation-3103/spawn-home/state/named-task.git-hooks
+Cleanup reported Permission denied for their contents. The subsequently denied compound command included permission-changing cleanup, so these protected paths were left untouched after the refusal.
+
+Final cleanup was also refused before execution by the command executor:
+CreateProcess rejected: rm -f style commands are not permitted. Use a safer approach.
+No alternative tool, command, or runtime was used to perform the denied deletion.
+Consequently the whole ignored .validation-3103/ scratch directory remains, including downloaded CLIs, npm dependencies, baseline snapshot, emulator inputs and the protected hook directories. All live checks and focused test processes had already completed before this cleanup refusal.
