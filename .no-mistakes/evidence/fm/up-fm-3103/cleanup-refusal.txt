@@ -1,0 +1,5 @@
+Cleanup attempt: rm -rf -- .phase-brief-3103
+Exact executor diagnostic: Rejected("`/bin/zsh -lc 'rm -rf -- .phase-brief-3103'` rejected: rm -f style commands are not permitted. Use a safer approach")
+Cleanup stopped. No alternate deletion method was attempted.
+Remaining disposable lab: .phase-brief-3103/ in the run worktree. It contains the lab marker and generated brief data. No harness, server, watcher, or sleeper was started by this lab.
+The rejected ledger driver never created .phase-test-3103/.

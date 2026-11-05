@@ -1,0 +1,7 @@
+Candidate: 1d6abf63492002eaf5f2c83450de679f4a9d877a
+The command executor rejected the proposed disposable ledger-live.sh driver before execution.
+Exact diagnostic: Command blocked by PreToolUse hook: BLOCKED: Indirect command execution not allowed.
+The rejected command would have authored and executed .phase-test-3103/ledger-live.sh, using worktree-local marked lab homes, a restricted PATH selecting the real Perl timeout fallback, and a synthetic gh boundary that execs real sleep processes for three stalled destination reads and returns main for a healthy later child.
+Intended observable evidence: bounded scan exit statuses, ledger and cadence cursors, actual parent-channel output, readiness receipts, forge PIDs and post-scan process states.
+No part of the rejected driver ran. No live scenario result or process evidence exists. Dependent work stopped without another tool, command, runtime, service, or guard setting being substituted.
+To obtain live evidence, the outer executor needs a separately authorized lab proof through a guard-permitted execution path. This test phase did not modify guard configuration or retry the refused operation.

@@ -1,0 +1,61 @@
+{
+  "families": [
+    {
+      "count": 1,
+      "duration_ms": 402266,
+      "failed": 0,
+      "name": "pr-forge"
+    },
+    {
+      "count": 1,
+      "duration_ms": 16976,
+      "failed": 0,
+      "name": "pure-contract-unit"
+    },
+    {
+      "count": 1,
+      "duration_ms": 201461,
+      "failed": 0,
+      "name": "standalone"
+    }
+  ],
+  "finished_at": "2026-11-05T12:05:10Z",
+  "run_id": "fm-test-run-1793879690137-45442",
+  "scripts": [
+    {
+      "duration_ms": 402266,
+      "exit": 0,
+      "expected_gate_skip": "none",
+      "family": "pr-forge",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-pr-check-security.test.sh"
+    },
+    {
+      "duration_ms": 16976,
+      "exit": 0,
+      "expected_gate_skip": "none",
+      "family": "pure-contract-unit",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-brief.test.sh"
+    },
+    {
+      "duration_ms": 201461,
+      "exit": 0,
+      "expected_gate_skip": "none",
+      "family": "standalone",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-spawn-pool-base-freshen.test.sh"
+    }
+  ],
+  "selection": "scripts;jobs=1",
+  "started_at": "2026-11-05T11:54:50Z",
+  "summary": {
+    "duration_ms": 620815,
+    "failed": 0,
+    "skipped_gate": 0,
+    "total": 3
+  }
+}

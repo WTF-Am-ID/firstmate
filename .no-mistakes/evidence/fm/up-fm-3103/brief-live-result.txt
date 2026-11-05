@@ -1,0 +1,21 @@
+Candidate: 1d6abf63492002eaf5f2c83450de679f4a9d877a
+Real product: bin/fm-brief.sh, using a disposable marked lab home .phase-brief-3103 inside the run worktree and synthetic repository name lab-project.
+No forge CLI, harness, or network service was replaced or contacted in this scenario.
+
+Executed commands, each with FM_HOME pointing at the lab and inherited FM_ROOT_OVERRIDE, FM_STATE_OVERRIDE, FM_DATA_OVERRIDE, FM_CONFIG_OVERRIDE and FM_PROJECTS_OVERRIDE removed:
+bin/fm-brief.sh named-base lab-project --mode direct-PR --base-branch release/integration
+bin/fm-brief.sh default-base lab-project --mode no-mistakes
+bin/fm-brief.sh local-only lab-project --mode local-only
+All three commands emitted scaffolded paths. Their actual generated output is retained as brief-named-base.md, brief-default-base.md and brief-local-only.md.
+
+Observed named-base output: Base branch: release/integration. Its delivered contract explicitly requires opening the PR against release/integration with --base release/integration, rather than the repository default.
+Observed default output: starts at a clean default branch and carries mode=no-mistakes.
+Observed local-only output: carries mode=local-only and reports ready in branch fm/local-only. It emits no Expected PR base line.
+
+Adversarial command:
+bin/fm-brief.sh invalid-local-base lab-project --mode local-only --base-branch release/integration
+Observed exit status: 1.
+Observed refusal: a base branch cannot ship mode=local-only, whose landing fast-forwards local main; ship no-mistakes or direct-PR, which open a pull request against the base.
+Exact stderr is retained in brief-invalid-local-base.log.
+
+This scenario proves only actual brief scaffolding and the local-only option boundary. It does not prove spawn-time destination pinning, promotion, restart, forge registration, polling or merging.

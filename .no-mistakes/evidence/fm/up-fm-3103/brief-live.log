@@ -1,0 +1,3 @@
+scaffolded: {run-worktree}/.phase-brief-3103/data/named-base/brief.md (ship, mode=direct-PR; replace {TASK} and {FIRSTMATE_SPEC})
+scaffolded: {run-worktree}/.phase-brief-3103/data/default-base/brief.md (ship, mode=no-mistakes; replace {TASK} and {FIRSTMATE_SPEC})
+scaffolded: {run-worktree}/.phase-brief-3103/data/local-only/brief.md (ship, mode=local-only; replace {TASK} and {FIRSTMATE_SPEC})
