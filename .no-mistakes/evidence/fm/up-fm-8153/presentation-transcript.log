@@ -1,0 +1,650 @@
+$ bin/fm-bearings-board.sh build ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/board-payload.json
+exit=0
+board: ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/parent/.lavish/bearings-board.html
+session:
+  file: ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/parent/.lavish/bearings-board.html
+  url: "http://127.0.0.1:49353/session/36d83aa83cc18e88"
+  status: opened
+next_step: "Do not respond to the user just yet. Now you must run `lavish-axi poll ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/parent/.lavish/bearings-board.html`. This command long-polls until the user sends feedback, ends the session, or leaves every review window disconnected past the reconnect grace period, and it stays silent the whole time - that is normal, never kill it. Layout issues the browser detects do not return this poll; they wait in the user's Layout issues inbox until the user queues them, then arrive as an ordinary tag \"layout-warnings\" prompt. Do not pass --timeout-ms during normal agent use. Keep the poll in the foreground by default and let it return the feedback directly to the agent. A background poll is allowed only through a harness-native tracked background-job facility whose completion result is guaranteed to resume or notify the same agent. Never use `nohup`, shell `&`, `disown`, redirected fire-and-forget processes, or a detached terminal without an explicit verified callback merely to keep polling alive. If the harness has no completion-aware background facility, use the foreground poll or first wire a verified wake callback into the surrounding supervisor. Do not tell the user the artifact is being monitored until that wake path is live. If the poll gets killed or times out before feedback arrives, re-run it - feedback remains queued until delivery. Poll delivery consumes the response, so read it completely. If it returns browser_disconnected, the review window stayed disconnected past its reconnect grace period but the session remains resumable; ask the user whether to reopen or end it, and do neither uninvited. Codex detected: completed background tasks may not resume Codex automatically, so keep the poll attached to the active turn. After applying feedback, run `lavish-axi poll ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/parent/.lavish/bearings-board.html --agent-reply \"<message for the user>\"` without --timeout-ms to show a concise response in Lavish Editor and keep waiting for more feedback. If instead you are handing back a result without starting another long-poll, run `lavish-axi reply ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/parent/.lavish/bearings-board.html --agent-reply \"<message for the user>\"` to get an acceptance receipt. Keep the reply concise. Only when a longer reply is genuinely necessary, use Markdown structure - blank-line paragraphs, `- ` / `1. ` lists, `## ` headings - so it renders scannably instead of a wall of text, and pass that body with `--agent-reply-file <path>` (`-` reads stdin) so newlines survive quoting. The Conversation panel's Markdown subset is in `lavish-axi poll --help` and README. If the user ends the session, stop polling and do not reopen it by re-running `lavish-axi ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/parent/.lavish/bearings-board.html` unless the user asks for further review or something genuinely important needs their visual attention - deliver routine updates directly in this conversation instead. When reopening is warranted, run `lavish-axi ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/parent/.lavish/bearings-board.html --reopen`."
+session: live
+served: ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/parent/.lavish/bearings-board.html
+bound: lavish-36d83aa83cc18e88
+armed: lavish-36d83aa83cc18e88
+
+$ chrome-devtools-axi newpage http://127.0.0.1:49353/session/36d83aa83cc18e88
+exit=0
+page:
+  title: Bearings - fleet board · Lavish
+  url: "http://127.0.0.1:49353/session/36d83aa83cc18e88"
+  refs: 61
+snapshot:
+uid=g2:1_0 RootWebArea "Bearings - fleet board · Lavish" url="http://127.0.0.1:49353/session/36d83aa83cc18e88"
+  uid=g2:1_1 "Lavish"
+  uid=g2:1_2 "EDITOR"
+  uid=g2:1_3 button "Annotate" description="Toggle annotate/explore mode (⌘I / Ctrl+I)" pressed
+  uid=g2:1_4 button "Hide conversation" description="Hide conversation" expandable expanded
+  uid=g2:1_5 button "More" expandable haspopup="menu"
+  uid=g2:1_6 Iframe
+    uid=g2:1_7 RootWebArea "Bearings - fleet board" url="http://127.0.0.1:49353/artifact/36d83aa83cc18e88/index.html?artifact_revision=1&artifact_load_token=IKrJPkKy2ECNv3XnAb3e5KzQV0eBDPg9"
+      uid=g2:1_8 banner
+        uid=g2:1_9 "bearings"
+      uid=g2:1_10 main
+        uid=g2:1_11 "5"
+        uid=g2:1_12 "NEED YOU"
+        uid=g2:1_13 "0"
+        uid=g2:1_14 "UNDERWAY"
+        uid=g2:1_15 "0"
+        uid=g2:1_16 "LANDED RECENTLY"
+        uid=g2:1_17 "0"
+        uid=g2:1_18 "CHARTED NEXT"
+        uid=g2:1_19 "CAPTAIN'S CALL"
+        uid=g2:1_20 "5 ITEMS WAIT ON YOU, CAPTAIN"
+        uid=g2:1_21 "DECISION"
+        uid=g2:1_22 "sample"
+        uid=g2:1_23 heading "full-call" level="3"
+        uid=g2:1_24 "DECIDE"
+        uid=g2:1_25 "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact."
+        uid=g2:1_26 form
+          uid=g2:1_27 radio "Retain the workflow"
+          uid=g2:1_28 "Retain the workflow"
+          uid=g2:1_29 radio "Defer the migration"
+          uid=g2:1_30 "Defer the migration"
+          uid=g2:1_31 radio "Choose the final alternative"
+          uid=g2:1_32 "Choose the final alternative"
+          uid=g2:1_33 radio "Reconcile Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g2:1_34 "Reconcile"
+          uid=g2:1_35 "Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g2:1_36 button "Queue answer"
+        uid=g2:1_37 "card 1 of 5"
+        uid=g2:1_38 button "Previous card" disableable disabled
+        uid=g2:1_39 button "Next card"
+        uid=g2:1_40 "CHARTED NEXT"
+        uid=g2:1_41 "Nothing is queued."
+        uid=g2:1_42 "NOTHING PICKED"
+        uid=g2:1_43 button "Queue dispatch order"
+        uid=g2:1_44 "UNDERWAY"
+        uid=g2:1_45 "Nothing is underway."
+        uid=g2:1_46 "RECENTLY LANDED"
+        uid=g2:1_47 "No recent completions are in the current baseline."
+        uid=g2:1_48 "fm-bearings-board.v1 · 2026-11-05T01:22:18Z"
+  uid=g2:1_49 complementary
+    uid=g2:1_50 heading "Conversation" level="2"
+    "Agent hasn't sent a message yet. Click an element in the artifact to annotate, or type below to start."
+    uid=g2:1_51 textbox "Write a message for the agent..." multiline
+    uid=g2:1_52 button "Attach images"
+    uid=g2:1_53 status atomic live="polite" relevant="additions text"
+    uid=g2:1_54 button "Send & End"
+    uid=g2:1_55 button "Send to Agent"
+  uid=g2:1_56 "Checking layout."
+  uid=g2:1_57 LineBreak "
+"
+  uid=g2:1_58 "One moment."
+  uid=g2:1_59 "Lavish is waiting for fonts and final geometry before revealing this artifact."
+  uid=g2:1_60 button "Show anyway"
+help[4]:
+  Run `chrome-devtools-axi fill @g2:1_51 "text"` to fill the "Write a message for the agent..." field
+  Run `chrome-devtools-axi click @g2:1_3` to click the "Annotate" button
+  Run `chrome-devtools-axi scroll down` to scroll down
+  Use `chrome-devtools-axi eval <expr>` for JS expressions. For multi-statement code, pass a function: `eval "() => { ...; return result }"`
+
+$ chrome-devtools-axi wait 2000
+exit=0
+waited: "2000"
+help[1]:
+  Run `chrome-devtools-axi snapshot` to see current page state
+
+$ chrome-devtools-axi screenshot ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/decision-full-question.png
+exit=0
+screenshot: ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/decision-full-question.png
+
+$ chrome-devtools-axi eval () => { const d=document.querySelector("iframe").contentDocument; const expected="Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final caf\u00e9 / \u6771\u4eac alternative only after the report is reviewed, keeping literal <script>example</script> text intact."; const cards=[...d.querySelectorAll(".bb-decision")].map(n=>({text:n.innerText,fullText:n.textContent,visible:n.getBoundingClientRect().height>0})); return {cards, exactQuestionCards:cards.filter(c=>c.fullText.includes(expected)).length, scriptsExecuted: typeof d.defaultView.example, errors: d.querySelector("#bb-error")?.innerText}; }
+exit=1
+error: "Error: Cannot read properties of null (reading 'querySelectorAll')"
+code: UNKNOWN
+
+$ chrome-devtools-axi newpage http://127.0.0.1:49353/artifact/36d83aa83cc18e88/index.html
+exit=0
+page:
+  title: Artifact load expired
+  url: "http://127.0.0.1:49353/artifact/36d83aa83cc18e88/index.html"
+  refs: 2
+snapshot:
+uid=g3:3_0 RootWebArea "Artifact load expired" url="http://127.0.0.1:49353/artifact/36d83aa83cc18e88/index.html"
+  uid=g3:3_1 "This artifact load is no longer current. Reload Lavish to continue."
+help[1]:
+  Use `chrome-devtools-axi eval <expr>` for JS expressions. For multi-statement code, pass a function: `eval "() => { ...; return result }"`
+
+$ chrome-devtools-axi pages
+exit=0
+pages[3]{id,url,selected}:
+  1,about:blank,false
+  2,http://127.0.0.1:49353/session/36d83aa83cc18e88,false
+  3,http://127.0.0.1:49353/artifact/36d83aa83cc18e88/index.html,true
+help[2]:
+  Run `chrome-devtools-axi selectpage <id>` to switch tabs
+  Run `chrome-devtools-axi newpage <url>` to open a new tab
+
+$ chrome-devtools-axi closepage 3
+exit=0
+status: closed
+pageId: 3
+
+$ chrome-devtools-axi selectpage 2
+exit=0
+page:
+  title: Bearings - fleet board · Lavish
+  refs: 56
+snapshot:
+uid=g4:1_0 RootWebArea "Bearings - fleet board · Lavish" url="http://127.0.0.1:49353/session/36d83aa83cc18e88"
+  uid=g4:1_1 "Lavish"
+  uid=g4:1_2 "EDITOR"
+  uid=g4:1_3 button "Annotate" description="Toggle annotate/explore mode (⌘I / Ctrl+I)" pressed
+  uid=g4:1_4 button "Hide conversation" description="Hide conversation" expandable expanded
+  uid=g4:1_5 button "More" expandable haspopup="menu"
+  uid=g4:1_6 Iframe
+    uid=g4:1_7 RootWebArea "Bearings - fleet board" url="http://127.0.0.1:49353/artifact/36d83aa83cc18e88/index.html?artifact_revision=1&artifact_load_token=IKrJPkKy2ECNv3XnAb3e5KzQV0eBDPg9"
+      uid=g4:1_8 banner
+        uid=g4:1_9 "bearings"
+      uid=g4:1_10 main
+        uid=g4:1_11 "5"
+        uid=g4:1_12 "NEED YOU"
+        uid=g4:1_13 "0"
+        uid=g4:1_14 "UNDERWAY"
+        uid=g4:1_15 "0"
+        uid=g4:1_16 "LANDED RECENTLY"
+        uid=g4:1_17 "0"
+        uid=g4:1_18 "CHARTED NEXT"
+        uid=g4:1_19 "CAPTAIN'S CALL"
+        uid=g4:1_20 "5 ITEMS WAIT ON YOU, CAPTAIN"
+        uid=g4:1_21 "DECISION"
+        uid=g4:1_22 "sample"
+        uid=g4:1_23 heading "full-call" level="3"
+        uid=g4:1_24 "DECIDE"
+        uid=g4:1_25 "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact."
+        uid=g4:1_26 form
+          uid=g4:1_27 radio "Retain the workflow"
+          uid=g4:1_28 "Retain the workflow"
+          uid=g4:1_29 radio "Defer the migration"
+          uid=g4:1_30 "Defer the migration"
+          uid=g4:1_31 radio "Choose the final alternative"
+          uid=g4:1_32 "Choose the final alternative"
+          uid=g4:1_33 radio "Reconcile Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g4:1_34 "Reconcile"
+          uid=g4:1_35 "Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g4:1_36 button "Queue answer"
+        uid=g4:1_37 "card 1 of 5"
+        uid=g4:1_38 button "Previous card" disableable disabled
+        uid=g4:1_39 button "Next card"
+        uid=g4:1_40 "CHARTED NEXT"
+        uid=g4:1_41 "Nothing is queued."
+        uid=g4:1_42 "NOTHING PICKED"
+        uid=g4:1_43 button "Queue dispatch order"
+        uid=g4:1_44 "UNDERWAY"
+        uid=g4:1_45 "Nothing is underway."
+        uid=g4:1_46 "RECENTLY LANDED"
+        uid=g4:1_47 "No recent completions are in the current baseline."
+        uid=g4:1_48 "fm-bearings-board.v1 · 2026-11-05T01:22:18Z"
+  uid=g4:1_49 complementary
+    uid=g4:1_50 heading "Conversation" level="2"
+    "Agent hasn't sent a message yet. Click an element in the artifact to annotate, or type below to start."
+    uid=g4:1_51 textbox "Write a message for the agent..." multiline
+    uid=g4:1_52 button "Attach images"
+    uid=g4:1_53 status atomic live="polite" relevant="additions text"
+    uid=g4:1_54 button "Send & End"
+    uid=g4:1_55 button "Send to Agent"
+help[4]:
+  Run `chrome-devtools-axi fill @g4:1_51 "text"` to fill the "Write a message for the agent..." field
+  Run `chrome-devtools-axi click @g4:1_3` to click the "Annotate" button
+  Run `chrome-devtools-axi scroll down` to scroll down
+  Use `chrome-devtools-axi eval <expr>` for JS expressions. For multi-statement code, pass a function: `eval "() => { ...; return result }"`
+
+$ chrome-devtools-axi snapshot
+exit=0
+page:
+  title: Bearings - fleet board · Lavish
+  refs: 56
+snapshot:
+uid=g5:1_0 RootWebArea "Bearings - fleet board · Lavish" url="http://127.0.0.1:49353/session/36d83aa83cc18e88"
+  uid=g5:1_1 "Lavish"
+  uid=g5:1_2 "EDITOR"
+  uid=g5:1_3 button "Annotate" description="Toggle annotate/explore mode (⌘I / Ctrl+I)" pressed
+  uid=g5:1_4 button "Hide conversation" description="Hide conversation" expandable expanded
+  uid=g5:1_5 button "More" expandable haspopup="menu"
+  uid=g5:1_6 Iframe
+    uid=g5:1_7 RootWebArea "Bearings - fleet board" url="http://127.0.0.1:49353/artifact/36d83aa83cc18e88/index.html?artifact_revision=1&artifact_load_token=IKrJPkKy2ECNv3XnAb3e5KzQV0eBDPg9"
+      uid=g5:1_8 banner
+        uid=g5:1_9 "bearings"
+      uid=g5:1_10 main
+        uid=g5:1_11 "5"
+        uid=g5:1_12 "NEED YOU"
+        uid=g5:1_13 "0"
+        uid=g5:1_14 "UNDERWAY"
+        uid=g5:1_15 "0"
+        uid=g5:1_16 "LANDED RECENTLY"
+        uid=g5:1_17 "0"
+        uid=g5:1_18 "CHARTED NEXT"
+        uid=g5:1_19 "CAPTAIN'S CALL"
+        uid=g5:1_20 "5 ITEMS WAIT ON YOU, CAPTAIN"
+        uid=g5:1_21 "DECISION"
+        uid=g5:1_22 "sample"
+        uid=g5:1_23 heading "full-call" level="3"
+        uid=g5:1_24 "DECIDE"
+        uid=g5:1_25 "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact."
+        uid=g5:1_26 form
+          uid=g5:1_27 radio "Retain the workflow"
+          uid=g5:1_28 "Retain the workflow"
+          uid=g5:1_29 radio "Defer the migration"
+          uid=g5:1_30 "Defer the migration"
+          uid=g5:1_31 radio "Choose the final alternative"
+          uid=g5:1_32 "Choose the final alternative"
+          uid=g5:1_33 radio "Reconcile Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g5:1_34 "Reconcile"
+          uid=g5:1_35 "Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g5:1_36 button "Queue answer"
+        uid=g5:1_37 "card 1 of 5"
+        uid=g5:1_38 button "Previous card" disableable disabled
+        uid=g5:1_39 button "Next card"
+        uid=g5:1_40 "CHARTED NEXT"
+        uid=g5:1_41 "Nothing is queued."
+        uid=g5:1_42 "NOTHING PICKED"
+        uid=g5:1_43 button "Queue dispatch order"
+        uid=g5:1_44 "UNDERWAY"
+        uid=g5:1_45 "Nothing is underway."
+        uid=g5:1_46 "RECENTLY LANDED"
+        uid=g5:1_47 "No recent completions are in the current baseline."
+        uid=g5:1_48 "fm-bearings-board.v1 · 2026-11-05T01:22:18Z"
+  uid=g5:1_49 complementary
+    uid=g5:1_50 heading "Conversation" level="2"
+    "Agent hasn't sent a message yet. Click an element in the artifact to annotate, or type below to start."
+    uid=g5:1_51 textbox "Write a message for the agent..." multiline
+    uid=g5:1_52 button "Attach images"
+    uid=g5:1_53 status atomic live="polite" relevant="additions text"
+    uid=g5:1_54 button "Send & End"
+    uid=g5:1_55 button "Send to Agent"
+help[4]:
+  Run `chrome-devtools-axi fill @g5:1_51 "text"` to fill the "Write a message for the agent..." field
+  Run `chrome-devtools-axi click @g5:1_3` to click the "Annotate" button
+  Run `chrome-devtools-axi scroll down` to scroll down
+  Use `chrome-devtools-axi eval <expr>` for JS expressions. For multi-statement code, pass a function: `eval "() => { ...; return result }"`
+
+$ chrome-devtools-axi click @g5:1_3
+exit=0
+page:
+  title: Bearings - fleet board · Lavish
+  refs: 56
+snapshot:
+uid=g6:1_0 RootWebArea "Bearings - fleet board · Lavish" url="http://127.0.0.1:49353/session/36d83aa83cc18e88"
+  uid=g6:1_1 "Lavish"
+  uid=g6:1_2 "EDITOR"
+  uid=g6:1_3 button "Annotate" description="Toggle annotate/explore mode (⌘I / Ctrl+I)" focusable focused
+  uid=g6:1_4 button "Hide conversation" description="Hide conversation" expandable expanded
+  uid=g6:1_5 button "More" expandable haspopup="menu"
+  uid=g6:1_6 Iframe
+    uid=g6:1_7 RootWebArea "Bearings - fleet board" url="http://127.0.0.1:49353/artifact/36d83aa83cc18e88/index.html?artifact_revision=1&artifact_load_token=IKrJPkKy2ECNv3XnAb3e5KzQV0eBDPg9"
+      uid=g6:1_8 banner
+        uid=g6:1_9 "bearings"
+      uid=g6:1_10 main
+        uid=g6:1_11 "5"
+        uid=g6:1_12 "NEED YOU"
+        uid=g6:1_13 "0"
+        uid=g6:1_14 "UNDERWAY"
+        uid=g6:1_15 "0"
+        uid=g6:1_16 "LANDED RECENTLY"
+        uid=g6:1_17 "0"
+        uid=g6:1_18 "CHARTED NEXT"
+        uid=g6:1_19 "CAPTAIN'S CALL"
+        uid=g6:1_20 "5 ITEMS WAIT ON YOU, CAPTAIN"
+        uid=g6:1_21 "DECISION"
+        uid=g6:1_22 "sample"
+        uid=g6:1_23 heading "full-call" level="3"
+        uid=g6:1_24 "DECIDE"
+        uid=g6:1_25 "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact."
+        uid=g6:1_26 form
+          uid=g6:1_27 radio "Retain the workflow"
+          uid=g6:1_28 "Retain the workflow"
+          uid=g6:1_29 radio "Defer the migration"
+          uid=g6:1_30 "Defer the migration"
+          uid=g6:1_31 radio "Choose the final alternative"
+          uid=g6:1_32 "Choose the final alternative"
+          uid=g6:1_33 radio "Reconcile Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g6:1_34 "Reconcile"
+          uid=g6:1_35 "Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g6:1_36 button "Queue answer"
+        uid=g6:1_37 "card 1 of 5"
+        uid=g6:1_38 button "Previous card" disableable disabled
+        uid=g6:1_39 button "Next card"
+        uid=g6:1_40 "CHARTED NEXT"
+        uid=g6:1_41 "Nothing is queued."
+        uid=g6:1_42 "NOTHING PICKED"
+        uid=g6:1_43 button "Queue dispatch order"
+        uid=g6:1_44 "UNDERWAY"
+        uid=g6:1_45 "Nothing is underway."
+        uid=g6:1_46 "RECENTLY LANDED"
+        uid=g6:1_47 "No recent completions are in the current baseline."
+        uid=g6:1_48 "fm-bearings-board.v1 · 2026-11-05T01:22:18Z"
+  uid=g6:1_49 complementary
+    uid=g6:1_50 heading "Conversation" level="2"
+    "Agent hasn't sent a message yet. Click an element in the artifact to annotate, or type below to start."
+    uid=g6:1_51 textbox "Write a message for the agent..." multiline
+    uid=g6:1_52 button "Attach images"
+    uid=g6:1_53 status atomic live="polite" relevant="additions text"
+    uid=g6:1_54 button "Send & End"
+    uid=g6:1_55 button "Send to Agent"
+help[4]:
+  Run `chrome-devtools-axi fill @g6:1_51 "text"` to fill the "Write a message for the agent..." field
+  Run `chrome-devtools-axi click @g6:1_3` to click the "Annotate" button
+  Run `chrome-devtools-axi scroll down` to scroll down
+  Use `chrome-devtools-axi eval <expr>` for JS expressions. For multi-statement code, pass a function: `eval "() => { ...; return result }"`
+
+$ chrome-devtools-axi click @g6:1_39
+exit=0
+page:
+  title: Bearings - fleet board · Lavish
+  refs: 56
+snapshot:
+uid=g7:1_0 RootWebArea "Bearings - fleet board · Lavish" url="http://127.0.0.1:49353/session/36d83aa83cc18e88"
+  uid=g7:1_1 "Lavish"
+  uid=g7:1_2 "EDITOR"
+  uid=g7:1_3 button "Annotate" description="Toggle annotate/explore mode (⌘I / Ctrl+I)"
+  uid=g7:1_4 button "Hide conversation" description="Hide conversation" expandable expanded
+  uid=g7:1_5 button "More" expandable haspopup="menu"
+  uid=g7:1_6 Iframe
+    uid=g7:1_7 RootWebArea "Bearings - fleet board" url="http://127.0.0.1:49353/artifact/36d83aa83cc18e88/index.html?artifact_revision=1&artifact_load_token=IKrJPkKy2ECNv3XnAb3e5KzQV0eBDPg9"
+      uid=g7:1_8 banner
+        uid=g7:1_9 "bearings"
+      uid=g7:1_10 main
+        uid=g7:1_11 "5"
+        uid=g7:1_12 "NEED YOU"
+        uid=g7:1_13 "0"
+        uid=g7:1_14 "UNDERWAY"
+        uid=g7:1_15 "0"
+        uid=g7:1_16 "LANDED RECENTLY"
+        uid=g7:1_17 "0"
+        uid=g7:1_18 "CHARTED NEXT"
+        uid=g7:1_19 "CAPTAIN'S CALL"
+        uid=g7:1_20 "5 ITEMS WAIT ON YOU, CAPTAIN"
+        uid=g7:7_0 "DECISION"
+        uid=g7:7_1 "sample"
+        uid=g7:7_2 heading "generated/full-call" level="3"
+        uid=g7:7_3 "DECIDE"
+        uid=g7:7_4 "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact."
+        uid=g7:7_5 form
+          uid=g7:7_6 radio "Retain the workflow"
+          uid=g7:7_7 "Retain the workflow"
+          uid=g7:7_8 radio "Defer the migration"
+          uid=g7:7_9 "Defer the migration"
+          uid=g7:7_10 radio "Choose the final alternative"
+          uid=g7:7_11 "Choose the final alternative"
+          uid=g7:7_12 radio "Reconcile Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g7:7_13 "Reconcile"
+          uid=g7:7_14 "Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g7:7_15 button "Queue answer"
+        uid=g7:7_16 "card 2 of 5"
+        uid=g7:1_38 button "Previous card"
+        uid=g7:1_39 button "Next card" focusable focused
+        uid=g7:1_40 "CHARTED NEXT"
+        uid=g7:1_41 "Nothing is queued."
+        uid=g7:1_42 "NOTHING PICKED"
+        uid=g7:1_43 button "Queue dispatch order"
+        uid=g7:1_44 "UNDERWAY"
+        uid=g7:1_45 "Nothing is underway."
+        uid=g7:1_46 "RECENTLY LANDED"
+        uid=g7:1_47 "No recent completions are in the current baseline."
+        uid=g7:1_48 "fm-bearings-board.v1 · 2026-11-05T01:22:18Z"
+  uid=g7:1_49 complementary
+    uid=g7:1_50 heading "Conversation" level="2"
+    "Agent hasn't sent a message yet. Click an element in the artifact to annotate, or type below to start."
+    uid=g7:1_51 textbox "Write a message for the agent..." multiline
+    uid=g7:1_52 button "Attach images"
+    uid=g7:1_53 status atomic live="polite" relevant="additions text"
+    uid=g7:1_54 button "Send & End"
+    uid=g7:1_55 button "Send to Agent"
+help[4]:
+  Run `chrome-devtools-axi fill @g7:1_51 "text"` to fill the "Write a message for the agent..." field
+  Run `chrome-devtools-axi click @g7:1_3` to click the "Annotate" button
+  Run `chrome-devtools-axi scroll down` to scroll down
+  Use `chrome-devtools-axi eval <expr>` for JS expressions. For multi-statement code, pass a function: `eval "() => { ...; return result }"`
+
+$ chrome-devtools-axi screenshot ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/decision-card-2.png
+exit=0
+screenshot: ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/decision-card-2.png
+
+$ chrome-devtools-axi click @g7:1_39
+exit=0
+page:
+  title: Bearings - fleet board · Lavish
+  refs: 56
+snapshot:
+uid=g8:1_0 RootWebArea "Bearings - fleet board · Lavish" url="http://127.0.0.1:49353/session/36d83aa83cc18e88"
+  uid=g8:1_1 "Lavish"
+  uid=g8:1_2 "EDITOR"
+  uid=g8:1_3 button "Annotate" description="Toggle annotate/explore mode (⌘I / Ctrl+I)"
+  uid=g8:1_4 button "Hide conversation" description="Hide conversation" expandable expanded
+  uid=g8:1_5 button "More" expandable haspopup="menu"
+  uid=g8:1_6 Iframe
+    uid=g8:1_7 RootWebArea "Bearings - fleet board" url="http://127.0.0.1:49353/artifact/36d83aa83cc18e88/index.html?artifact_revision=1&artifact_load_token=IKrJPkKy2ECNv3XnAb3e5KzQV0eBDPg9"
+      uid=g8:1_8 banner
+        uid=g8:1_9 "bearings"
+      uid=g8:1_10 main
+        uid=g8:1_11 "5"
+        uid=g8:1_12 "NEED YOU"
+        uid=g8:1_13 "0"
+        uid=g8:1_14 "UNDERWAY"
+        uid=g8:1_15 "0"
+        uid=g8:1_16 "LANDED RECENTLY"
+        uid=g8:1_17 "0"
+        uid=g8:1_18 "CHARTED NEXT"
+        uid=g8:1_19 "CAPTAIN'S CALL"
+        uid=g8:1_20 "5 ITEMS WAIT ON YOU, CAPTAIN"
+        uid=g8:8_0 "DECISION"
+        uid=g8:8_1 "sample"
+        uid=g8:8_2 heading "supplied/legacy" level="3"
+        uid=g8:8_3 "DECIDE"
+        uid=g8:8_4 "Supplied question: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact."
+        uid=g8:8_5 form
+          uid=g8:8_6 radio "Retain the workflow"
+          uid=g8:8_7 "Retain the workflow"
+          uid=g8:8_8 radio "Defer the migration"
+          uid=g8:8_9 "Defer the migration"
+          uid=g8:8_10 radio "Choose the final alternative"
+          uid=g8:8_11 "Choose the final alternative"
+          uid=g8:8_12 radio "Reconcile Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g8:8_13 "Reconcile"
+          uid=g8:8_14 "Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g8:8_15 button "Queue answer"
+        uid=g8:8_16 "card 3 of 5"
+        uid=g8:1_38 button "Previous card"
+        uid=g8:1_39 button "Next card" focusable focused
+        uid=g8:1_40 "CHARTED NEXT"
+        uid=g8:1_41 "Nothing is queued."
+        uid=g8:1_42 "NOTHING PICKED"
+        uid=g8:1_43 button "Queue dispatch order"
+        uid=g8:1_44 "UNDERWAY"
+        uid=g8:1_45 "Nothing is underway."
+        uid=g8:1_46 "RECENTLY LANDED"
+        uid=g8:1_47 "No recent completions are in the current baseline."
+        uid=g8:1_48 "fm-bearings-board.v1 · 2026-11-05T01:22:18Z"
+  uid=g8:1_49 complementary
+    uid=g8:1_50 heading "Conversation" level="2"
+    "Agent hasn't sent a message yet. Click an element in the artifact to annotate, or type below to start."
+    uid=g8:1_51 textbox "Write a message for the agent..." multiline
+    uid=g8:1_52 button "Attach images"
+    uid=g8:1_53 status atomic live="polite" relevant="additions text"
+    uid=g8:1_54 button "Send & End"
+    uid=g8:1_55 button "Send to Agent"
+help[4]:
+  Run `chrome-devtools-axi fill @g8:1_51 "text"` to fill the "Write a message for the agent..." field
+  Run `chrome-devtools-axi click @g8:1_3` to click the "Annotate" button
+  Run `chrome-devtools-axi scroll down` to scroll down
+  Use `chrome-devtools-axi eval <expr>` for JS expressions. For multi-statement code, pass a function: `eval "() => { ...; return result }"`
+
+$ chrome-devtools-axi screenshot ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/decision-card-3.png
+exit=0
+screenshot: ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/decision-card-3.png
+
+$ chrome-devtools-axi click @g8:1_39
+exit=0
+page:
+  title: Bearings - fleet board · Lavish
+  refs: 56
+snapshot:
+uid=g9:1_0 RootWebArea "Bearings - fleet board · Lavish" url="http://127.0.0.1:49353/session/36d83aa83cc18e88"
+  uid=g9:1_1 "Lavish"
+  uid=g9:1_2 "EDITOR"
+  uid=g9:1_3 button "Annotate" description="Toggle annotate/explore mode (⌘I / Ctrl+I)"
+  uid=g9:1_4 button "Hide conversation" description="Hide conversation" expandable expanded
+  uid=g9:1_5 button "More" expandable haspopup="menu"
+  uid=g9:1_6 Iframe
+    uid=g9:1_7 RootWebArea "Bearings - fleet board" url="http://127.0.0.1:49353/artifact/36d83aa83cc18e88/index.html?artifact_revision=1&artifact_load_token=IKrJPkKy2ECNv3XnAb3e5KzQV0eBDPg9"
+      uid=g9:1_8 banner
+        uid=g9:1_9 "bearings"
+      uid=g9:1_10 main
+        uid=g9:1_11 "5"
+        uid=g9:1_12 "NEED YOU"
+        uid=g9:1_13 "0"
+        uid=g9:1_14 "UNDERWAY"
+        uid=g9:1_15 "0"
+        uid=g9:1_16 "LANDED RECENTLY"
+        uid=g9:1_17 "0"
+        uid=g9:1_18 "CHARTED NEXT"
+        uid=g9:1_19 "CAPTAIN'S CALL"
+        uid=g9:1_20 "5 ITEMS WAIT ON YOU, CAPTAIN"
+        uid=g9:9_0 "DECISION"
+        uid=g9:9_1 "sample"
+        uid=g9:9_2 heading "supplied/report" level="3"
+        uid=g9:9_3 "DECIDE"
+        uid=g9:9_4 "Review report: data/supplied/report.md"
+        uid=g9:9_5 form
+          uid=g9:9_6 radio "Retain the workflow"
+          uid=g9:9_7 "Retain the workflow"
+          uid=g9:9_8 radio "Defer the migration"
+          uid=g9:9_9 "Defer the migration"
+          uid=g9:9_10 radio "Choose the final alternative"
+          uid=g9:9_11 "Choose the final alternative"
+          uid=g9:9_12 radio "Reconcile Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g9:9_13 "Reconcile"
+          uid=g9:9_14 "Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g9:9_15 button "Queue answer"
+        uid=g9:9_16 "card 4 of 5"
+        uid=g9:1_38 button "Previous card"
+        uid=g9:1_39 button "Next card" focusable focused
+        uid=g9:1_40 "CHARTED NEXT"
+        uid=g9:1_41 "Nothing is queued."
+        uid=g9:1_42 "NOTHING PICKED"
+        uid=g9:1_43 button "Queue dispatch order"
+        uid=g9:1_44 "UNDERWAY"
+        uid=g9:1_45 "Nothing is underway."
+        uid=g9:1_46 "RECENTLY LANDED"
+        uid=g9:1_47 "No recent completions are in the current baseline."
+        uid=g9:1_48 "fm-bearings-board.v1 · 2026-11-05T01:22:18Z"
+  uid=g9:1_49 complementary
+    uid=g9:1_50 heading "Conversation" level="2"
+    "Agent hasn't sent a message yet. Click an element in the artifact to annotate, or type below to start."
+    uid=g9:1_51 textbox "Write a message for the agent..." multiline
+    uid=g9:1_52 button "Attach images"
+    uid=g9:1_53 status atomic live="polite" relevant="additions text"
+    uid=g9:1_54 button "Send & End"
+    uid=g9:1_55 button "Send to Agent"
+help[4]:
+  Run `chrome-devtools-axi fill @g9:1_51 "text"` to fill the "Write a message for the agent..." field
+  Run `chrome-devtools-axi click @g9:1_3` to click the "Annotate" button
+  Run `chrome-devtools-axi scroll down` to scroll down
+  Use `chrome-devtools-axi eval <expr>` for JS expressions. For multi-statement code, pass a function: `eval "() => { ...; return result }"`
+
+$ chrome-devtools-axi screenshot ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/decision-card-4.png
+exit=0
+screenshot: ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/decision-card-4.png
+
+$ chrome-devtools-axi click @g9:1_39
+exit=0
+page:
+  title: Bearings - fleet board · Lavish
+  refs: 56
+snapshot:
+uid=g10:1_0 RootWebArea "Bearings - fleet board · Lavish" url="http://127.0.0.1:49353/session/36d83aa83cc18e88"
+  uid=g10:1_1 "Lavish"
+  uid=g10:1_2 "EDITOR"
+  uid=g10:1_3 button "Annotate" description="Toggle annotate/explore mode (⌘I / Ctrl+I)"
+  uid=g10:1_4 button "Hide conversation" description="Hide conversation" expandable expanded
+  uid=g10:1_5 button "More" expandable haspopup="menu"
+  uid=g10:1_6 Iframe
+    uid=g10:1_7 RootWebArea "Bearings - fleet board" url="http://127.0.0.1:49353/artifact/36d83aa83cc18e88/index.html?artifact_revision=1&artifact_load_token=IKrJPkKy2ECNv3XnAb3e5KzQV0eBDPg9"
+      uid=g10:1_8 banner
+        uid=g10:1_9 "bearings"
+      uid=g10:1_10 main
+        uid=g10:1_11 "5"
+        uid=g10:1_12 "NEED YOU"
+        uid=g10:1_13 "0"
+        uid=g10:1_14 "UNDERWAY"
+        uid=g10:1_15 "0"
+        uid=g10:1_16 "LANDED RECENTLY"
+        uid=g10:1_17 "0"
+        uid=g10:1_18 "CHARTED NEXT"
+        uid=g10:1_19 "CAPTAIN'S CALL"
+        uid=g10:1_20 "5 ITEMS WAIT ON YOU, CAPTAIN"
+        uid=g10:10_0 "DECISION"
+        uid=g10:10_1 "sample"
+        uid=g10:10_2 heading "supplied/explicit" level="3"
+        uid=g10:10_3 "DECIDE"
+        uid=g10:10_4 "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact."
+        uid=g10:10_5 form
+          uid=g10:10_6 radio "Retain the workflow"
+          uid=g10:10_7 "Retain the workflow"
+          uid=g10:10_8 radio "Defer the migration"
+          uid=g10:10_9 "Defer the migration"
+          uid=g10:10_10 radio "Choose the final alternative"
+          uid=g10:10_11 "Choose the final alternative"
+          uid=g10:10_12 radio "Reconcile Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g10:10_13 "Reconcile"
+          uid=g10:10_14 "Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g10:10_15 button "Queue answer"
+        uid=g10:10_16 "card 5 of 5"
+        uid=g10:1_38 button "Previous card"
+        uid=g10:1_39 button "Next card" disableable disabled
+        uid=g10:1_40 "CHARTED NEXT"
+        uid=g10:1_41 "Nothing is queued."
+        uid=g10:1_42 "NOTHING PICKED"
+        uid=g10:1_43 button "Queue dispatch order"
+        uid=g10:1_44 "UNDERWAY"
+        uid=g10:1_45 "Nothing is underway."
+        uid=g10:1_46 "RECENTLY LANDED"
+        uid=g10:1_47 "No recent completions are in the current baseline."
+        uid=g10:1_48 "fm-bearings-board.v1 · 2026-11-05T01:22:18Z"
+  uid=g10:1_49 complementary
+    uid=g10:1_50 heading "Conversation" level="2"
+    "Agent hasn't sent a message yet. Click an element in the artifact to annotate, or type below to start."
+    uid=g10:1_51 textbox "Write a message for the agent..." multiline
+    uid=g10:1_52 button "Attach images"
+    uid=g10:1_53 status atomic live="polite" relevant="additions text"
+    uid=g10:1_54 button "Send & End"
+    uid=g10:1_55 button "Send to Agent"
+help[4]:
+  Run `chrome-devtools-axi fill @g10:1_51 "text"` to fill the "Write a message for the agent..." field
+  Run `chrome-devtools-axi click @g10:1_3` to click the "Annotate" button
+  Run `chrome-devtools-axi scroll down` to scroll down
+  Use `chrome-devtools-axi eval <expr>` for JS expressions. For multi-statement code, pass a function: `eval "() => { ...; return result }"`
+
+$ lavish-axi end ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/parent/.lavish/bearings-board.html
+exit=0
+session:
+  file: ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/parent/.lavish/bearings-board.html
+  status: ended
+
+$ bin/fm-procevent-lavish.sh retire ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/parent/.lavish/bearings-board.html
+exit=0
+retired: lavish-36d83aa83cc18e88
+
+$ lavish-axi stop
+exit=0
+server:
+  status: stopped
+  port: 49353
+
+$ chrome-devtools-axi stop
+exit=0
+status: stopped
+
+$ bin/fm-procevent.sh list
+exit=0
+no sources registered
+

@@ -1,0 +1,25 @@
+{
+  "question": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+  "options": [
+    "A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome.",
+    "B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period.",
+    "C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact."
+  ],
+  "default_order": [
+    "full-call",
+    "report-call",
+    "minimal",
+    "generated/full-call",
+    "generated/report-call",
+    "generated/minimal",
+    "supplied/legacy",
+    "supplied/minimal",
+    "supplied/report",
+    "supplied/explicit"
+  ],
+  "backlog_hashes": {
+    "~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/parent/data/backlog.md": "0401ae9fde938646e01ddff66e4e814f574f19ab369d03811bb4428b8f500681",
+    "~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/generated/data/backlog.md": "0401ae9fde938646e01ddff66e4e814f574f19ab369d03811bb4428b8f500681",
+    "~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/supplied/data/backlog.md": "fc7cfb341b1c7627e953dcca21ee8f90a02fb1e30d8ef38f3a3ba576acbe6bc8"
+  }
+}

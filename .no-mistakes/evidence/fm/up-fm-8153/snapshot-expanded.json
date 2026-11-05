@@ -1,0 +1,201 @@
+{
+  "schema": "fm-bearings.v1",
+  "home": "live-homes/parent",
+  "generated": "2026-11-05T01:22:19Z",
+  "prs": "not_requested (run: /bearings include PRs)",
+  "contributions": {
+    "scope": "owned contributions per home",
+    "known": 0,
+    "checked": 0,
+    "counts": {
+      "captain": 0,
+      "fleet": 0,
+      "maintainer": 0,
+      "nobody": 0
+    },
+    "complete": true,
+    "proven_clear": true,
+    "unmeasured_homes": 0,
+    "unreadable_records": 0,
+    "unmeasured": 0,
+    "stale_verdicts": 0,
+    "missing_verdicts": 0,
+    "captain_omitted": 0,
+    "captain": []
+  },
+  "in_flight": [],
+  "secondmates": [
+    {
+      "id": "generated",
+      "state": "captain_decision",
+      "doing": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the o…",
+      "provenance": "structured-home",
+      "freshness": "fresh",
+      "age_seconds": 1,
+      "contradiction": false,
+      "reason": "-"
+    },
+    {
+      "id": "supplied",
+      "state": "captain_decision",
+      "doing": "Supplied question; ; Review report; Bounded overview",
+      "provenance": "structured-home",
+      "freshness": "fresh",
+      "age_seconds": 1,
+      "contradiction": false,
+      "reason": "-"
+    }
+  ],
+  "secondmate_reconcile": [
+    {
+      "id": "generated",
+      "spawn_gen": null,
+      "host": null,
+      "kind": null,
+      "ids": []
+    },
+    {
+      "id": "supplied",
+      "spawn_gen": null,
+      "host": null,
+      "kind": null,
+      "ids": []
+    }
+  ],
+  "decisions_open": [
+    {
+      "id": "full-call",
+      "key": "full-call",
+      "verb": "captain-hold",
+      "summary": "Choose the release scope after every integration owner has completed the staged checks and…",
+      "question": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+      "owner": "(main)"
+    },
+    {
+      "id": "deferred",
+      "key": "deferred",
+      "verb": "captain-hold",
+      "summary": "Choose the release scope after eve…: until 2099-01-01: Which route should proceed? A: ret…",
+      "question": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+      "owner": "(main)"
+    },
+    {
+      "id": "report-call",
+      "key": "report-call",
+      "verb": "captain-hold",
+      "summary": "Review the proposal: data/proposal/report.md",
+      "question": "Review the proposal: data/proposal/report.md",
+      "owner": "(main)"
+    },
+    {
+      "id": "minimal",
+      "key": "minimal",
+      "verb": "captain-hold",
+      "summary": "Minimal choice: Keep or defer?",
+      "question": "Minimal choice: Keep or defer?",
+      "owner": "(main)"
+    },
+    {
+      "id": "generated/full-call",
+      "key": "full-call",
+      "verb": "captain-hold",
+      "summary": "Choose the release scope after every integration owner has completed the staged checks and…",
+      "question": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+      "owner": "generated"
+    },
+    {
+      "id": "generated/report-call",
+      "key": "report-call",
+      "verb": "captain-hold",
+      "summary": "Review the proposal: data/proposal/report.md",
+      "question": "Review the proposal: data/proposal/report.md",
+      "owner": "generated"
+    },
+    {
+      "id": "generated/minimal",
+      "key": "minimal",
+      "verb": "captain-hold",
+      "summary": "Minimal choice: Keep or defer?",
+      "question": "Minimal choice: Keep or defer?",
+      "owner": "generated"
+    },
+    {
+      "id": "generated/deferred",
+      "key": "deferred",
+      "verb": "captain-hold",
+      "summary": "Choose the release scope after eve…: until 2099-01-01: Which route should proceed? A: ret…",
+      "question": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+      "owner": "generated"
+    },
+    {
+      "id": "supplied/legacy",
+      "key": "legacy",
+      "verb": "captain-hold",
+      "summary": "Supplied question: Which route should proceed? A: retain the current workflow through the …",
+      "question": "Supplied question: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+      "owner": "supplied"
+    },
+    {
+      "id": "supplied/minimal",
+      "key": null,
+      "verb": "captain-hold",
+      "summary": "minimal: captain decision pending",
+      "question": "minimal: captain decision pending",
+      "owner": "supplied"
+    },
+    {
+      "id": "supplied/report",
+      "key": "report",
+      "verb": "captain-hold",
+      "summary": "Review report: data/supplied/report.md",
+      "question": "Review report: data/supplied/report.md",
+      "owner": "supplied"
+    },
+    {
+      "id": "supplied/explicit",
+      "key": "explicit",
+      "verb": "captain-hold",
+      "summary": "Bounded overview: Bounded reason",
+      "question": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+      "owner": "supplied"
+    },
+    {
+      "id": "supplied/queued-only",
+      "key": "queued-only",
+      "verb": "captain-hold",
+      "summary": "Deferred supplied question: until 2099-01-01: Which route should proceed? A: ret…",
+      "question": "Deferred supplied question: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+      "owner": "supplied"
+    }
+  ],
+  "landed": [],
+  "gates": [],
+  "reports": [],
+  "recorded_prs": [],
+  "omitted": [
+    {
+      "surface": "backlog item bodies",
+      "reveal": "--fields bodies"
+    },
+    {
+      "surface": "task paths",
+      "reveal": "--fields paths"
+    },
+    {
+      "surface": "watch/steer actions",
+      "reveal": "--fields actions"
+    },
+    {
+      "surface": "healthy endpoint detail",
+      "reveal": "--fields endpoints"
+    },
+    {
+      "surface": "full scout-report inventory",
+      "reveal": "--all-reports"
+    },
+    {
+      "surface": "live PR discovery + checks",
+      "reveal": "--include-prs"
+    }
+  ]
+}

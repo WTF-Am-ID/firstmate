@@ -1,0 +1,116 @@
+{
+  "schema": "fm-bearings-board.v1",
+  "home": "Synthetic validation home",
+  "generated": "2026-11-05T01:22:18Z",
+  "prs_live": false,
+  "captains_call": [
+    {
+      "key": "probe-0",
+      "type": "decision",
+      "repo": "sample",
+      "title": "full-call",
+      "decide": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+      "options": [
+        {
+          "value": "retain",
+          "label": "Retain the workflow"
+        },
+        {
+          "value": "defer",
+          "label": "Defer the migration"
+        },
+        {
+          "value": "final",
+          "label": "Choose the final alternative"
+        }
+      ]
+    },
+    {
+      "key": "probe-1",
+      "type": "decision",
+      "repo": "sample",
+      "title": "generated/full-call",
+      "decide": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+      "options": [
+        {
+          "value": "retain",
+          "label": "Retain the workflow"
+        },
+        {
+          "value": "defer",
+          "label": "Defer the migration"
+        },
+        {
+          "value": "final",
+          "label": "Choose the final alternative"
+        }
+      ]
+    },
+    {
+      "key": "probe-2",
+      "type": "decision",
+      "repo": "sample",
+      "title": "supplied/legacy",
+      "decide": "Supplied question: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+      "options": [
+        {
+          "value": "retain",
+          "label": "Retain the workflow"
+        },
+        {
+          "value": "defer",
+          "label": "Defer the migration"
+        },
+        {
+          "value": "final",
+          "label": "Choose the final alternative"
+        }
+      ]
+    },
+    {
+      "key": "probe-3",
+      "type": "decision",
+      "repo": "sample",
+      "title": "supplied/report",
+      "decide": "Review report: data/supplied/report.md",
+      "options": [
+        {
+          "value": "retain",
+          "label": "Retain the workflow"
+        },
+        {
+          "value": "defer",
+          "label": "Defer the migration"
+        },
+        {
+          "value": "final",
+          "label": "Choose the final alternative"
+        }
+      ]
+    },
+    {
+      "key": "probe-4",
+      "type": "decision",
+      "repo": "sample",
+      "title": "supplied/explicit",
+      "decide": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+      "options": [
+        {
+          "value": "retain",
+          "label": "Retain the workflow"
+        },
+        {
+          "value": "defer",
+          "label": "Defer the migration"
+        },
+        {
+          "value": "final",
+          "label": "Choose the final alternative"
+        }
+      ]
+    }
+  ],
+  "underway": [],
+  "landed": [],
+  "charted": []
+}

@@ -1,0 +1,27 @@
+[
+  {
+    "card": 1,
+    "expected_text": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+    "exact_text_present": true
+  },
+  {
+    "card": 2,
+    "expected_text": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+    "exact_text_present": true
+  },
+  {
+    "card": 3,
+    "expected_text": "Supplied question: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+    "exact_text_present": true
+  },
+  {
+    "card": 4,
+    "expected_text": "Review report: data/supplied/report.md",
+    "exact_text_present": true
+  },
+  {
+    "card": 5,
+    "expected_text": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+    "exact_text_present": true
+  }
+]

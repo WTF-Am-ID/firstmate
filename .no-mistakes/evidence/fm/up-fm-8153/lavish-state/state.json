@@ -1,0 +1,32 @@
+{
+  "sessions": {
+    "36d83aa83cc18e88": {
+      "key": "36d83aa83cc18e88",
+      "file": "~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/parent/.lavish/bearings-board.html",
+      "url": "http://127.0.0.1:49353/session/36d83aa83cc18e88",
+      "status": "ended",
+      "pending_prompts": 0,
+      "prompts": [],
+      "layout_warnings": [],
+      "artifact_revision": 1,
+      "artifact_load": {
+        "artifact_load_token": "IKrJPkKy2ECNv3XnAb3e5KzQV0eBDPg9",
+        "artifact_revision": 1,
+        "last_pass_sequence": 0,
+        "request_id": "lavish-load-mw2v2w61-1-rtajqtuu99a",
+        "request_sequence": 1,
+        "handoff_token": "2X3Irmb5ilzA1Gkax4qPEgLLDsLweD5v"
+      },
+      "artifact_failures": [],
+      "delivered_attachments": [],
+      "dom_snapshot": "",
+      "chat": [],
+      "chat_revision": 0,
+      "chat_ack_ids": [],
+      "delivery_seq": 0,
+      "closed_delivery_seq": 0,
+      "updated_at": "2026-11-05T01:24:23.159Z",
+      "ended_by": "agent"
+    }
+  }
+}

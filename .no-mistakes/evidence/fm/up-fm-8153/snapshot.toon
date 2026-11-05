@@ -1,0 +1,54 @@
+schema: fm-bearings.v1
+home: live-homes/parent
+generated: "2026-11-05T01:22:20Z"
+prs: "not_requested (run: /bearings include PRs)"
+contributions: 
+  scope: owned contributions per home
+  known: 0
+  checked: 0
+  counts: 
+    captain: 0
+    fleet: 0
+    maintainer: 0
+    nobody: 0
+  complete: true
+  proven_clear: true
+  unmeasured_homes: 0
+  unreadable_records: 0
+  unmeasured: 0
+  stale_verdicts: 0
+  missing_verdicts: 0
+  captain_omitted: 0
+  captain: []
+in_flight: []
+secondmates[2]{id,state,doing,provenance,freshness,age_seconds,contradiction,reason}:
+  generated,captain_decision,Choose the release scope after every integration owner has completed the staged checks and recorded the result for the o…,structured-home,fresh,2,false,"-"
+  supplied,captain_decision,Supplied question; ; Review report; Bounded overview,structured-home,fresh,2,false,"-"
+secondmate_reconcile[2]{id,spawn_gen,host,kind,ids}:
+  generated,null,null,null,"[]"
+  supplied,null,null,null,"[]"
+decisions_open[13]{id,key,verb,summary,question,owner}:
+  full-call,full-call,captain-hold,Choose the release scope after every integration owner has completed the staged checks and…,"Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",(main)
+  deferred,deferred,captain-hold,"Choose the release scope after eve…: until 2099-01-01: Which route should proceed? A: ret…","Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",(main)
+  report-call,report-call,captain-hold,"Review the proposal: data/proposal/report.md","Review the proposal: data/proposal/report.md",(main)
+  minimal,minimal,captain-hold,"Minimal choice: Keep or defer?","Minimal choice: Keep or defer?",(main)
+  generated/full-call,full-call,captain-hold,Choose the release scope after every integration owner has completed the staged checks and…,"Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",generated
+  generated/report-call,report-call,captain-hold,"Review the proposal: data/proposal/report.md","Review the proposal: data/proposal/report.md",generated
+  generated/minimal,minimal,captain-hold,"Minimal choice: Keep or defer?","Minimal choice: Keep or defer?",generated
+  generated/deferred,deferred,captain-hold,"Choose the release scope after eve…: until 2099-01-01: Which route should proceed? A: ret…","Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",generated
+  supplied/legacy,legacy,captain-hold,"Supplied question: Which route should proceed? A: retain the current workflow through the …","Supplied question: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",supplied
+  supplied/minimal,null,captain-hold,"minimal: captain decision pending","minimal: captain decision pending",supplied
+  supplied/report,report,captain-hold,"Review report: data/supplied/report.md","Review report: data/supplied/report.md",supplied
+  supplied/explicit,explicit,captain-hold,"Bounded overview: Bounded reason","Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",supplied
+  supplied/queued-only,queued-only,captain-hold,"Deferred supplied question: until 2099-01-01: Which route should proceed? A: ret…","Deferred supplied question: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",supplied
+landed: []
+gates: []
+reports: []
+recorded_prs: []
+omitted[6]{surface,reveal}:
+  backlog item bodies,"--fields bodies"
+  task paths,"--fields paths"
+  watch/steer actions,"--fields actions"
+  healthy endpoint detail,"--fields endpoints"
+  full scout-report inventory,"--all-reports"
+  live PR discovery + checks,"--include-prs"

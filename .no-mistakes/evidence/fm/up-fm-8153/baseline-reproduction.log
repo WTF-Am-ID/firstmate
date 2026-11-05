@@ -1,0 +1,3 @@
+Baseline 4bd1e3aa72c85ae4ba7a7c7f69bc3168702b28da: exit=0
+Full decision row: {"id": "full-call", "key": "full-call", "verb": "captain-hold", "summary": "Choose the release scope after every integration owner has completed the staged checks and…", "owner": "(main)"}
+Final option absent. Candidate snapshot-default.json retains the exact 599-character question.

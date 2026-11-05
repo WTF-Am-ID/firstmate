@@ -1,0 +1,66 @@
+page:
+  title: Bearings - fleet board · Lavish
+  refs: 56
+snapshot:
+uid=g6:1_0 RootWebArea "Bearings - fleet board · Lavish" url="http://127.0.0.1:49353/session/36d83aa83cc18e88"
+  uid=g6:1_1 "Lavish"
+  uid=g6:1_2 "EDITOR"
+  uid=g6:1_3 button "Annotate" description="Toggle annotate/explore mode (⌘I / Ctrl+I)" focusable focused
+  uid=g6:1_4 button "Hide conversation" description="Hide conversation" expandable expanded
+  uid=g6:1_5 button "More" expandable haspopup="menu"
+  uid=g6:1_6 Iframe
+    uid=g6:1_7 RootWebArea "Bearings - fleet board" url="http://127.0.0.1:49353/artifact/36d83aa83cc18e88/index.html?artifact_revision=1&artifact_load_token=IKrJPkKy2ECNv3XnAb3e5KzQV0eBDPg9"
+      uid=g6:1_8 banner
+        uid=g6:1_9 "bearings"
+      uid=g6:1_10 main
+        uid=g6:1_11 "5"
+        uid=g6:1_12 "NEED YOU"
+        uid=g6:1_13 "0"
+        uid=g6:1_14 "UNDERWAY"
+        uid=g6:1_15 "0"
+        uid=g6:1_16 "LANDED RECENTLY"
+        uid=g6:1_17 "0"
+        uid=g6:1_18 "CHARTED NEXT"
+        uid=g6:1_19 "CAPTAIN'S CALL"
+        uid=g6:1_20 "5 ITEMS WAIT ON YOU, CAPTAIN"
+        uid=g6:1_21 "DECISION"
+        uid=g6:1_22 "sample"
+        uid=g6:1_23 heading "full-call" level="3"
+        uid=g6:1_24 "DECIDE"
+        uid=g6:1_25 "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact."
+        uid=g6:1_26 form
+          uid=g6:1_27 radio "Retain the workflow"
+          uid=g6:1_28 "Retain the workflow"
+          uid=g6:1_29 radio "Defer the migration"
+          uid=g6:1_30 "Defer the migration"
+          uid=g6:1_31 radio "Choose the final alternative"
+          uid=g6:1_32 "Choose the final alternative"
+          uid=g6:1_33 radio "Reconcile Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g6:1_34 "Reconcile"
+          uid=g6:1_35 "Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g6:1_36 button "Queue answer"
+        uid=g6:1_37 "card 1 of 5"
+        uid=g6:1_38 button "Previous card" disableable disabled
+        uid=g6:1_39 button "Next card"
+        uid=g6:1_40 "CHARTED NEXT"
+        uid=g6:1_41 "Nothing is queued."
+        uid=g6:1_42 "NOTHING PICKED"
+        uid=g6:1_43 button "Queue dispatch order"
+        uid=g6:1_44 "UNDERWAY"
+        uid=g6:1_45 "Nothing is underway."
+        uid=g6:1_46 "RECENTLY LANDED"
+        uid=g6:1_47 "No recent completions are in the current baseline."
+        uid=g6:1_48 "fm-bearings-board.v1 · 2026-11-05T01:22:18Z"
+  uid=g6:1_49 complementary
+    uid=g6:1_50 heading "Conversation" level="2"
+    "Agent hasn't sent a message yet. Click an element in the artifact to annotate, or type below to start."
+    uid=g6:1_51 textbox "Write a message for the agent..." multiline
+    uid=g6:1_52 button "Attach images"
+    uid=g6:1_53 status atomic live="polite" relevant="additions text"
+    uid=g6:1_54 button "Send & End"
+    uid=g6:1_55 button "Send to Agent"
+help[4]:
+  Run `chrome-devtools-axi fill @g6:1_51 "text"` to fill the "Write a message for the agent..." field
+  Run `chrome-devtools-axi click @g6:1_3` to click the "Annotate" button
+  Run `chrome-devtools-axi scroll down` to scroll down
+  Use `chrome-devtools-axi eval <expr>` for JS expressions. For multi-statement code, pass a function: `eval "() => { ...; return result }"`

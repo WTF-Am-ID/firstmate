@@ -1,0 +1,195 @@
+{
+  "schema": "fm-secondmate-home-summary.v1",
+  "hold_classifier_schema": "fm-captain-hold-buckets.v1",
+  "contributions": {
+    "known": 0,
+    "checked": 0,
+    "counts": {
+      "captain": 0,
+      "fleet": 0,
+      "maintainer": 0,
+      "nobody": 0
+    },
+    "unmeasured": 0,
+    "complete": true,
+    "proven_clear": true,
+    "stale_verdicts": 0,
+    "missing_verdicts": 0,
+    "unreadable_records": 0,
+    "valid_until": 900,
+    "captain": [],
+    "captain_omitted": 0
+  },
+  "generated": "2026-11-05T01:22:18Z",
+  "generated_epoch": 1793841738,
+  "home": "~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/generated",
+  "valid": true,
+  "reason": null,
+  "invalidity": {
+    "kind": null,
+    "ids": []
+  },
+  "state": "captain_decision",
+  "active_children": [],
+  "decisions_open": [
+    {
+      "id": "full-call",
+      "key": "full-call",
+      "verb": "captain-hold",
+      "summary": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review",
+      "reason": "Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has…",
+      "question": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+      "hold_until": null,
+      "hold_bucket": "live",
+      "hold_age_days": null,
+      "source": "backlog"
+    },
+    {
+      "id": "report-call",
+      "key": "report-call",
+      "verb": "captain-hold",
+      "summary": "Review the proposal",
+      "reason": "data/proposal/report.md",
+      "question": "Review the proposal: data/proposal/report.md",
+      "hold_until": null,
+      "hold_bucket": "live",
+      "hold_age_days": null,
+      "source": "backlog"
+    },
+    {
+      "id": "minimal",
+      "key": "minimal",
+      "verb": "captain-hold",
+      "summary": "Minimal choice",
+      "reason": "Keep or defer?",
+      "question": "Minimal choice: Keep or defer?",
+      "hold_until": null,
+      "hold_bucket": "live",
+      "hold_age_days": null,
+      "source": "backlog"
+    }
+  ],
+  "holds": [
+    {
+      "id": "full-call",
+      "title": "Choose the release scope after every integration owner has completed the staged checks and…",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "reason": "Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every s…",
+      "source": "backlog"
+    },
+    {
+      "id": "deferred",
+      "title": "Choose the release scope after every integration owner has completed the staged checks and…",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "reason": "Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every s…",
+      "source": "backlog"
+    },
+    {
+      "id": "report-call",
+      "title": "Review the proposal",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "reason": "data/proposal/report.md",
+      "source": "backlog"
+    },
+    {
+      "id": "minimal",
+      "title": "Minimal choice",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "reason": "Keep or defer?",
+      "source": "backlog"
+    }
+  ],
+  "queued": [
+    {
+      "id": "deferred",
+      "title": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the o…",
+      "question": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "blocked_reason": null,
+      "hold_reason": "Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has…",
+      "hold_kind": "captain",
+      "hold_until": "2099-01-01",
+      "hold_bucket": "dated",
+      "hold_age_days": null,
+      "captain_actionable": false,
+      "repo": "sample",
+      "kind": "captain",
+      "since": null
+    },
+    {
+      "id": "full-call",
+      "title": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the o…",
+      "question": "Choose the release scope after every integration owner has completed the staged checks and recorded the result for the operator to review: Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has reported the outcome. B: postpone the independent migration until the remaining review finishes while preserving the complete fallback route and its observation period. C: choose the final café / 東京 alternative only after the report is reviewed, keeping literal <script>example</script> text intact.",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "blocked_reason": null,
+      "hold_reason": "Which route should proceed? A: retain the current workflow through the complete staged verification and preserve every supported integration until its owner has…",
+      "hold_kind": "captain",
+      "hold_until": null,
+      "hold_bucket": "live",
+      "hold_age_days": null,
+      "captain_actionable": true,
+      "repo": "sample",
+      "kind": "captain",
+      "since": null
+    },
+    {
+      "id": "report-call",
+      "title": "Review the proposal",
+      "question": "Review the proposal: data/proposal/report.md",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "blocked_reason": null,
+      "hold_reason": "data/proposal/report.md",
+      "hold_kind": "captain",
+      "hold_until": null,
+      "hold_bucket": "live",
+      "hold_age_days": null,
+      "captain_actionable": true,
+      "repo": "sample",
+      "kind": "captain",
+      "since": null
+    },
+    {
+      "id": "minimal",
+      "title": "Minimal choice",
+      "question": "Minimal choice: Keep or defer?",
+      "blocked_by": null,
+      "blocked_by_ids": [],
+      "unresolved_blocker_ids": [],
+      "blocked_reason": null,
+      "hold_reason": "Keep or defer?",
+      "hold_kind": "captain",
+      "hold_until": null,
+      "hold_bucket": "live",
+      "hold_age_days": null,
+      "captain_actionable": true,
+      "repo": null,
+      "kind": null,
+      "since": null
+    }
+  ],
+  "landed": [],
+  "endpoints": [],
+  "counts": {
+    "active_children": 0,
+    "decisions_open": 3,
+    "holds": 4,
+    "queued": 4,
+    "landed": 0,
+    "endpoints": 0
+  },
+  "omitted": []
+}

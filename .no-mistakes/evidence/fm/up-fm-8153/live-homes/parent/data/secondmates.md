@@ -1,0 +1,2 @@
+- generated - Synthetic question transport (home: ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/generated; scope: validation; projects: sample; added 2026-11-04)
+- supplied - Synthetic question transport (home: ~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes/supplied; scope: validation; projects: sample; added 2026-11-04)

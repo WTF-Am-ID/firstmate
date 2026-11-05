@@ -1,0 +1,13 @@
+{
+  "owned_processes_remaining": [],
+  "retained_directories": [
+    "~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/live-homes",
+    "~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/chrome-profile",
+    "~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/tooltmp",
+    "~/.no-mistakes-upstream-codex/evidence/01M6MMJ0V3K6NAXBAG5VFRYCHH/claims"
+  ],
+  "reason": "PreToolUse recursive-delete guard refused evidence-directory cleanup outside the worktree; no retry or alternative deletion attempted. All associated product services were stopped.",
+  "retained_worktree_directory": ".validation-8153-tools/",
+  "worktree_cleanup_reason": "The separate worktree-only rm was also refused: rm -f style commands are not permitted. No alternate deletion attempted.",
+  "git_status": "?? .validation-8153-tools/\n"
+}
