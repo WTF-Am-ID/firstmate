@@ -1,0 +1,470 @@
+=== runner ls-proof-run.sh a1e02205dfc1eb46e634fb03ff2e96a0882bf3bc11d5021e8841c6f18443e339
+=== source e443cc009b1f9fcb116c88d4fcf931f3641dc3cadb23eaeb63e41e6871a43c50  ~/up3103-test-01m6pv-source.tar.gz
+=== guest script a1c07f6f8338dbe5feb4ec23e35b1582cca4298a8b9dcbc514536feeaa51104d  ~/up3103-test-01m6pv-guest2.sh
+=== launch 2026-11-05T23:06:56Z ci-bench-202610201338 ls-up3103-test-01m6pv-r2 project ls-ci-scratch as_user=ubuntu
+=== ready wait up to 180s for root growth to finish
+=== ready obs 1 t=0s ready=1 uptime=3.73 unit=loaded/inactive/dead result=success job=none exit_mono=2959858 exit_status=0 root=/dev/sda2 disk=/dev/sda part=2 kernel_bytes=21368913408 ondisk_bytes=21368913408 root_avail=18409291776
+=== ready obs 2 t=1s ready=1 uptime=4.81 unit=loaded/inactive/dead result=success job=none exit_mono=2959858 exit_status=0 root=/dev/sda2 disk=/dev/sda part=2 kernel_bytes=21368913408 ondisk_bytes=21368913408 root_avail=18409291776
+=== ready after 1s
+=== host_boot 56499120-68e6-43e9-b731-4cb022666369 guest_boot 66b7fa49-c0a4-4317-b175-5d8cd213f31c
+=== guest PRETTY_NAME="Ubuntu 24.04.5 LTS"
+=== guest VERSION_ID="24.04"
+=== guest kvm
+=== guest systemd
+=== running as ubuntu uid=1000 gid=1000 home=~
+=== PROOF_EXIT 0
+--- stdout
+TEST_CANDIDATE=27406d7c42aad8136b7fe6800bfafae9cfc1c403
+TEST_USER=ubuntu
+git version 2.43.0
+jq-1.7
+perl 5.38.2
+
+SCENARIO S5 public scan with three real sleeping destination reads
+S5 mechanism=timeout
+S5 timer=normal scan=1 elapsed_ms=2286 cursor=epoch=1793920028
+cursor=a-hung
+S5 pid=946 deadline=1793920030594 start_ms=1793920028689 url=https://github.com/o/r/pull/1 state_after_scan=gone
+S5 timer=normal scan=2 elapsed_ms=3143 cursor=epoch=1793920030
+cursor=b-hung
+S5 pid=1403 deadline=1793920033885 start_ms=1793920030974 url=https://github.com/o/r/pull/2 state_after_scan=gone
+S5 timer=normal scan=3 elapsed_ms=3143 cursor=epoch=1793920034
+cursor=c-hung
+S5 pid=1659 deadline=1793920037037 start_ms=1793920034125 url=https://github.com/o/r/pull/3 state_after_scan=gone
+S5 timer=normal scan=4 elapsed_ms=3147 cursor=epoch=1793920037
+cursor=a-hung
+S5 pid=1916 deadline=1793920040187 start_ms=1793920037274 url=https://github.com/o/r/pull/4 state_after_scan=gone
+S5 pid=2116 deadline=1793920040187 start_ms=1793920037429 url=https://github.com/o/r/pull/1 state_after_scan=gone
+done [key=child-outcome-z-ready-done-eec697ce] [at=1793920037]: child z-ready done: PR https://github.com/o/r/pull/4 checks green pr=https://github.com/o/r/pull/4 mode=direct-PR yolo=off
+schema=fm-terminal-outcome.v1
+fingerprint=eec697ce731a1b3a3afbeeb4b627fbef
+task_id=z-ready
+incarnation=s1.1.1
+state=done
+outcome_key=child-outcome-z-ready-done-eec697ce
+origin=direct
+phase=upstream
+pr=https://github.com/o/r/pull/4
+created_epoch=1793920037
+notice_emitted=0
+S5_PASS timer=normal scan=4
+S5 mechanism=perl
+S5 timer=perl scan=1 elapsed_ms=2492 cursor=epoch=1793920040
+cursor=a-hung
+S5 pid=2493 deadline=1793920042468 start_ms=1793920040551 url=https://github.com/o/r/pull/1 state_after_scan=gone
+S5 timer=perl scan=2 elapsed_ms=3343 cursor=epoch=1793920042
+cursor=b-hung
+S5 pid=2934 deadline=1793920045961 start_ms=1793920043048 url=https://github.com/o/r/pull/2 state_after_scan=gone
+S5 timer=perl scan=3 elapsed_ms=3348 cursor=epoch=1793920046
+cursor=c-hung
+S5 pid=3174 deadline=1793920049315 start_ms=1793920046404 url=https://github.com/o/r/pull/3 state_after_scan=gone
+S5 timer=perl scan=4 elapsed_ms=3345 cursor=epoch=1793920049
+cursor=a-hung
+S5 pid=3415 deadline=1793920052669 start_ms=1793920049761 url=https://github.com/o/r/pull/4 state_after_scan=gone
+S5 pid=3607 deadline=1793920052669 start_ms=1793920049921 url=https://github.com/o/r/pull/1 state_after_scan=gone
+done [key=child-outcome-z-ready-done-eec697ce] [at=1793920049]: child z-ready done: PR https://github.com/o/r/pull/4 checks green pr=https://github.com/o/r/pull/4 mode=direct-PR yolo=off
+schema=fm-terminal-outcome.v1
+fingerprint=eec697ce731a1b3a3afbeeb4b627fbef
+task_id=z-ready
+incarnation=s1.1.1
+state=done
+outcome_key=child-outcome-z-ready-done-eec697ce
+origin=direct
+phase=upstream
+pr=https://github.com/o/r/pull/4
+created_epoch=1793920049
+notice_emitted=0
+S5_PASS timer=perl scan=4
+S5_EXIT=0
+SCENARIO brief generation
+scaffolded: /opt/src/cli-live/brief/data/named-integration/brief.md (ship, mode=direct-PR; replace {TASK} and {FIRSTMATE_SPEC})
+Base branch: release/integration
+BRIEF_EXIT=0
+armed: state/github.check.sh
+REGISTER github matching poll armed
+POLL github matching=merged
+POLL github retargeted=silent
+POLL github unreadable=silent
+task github merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+POLL github missing-task-destination=one-recovery-notice-no-merge
+POLL github legacy-named-base=merged
+error: expected PR base main, actual base wrong
+REGISTER github mismatch refused rc=1
+error: expected PR base main, actual base unavailable
+REGISTER github unreadable refused rc=1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+REGISTER github absent refused rc=1
+armed: state/gitlab.check.sh
+REGISTER gitlab matching poll armed
+POLL gitlab matching=merged
+POLL gitlab retargeted=silent
+POLL gitlab unreadable=silent
+task gitlab merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+POLL gitlab missing-task-destination=one-recovery-notice-no-merge
+POLL gitlab legacy-named-base=merged
+error: expected PR base main, actual base wrong
+REGISTER gitlab mismatch refused rc=1
+error: expected PR base main, actual base unavailable
+REGISTER gitlab unreadable refused rc=1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+REGISTER gitlab absent refused rc=1
+armed: state/gerrit.check.sh
+REGISTER gerrit matching poll armed
+POLL gerrit matching=merged
+POLL gerrit retargeted=silent
+POLL gerrit unreadable=silent
+error: expected PR base main, actual base wrong
+REGISTER gerrit mismatch refused rc=1
+error: expected PR base main, actual base unavailable
+REGISTER gerrit unreadable refused rc=1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+REGISTER gerrit absent refused rc=1
+armed: state/forgejo.check.sh
+REGISTER forgejo matching poll armed
+POLL forgejo matching=merged
+POLL forgejo retargeted=silent
+POLL forgejo unreadable=silent
+task forgejo merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+POLL forgejo missing-task-destination=one-recovery-notice-no-merge
+POLL forgejo legacy-named-base=merged
+error: expected PR base main, actual base wrong
+REGISTER forgejo mismatch refused rc=1
+error: watching a Forgejo pull request at forgejo.example requires exactly one 'tea login' registered for that host (see 'tea login list')
+REGISTER forgejo unreadable refused rc=1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+REGISTER forgejo absent refused rc=1
+FORGE_MATRIX_EXIT=0
+SCENARIO independent local and parent legacy recovery notices
+LEGACY order=ledger-first local=task child merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+blocked [key=child-pr-base-child-7070-2806] [at=1793920057]: task child merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+armed: state/child.check.sh
+LEGACY order=ledger-first one-local-one-parent rearm-cleared-both
+LEGACY order=watcher-first local=task child merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+blocked [key=child-pr-base-child-8321-11670] [at=1793920058]: task child merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+armed: state/child.check.sh
+LEGACY order=watcher-first one-local-one-parent rearm-cleared-both
+LEGACY_AUDIENCES_EXIT=0
+error: expected PR base main, actual base wrong
+MERGE retargeted refused rc=1 no-merge-call
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+armed: state/github.check.sh
+error: refusing to merge https://github.com/o/r/pull/1
+  - the branch protection summary for base branch main could not be read, so a required check that has not reported cannot be ruled out
+  - the branch rules for base branch main could not be read, so a required check that has not reported cannot be ruled out
+  - the live head is "e6a010de3077c8f7e9bff61071568324a9c72f5e", not the expected head 1111111111111111111111111111111111111111
+  - the live head is "e6a010de3077c8f7e9bff61071568324a9c72f5e", not the expected head 1111111111111111111111111111111111111111
+MERGE moved-reviewed-head refused rc=1 no-merge-call
+gh pr view https://github.com/o/r/pull/1 --json isDraft
+gh pr view https://github.com/o/r/pull/1 --json baseRefName -q .baseRefName
+gh pr view https://github.com/o/r/pull/1 --json headRefOid -q .headRefOid
+gh pr view https://github.com/o/r/pull/1 --json baseRefName -q .baseRefName
+gh pr view https://github.com/o/r/pull/1 --json state,baseRefName -q [.baseRefName, .state] | @tsv
+gh pr view https://github.com/o/r/pull/1 --json state,baseRefName -q [.baseRefName, .state] | @tsv
+gh pr view https://github.com/o/r/pull/1 --json state,baseRefName -q [.baseRefName, .state] | @tsv
+gh pr view https://github.com/o/r/pull/1 --json state,baseRefName -q [.baseRefName, .state] | @tsv
+gh pr view https://github.com/o/r/pull/1 --json isDraft
+gh pr view https://github.com/o/r/pull/1 --json baseRefName -q .baseRefName
+gh pr view https://github.com/o/r/pull/1 --json isDraft
+gh pr view https://github.com/o/r/pull/1 --json baseRefName -q .baseRefName
+gh pr view https://github.com/o/r/pull/1 --json isDraft
+glab mr view 1 -R https://gitlab.com/o/r -F json
+glab mr view 1 -R https://gitlab.com/o/r -F json
+glab mr view 1 -R https://gitlab.com/o/r -F json
+glab mr view 1 -R https://gitlab.com/o/r -F json
+glab mr view 1 -R https://gitlab.com/o/r -F json
+glab mr view 1 -R https://gitlab.com/o/r -F json
+glab mr view 1 -R https://gitlab.com/o/r -F json
+glab mr view 1 -R https://gitlab.com/o/r -F json
+gerrit show 1 --host gerrit.example --json
+gerrit show 1 --host gerrit.example --json
+gerrit show 1 --host gerrit.example --json
+gerrit show 1 --host gerrit.example --json
+gerrit show 1 --host gerrit.example --json
+gerrit show 1 --host gerrit.example --json
+gerrit show 1 --host gerrit.example --json
+gerrit show 1 --host gerrit.example --json
+tea login list --output json
+tea login list --output json
+tea api --login lab --repo o/r /repos/{owner}/{repo}/pulls/1
+tea login list --output json
+tea api --login lab --repo o/r /repos/{owner}/{repo}/pulls/1
+tea login list --output json
+tea api --login lab --repo o/r /repos/{owner}/{repo}/pulls/1
+tea login list --output json
+tea api --login lab --repo o/r /repos/{owner}/{repo}/pulls/1
+tea login list --output json
+tea login list --output json
+tea api --login lab --repo o/r /repos/{owner}/{repo}/pulls/1
+tea login list --output json
+tea login list --output json
+tea api --login lab --repo o/r /repos/{owner}/{repo}/pulls/1
+tea login list --output json
+tea login list --output json
+gh pr view https://github.com/o/r/pull/1 --json isDraft
+gh pr view https://github.com/o/r/pull/1 --json baseRefName -q .baseRefName
+gh pr view https://github.com/o/r/pull/1 --json headRefOid -q .headRefOid
+gh pr view https://github.com/o/r/pull/1 --json baseRefName -q .baseRefName
+gh pr view https://github.com/o/r/pull/1 --json isDraft
+gh pr view https://github.com/o/r/pull/1 --json baseRefName -q .baseRefName
+gh pr view https://github.com/o/r/pull/1 --json headRefOid -q .headRefOid
+gh pr view https://github.com/o/r/pull/1 --json baseRefName -q .baseRefName
+gh pr view https://github.com/o/r/pull/1 --json baseRefName -q .baseRefName
+gh pr view https://github.com/o/r/pull/1 --json baseRefName -q .baseRefName
+gh pr view https://github.com/o/r/pull/1 --json headRefOid -q .headRefOid
+gh pr view https://github.com/o/r/pull/1 --json baseRefName -q .baseRefName
+gh pr view https://github.com/o/r/pull/1 --json state,isDraft,mergeable,mergeStateStatus,headRefOid,baseRefName,statusCheckRollup
+gh api repos/o/r/branches/main
+gh api --paginate repos/o/r/rules/branches/main
+MERGE_BOUNDARY_EXIT=0
+CREW_STATE rc=124 elapsed_ms=1023 output=state: unknown · source: none · scan read deadline expired
+pipeline-read axi status pid=10277
+TRUNCATED_READ_EXIT=0
+CLI_PROOF_EXIT=0
+FM_TEST_BEGIN 2026-11-05T23:07:42Z tests/fm-inactive-reconcile.test.sh family=watcher-wake-lock expected_gate_skip=none
+ok - legacy terminal ledgers report missing-base refusal once on either parent route
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - main direct terminal presentation has a durable receipt
+ok - busy agent withholds the terminal outcome
+ok - idle agent on a newer incarnation withholds the terminal outcome
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - idle finished agent keeps the terminal outcome
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - idle finished agent with rewritten meta keeps the terminal outcome
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - dead agent keeps the terminal outcome
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - a branch-actor acknowledgement retires the inactive-outcome receipt and later scans stay quiet
+ok - unpushed CI-ready ship done: is not published upstream
+ok - inactive reconciliation pins local readiness under its existing lock before one parent delivery
+ok - a delivered ship done: skips the git gate on later polls
+ok - secondmate delivers a child's terminal ledger line once, on the next poll, from the ledger alone
+ok - multiline terminal outcomes are reported once before or during a state read
+ok - an unterminated continuation line does not withhold a proven child outcome
+ok - later status prose does not change the inactive terminal receipt identity
+ok - busy child locks do not starve later ledger outcomes
+ok - a hung destination lookup refuses that child without starving the next ledger report
+ok - hung destinations refuse readiness while inactive and ledger outcomes both progress
+actionable: inactive terminal outcome awaiting captain presentation: child=z-ready state=done pr=https://github.com/owner/repo/pull/3
+actionable: inactive terminal outcome awaiting captain presentation: child=z-ready state=done pr=https://github.com/owner/repo/pull/3
+ok - ledger and cadence readiness share deadlines without surviving forge processes
+ok - deadline-truncated run reads return unknown and create no terminal outcome
+ok - the forced first cadence visit preserves a measured full-second floor after real stalled ledger proof
+ok - ledger delivery carries the report pointer, the failed verb, and each new terminal line
+ok - pr= requires the recorded PR or a ready-signal terminal line, whatever its stamp, and never a scout
+ok - terminal lines arriving during state reads remain ledger-owned
+ok - inactive and ledger paths reconcile one raced completion without hiding later events
+ok - progress after an inactive fallback starts a distinct terminal event
+ok - complete long ledger lines retain distinct receipt identities
+ok - a ledger line still being appended waits for its newline
+ok - the remote route carries a child's ledger line once
+ok - report delivers a child's final line, owes nothing twice, and refuses only an unwritable channel
+actionable: child outcome needs parent report: child=child state=done (missing or unreadable parent binding .fm-secondmate-parent)
+ok - a pending ship done: is delivered by report after teardown removed the worktree
+ok - report preserves teardown's metadata-before-scan lock order
+actionable: child outcome needs parent report: child=child state=failed (missing or unreadable parent binding .fm-secondmate-parent)
+ok - relative local parent homes fail closed
+ok - invalid secondmate markers block routing and surface the obligation
+ok - remote parent-replies mirror input is durable and idempotent
+ok - reused task ids retain per-incarnation terminal receipts
+ok - legacy metadata rewrites preserve terminal receipt identity
+ok - relaunch cannot replace metadata during terminal snapshot
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - terminal reconciliation ignores heartbeat backoff state
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - scan marker replaces a symlink without overwriting its target
+ok - nonterminal and captain-held workers remain outside inactive terminal reporting
+ok - watcher hook wakes for terminal loss and preserves idle secondmate exemption
+ok - the real watcher poll delivers a child's terminal ledger line to the parent channel
+actionable: inactive terminal outcome awaiting captain presentation: child=b state=done
+ok - stalled state reads are bounded without starving later children
+actionable: inactive terminal outcome awaiting captain presentation: child=b state=done
+actionable: inactive terminal outcome awaiting captain presentation: child=a state=failed
+ok - stalled liveness reads are bounded without starving later children
+ok - aggregate scan budget includes durable wake operations
+actionable: inactive terminal outcome needs parent report: child=child state=failed (missing or unreadable parent binding .fm-secondmate-parent)
+ok - notice recovery remains idempotent across queue acknowledgement
+ok - a secondmate home with no parent binding names the missing binding instead of failing quietly
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - reconciliation makes zero forge or PR API calls
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - reconciliation state reads set no-forge mode
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=failed
+ok - a terminal outcome names no pull request when its run opened none
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done pr=https://example.test/owner/repo/pull/42
+ok - a terminal outcome names the pull request its own run opened
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done pr=https://github.com/owner/repo/pull/7
+ok - a status-log sourced outcome keeps the pull request that record named
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done pr=https://gitlab.example/group/sub/project/-/merge_requests/8
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done pr=https://gerrit.example/c/group/project/+/4201
+ok - a status-log outcome keeps GitLab and Gerrit review links
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - a status-log outcome without its own pull request carries none
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - a status-log outcome takes no pull request from another line
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - a status-log outcome never claims a pull request mentioned in prose
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - a scout's terminal outcome carries no pull request
+ok - a failure the crew's own last word contradicts is never presented
+ok - a success the crew's own last word contradicts is never presented
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=failed
+ok - a run-step failure is not suppressed by the crew's own earlier word
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=failed
+ok - a stale pause line does not suppress the failure that followed it
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=failed
+ok - a genuine, uncontradicted failure still reaches the captain
+all inactive reconciliation tests passed
+FM_TEST_END 2026-11-05T23:09:47Z tests/fm-inactive-reconcile.test.sh exit=0 duration_ms=125438 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=125475
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=125438 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-inactive-reconcile.test.sh duration_ms=125438
+FM_TEST_BEGIN 2026-11-05T23:09:47Z tests/fm-dod-lib.test.sh family=pure-contract-unit expected_gate_skip=none
+ok - Gerrit readiness caps custody, revision and resolver reads at the scan deadline
+ok - a canonical PR requires destination metadata even when its head is published
+ok - scout done: is not gated
+ok - unpushed ship done: is refused
+ok - no-mistakes pre-validation done: is not gated
+ok - named head on a remote-tracking ref is accepted
+ok - a moved remote branch that lacks the named head is refused
+ok - a 40-hex token in the note is not the named head
+ok - a recorded merged PR satisfies the gate after prune
+ok - the merged-PR short-circuit applies only to the recorded PR the done line names
+ok - a forge-recorded head for the named PR is accepted without a local object
+ok - a direct-PR recorded head does not cover a later unpushed commit
+ok - CI-ready notes require checks green and an actual PR reference
+ok - no-mistakes CI-ready done: with extra text is gated
+ok - keyed and spaced ship done: lines are gated
+ok - local-only linked named branch is reachable from the project clone
+ok - local-only detached HEAD only in the disposable copy is refused
+ok - standalone local-only done: requires the named head in the project clone
+ok - non-done lines are not gated
+ok - fenced and indented Captain lines are not authorized intent
+ok - PR-based DoD draft check uses gh-axi
+ok - promotion keeps a scout's recorded base branch and refuses local-only for it
+ok - default-base promotion emits a PR destination only for publishing modes
+ok - forge=external composes with direct-PR only and refuses a base branch
+ok - external rule one forbids origin and task-prefixed pushes and names only the backup copy
+ok - external DoD renders the contract, the review grammar, and the adapter, and refuses without one
+ok - external review done: accepted on a canonical URL alone without a backup; PR, non-https, query, fragment, forge, and pattern mismatches refused
+ok - external review done with a backup: refused until HEAD is under refs/remotes/backup/backup/, then accepted
+ok - worker role names the skill and its fallback skill file
+all fm-dod-lib tests passed
+FM_TEST_END 2026-11-05T23:09:58Z tests/fm-dod-lib.test.sh exit=0 duration_ms=11118 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=11147
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=11118 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-dod-lib.test.sh duration_ms=11118
+FM_TEST_BEGIN 2026-11-05T23:09:58Z tests/fm-pr-check-security.test.sh family=pr-forge expected_gate_skip=none
+ok - legacy watcher and parent notices are independent in either order and reset on re-arm
+ok - legacy polls wake once without merge proof and reset their notice on re-arm
+ok - registration refuses a PR on the wrong destination
+ok - destination proof fails closed through readiness, polling, restart, and legacy task records
+ok - raw-byte parser accepts canonical URLs and rejects the complete adversarial matrix
+ok - GitHub Enterprise config resolves override, home, then the library code root
+ok - GitHub Enterprise hosts are accepted only when the home names them and their host reaches every forge call
+ok - GitLab merge requests are followed on any instance and never wake falsely
+ok - Forgejo poll reads one pull request by number through tea api and wakes only on merged true
+ok - Forgejo login match parses tea's JSON in every line shape, in the helper and the static poll
+ok - the Gerrit watch wakes only on an explicit merged status and never on submittability
+ok - Gerrit arming records no patch set revision and the merge path refuses to submit
+ok - Gerrit arming accepts a published HEAD only by the change's current patch set tree
+ok - a no-mistakes Gerrit ready report requires the pipeline's fixes recovered into the published copy
+ok - validated merged polls notify once and retire before the next watcher cycle
+ok - a repeat identical merged poll for an already-notified task is absorbed, never queued as a main-blocking row
+ok - a failed upward merge report keeps its poll armed for repair and retry
+ok - staged self-merge and poll interleavings are never silent
+ok - queued merges retain their away authority after captain return
+ok - poll distinguishes attended authorization from external landing
+ok - accepted merge authority refuses rebound task metadata
+ok - accepted merge authority persists under the lifecycle lock
+ok - teardown cannot race merged-poll authority consumption
+ok - poll retirement preserves a replacement authority record
+ok - a merge detected by the poll is reported upward from a secondmate home exactly once
+ok - a different merged PR for the same task gets its own first notification
+ok - a merged poll on a persistent secondmate retires silently: no outcome, marker, or wake, and every lifecycle artifact preserved
+ok - queue, receipt, and every fixed-path removal crash point recover without loss or repeated execution
+ok - open/red, closed-unmerged, malformed, and forge errors remain armed until an exact merged transition
+ok - replacement, nonterminal, tampered, and custom results receive no deletion authority
+ok - queue failure and untrusted receipts preserve canonical poll evidence
+ok - GitHub and GitLab exact merged results share one retirement path
+ok - PR and teardown entrypoints reject invalid arguments before every side effect
+ok - arming refuses a draft pull request, naming it, and arms a ready or unreadable one
+ok - fm-pr-check refuses to record a PR or arm a merge watch on a secondmate record
+ok - fm-pr-check refuses to register a PR whose named head is only in the worker copy
+ok - fm-pr-check refuses a direct-PR registration while a later commit is only in the copy
+ok - the scan records the PR a done line reports and leaves prose, scouts and recorded PRs alone
+ok - the scan reports a refused registration once and records the PR on a later retry
+ok - the scan retries a refused task within two sweeps despite a hanging registration
+ok - the scan starts a later sweep at a different task so a hanging registration cannot starve it
+ok - the scan publishes the poll of a task whose pr= has none
+ok - the scan keeps a PR the supervisor recorded during its registration
+ok - the scan leaves a merged task's retired poll alone
+ok - the scan arms a replacement PR despite an older PR's merge marker
+ok - the watcher sweep scans only with config/pr-register-scan present, then records a reported PR and queues a refusal
+ok - valid direct and merge flows record exact metadata and reject multiline head metadata
+ok - rejected metacharacter bytes remain inert at generation and watcher time
+ok - static poll emits only exact merges or one missing-base notice and remains watcher-bounded
+ok - interrupted atomic preparation cleans private temporaries and publishes nothing
+ok - concurrent watchers observe only complete private poll publications
+ok - poll publication paths refuse symlinks and directories
+ok - live poll and custom-check artifacts require private single-link files
+ok - registered generations survive template updates and relaunch metadata without executing sidecar code or trusting forged bytes
+ok - a poll armed before a volume renumber is re-recorded under the control lock and keeps detecting merges
+ok - a renumbered registration is never re-recorded around a tampered artifact: swapped-check altered-check swapped-sidecar altered-sidecar altered-template-hash wrong-mode hardlinked-check split-device foreign-device, or a pending retirement
+ok - direct re-arm publication waits without replacing an armed poll
+ok - device re-record publication waits without rewriting its registration
+ok - post-rename poll validation faults revoke both names and allow a clean retry
+ok - bootstrap does not rewrite unauthenticated checks or emit retired migration diagnostics
+ok - watcher signals promptly stop custom checks and clean private state
+ok - returned custom check descendants are drained on installed and fallback timeout paths
+ok - a timed-out custom check surfaces its timeout and earlier output on installed and fallback timeout paths
+ok - teardown removes safe poll artifacts and refuses directory-shaped check files without traversal
+FM_TEST_END 2026-11-05T23:15:05Z tests/fm-pr-check-security.test.sh exit=0 duration_ms=307184 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=307212
+FM_TEST_SUMMARY_FAMILY family=pr-forge count=1 duration_ms=307184 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-pr-check-security.test.sh duration_ms=307184
+ACCEPTED_INCOMPLETE_SUITE=tests/fm-control-relaunch.test.sh;Pi-unavailable;prior-targeted-cases-and-S7-accepted;not-repeated
+TEST_PHASE_EXIT=0
+--- stderr
+Note: switching to '27406d7c42aad8136b7fe6800bfafae9cfc1c403'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+=== deleted ls-up3103-test-01m6pv-r2
+=== scratch now: 

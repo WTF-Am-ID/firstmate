@@ -1,0 +1,20 @@
+=== runner ls-proof-run.sh a1e02205dfc1eb46e634fb03ff2e96a0882bf3bc11d5021e8841c6f18443e339
+=== source e443cc009b1f9fcb116c88d4fcf931f3641dc3cadb23eaeb63e41e6871a43c50  ~/up3103-test-01m6pv-source.tar.gz
+=== guest script ab591dd3363990a87c3736fed18dfcf63106af47e7d56eaa6e18158d396e4348  ~/up3103-test-01m6pv-guest.sh
+=== launch 2026-11-05T23:06:26Z ci-bench-202610201338 ls-up3103-test-01m6pv project ls-ci-scratch as_user=ubuntu
+=== ready wait up to 180s for root growth to finish
+=== ready obs 1 t=0s ready=1 uptime=3.81 unit=loaded/inactive/dead result=success job=none exit_mono=2989424 exit_status=0 root=/dev/sda2 disk=/dev/sda part=2 kernel_bytes=21368913408 ondisk_bytes=21368913408 root_avail=18409254912
+=== ready obs 2 t=1s ready=1 uptime=4.88 unit=loaded/inactive/dead result=success job=none exit_mono=2989424 exit_status=0 root=/dev/sda2 disk=/dev/sda part=2 kernel_bytes=21368913408 ondisk_bytes=21368913408 root_avail=18409254912
+=== ready after 1s
+=== host_boot 56499120-68e6-43e9-b731-4cb022666369 guest_boot 42f7e0d3-57ca-460f-9103-8c8e5c5c32fc
+=== guest PRETTY_NAME="Ubuntu 24.04.5 LTS"
+=== guest VERSION_ID="24.04"
+=== guest kvm
+=== guest systemd
+=== running as ubuntu uid=1000 gid=1000 home=~
+=== PROOF_EXIT 128
+--- stdout
+--- stderr
+fatal: Remote branch fm/up-fm-3103 not found in upstream origin
+=== deleted ls-up3103-test-01m6pv
+=== scratch now: 
