@@ -1,0 +1,41 @@
+{
+  "revision": "0eac5de85c81452a5f538bef0eb5283153268a44",
+  "base": "4869cf58e36b4fe9113cc3684648ed4e9fb4d0dc",
+  "candidate_preparation": "Git bundle freshly cloned on host; exact HEAD and clean status checked before adding disposable probe driver; .git excluded from archive.",
+  "source_archive_sha256": "e1da93dcc5f8b6a5be82e1a1d1807d5c5fa4df1f8b83c4913f12003673f7e72d",
+  "protected_runner_sha256": "01752dd8824ac5d0719be750a25b6db565014cfdee964b0a49fe25e37bea1b2b",
+  "live_probes": {
+    "guest": "lsfm8096-test-01m6b",
+    "command": "runuser -u fm8096test -- bash /opt/src/.test-phase/live-probes.sh /opt/src",
+    "exit": 0,
+    "scenarios": 6
+  },
+  "closure": {
+    "guest": "lsfm8096-test-01m6c",
+    "path": "/opt/src",
+    "command": "bin/fm-test-run.sh tests/fm-procevent.test.sh",
+    "user": "fm8096test",
+    "exit": 0,
+    "duration_ms": 299872,
+    "gate_skipped": false
+  },
+  "setup_attempts": [
+    "Guest 1 stopped before product execution because gawk needed libmpfr6. Added package to guest preparation.",
+    "Guest 2 passed six live probes; focused suite stopped at sweep-home because Node was absent. Confirmed node and nodejs absent with command -v and dpkg-query. Added Debian nodejs dependencies.",
+    "Guest 3 completed focused closure with exit 0 and empty stderr."
+  ],
+  "cleanup": {
+    "remote": "All three task guests deleted by protected runner. Task-owned remote bundle, clone, tarball, dependencies, scripts and consoles removed.",
+    "local": "Deletion of .test-phase was rejected by command guard: rm -f style commands are not permitted. No alternate deletion attempted. Its bundle and three scripts remain in the worktree scratch directory.",
+    "evidence": "Retained in the assigned evidence directory."
+  },
+  "files": {
+    "live-cli-transcript.txt": "75460864dcde360c258262601c53a7676c6cf11c432bdb74664e323afaeadb43",
+    "live-probes.sh": "6d26f268cdada30443d826e8aaf3264de8ca0b0fca07d8c86c95081be1632fd2",
+    "guest.sh": "71eb991e2c7998b0c2d3f5c185e78000437ac93c4abac3c9be3c95e733720176",
+    "guest-closure.sh": "414303810ea8ad8f5175ba0da9e47338da2d61769ceb525e357fc5efb8462016",
+    "ci-console-1.txt": "bb17ea70a585b2569de3cbef53e3a85834ea66c3d87b5a9e4b029486318fad91",
+    "ci-console-2.txt": "289eb24c31dfe4f532c161c23f2c33b60514cb116c638e9d9c0bc5d6b1ff3ea8",
+    "ci-console-3.txt": "f0db7e07f490de94ab9c80d40f551ca736cb1de1fe963716c52a48ae52c47bc3"
+  }
+}

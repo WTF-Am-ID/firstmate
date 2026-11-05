@@ -1,0 +1,51 @@
+Candidate: 0eac5de85c81452a5f538bef0eb5283153268a44
+Guest: lsfm8096-test-01m6b, Debian 13, unprivileged fm8096test
+Command: bash /opt/src/.test-phase/live-probes.sh /opt/src
+Synthetic blocking source commands and private homes and claims only.
+
+SCENARIO delayed reconcile starts the synthetic command
+registered: delayed-src (plain)
+observed lease age 3.035s, configured lease 2s
+reconciled: published=1 started=1 stopped=0 uncertain=0 failed=0
+reconcile exit=0
+source command started pid=2517
+SOURCE                       ADAPTER      OWNER      PENDING
+delayed-src                  plain        live       0
+SCENARIO detached runner stops after its lease is no longer renewed
+runner pid=2154 exited without owner renewal
+SCENARIO ensure-listening refreshes a stale caller lease
+registered: ensure-src (plain)
+observed lease age 3.083s, configured lease 2s
+source command started pid=3660
+SOURCE                       ADAPTER      OWNER      PENDING
+ensure-src                   plain        live       0
+runner pid=3330 exited without owner renewal
+SCENARIO an attached start remains healthy past the short lease
+registered: attached-src (plain)
+source command started pid=4639
+attached caller alive after 5s with 2s lease
+not-autohandled: attached-src (left for the handler; still unacknowledged)
+captured: /tmp/fm8096-live.yefCDl/attached/state/procevent-inbox/attached-src.1.result
+synthetic-payload
+SCENARIO a real runner descendant cannot renew another stale home
+registered: target-src (plain)
+observed lease age 3.085s, configured lease 2s
+registered: parent-src (plain)
+not-autohandled: parent-src (left for the handler; still unacknowledged)
+captured: /tmp/fm8096-live.yefCDl/parent/state/procevent-inbox/parent-src.1.result
+inherited runner marker=1
+descendant ensure-listening exit=1
+stale target lease unchanged and target source command never started
+SCENARIO removal of the owning state root stops its runner
+registered: gone-src (plain)
+reconciled: published=0 started=1 stopped=0 uncertain=0 failed=0
+source command started pid=6852
+owner state root removed while its 30s lease was fresh
+runner pid=6491 exited without owner renewal
+LIVE_PROBES_EXIT=0
+retired: delayed-src
+retired: ensure-src
+retired: attached-src
+retired: target-src
+retired: parent-src
+retired: gone-src
