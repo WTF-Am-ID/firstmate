@@ -1,0 +1,69 @@
+CI-box current Test attempt for candidate 7d3965b5c5d3b222b0478e26edb657ffe89970c2
+Approved runner SHA256: a1e02205dfc1eb46e634fb03ff2e96a0882bf3bc11d5021e8841c6f18443e339
+Command: sudo bash ~/ls-proof-run.sh ls-up8155-test-01m6 ~/ls-up8155-test-01m6-source.tar.gz ~/ls-up8155-test-01m6-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+
+Thu Nov  5 21:45:34 UTC 2026
+ 644412  644411       25:31 sudo bash ~/ls-proof-run.sh ls-u8170-r17-50b1108b ~/ls-u8170-r17-50b1108b-upload/source.tar.gz ~/ls-u8170-r17-50b1108b-upload/guest.sh --image ci-bench-202610201338 --as-user ubuntu --debs ~/ls-u8170-r17-50b1108b-upload/debs --wait-ci 3600
+ 644414  644412       25:31 bash ~/ls-proof-run.sh ls-u8170-r17-50b1108b ~/ls-u8170-r17-50b1108b-upload/source.tar.gz ~/ls-u8170-r17-50b1108b-upload/guest.sh --image ci-bench-202610201338 --as-user ubuntu --debs ~/ls-u8170-r17-50b1108b-upload/debs --wait-ci 3600
+ 647713  647712       19:01 sudo bash ~/ls-proof-run.sh ls-up3103-proof037 ~/proof037-source.tar.gz ~/proof037-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 647715  647713       19:01 bash ~/ls-proof-run.sh ls-up3103-proof037 ~/proof037-source.tar.gz ~/proof037-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 647725  647715       19:01 flock -w 3600 9
+ 651370       1       13:13 sudo bash ~/ls-proof-run.sh ls-up8155-test-071bf4b ~/up8155-test-071bf4b-src.tar.gz ~/up8155-test-071bf4b-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 651372  651370       13:13 bash ~/ls-proof-run.sh ls-up8155-test-071bf4b ~/up8155-test-071bf4b-src.tar.gz ~/up8155-test-071bf4b-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 651384  651372       13:13 flock -w 3600 9
+ 656024  656023       03:43 sudo bash ~/ls-proof-run.sh ls-up8155-test-01m6 ~/ls-up8155-test-01m6-source.tar.gz ~/ls-up8155-test-01m6-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 656026  656024       03:43 bash ~/ls-proof-run.sh ls-up8155-test-01m6 ~/ls-up8155-test-01m6-source.tar.gz ~/ls-up8155-test-01m6-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 656036  656026       03:43 flock -w 3600 9
+ 657937  657936       00:00 bash -c date -u; ps -eo pid,ppid,etime,args | grep -E "ls-proof-run.sh ls-|flock -w 3600"
+ 657940  657937       00:00 grep -E ls-proof-run.sh ls-|flock -w 3600
+
+Thu Nov  5 21:48:49 UTC 2026
+    PID    PPID     ELAPSED COMMAND
+ 644414  644412       28:46 bash ~/ls-proof-run.sh ls-u8170-r17-50b1108b ~/ls-u8170-r17-50b1108b-upload/source.tar.gz ~/ls-u8170-r17-50b1108b-upload/guest.sh --image ci-bench-202610201338 --as-user ubuntu --debs ~/ls-u8170-r17-50b1108b-upload/debs --wait-ci 3600
+ 647715  647713       22:16 bash ~/ls-proof-run.sh ls-up3103-proof037 ~/proof037-source.tar.gz ~/proof037-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 651372  651370       16:29 bash ~/ls-proof-run.sh ls-up8155-test-071bf4b ~/up8155-test-071bf4b-src.tar.gz ~/up8155-test-071bf4b-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 656026  656024       06:59 bash ~/ls-proof-run.sh ls-up8155-test-01m6 ~/ls-up8155-test-01m6-source.tar.gz ~/ls-up8155-test-01m6-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 656036  656026       06:58 flock -w 3600 9
+
+Thu Nov  5 21:50:57 UTC 2026
+    PID    PPID     ELAPSED COMMAND
+ 644414  644412       30:54 bash ~/ls-proof-run.sh ls-u8170-r17-50b1108b ~/ls-u8170-r17-50b1108b-upload/source.tar.gz ~/ls-u8170-r17-50b1108b-upload/guest.sh --image ci-bench-202610201338 --as-user ubuntu --debs ~/ls-u8170-r17-50b1108b-upload/debs --wait-ci 3600
+ 647715  647713       24:24 bash ~/ls-proof-run.sh ls-up3103-proof037 ~/proof037-source.tar.gz ~/proof037-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 651372  651370       18:37 bash ~/ls-proof-run.sh ls-up8155-test-071bf4b ~/up8155-test-071bf4b-src.tar.gz ~/up8155-test-071bf4b-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 656026  656024       09:07 bash ~/ls-proof-run.sh ls-up8155-test-01m6 ~/ls-up8155-test-01m6-source.tar.gz ~/ls-up8155-test-01m6-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 656036  656026       09:07 flock -w 3600 9
+
+Thu Nov  5 21:53:31 UTC 2026
+    PID    PPID     ELAPSED COMMAND
+ 656024  656023       11:40 sudo bash ~/ls-proof-run.sh ls-up8155-test-01m6 ~/ls-up8155-test-01m6-source.tar.gz ~/ls-up8155-test-01m6-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 656026  656024       11:40 bash ~/ls-proof-run.sh ls-up8155-test-01m6 ~/ls-up8155-test-01m6-source.tar.gz ~/ls-up8155-test-01m6-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 656036  656026       11:40 flock -w 3600 9
+NO_GUEST_CONSOLE_EXIT=0
+
+The Test phase cancelled only its own blocked flock PID 656036 after approximately 11m47s to preserve the 30-minute phase budget and permit cleanup. No guest was launched. The runner prints its configured 3600s limit in the refusal message, not actual elapsed waiting time.
+Runner result:
+{
+  "chunk_id": "e1cb02",
+  "wall_time_seconds": 0.000002959,
+  "exit_code": 75,
+  "original_token_count": 22,
+  "output": "refused: another scratch guest run held the lock for 3600s; nothing launched\nTerminated\n"
+}
+Remote cleanup:
+{
+  "chunk_id": "cfc66d",
+  "wall_time_seconds": 0.31040575,
+  "exit_code": 1,
+  "original_token_count": 13,
+  "output": "OWN_STAGING_ABSENT_EXIT=0\n    PID    PPID COMMAND\n"
+}
+The cleanup shell exited 1 only because ps found no remaining listed PIDs. Staged file absence was confirmed with exit 0. Other tasks and the shared lock were left untouched.
+
+Local scratch cleanup was rejected before execution:
+rm -f -- .test-phase-8155/current-test-01M6/candidate.bundle .test-phase-8155/current-test-01M6/source.tar.gz .test-phase-8155/current-test-01M6/guest.sh .test-phase-8155/current-test-01M6/live.sh
+Automatic approval review: rm -f style commands are not permitted. Use a safer approach.
+No alternate deletion route was attempted. All four files remain in the ignored .test-phase-8155/current-test-01M6/ directory, approximately 50 MiB. Existing scratch was not touched.
+Final git status --short produced no output. HEAD remains 7d3965b5c5d3b222b0478e26edb657ffe89970c2.
+Final scratch guest inventory contained only the unrelated ls-up3103-proof037. Our ls-up8155-test-01m6 guest never launched, and our runner, sudo wrapper, lock waiter, and local SSH child all exited.
+
+Prior author proof was read and copied as prior-author-focused-console.txt. SHA256 verified as 8cc71e4218815e80e09e117d5d44d8d92e0fedf3cdaaf38c6911c6a82adb49ba. It records exact revision 7d3965b5c5d3b222b0478e26edb657ffe89970c2 and both focused files passing. It is prior execution, not a live scenario in this Test phase.
