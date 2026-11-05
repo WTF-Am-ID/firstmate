@@ -1,0 +1,15 @@
+{
+  "revision": "9b15e9d1386ad046c8233df42312a2f00754f8ba",
+  "command": "TMPDIR=\"$PWD/.phase-test/tmp\" bash .phase-test/live-proof.sh",
+  "exit_status": 0,
+  "transport": "synthetic local SSH boundary; real fm-on.sh, sender and receiver executables",
+  "baseline_receiver_revision": "4869cf58e36b4fe9113cc3684648ed4e9fb4d0dc",
+  "transcript": "live-product-transcript.log",
+  "focused_runner_exit_status": 0,
+  "focused_scripts": [
+    "tests/fm-remote-inherit-generation.test.sh",
+    "tests/fm-bootstrap-network-parallel.test.sh"
+  ],
+  "remaining_fixture_processes": [],
+  "scratch_removed": ".phase-test"
+}

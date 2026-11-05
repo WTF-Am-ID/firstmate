@@ -1,0 +1,138 @@
+Revision: 9b15e9d1386ad046c8233df42312a2f00754f8ba
+Real sender/receiver; synthetic homes; fake SSH transport only.
+
+CHECKPOINT: older receiver generation usage refusal preserves inheritance at floor zero
+CLI transcript old.out:
+pushed: config/crew-harness
+unchanged: data/captain-shared.md
+Receiver committed generation/bytes/SHA256/operation:
+1
+15
+4db8b57826b189d580e4969b90e99620390bbab679a4079eddd93886b5b886f7
+put
+Receiver payload:
+current sender
+
+CHECKPOINT: missing sender counter recovers above the receiver under the sender transaction lock
+CLI transcript missing.out:
+pushed: config/crew-harness
+unchanged: data/captain-shared.md
+Durable sender counter: 101
+Receiver committed generation/bytes/SHA256/operation:
+101
+15
+4db8b57826b189d580e4969b90e99620390bbab679a4079eddd93886b5b886f7
+put
+Receiver payload:
+current sender
+
+CHECKPOINT: lower, restored and same-generation conflicting sender counters recover
+CLI transcript restored-1.out:
+pushed: config/crew-harness
+unchanged: data/captain-shared.md
+CLI transcript restored-101.out:
+pushed: config/crew-harness
+unchanged: data/captain-shared.md
+CLI transcript restored-20.out:
+pushed: config/crew-harness
+unchanged: data/captain-shared.md
+Durable sender counter: 104
+Receiver committed generation/bytes/SHA256/operation:
+104
+25
+6240a6f3ecedf7cf0e8302ce97f7e1a57a8a8a563882b5b5a78264aa3e3cc1e0
+put
+Receiver payload:
+sender after restore 101
+
+CHECKPOINT: delayed older and conflicting same-generation payloads remain refused
+CLI transcript conflict.out:
+error: inheritance generation conflicts with its committed payload
+CLI transcript delayed.out:
+error: inheritance write generation is superseded
+Durable sender counter: 104
+Receiver committed generation/bytes/SHA256/operation:
+104
+25
+6240a6f3ecedf7cf0e8302ce97f7e1a57a8a8a563882b5b5a78264aa3e3cc1e0
+put
+Receiver payload:
+sender after restore 101
+
+CHECKPOINT: racing pushes commit increasing generations through the shared sender transaction
+CLI transcript race-first.out:
+unchanged: config/crew-harness
+unchanged: data/captain-shared.md
+CLI transcript race-second.out:
+unchanged: config/crew-harness
+unchanged: data/captain-shared.md
+Durable sender counter: 106
+Receiver committed generation/bytes/SHA256/operation:
+106
+25
+6240a6f3ecedf7cf0e8302ce97f7e1a57a8a8a563882b5b5a78264aa3e3cc1e0
+put
+Receiver payload:
+sender after restore 101
+
+CHECKPOINT: malformed or unreadable generation state fails closed without changing inherited content
+CLI transcript counter-malformed.out:
+CLI transcript probe-empty.out:
+error: receiver inheritance generation is malformed
+CLI transcript probe-failed.out:
+CLI transcript probe-malformed.out:
+error: receiver inheritance generation is malformed
+CLI transcript probe-refused.out:
+CLI transcript probe-unreadable.out:
+CLI transcript record-malformed.out:
+error: inheritance generation record is malformed
+CLI transcript record-unreadable.out:
+error: inheritance generation record is unsafe or unreadable
+Durable sender counter: not-a-generation
+Receiver committed generation/bytes/SHA256/operation:
+106
+25
+6240a6f3ecedf7cf0e8302ce97f7e1a57a8a8a563882b5b5a78264aa3e3cc1e0
+put
+Receiver payload:
+sender after restore 101
+Unreadable sender counter exit: 1
+
+CHECKPOINT: unreadable sender counter leaves receiver unchanged
+CLI transcript sender-unreadable.out:
+{run-worktree}/bin/fm-secondmate-nudge-lib.sh: line 32: {run-worktree}/.phase-test/tmp/fm-remote-inherit-generation.guQgVg/parent/state/.remote-inherit-fixture.generation: Permission denied
+Durable sender counter: 300
+Receiver committed generation/bytes/SHA256/operation:
+106
+25
+6240a6f3ecedf7cf0e8302ce97f7e1a57a8a8a563882b5b5a78264aa3e3cc1e0
+put
+Receiver payload:
+sender after restore 101
+Unsafe source exit: 1; transport calls: zero
+
+CHECKPOINT: unsafe source is rejected before any remote command
+CLI transcript source-refused.out:
+error: inherited source is unsafe: {run-worktree}/.phase-test/tmp/fm-remote-inherit-generation.guQgVg/parent/config/crew-harness
+Durable sender counter: 201
+Receiver committed generation/bytes/SHA256/operation:
+106
+25
+6240a6f3ecedf7cf0e8302ce97f7e1a57a8a8a563882b5b5a78264aa3e3cc1e0
+put
+Receiver payload:
+sender after restore 101
+Genuine baseline receiver push exit: 0
+
+CHECKPOINT: genuine older receiver usage refusal preserves inheritance
+CLI transcript baseline-receiver.out:
+pushed: config/crew-harness
+unchanged: data/captain-shared.md
+Durable sender counter: 202
+Receiver committed generation/bytes/SHA256/operation:
+202
+35
+9bb9ed698674fce8b53362a29ded468b681fd44ac69cd013629b5d5e741a5b34
+put
+Receiver payload:
+payload for genuine older receiver
