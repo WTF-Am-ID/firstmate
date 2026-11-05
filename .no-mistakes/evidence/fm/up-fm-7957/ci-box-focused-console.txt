@@ -1,0 +1,172 @@
+=== runner ls-proof-run.sh 01752dd8824ac5d0719be750a25b6db565014cfdee964b0a49fe25e37bea1b2b
+=== source f0eecb393164f56b72bec4b27024d041e61d0aa6258865acb098d6e857c75796  ~/source.tar.gz
+=== guest script 3648ccedea3ad0725b5f0105640add6441ba6ec326c4ad57f0c949483e56f55f  ~/focused-proof.sh
+=== launch 2026-11-05T16:26:10Z images:debian/13 ls-u7957-gate-01m6p7 project ls-ci-scratch
+=== ready wait up to 180s for root growth to finish
+=== ready obs 1 t=0s ready=0 uptime=3.84 unit=loaded/activating/start-pre result=success job=112 exit_mono=0 exit_status=0 root=/dev/sda2 disk=/dev/sda part=2 kernel_bytes=4189044224 ondisk_bytes=21368913408 root_avail=3222663168
+=== ready obs 2 t=1s ready=1 uptime=4.93 unit=loaded/inactive/dead result=success job=none exit_mono=4087350 exit_status=0 root=/dev/sda2 disk=/dev/sda part=2 kernel_bytes=21368913408 ondisk_bytes=21368913408 root_avail=19874553856
+=== ready obs 3 t=2s ready=1 uptime=6.03 unit=loaded/inactive/dead result=success job=none exit_mono=4087350 exit_status=0 root=/dev/sda2 disk=/dev/sda part=2 kernel_bytes=21368913408 ondisk_bytes=21368913408 root_avail=19874553856
+=== ready after 2s
+=== prep dpkg_exit=0
+=== prep git-man_1%3a2.47.3-0+deb13u1_all.deb
+=== prep git_1%3a2.47.3-0+deb13u1_amd64.deb
+=== prep jq_1.7.1-6+deb13u4_amd64.deb
+=== prep libbrotli1_1.1.0-2+deb13u1_amd64.deb
+=== prep libbz2-1.0_1.0.8-6_amd64.deb
+=== prep libcom-err2_1.47.2-3+b12_amd64.deb
+=== prep libcrypt1_1%3a4.4.38-1_amd64.deb
+=== prep libcurl3t64-gnutls_8.14.1-2+deb13u7_amd64.deb
+=== prep libdb5.3t64_5.3.28+dfsg2-9_amd64.deb
+=== prep liberror-perl_0.17030-1_all.deb
+=== prep libffi8_3.4.8-2_amd64.deb
+=== prep libgdbm-compat4t64_1.24-2_amd64.deb
+=== prep libgdbm6t64_1.24-2_amd64.deb
+=== prep libgmp10_2%3a6.3.0+dfsg-3_amd64.deb
+=== prep libgnutls30t64_3.8.9-3+deb13u4_amd64.deb
+=== prep libgssapi-krb5-2_1.21.3-5+deb13u1_amd64.deb
+=== prep libhogweed6t64_3.10.1-1_amd64.deb
+=== prep libidn2-0_2.3.8-2_amd64.deb
+=== prep libjq1_1.7.1-6+deb13u4_amd64.deb
+=== prep libk5crypto3_1.21.3-5+deb13u1_amd64.deb
+=== prep libkeyutils1_1.6.3-6_amd64.deb
+=== prep libkrb5-3_1.21.3-5+deb13u1_amd64.deb
+=== prep libkrb5support0_1.21.3-5+deb13u1_amd64.deb
+=== prep libldap2_2.6.10+dfsg-1_amd64.deb
+=== prep liblzma5_5.8.1-1+deb13u2_amd64.deb
+=== prep libnettle8t64_3.10.1-1_amd64.deb
+=== prep libnghttp2-14_1.64.0-1.1+deb13u1_amd64.deb
+=== prep libnghttp3-9_1.8.0-1_amd64.deb
+=== prep libngtcp2-16_1.11.0-1+deb13u1_amd64.deb
+=== prep libngtcp2-crypto-gnutls8_1.11.0-1+deb13u1_amd64.deb
+=== prep libonig5_6.9.9-1+b1_amd64.deb
+=== prep libp11-kit0_0.25.5-3_amd64.deb
+=== prep libperl5.40_5.40.1-6+deb13u1_amd64.deb
+=== prep libpsl5t64_0.21.2-1.1+b1_amd64.deb
+=== prep librtmp1_2.4+20151223.gitfa8646d.1-2+b5_amd64.deb
+=== prep libsasl2-2_2.1.28+dfsg1-9_amd64.deb
+=== prep libsasl2-modules-db_2.1.28+dfsg1-9_amd64.deb
+=== prep libssh2-1t64_1.11.1-1+deb13u2_amd64.deb
+=== prep libssl3t64_3.5.7-1~deb13u3_amd64.deb
+=== prep libtasn1-6_4.20.0-2+deb13u1_amd64.deb
+=== prep libunistring5_1.3-2_amd64.deb
+=== prep libzstd1_1.5.7+dfsg-1_amd64.deb
+=== prep openssl-provider-legacy_3.5.7-1~deb13u3_amd64.deb
+=== prep perl-modules-5.40_5.40.1-6+deb13u1_all.deb
+=== prep perl_5.40.1-6+deb13u1_amd64.deb
+=== prep xz-utils_5.8.1-1+deb13u2_amd64.deb
+=== prep zlib1g_1%3a1.3.dfsg+really1.3.1-1+b1_amd64.deb
+=== host_boot 56499120-68e6-43e9-b731-4cb022666369 guest_boot de30618b-e909-4891-8c84-3385c7defeb2
+=== guest PRETTY_NAME="Debian GNU/Linux 13 (trixie)"
+=== guest VERSION_ID="13"
+=== guest kvm
+=== guest systemd
+=== PROOF_EXIT 0
+--- stdout
+EXACT_CANDIDATE=0e8f7b1d0c40ceb02cef9a57f2c0d7e87fbf30ca
+FM_TEST_BEGIN 2026-11-05T16:26:29Z tests/fm-dispatch-resolve.test.sh family=standalone expected_gate_skip=none
+ok - invalid preferred_provider: null
+ok - invalid preferred_provider: false
+ok - invalid preferred_provider: 42
+ok - invalid preferred_provider: []
+ok - invalid preferred_provider: {}
+ok - invalid preferred_provider: ""
+ok - invalid preferred_provider: "Codex"
+ok - invalid preferred_provider: "codex\\n"
+ok - invalid preferred_provider: " codex"
+ok - preferred provider: astra-82-claude-26
+ok - preferred provider: work-account
+ok - preferred provider: exhausted
+ok - preferred provider: unknown
+ok - preferred provider: unknown-one-known-one
+ok - preferred provider: claude-only
+ok - preferred provider: config-override
+ok - preferred provider: prose-why
+ok - preferred provider: absent
+ok - preferred provider: approval
+ok - preferred provider: tie
+ok - preferred provider: floor
+ok - absent key is off: one stderr line, exit 0, no network call
+ok - TYPESAFE_API_KEY= in .env activates the tool; environment and config overrides work
+ok - clear: one rule Choice request, key on the fd header only, spendPriority argmax over every candidate
+ok - TypeSafe base supports environment and .env overrides and rejects unsafe URLs before sending
+ok - OpenRouter clear uses the same output contract and keeps its key out of argv and child environments
+ok - OpenRouter ambiguous, malformed, HTTP, and missing-model paths are handled
+ok - mapping: a declared macos-keychain service and optional account become the lookup, and the key rides the fd header
+ok - precedence: environment, then .env, then the declared source, which is read only when needed
+ok - provider isolation: each provider reads only its own declared service, and a declaration never selects a provider
+ok - effective-home isolation: only the effective config directory's declaration is consulted
+ok - failure distinctions: off, a configuration error, and an unavailable source each read differently and send nothing
+ok - secret containment: the declared key is on no argv, in no output, environment, or file, and only on the fd header
+ok - capability probe: supported or unsupported, with no declaration read and no credential tool run
+ok - with no provider set, other providers' settings leave the original off line unchanged
+ok - systemone posts the unchanged request to its base URL with an optional fd-3 key
+ok - systemone configuration errors, never-send base URL, partial response, and transport failure are handled
+ok - openai maps the Choice request to the Decisions API and its answer back, key on fd 3 only
+ok - the never-send check runs on the final openai request body
+ok - openai malformed, partial, refused, ambiguous, HTTP, and transport paths return to normal intake
+ok - never-send list withholds the request on a match or a bad list, and never prints the value
+ok - rules snapshots and shell quoting preserve the profile protocol
+ok - quota_scope binds an agy candidate to its declared tier row
+ok - no-rule fallback, Agy, Gemini, and documented configurations resolve
+ok - ambiguous: confidence below the fixed floor hands the decision back
+ok - per-rule confidence floors fall to the most probable runner-up that clears its own floor
+ok - only the brief's task sections and scout tag reach the model, with a whole-brief fallback
+ok - escalate: a rule declared approval: captain never yields a profile
+ok - rule floor: known shortfall falls through while unavailable evidence escalates
+ok - declared provider and profile floor evidence are applied in code
+ok - nonnumeric spendPriority evidence is never ranked
+ok - partial and missing quota evidence remain eligible but unranked
+ok - provider-wide and exact quota rows combine into one limiting candidate
+ok - default: no rule matched resolves among the default profiles
+ok - tie: equal spendPriority never breaks by array order
+ok - no rankable candidate: the tool escalates instead of guessing
+ok - native Codex binds to codex-home before default, independently of Pi accounts and row order
+ok - Pi native adapters bind to codex-home with existing fallbacks and schema 5 compatibility
+ok - schema 6: each candidate binds to its account row; schema 5 is unchanged
+ok - quota evidence comes from one quota-axi --json read, and its failure is an error outcome
+ok - API, transport, and response failures are error outcomes with exit 0
+ok - configuration errors exit 2 before any network call
+ok - shared-quota opt-out: no quota snapshot, deterministic declared-order pick, opt-out stated on every candidate
+ok - shared-quota bypasses an unmet rule-level floor: the rule's own profile wins with no quota call
+ok - shared-quota bypasses an unmet profile-level floor: the first declared profile wins with no quota call
+ok - shared-quota keeps preferred_provider narrowing: the preferred family wins in declared order with no quota call
+ok - shared_quota false keeps the unchanged quota-ranked behavior
+# all fm-dispatch-resolve tests passed
+FM_TEST_END 2026-11-05T16:26:48Z tests/fm-dispatch-resolve.test.sh exit=0 duration_ms=19021 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=19060
+FM_TEST_SUMMARY_FAMILY family=standalone count=1 duration_ms=19021 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-dispatch-resolve.test.sh duration_ms=19021
+FOCUSED_EXIT=0
+fm-doc-audience-check: ok surfaces=141 local_links=1188
+DOC_AUDIENCE_EXIT=0
+--- stderr
+Cloning into '/opt/check'...
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint: 	git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint: 	git branch -m <name>
+Note: switching to '0e8f7b1d0c40ceb02cef9a57f2c0d7e87fbf30ca'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+=== deleted ls-u7957-gate-01m6p7
+=== scratch now: 

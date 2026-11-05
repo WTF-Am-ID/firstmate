@@ -1,0 +1,13 @@
+Candidate: 0e8f7b1d0c40ceb02cef9a57f2c0d7e87fbf30ca
+Base inspected: 4869cf58e36b4fe9113cc3684648ed4e9fb4d0dc
+Protected CI-box runner checksum verified: 01752dd8824ac5d0719be750a25b6db565014cfdee964b0a49fe25e37bea1b2b
+First launch attempt: exit 75; shared scratch-guest lock occupied for 60 seconds; nothing launched.
+Retry: --wait-ci 600 acquired lock; disposable Debian 13 VM ls-u7957-gate-01m6p7.
+Fresh clone /opt/check verified exact HEAD before checks.
+bash bin/fm-test-run.sh tests/fm-dispatch-resolve.test.sh: exit 0; no skipped gates.
+bash bin/fm-doc-audience-check.sh: exit 0.
+Proof exit 0; runner process exit 0; guest deleted; scratch project empty at runner completion.
+No real curl probe ran. The focused suite substitutes fake curl, quota-axi, security and uname; it is behavioral fixture coverage, not live network execution.
+The attempted localhost emulator/driver creation was blocked before execution by the command guard as system service modification. No reroute was attempted.
+Only synthetic credentials were prepared. Local temporary certificate/key, package downloads, bundle, tarball and proof script were removed with the task scratch directory. Transferred task tarball, proof script and copied console were removed from ci-box after preserving the console here. Pre-existing package cache was left intact.
+No source or permanent test changes. No other pipeline phase executed.

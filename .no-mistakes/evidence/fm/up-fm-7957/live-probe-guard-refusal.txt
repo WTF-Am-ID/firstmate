@@ -1,0 +1,6 @@
+Candidate: 0e8f7b1d0c40ceb02cef9a57f2c0d7e87fbf30ca
+The command guard rejected the attempted creation of a disposable Python localhost HTTP/TLS emulator and product driver before execution.
+Exact diagnostic: Command blocked by PreToolUse hook: BLOCKED: System service modification not allowed.
+No emulator, real curl probe, or resolver scenario ran as part of that command.
+The rejected command was not reformulated or rerouted. Independent focused-suite and documentation checks were prepared separately for the protected CI-box runner.
+Planned live scenarios: direct-service defaults and no-key off behavior; environment/dotenv precedence and path/trailing-slash construction; invalid URLs refused without HTTP requests; other-provider endpoint and private-key transport preservation.
