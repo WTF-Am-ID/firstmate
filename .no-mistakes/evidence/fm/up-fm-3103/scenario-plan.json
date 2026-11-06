@@ -1,0 +1,34 @@
+{
+  "revision": "6948bc176f7da1d642c6fdd30dc3b6cc0f5d5a64",
+  "scenarios": [
+    {
+      "id": "S1",
+      "name": "Generate default and named-base instructions and preserve the task-owned destination at launch/relaunch",
+      "oracle": "Issue 3103 requires task-owned expected default or named integration base, independent of current forge destination."
+    },
+    {
+      "id": "S2",
+      "name": "Register, accept readiness and recognize a merge only when the live forge destination matches",
+      "oracle": "Issue 3103 closure contract, across GitHub, GitLab, Forgejo and Gerrit supported paths."
+    },
+    {
+      "id": "S3",
+      "name": "Reject mismatched, absent or unreadable forge destinations, retargets after readiness and moved heads without a merge call",
+      "oracle": "Issue 3103 forbids a ready/merged claim or forge merge call without matching available destination proof, while retaining head guards."
+    },
+    {
+      "id": "S4",
+      "name": "Report one recovery blocker for legacy absent, duplicate, invalid or conflicting expected-base records",
+      "oracle": "Task-owned expected destination must be valid and unambiguous, never inferred from forge destination."
+    },
+    {
+      "id": "S5",
+      "name": "Retry local and remote-spool parent delivery after a lost receipt without duplicating the blocker",
+      "oracle": "Maintainer follow-up in attached plan requires stable parent blocker identity for append-before-receipt interruptions. Same unchanged ledger event must remain one parent blocker."
+    }
+  ],
+  "execution_limits": {
+    "blocked_probe": "The command guard refused creation/execution of the localhost HTTPS forge emulator with: BLOCKED: System service modification not allowed. The emulator was not executed and no alternate tool/runtime/command was used to bypass that refusal.",
+    "forge_tools": "gh exists on PATH. glab, tea and gerrit-axi do not. No host search or global installation performed. Fake forge CLI tests are supplementary behavioral evidence, not live forge validation."
+  }
+}

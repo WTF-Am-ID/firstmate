@@ -1,0 +1,35 @@
+$ bin/fm-lab-home.sh create {run-worktree}/.tmp-live-validation/parents/parent
+exit=0
+{run-worktree}/.tmp-live-validation/parents/parent
+$ bin/fm-lab-home.sh create {run-worktree}/.tmp-live-validation/parents/local
+exit=0
+{run-worktree}/.tmp-live-validation/parents/local
+SCENARIO local: real reporting CLI, synthetic missing-base child, lost receipt
+$ bin/fm-inactive-reconcile.sh report task
+exit=0
+Constructed append-before-receipt persisted state by removing the disposable receipt.
+$ bin/fm-inactive-reconcile.sh report task
+exit=0
+$ bin/fm-inactive-reconcile.sh report task
+exit=0
+PARENT OUTPUT
+blocked [key=child-pr-base-task-dbc6dc04bb5eb155e2328b545e494bc9] [at=1793945036]: task task merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+RECOVERED RECEIPT
+dbc6dc04bb5eb155e2328b545e494bc9
+Retry and subsequent invocation retained exactly one blocker, no ready/done claim.
+$ bin/fm-lab-home.sh create {run-worktree}/.tmp-live-validation/parents/remote
+exit=0
+{run-worktree}/.tmp-live-validation/parents/remote
+SCENARIO remote: real reporting CLI, synthetic missing-base child, lost receipt
+$ bin/fm-inactive-reconcile.sh report task
+exit=0
+Constructed append-before-receipt persisted state by removing the disposable receipt.
+$ bin/fm-inactive-reconcile.sh report task
+exit=0
+$ bin/fm-inactive-reconcile.sh report task
+exit=0
+PARENT OUTPUT
+blocked [key=child-pr-base-task-dbc6dc04bb5eb155e2328b545e494bc9] [at=1793945036]: task task merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+RECOVERED RECEIPT
+dbc6dc04bb5eb155e2328b545e494bc9
+Retry and subsequent invocation retained exactly one blocker, no ready/done claim.

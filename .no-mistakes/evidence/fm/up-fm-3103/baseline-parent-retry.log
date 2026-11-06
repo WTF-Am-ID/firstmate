@@ -1,0 +1,13 @@
+Baseline revision f9913a935c26f69caee33b5d5ea3ea13cc3c864d, archived inside run worktree.
+local attempt=1 exit=0
+local attempt=2 exit=0
+PARENT OUTPUT
+blocked [key=child-pr-base-task-17969-13945] [at=1793945117]: task task merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+blocked [key=child-pr-base-task-19407-11878] [at=1793945118]: task task merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+Reproduced regression: one unchanged ledger event produced two parent blockers.
+remote attempt=1 exit=0
+remote attempt=2 exit=0
+PARENT OUTPUT
+blocked [key=child-pr-base-task-20187-22627] [at=1793945118]: task task merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+blocked [key=child-pr-base-task-20902-3392] [at=1793945119]: task task merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+Reproduced regression: one unchanged ledger event produced two parent blockers.

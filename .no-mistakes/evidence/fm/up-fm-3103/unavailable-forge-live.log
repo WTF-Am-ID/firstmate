@@ -1,0 +1,23 @@
+Real gh uses an intentionally unavailable localhost proxy at 127.0.0.1:9, synthetic token, isolated configuration. No server was started.
+$ bin/fm-lab-home.sh create {run-worktree}/.tmp-live-validation/unavailable
+exit=0
+{run-worktree}/.tmp-live-validation/unavailable
+$ bin/fm-pr-check.sh task https://github.com/o/r/pull/1
+exit=1
+error: expected PR base main, actual base unavailable
+$ bin/fm-pr-poll.sh --validated github https://github.com/o/r/pull/1 github.com o/r 1 main
+exit=0
+$ bin/fm-crew-state.sh task
+exit=0
+state: unknown · source: none · worktree gone (torn down?)
+Setup corrected: provide disposable worktree directory so current-state reading can reach readiness. It has no git branch or no-mistakes run.
+$ bin/fm-crew-state.sh task
+exit=0
+state: unknown · source: none · no backend target recorded
+Current-state reading requires a real backend and remains untested here. Readiness is exercised independently through the real parent-delivery entry point.
+$ bin/fm-inactive-reconcile.sh report task
+exit=0
+$ bin/fm-pr-merge.sh task https://github.com/o/r/pull/1 --attended-override
+exit=1
+error: expected PR base main, actual base unavailable
+No poll registration, parent-ready outcome, or merged output was created. Merge entry point refused unavailable destination before dispatch.

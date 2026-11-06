@@ -1,0 +1,33 @@
+FM_TEST_BEGIN 2026-11-06T06:12:23Z tests/fm-inactive-reconcile.test.sh family=watcher-wake-lock expected_gate_skip=none
+ok - legacy terminal ledgers report missing-base refusal once on either parent route
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - main direct terminal presentation has a durable receipt
+ok - busy agent withholds the terminal outcome
+ok - idle agent on a newer incarnation withholds the terminal outcome
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - idle finished agent keeps the terminal outcome
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - idle finished agent with rewritten meta keeps the terminal outcome
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - dead agent keeps the terminal outcome
+actionable: inactive terminal outcome awaiting captain presentation: child=child state=done
+ok - a branch-actor acknowledgement retires the inactive-outcome receipt and later scans stay quiet
+ok - unpushed CI-ready ship done: is not published upstream
+ok - inactive reconciliation pins local readiness under its existing lock before one parent delivery
+ok - a delivered ship done: skips the git gate on later polls
+ok - secondmate delivers a child's terminal ledger line once, on the next poll, from the ledger alone
+ok - multiline terminal outcomes are reported once before or during a state read
+ok - an unterminated continuation line does not withhold a proven child outcome
+ok - later status prose does not change the inactive terminal receipt identity
+ok - busy child locks do not starve later ledger outcomes
+ok - a hung destination lookup refuses that child without starving the next ledger report
+ok - hung destinations refuse readiness while inactive and ledger outcomes both progress
+actionable: inactive terminal outcome awaiting captain presentation: child=z-ready state=done pr=https://github.com/owner/repo/pull/3
+actionable: inactive terminal outcome awaiting captain presentation: child=z-ready state=done pr=https://github.com/owner/repo/pull/3
+ok - ledger and cadence readiness share deadlines without surviving forge processes
+ok - deadline-truncated run reads return unknown and create no terminal outcome
+not ok - the forced first cadence visit inherited less than a full second of real budget
+FM_TEST_END 2026-11-06T06:14:00Z tests/fm-inactive-reconcile.test.sh exit=1 duration_ms=97724 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=97797
+FM_TEST_SUMMARY_FAMILY family=watcher-wake-lock count=1 duration_ms=97724 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-inactive-reconcile.test.sh duration_ms=97724
