@@ -1,0 +1,323 @@
+=== runner ls-proof-run.sh a1e02205dfc1eb46e634fb03ff2e96a0882bf3bc11d5021e8841c6f18443e339
+=== source 9bf5ef78e1e4ec14538f4bf16d2989b5cf1f13de12b48425c5e9a88a1dbeac55  ~/up4405-56b8b7bb-offline-source.tar.gz
+=== guest script 24827e5095c56b9e2bd1c5960bd6cb6c057c5c90e10b1e808147e9eaf05272dd  ~/up4405-56b8b7bb-offline-proof.sh
+=== launch 2026-11-06T10:38:01Z ci-bench-202610201338 ls-up4405-56b8b7bb-offline project ls-ci-scratch as_user=ubuntu
+=== ready wait up to 180s for root growth to finish
+=== ready obs 1 t=0s ready=1 uptime=3.74 unit=loaded/inactive/dead result=success job=none exit_mono=2365408 exit_status=0 root=/dev/sda2 disk=/dev/sda part=2 kernel_bytes=21368913408 ondisk_bytes=21368913408 root_avail=18409287680
+=== ready obs 2 t=1s ready=1 uptime=4.82 unit=loaded/inactive/dead result=success job=none exit_mono=2365408 exit_status=0 root=/dev/sda2 disk=/dev/sda part=2 kernel_bytes=21368913408 ondisk_bytes=21368913408 root_avail=18409287680
+=== ready after 1s
+=== host_boot 56499120-68e6-43e9-b731-4cb022666369 guest_boot ed2bb778-2b85-4b00-9047-6a0cfdeec4c2
+=== guest PRETTY_NAME="Ubuntu 24.04.5 LTS"
+=== guest VERSION_ID="24.04"
+=== guest kvm
+=== guest systemd
+=== running as ubuntu uid=1000 gid=1000 home=~
+=== PROOF_EXIT 0
+--- stdout
+UP4405_HEAD=56b8b7bb986fd9917519d07db4739269c72dc172
+HOST_BOOT_ID=56499120-68e6-43e9-b731-4cb022666369 GUEST_BOOT_ID=ed2bb778-2b85-4b00-9047-6a0cfdeec4c2
+GNU bash, version 5.2.21(1)-release (x86_64-pc-linux-gnu)
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+
+This is free software; you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+v22.23.3
+10.9.9
+Verified 155 package tarballs against npm lockfile SHA512 integrity
+FM_TEST_BEGIN 2026-11-06T10:38:43Z tests/fm-timeout-lib.test.sh family=pure-contract-unit expected_gate_skip=none
+ok - fm_run_timed perl preserves interruption status during timeout cleanup
+ok - fm_run_timed perl bounds its deadline and cleanup despite wall-clock changes
+ok - fm_run_timed perl reaps owned groups and preserves caller signal dispositions on INT/HUP/TERM and timeout
+[1]+  Interrupt               perl -MPOSIX=WNOHANG,setpgid -MTime::HiRes=clock_gettime,CLOCK_MONOTONIC -e '
+        my $bound = shift;
+        my ($signal, $kill_at, $result) = (0, 0, 0);
+        for my $entry ([HUP => 1], [INT => 2], [TERM => 15]) {
+          my ($name, $number) = @$entry;
+          $SIG{$name} = sub { $signal ||= $number };
+        }
+        my $pid = fork;
+        exit 127 unless defined $pid;
+        if (!$pid) {
+          $SIG{$_} = "DEFAULT" for qw(INT HUP TERM);
+          setpgid(0, 0);
+          exec @ARGV;
+          exit 127;
+        }
+        # Both sides establish the group before the parent can signal it.
+        setpgid($pid, $pid);
+        my $deadline = clock_gettime(CLOCK_MONOTONIC) + $bound;
+        while (1) {
+          if (!$kill_at && ($signal || clock_gettime(CLOCK_MONOTONIC) >= $deadline)) {
+            $result = $signal ? 128 + $signal : 124;
+            $kill_at = clock_gettime(CLOCK_MONOTONIC) + 0.2;
+            kill "TERM", -$pid;
+          }
+          my $done = waitpid $pid, WNOHANG;
+          if ($done == $pid) {
+            my $status = $?;
+            kill "KILL", -$pid if $kill_at;
+            exit($kill_at ? $result : ($status & 127) ? 128 + ($status & 127) : $status >> 8);
+          }
+          exit 127 if $done == -1;
+          if ($kill_at && clock_gettime(CLOCK_MONOTONIC) >= $kill_at) {
+            kill "KILL", -$pid;
+            waitpid $pid, 0;
+            exit $result;
+          }
+          select undef, undef, undef, 0.02;
+        }
+      ' -- "$seconds" "$@" 0<&0
+[1]+  Interrupt               perl -MPOSIX=WNOHANG,setpgid -MTime::HiRes=clock_gettime,CLOCK_MONOTONIC -e '
+        my $bound = shift;
+        my ($signal, $kill_at, $result) = (0, 0, 0);
+        for my $entry ([HUP => 1], [INT => 2], [TERM => 15]) {
+          my ($name, $number) = @$entry;
+          $SIG{$name} = sub { $signal ||= $number };
+        }
+        my $pid = fork;
+        exit 127 unless defined $pid;
+        if (!$pid) {
+          $SIG{$_} = "DEFAULT" for qw(INT HUP TERM);
+          setpgid(0, 0);
+          exec @ARGV;
+          exit 127;
+        }
+        # Both sides establish the group before the parent can signal it.
+        setpgid($pid, $pid);
+        my $deadline = clock_gettime(CLOCK_MONOTONIC) + $bound;
+        while (1) {
+          if (!$kill_at && ($signal || clock_gettime(CLOCK_MONOTONIC) >= $deadline)) {
+            $result = $signal ? 128 + $signal : 124;
+            $kill_at = clock_gettime(CLOCK_MONOTONIC) + 0.2;
+            kill "TERM", -$pid;
+          }
+          my $done = waitpid $pid, WNOHANG;
+          if ($done == $pid) {
+            my $status = $?;
+            kill "KILL", -$pid if $kill_at;
+            exit($kill_at ? $result : ($status & 127) ? 128 + ($status & 127) : $status >> 8);
+          }
+          exit 127 if $done == -1;
+          if ($kill_at && clock_gettime(CLOCK_MONOTONIC) >= $kill_at) {
+            kill "KILL", -$pid;
+            waitpid $pid, 0;
+            exit $result;
+          }
+          select undef, undef, undef, 0.02;
+        }
+      ' -- "$seconds" "$@" 0<&0
+[1]+  Hangup                  perl -MPOSIX=WNOHANG,setpgid -MTime::HiRes=clock_gettime,CLOCK_MONOTONIC -e '
+        my $bound = shift;
+        my ($signal, $kill_at, $result) = (0, 0, 0);
+        for my $entry ([HUP => 1], [INT => 2], [TERM => 15]) {
+          my ($name, $number) = @$entry;
+          $SIG{$name} = sub { $signal ||= $number };
+        }
+        my $pid = fork;
+        exit 127 unless defined $pid;
+        if (!$pid) {
+          $SIG{$_} = "DEFAULT" for qw(INT HUP TERM);
+          setpgid(0, 0);
+          exec @ARGV;
+          exit 127;
+        }
+        # Both sides establish the group before the parent can signal it.
+        setpgid($pid, $pid);
+        my $deadline = clock_gettime(CLOCK_MONOTONIC) + $bound;
+        while (1) {
+          if (!$kill_at && ($signal || clock_gettime(CLOCK_MONOTONIC) >= $deadline)) {
+            $result = $signal ? 128 + $signal : 124;
+            $kill_at = clock_gettime(CLOCK_MONOTONIC) + 0.2;
+            kill "TERM", -$pid;
+          }
+          my $done = waitpid $pid, WNOHANG;
+          if ($done == $pid) {
+            my $status = $?;
+            kill "KILL", -$pid if $kill_at;
+            exit($kill_at ? $result : ($status & 127) ? 128 + ($status & 127) : $status >> 8);
+          }
+          exit 127 if $done == -1;
+          if ($kill_at && clock_gettime(CLOCK_MONOTONIC) >= $kill_at) {
+            kill "KILL", -$pid;
+            waitpid $pid, 0;
+            exit $result;
+          }
+          select undef, undef, undef, 0.02;
+        }
+      ' -- "$seconds" "$@" 0<&0
+[1]+  Hangup                  perl -MPOSIX=WNOHANG,setpgid -MTime::HiRes=clock_gettime,CLOCK_MONOTONIC -e '
+        my $bound = shift;
+        my ($signal, $kill_at, $result) = (0, 0, 0);
+        for my $entry ([HUP => 1], [INT => 2], [TERM => 15]) {
+          my ($name, $number) = @$entry;
+          $SIG{$name} = sub { $signal ||= $number };
+        }
+        my $pid = fork;
+        exit 127 unless defined $pid;
+        if (!$pid) {
+          $SIG{$_} = "DEFAULT" for qw(INT HUP TERM);
+          setpgid(0, 0);
+          exec @ARGV;
+          exit 127;
+        }
+        # Both sides establish the group before the parent can signal it.
+        setpgid($pid, $pid);
+        my $deadline = clock_gettime(CLOCK_MONOTONIC) + $bound;
+        while (1) {
+          if (!$kill_at && ($signal || clock_gettime(CLOCK_MONOTONIC) >= $deadline)) {
+            $result = $signal ? 128 + $signal : 124;
+            $kill_at = clock_gettime(CLOCK_MONOTONIC) + 0.2;
+            kill "TERM", -$pid;
+          }
+          my $done = waitpid $pid, WNOHANG;
+          if ($done == $pid) {
+            my $status = $?;
+            kill "KILL", -$pid if $kill_at;
+            exit($kill_at ? $result : ($status & 127) ? 128 + ($status & 127) : $status >> 8);
+          }
+          exit 127 if $done == -1;
+          if ($kill_at && clock_gettime(CLOCK_MONOTONIC) >= $kill_at) {
+            kill "KILL", -$pid;
+            waitpid $pid, 0;
+            exit $result;
+          }
+          select undef, undef, undef, 0.02;
+        }
+      ' -- "$seconds" "$@" 0<&0
+[1]+  Terminated              perl -MPOSIX=WNOHANG,setpgid -MTime::HiRes=clock_gettime,CLOCK_MONOTONIC -e '
+        my $bound = shift;
+        my ($signal, $kill_at, $result) = (0, 0, 0);
+        for my $entry ([HUP => 1], [INT => 2], [TERM => 15]) {
+          my ($name, $number) = @$entry;
+          $SIG{$name} = sub { $signal ||= $number };
+        }
+        my $pid = fork;
+        exit 127 unless defined $pid;
+        if (!$pid) {
+          $SIG{$_} = "DEFAULT" for qw(INT HUP TERM);
+          setpgid(0, 0);
+          exec @ARGV;
+          exit 127;
+        }
+        # Both sides establish the group before the parent can signal it.
+        setpgid($pid, $pid);
+        my $deadline = clock_gettime(CLOCK_MONOTONIC) + $bound;
+        while (1) {
+          if (!$kill_at && ($signal || clock_gettime(CLOCK_MONOTONIC) >= $deadline)) {
+            $result = $signal ? 128 + $signal : 124;
+            $kill_at = clock_gettime(CLOCK_MONOTONIC) + 0.2;
+            kill "TERM", -$pid;
+          }
+          my $done = waitpid $pid, WNOHANG;
+          if ($done == $pid) {
+            my $status = $?;
+            kill "KILL", -$pid if $kill_at;
+            exit($kill_at ? $result : ($status & 127) ? 128 + ($status & 127) : $status >> 8);
+          }
+          exit 127 if $done == -1;
+          if ($kill_at && clock_gettime(CLOCK_MONOTONIC) >= $kill_at) {
+            kill "KILL", -$pid;
+            waitpid $pid, 0;
+            exit $result;
+          }
+          select undef, undef, undef, 0.02;
+        }
+      ' -- "$seconds" "$@" 0<&0
+[1]+  Terminated              perl -MPOSIX=WNOHANG,setpgid -MTime::HiRes=clock_gettime,CLOCK_MONOTONIC -e '
+        my $bound = shift;
+        my ($signal, $kill_at, $result) = (0, 0, 0);
+        for my $entry ([HUP => 1], [INT => 2], [TERM => 15]) {
+          my ($name, $number) = @$entry;
+          $SIG{$name} = sub { $signal ||= $number };
+        }
+        my $pid = fork;
+        exit 127 unless defined $pid;
+        if (!$pid) {
+          $SIG{$_} = "DEFAULT" for qw(INT HUP TERM);
+          setpgid(0, 0);
+          exec @ARGV;
+          exit 127;
+        }
+        # Both sides establish the group before the parent can signal it.
+        setpgid($pid, $pid);
+        my $deadline = clock_gettime(CLOCK_MONOTONIC) + $bound;
+        while (1) {
+          if (!$kill_at && ($signal || clock_gettime(CLOCK_MONOTONIC) >= $deadline)) {
+            $result = $signal ? 128 + $signal : 124;
+            $kill_at = clock_gettime(CLOCK_MONOTONIC) + 0.2;
+            kill "TERM", -$pid;
+          }
+          my $done = waitpid $pid, WNOHANG;
+          if ($done == $pid) {
+            my $status = $?;
+            kill "KILL", -$pid if $kill_at;
+            exit($kill_at ? $result : ($status & 127) ? 128 + ($status & 127) : $status >> 8);
+          }
+          exit 127 if $done == -1;
+          if ($kill_at && clock_gettime(CLOCK_MONOTONIC) >= $kill_at) {
+            kill "KILL", -$pid;
+            waitpid $pid, 0;
+            exit $result;
+          }
+          select undef, undef, undef, 0.02;
+        }
+      ' -- "$seconds" "$@" 0<&0
+ok - fm_run_timed perl cancels before handler installation and preserves caller job control and signal handlers
+ok - fm_run_timed perl preserves stdin, output, completion statuses and caller traps
+ok - fm_run_timed preserves exact inherited pipe stdin through timeout
+ok - fm_run_timed preserves exact pipeline pipe stdin through timeout
+ok - fm_run_timed preserves exact inherited pipe stdin through gtimeout
+ok - fm_run_timed preserves exact pipeline pipe stdin through gtimeout
+ok - fm_run_timed preserves exact inherited pipe stdin through perl
+ok - fm_run_timed preserves exact pipeline pipe stdin through perl
+ok - fm_run_timed preserves exact inherited pipe stdin through bash
+ok - fm_run_timed preserves exact pipeline pipe stdin through bash
+ok - fm_exec_timed passes a command's status and output through unchanged
+ok - system Bash top-level and subshell calls preserve success, failure, and signal status
+Terminated
+ok - fm_run_timed reports 124 when the bound TERMs a read whose wrapper recorded 143
+ok - fm_run_timed passes a natural exit through when the bound fired after completion
+ok - fm_run_timed keeps stdout and nonzero status when a function shadows timeout
+ok - fm_run_timed delivers piped stdin through every available mechanism
+ok - fm_exec_timed sends TERM at the bound and a cooperative command ends there
+ok - fm_exec_timed kills a TERM-ignoring command once the grace has passed
+ok - fm_exec_timed replaces the calling shell instead of wrapping it
+ok - fm_exec_timed reaps a descendant that would otherwise hold the output past the bound
+ok - fm_exec_timed forwards a TERM it receives to the bounded command
+ok - fm_exec_timed ends the command when its named owner is already gone
+ok - fm_exec_timed ends the command when its owner dies during watchdog startup
+ok - fm_exec_timed preserves a top-level shell's parent across exec startup
+ok - fm_exec_timed prefers its perl watchdog over timeout
+ok - fm_exec_timed refuses instead of running unbounded when no mechanism exists
+ok - fm_exec_timed rejects a zero, padded, non-numeric, or missing bound and a missing command
+tests/fm-timeout-lib.test.sh: line 29:  4531 Killed                  ( . "$ROOT/bin/fm-timeout-lib.sh"; PATH=$path fm_exec_timed "$@" )
+ok - fm_exec_timed's GNU timeout fallback kills a TERM-ignoring command once the grace has passed
+ok - fm_timed_out accepts 124 and 137 and nothing else
+FM_TEST_END 2026-11-06T10:39:16Z tests/fm-timeout-lib.test.sh exit=0 duration_ms=33480 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=33523
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=33480 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-timeout-lib.test.sh duration_ms=33480
+Pi production-consumer typechecks: npm 10.9.9
+Offline bootstrap: real npm ci, verified locked public tarballs, Pi 1.1.0
+
+added 124 packages in 2s
+{"node":"v22.23.3","platform":"linux","arch":"x64","packages":{"@earendil-works/pi-ai":{"version":"1.1.0","resolved":"https://registry.npmjs.org/@earendil-works/pi-ai/-/pi-ai-1.1.0.tgz","integrity":"sha512-1T7LAkc/5Bvc0v6w4vAGVdCrli0o/E0pEmYKTnixu95vSFArBjvbhS/G4ZwI0RUePgf0Imcu0VyqlM4EcXxqfw=="},"@earendil-works/pi-coding-agent":{"version":"1.1.0","resolved":"https://registry.npmjs.org/@earendil-works/pi-coding-agent/-/pi-coding-agent-1.1.0.tgz","integrity":"sha512-SeEi/4hdcHNgA9UWlefZl7ZZpm3dzi2OoxNjDHsBJ9o298LNOtbL4DGKgitlEj6uCTccvtw6f2hlCkTPVJ2RXg=="},"@earendil-works/pi-tui":{"version":"1.1.0","resolved":"https://registry.npmjs.org/@earendil-works/pi-tui/-/pi-tui-1.1.0.tgz","integrity":"sha512-v7wkS0y2ErZvZkSfemqd9RrBZJ5x6p8Ujsv7NdJj01IXJyFM0kNL6rMdcKcvTe7EVTd6ugvDB9VPZSoaBF9QxQ=="},"@types/node":{"version":"22.19.19","resolved":"https://registry.npmjs.org/@types/node/-/node-22.19.19.tgz","integrity":"sha512-dyh/xO2Fh5bYrfWaaqGrRQQGkNdmYw6AmaAUvYeUMNTWQtvb796ikLdmTchRmOlOiIJ1TDXfWgVx1QkUlQ6Hew=="},"typebox":{"version":"1.3.27","resolved":"https://registry.npmjs.org/typebox/-/typebox-1.3.27.tgz","integrity":"sha512-zu+jc1pcy4UiNThxikUr36f0Rybk9PEeCg/NE6adeWr/SKsdNO4EzZHYRDlv2YCVAfj3Odq3dESSo/jNyoBXzA=="},"typescript":{"version":"5.9.3","resolved":"https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz","integrity":"sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="}},"lifecycleScriptsDisabled":true,"packagesWithInstallScripts":["node_modules/@google/genai","node_modules/esbuild","node_modules/protobufjs"]}
+Version 5.9.3
+ok - tracked Pi extensions pass strict no-emit typecheck against Pi 1.1.0
+{"sdk":"1.1.0","casesPassed":16,"results":[{"mode":"alternating-85","requests":4,"executions":6,"notices":1},{"mode":"alternating-65","requests":4,"executions":6,"notices":1},{"mode":"ssh","requests":4,"executions":3,"notices":1,"operationalAndResumeLatch":true,"realUserReset":true},{"mode":"cut","requests":4,"executions":3,"notices":1},{"mode":"grouped","requests":4,"executions":3,"notices":1},{"mode":"multiline","requests":4,"executions":3,"notices":1},{"mode":"continued-group","requests":4,"executions":3,"notices":1},{"mode":"unknown-group","requests":7,"executions":6,"notices":0},{"mode":"mutating-group","requests":7,"executions":6,"notices":0},{"mode":"same-batch","requests":4,"executions":3,"notices":1},{"mode":"truncated","requests":4,"executions":3,"notices":1},{"mode":"truncated-compact","requests":6,"executions":3,"notices":1},{"mode":"changing","requests":7,"executions":6,"notices":0},{"mode":"failed","requests":7,"executions":6,"notices":0},{"mode":"foreign-owner","requests":7,"executions":6,"notices":0},{"mode":"default-off","requests":7,"executions":6,"notices":0}]}
+ok - read guard real SDK events/abort against Pi 1.1.0
+Offline bootstrap: real npm ci, verified locked public tarballs, Pi 1.2.0
+
+added 121 packages in 2s
+{"node":"v22.23.3","platform":"linux","arch":"x64","packages":{"@earendil-works/pi-ai":{"version":"1.2.0","resolved":"https://registry.npmjs.org/@earendil-works/pi-ai/-/pi-ai-1.2.0.tgz","integrity":"sha512-U5/1zXqfV1on7/9sbez03tT4Ru49Lvfb4+zXSDK3DBKF5cRk6KxvAOTOY3HJ4jimlZth+rs7vbJqN6iBQAoNuQ=="},"@earendil-works/pi-coding-agent":{"version":"1.2.0","resolved":"https://registry.npmjs.org/@earendil-works/pi-coding-agent/-/pi-coding-agent-1.2.0.tgz","integrity":"sha512-h/4WaVWv1VlCaY8x8qEN5U+7jbF/e7+Ck6moPeEOFn5juMTWwNAXjwgYM7gRgbBYh8Zppwt6qWvJDzNTf4GNEQ=="},"@earendil-works/pi-tui":{"version":"1.2.0","resolved":"https://registry.npmjs.org/@earendil-works/pi-tui/-/pi-tui-1.2.0.tgz","integrity":"sha512-OdJCiYklkL3TqmdmGKUflHoLy9zw18GBYO0DPASZvGlP4RkDXAZzLLDt7cidJ6wUR7DBrKb13rrekDsXgMF60g=="},"@types/node":{"version":"22.19.19","resolved":"https://registry.npmjs.org/@types/node/-/node-22.19.19.tgz","integrity":"sha512-dyh/xO2Fh5bYrfWaaqGrRQQGkNdmYw6AmaAUvYeUMNTWQtvb796ikLdmTchRmOlOiIJ1TDXfWgVx1QkUlQ6Hew=="},"typebox":{"version":"1.3.27","resolved":"https://registry.npmjs.org/typebox/-/typebox-1.3.27.tgz","integrity":"sha512-zu+jc1pcy4UiNThxikUr36f0Rybk9PEeCg/NE6adeWr/SKsdNO4EzZHYRDlv2YCVAfj3Odq3dESSo/jNyoBXzA=="},"typescript":{"version":"5.9.3","resolved":"https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz","integrity":"sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="}},"lifecycleScriptsDisabled":true,"packagesWithInstallScripts":["node_modules/@google/genai","node_modules/protobufjs"]}
+Version 5.9.3
+ok - tracked Pi extensions pass strict no-emit typecheck against Pi 1.2.0
+{"sdk":"1.2.0","casesPassed":16,"results":[{"mode":"alternating-85","requests":4,"executions":6,"notices":1},{"mode":"alternating-65","requests":4,"executions":6,"notices":1},{"mode":"ssh","requests":4,"executions":3,"notices":1,"operationalAndResumeLatch":true,"realUserReset":true},{"mode":"cut","requests":4,"executions":3,"notices":1},{"mode":"grouped","requests":4,"executions":3,"notices":1},{"mode":"multiline","requests":4,"executions":3,"notices":1},{"mode":"continued-group","requests":4,"executions":3,"notices":1},{"mode":"unknown-group","requests":7,"executions":6,"notices":0},{"mode":"mutating-group","requests":7,"executions":6,"notices":0},{"mode":"same-batch","requests":4,"executions":3,"notices":1},{"mode":"truncated","requests":4,"executions":3,"notices":1},{"mode":"truncated-compact","requests":6,"executions":3,"notices":1},{"mode":"changing","requests":7,"executions":6,"notices":0},{"mode":"failed","requests":7,"executions":6,"notices":0},{"mode":"foreign-owner","requests":7,"executions":6,"notices":0},{"mode":"default-off","requests":7,"executions":6,"notices":0}]}
+ok - read guard real SDK events/abort against Pi 1.2.0
+UP4405_COMBINED_PROOF=PASS
+--- stderr
+npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+=== deleted ls-up4405-56b8b7bb-offline
+=== scratch now: 
