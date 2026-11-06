@@ -1,0 +1,31 @@
+Candidate: 25a530c694d44154fa9f1b630801e702ae5d895f
+Base: 8b1618a49511d67b247f5f8091868b812bfcae2d
+
+Executed read-only CI-box preflight:
+ssh -o BatchMode=yes -o IdentitiesOnly=yes -i ~/.ssh/ci-box-agent fmagent@ci-box 'sudo ~/ls-proof-run.sh --check'
+Exit: 0
+Output: CI_GATE idle runners=0 workers=0
+
+Executed read-only runner inspection and pending check:
+ssh -o BatchMode=yes -o IdentitiesOnly=yes -i ~/.ssh/ci-box-agent fmagent@ci-box 'cat ~/ls-proof-run.sh; if test -e ~/ls-proof-pending; then printf "PROOF_PENDING_PRESENT\n"; else printf "PROOF_PENDING_ABSENT\n"; fi'
+Exit: 0
+Pending check: PROOF_PENDING_ABSENT
+Runner contract observed: source tarball and guest script must already exist on CI box; runner creates a scratch VM, extracts project files to /opt/src, writes ~/<vm>-console.txt, and deletes the guest afterward.
+
+Boundary conflict:
+This turn confines intentional project/source/system writes to the current Mac worktree, with only dedicated evidence writes and incidental development-toolchain temp/cache writes excepted. Transferring the project to a remote upload path and provisioning a remote guest are intentional source/system writes outside that boundary. The attached plan describes those operations but is explicitly evidence, not permission overriding the boundary.
+The authoritative intent requires testing on CI box. Running the tests in a local disposable fixture, container or local VM would violate that requirement. Running on the CI-box host would depart from the approved disposable-guest procedure and still require remote fixture writes. No guest, test, child job, or source transfer was started.
+
+Scenarios awaiting execution:
+S1 Force Perl; signal caller PID with INT/HUP/TERM. Require 130/129/143, bounded EOF and no surviving owned command/group/descendant.
+S2 Force Perl; signal caller process group with INT/HUP/TERM. Require the same cleanup and status, including command substitutions with inherited inactive parent traps and active local handlers.
+S3 Interrupt during runner startup with caller job control off/on. Require no command launch, bounded runner cleanup, preserved handlers/options and signal status.
+S4 Normal completion, child signal death, timeout and stdin controls. Require exact output/input, statuses 0/7/137/143/124, preserved traps/options and no held output pipe.
+S5 Interrupt during timeout grace and perturb wall-clock readings. Require interrupt status, bounded cleanup and a deadline unaffected by wall-clock movement. The existing clock fixture injects the clock boundary, so that case alone would be supporting test evidence rather than live wall-clock validation.
+
+Proposed focused executable check, not run:
+bash bin/fm-test-run.sh tests/fm-timeout-lib.test.sh
+
+Needed: an explicit exception permitting task-prefixed remote source/script uploads and one disposable CI-box guest via ls-proof-run.sh, including its logs and teardown. Alternatively the owner could permit local testing, but the recorded no-Mac requirement remains in force here.
+
+No linters, static analysis, full suite, gate commands, source edits or permanent test edits were performed. No scratch or background processes were created. Evidence is the only intentional write from this phase.
