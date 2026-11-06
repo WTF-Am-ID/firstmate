@@ -1,0 +1,74 @@
+[
+  {
+    "receipt": {
+      "evidence_sha256": "b252354987769c844a8270072f37298fdc031ac8954ca1f9a51d6796f067f781",
+      "files": {
+        "request": {
+          "bytes": 167,
+          "path": "p4-000472/request.json",
+          "sha256": "5685d5acbf40995c6281e86d96516568b7e267a6b7c1e4ebc63e1d0ddc38723a"
+        },
+        "status": {
+          "bytes": 1,
+          "path": "p4-000472/exit-status.json",
+          "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        "stderr": {
+          "bytes": 0,
+          "path": "p4-000472/stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 558,
+          "path": "p4-000472/stdout.json",
+          "sha256": "613e5bc36926dc74f97e655da428f5c90a1aea1ae314865bf0c4d355caf83049"
+        }
+      },
+      "request_id": "p4-000472",
+      "schema": "plan-hardening-receipt/3",
+      "stage": "recover060-artifacts"
+    },
+    "payloads": {
+      "request": "{\"schema\":\"plan-hardening-probe/1\",\"root\":\"/tmp/up3103-shared\",\"queries\":[{\"op\":\"hash\",\"path\":\"up3103-063-source.tar.gz\"},{\"op\":\"hash\",\"path\":\"up3103-063-proof.sh\"}]}\n",
+      "status": "0",
+      "stderr": "",
+      "stdout": "{\"schema\": \"plan-hardening-probe/1\", \"results\": [{\"query\": {\"op\": \"hash\", \"path\": \"up3103-063-source.tar.gz\"}, \"root\": \"/private/tmp/up3103-shared\", \"path\": \"/private/tmp/up3103-shared/up3103-063-source.tar.gz\", \"sha256\": \"680efc50645fb788144d96ae88cf33cba121797859508d2e02d184ff4b524906\", \"bytes\": 57004357}, {\"query\": {\"op\": \"hash\", \"path\": \"up3103-063-proof.sh\"}, \"root\": \"/private/tmp/up3103-shared\", \"path\": \"/private/tmp/up3103-shared/up3103-063-proof.sh\", \"sha256\": \"2f2dc313e88b4a586073fe8929a126c2940b81b032bf6d90a89ebddd3fc3cb6e\", \"bytes\": 2115}]}\n"
+    }
+  },
+  {
+    "receipt": {
+      "evidence_sha256": "18b824e40248b64c8e625137ce594c6a3e514380eda495ae71cdbf016e10a0a4",
+      "files": {
+        "request": {
+          "bytes": 496,
+          "path": "p4-000480/request.json",
+          "sha256": "29290794b61567742e91f69ad0ff183740fa8f9fd9d9aca16223b2387db21c96"
+        },
+        "status": {
+          "bytes": 1,
+          "path": "p4-000480/exit-status.json",
+          "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        "stderr": {
+          "bytes": 0,
+          "path": "p4-000480/stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 5054,
+          "path": "p4-000480/stdout.json",
+          "sha256": "47913e2f2b2515372cc993c2e15161392154adcd396b59353d7a71d04be78583"
+        }
+      },
+      "request_id": "p4-000480",
+      "schema": "plan-hardening-receipt/3",
+      "stage": "proof064-completion"
+    },
+    "payloads": {
+      "request": "{\"schema\":\"plan-hardening-probe/1\",\"root\":\"/tmp/up3103-shared\",\"queries\":[{\"op\":\"hash\",\"path\":\"ls-up3103-064-console.txt\"},{\"op\":\"read\",\"path\":\"ls-up3103-064-console.txt\",\"lines\":26},{\"op\":\"search\",\"pattern\":\"FM_TEST_SUMMARY total=\",\"glob\":\"ls-up3103-064-console.txt\"},{\"op\":\"search\",\"pattern\":\"FM_TEST_END\",\"glob\":\"ls-up3103-064-console.txt\"},{\"op\":\"search\",\"pattern\":\"GREEN_EXIT=\",\"glob\":\"ls-up3103-064-console.txt\"},{\"op\":\"search\",\"pattern\":\"=== deleted\",\"glob\":\"ls-up3103-064-console.txt\"}]}\n",
+      "status": "0",
+      "stderr": "",
+      "stdout": "{\"schema\": \"plan-hardening-probe/1\", \"results\": [{\"query\": {\"op\": \"hash\", \"path\": \"ls-up3103-064-console.txt\"}, \"root\": \"/private/tmp/up3103-shared\", \"path\": \"/private/tmp/up3103-shared/ls-up3103-064-console.txt\", \"sha256\": \"683f666d21557a1364630f3db45d4d3dd5f43a20fdfbb0dbc14f846f8aebddc2\", \"bytes\": 80409}, {\"query\": {\"op\": \"read\", \"path\": \"ls-up3103-064-console.txt\", \"lines\": 26}, \"root\": \"/private/tmp/up3103-shared\", \"path\": \"/private/tmp/up3103-shared/ls-up3103-064-console.txt\", \"sha256\": \"683f666d21557a1364630f3db45d4d3dd5f43a20fdfbb0dbc14f846f8aebddc2\", \"bytes\": 80409, \"start\": 1, \"total_lines\": 1254, \"lines\": [\"=== runner ls-proof-run.sh 374dc61ad2ddd0f7022626a41081b5fa337e120256d4c88f669dc0d9b658a4b3\", \"=== source 680efc50645fb788144d96ae88cf33cba121797859508d2e02d184ff4b524906  ~/up3103-063-source.tar.gz\", \"=== guest script 2f2dc313e88b4a586073fe8929a126c2940b81b032bf6d90a89ebddd3fc3cb6e  ~/up3103-063-proof.sh\", \"=== launch 2026-11-06T17:52:59Z ci-prod-202610231759 ls-up3103-064 project ls-ci-scratch as_user=ubuntu\", \"=== ready wait up to 180s for root growth to finish\", \"=== ready obs 1 t=0s ready=1 uptime=3.76 unit=loaded/inactive/dead result=success job=none exit_mono=3073808 exit_status=0 root=/dev/sda2 disk=/dev/sda part=2 kernel_bytes=21368913408 ondisk_bytes=21368913408 root_avail=18365976576\", \"=== ready obs 2 t=1s ready=1 uptime=4.85 unit=loaded/inactive/dead result=success job=none exit_mono=3073808 exit_status=0 root=/dev/sda2 disk=/dev/sda part=2 kernel_bytes=21368913408 ondisk_bytes=21368913408 root_avail=18365976576\", \"=== ready after 1s\", \"=== host_boot 56499120-68e6-43e9-b731-4cb022666369 guest_boot 4f3f3a09-b044-4771-80f2-44ed0baf9b50\", \"=== guest PRETTY_NAME=\\\"Ubuntu 24.04.5 LTS\\\"\", \"=== guest VERSION_ID=\\\"24.04\\\"\", \"=== guest kvm\", \"=== guest systemd\", \"=== running as ubuntu uid=1000 gid=1000 home=~\", \"=== PROOF_EXIT 0\", \"--- stdout\", \"v24.12.0\", \"0.2.6\", \"bin/fm-remote-secondmate-control.sh\", \"GREEN_HEAD=de2717dcfc10f8947b81f1675286c26b4be1a884\", \"MAIN_PARENT=bf05a4fcd69b8bb27f261177eac4abb57f98aa1b\", \"RED_PRODUCT_MUTATION=bd239460f76aa98b6666766900847a770465f545\", \"01c551bf898079edbbac399b3372c00b72cada46fd9306c80f002aed3107f542  /opt/src/up3103-063.bundle\", \"bdebee276e58d0ef5448f3d5ac12c67daa963dd5e0a9bb621a53d1cefbc852fd  /opt/src/node-v24.12.0-linux-x64.tar.xz\", \"RED_EXIT=1\", \"FM_TEST_BEGIN 2026-11-06T17:53:15Z tests/fm-pr-check-security.test.sh family=pr-forge expected_gate_skip=none\"]}, {\"query\": {\"op\": \"search\", \"pattern\": \"FM_TEST_SUMMARY total=\", \"glob\": \"ls-up3103-064-console.txt\"}, \"root\": \"/private/tmp/up3103-shared\", \"count\": 2, \"matches\": [{\"path\": \"ls-up3103-064-console.txt\", \"line\": 62, \"text\": \"FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=115650\"}, {\"path\": \"ls-up3103-064-console.txt\", \"line\": 1133, \"text\": \"FM_TEST_SUMMARY total=8 failed=0 skipped_gate=0 duration_ms=1006915\"}]}, {\"query\": {\"op\": \"search\", \"pattern\": \"FM_TEST_END\", \"glob\": \"ls-up3103-064-console.txt\"}, \"root\": \"/private/tmp/up3103-shared\", \"count\": 9, \"matches\": [{\"path\": \"ls-up3103-064-console.txt\", \"line\": 61, \"text\": \"FM_TEST_END 2026-11-06T17:55:11Z tests/fm-pr-check-security.test.sh exit=1 duration_ms=115621 gate_skip=false\"}, {\"path\": \"ls-up3103-064-console.txt\", \"line\": 437, \"text\": \"FM_TEST_END 2026-11-06T17:56:36Z tests/fm-crew-state.test.sh exit=0 duration_ms=84586 gate_skip=false\"}, {\"path\": \"ls-up3103-064-console.txt\", \"line\": 534, \"text\": \"FM_TEST_END 2026-11-06T17:58:44Z tests/fm-inactive-reconcile.test.sh exit=0 duration_ms=128392 gate_skip=false\"}, {\"path\": \"ls-up3103-064-console.txt\", \"line\": 607, \"text\": \"FM_TEST_END 2026-11-06T18:03:56Z tests/fm-pr-check-security.test.sh exit=0 duration_ms=311526 gate_skip=false\"}, {\"path\": \"ls-up3103-064-console.txt\", \"line\": 762, \"text\": \"FM_TEST_END 2026-11-06T18:11:01Z tests/fm-pr-merge.test.sh exit=0 duration_ms=425288 gate_skip=false\"}, {\"path\": \"ls-up3103-064-console.txt\", \"line\": 782, \"text\": \"FM_TEST_END 2026-11-06T18:11:01Z tests/fm-pr-state.test.sh exit=0 duration_ms=594 gate_skip=false\"}, {\"path\": \"ls-up3103-064-console.txt\", \"line\": 815, \"text\": \"FM_TEST_END 2026-11-06T18:11:16Z tests/fm-dod-lib.test.sh exit=0 duration_ms=14150 gate_skip=false\"}, {\"path\": \"ls-up3103-064-console.txt\", \"line\": 862, \"text\": \"FM_TEST_END 2026-11-06T18:11:25Z tests/fm-brief.test.sh exit=0 duration_ms=8971 gate_skip=false\"}, {\"path\": \"ls-up3103-064-console.txt\", \"line\": 1132, \"text\": \"FM_TEST_END 2026-11-06T18:11:58Z tests/fm-timeout-lib.test.sh exit=0 duration_ms=33257 gate_skip=false\"}]}, {\"query\": {\"op\": \"search\", \"pattern\": \"GREEN_EXIT=\", \"glob\": \"ls-up3103-064-console.txt\"}, \"root\": \"/private/tmp/up3103-shared\", \"count\": 1, \"matches\": [{\"path\": \"ls-up3103-064-console.txt\", \"line\": 97, \"text\": \"GREEN_EXIT=0\"}]}, {\"query\": {\"op\": \"search\", \"pattern\": \"=== deleted\", \"glob\": \"ls-up3103-064-console.txt\"}, \"root\": \"/private/tmp/up3103-shared\", \"count\": 1, \"matches\": [{\"path\": \"ls-up3103-064-console.txt\", \"line\": 1253, \"text\": \"=== deleted ls-up3103-064\"}]}]}\n"
+    }
+  }
+]

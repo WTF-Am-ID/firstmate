@@ -1,0 +1,154 @@
+{
+  "mode": "read-only verification of prior evidence; no repository tests, fixtures, probes, services or installs executed",
+  "candidate": "de2717dcfc10f8947b81f1675286c26b4be1a884",
+  "console_sha256": "683f666d21557a1364630f3db45d4d3dd5f43a20fdfbb0dbc14f846f8aebddc2",
+  "console_bytes": 80409,
+  "console_lines": 1254,
+  "receipt_payload_integrity": "all declared hashes, byte lengths, exit statuses and empty stderr verified",
+  "fresh_clone_provenance": "Hash-matched guest script uses set -eu, two git clone commands into /opt/src/green and /opt/src/red, exact green HEAD assertion, git diff --quiet and tracked-file check before printing GREEN_HEAD. Console records successful completion. No independent rerun performed.",
+  "red_control": {
+    "families": [
+      {
+        "count": 1,
+        "duration_ms": 115621,
+        "failed": 1,
+        "name": "pr-forge"
+      }
+    ],
+    "finished_at": "2026-11-06T17:55:11Z",
+    "run_id": "fm-test-run-1793987595776-633",
+    "scripts": [
+      {
+        "duration_ms": 115621,
+        "exit": 1,
+        "expected_gate_skip": "none",
+        "family": "pr-forge",
+        "gate_skip": false,
+        "gate_skip_reason": "",
+        "path": "tests/fm-pr-check-security.test.sh"
+      }
+    ],
+    "selection": "scripts;jobs=1",
+    "started_at": "2026-11-06T17:53:15Z",
+    "summary": {
+      "duration_ms": 115650,
+      "failed": 1,
+      "skipped_gate": 0,
+      "total": 1
+    }
+  },
+  "green_suites": {
+    "families": [
+      {
+        "count": 3,
+        "duration_ms": 737408,
+        "failed": 0,
+        "name": "pr-forge"
+      },
+      {
+        "count": 4,
+        "duration_ms": 140964,
+        "failed": 0,
+        "name": "pure-contract-unit"
+      },
+      {
+        "count": 1,
+        "duration_ms": 128392,
+        "failed": 0,
+        "name": "watcher-wake-lock"
+      }
+    ],
+    "finished_at": "2026-11-06T18:11:58Z",
+    "run_id": "fm-test-run-1793987711471-104024",
+    "scripts": [
+      {
+        "duration_ms": 84586,
+        "exit": 0,
+        "expected_gate_skip": "none",
+        "family": "pure-contract-unit",
+        "gate_skip": false,
+        "gate_skip_reason": "",
+        "path": "tests/fm-crew-state.test.sh"
+      },
+      {
+        "duration_ms": 128392,
+        "exit": 0,
+        "expected_gate_skip": "none",
+        "family": "watcher-wake-lock",
+        "gate_skip": false,
+        "gate_skip_reason": "",
+        "path": "tests/fm-inactive-reconcile.test.sh"
+      },
+      {
+        "duration_ms": 311526,
+        "exit": 0,
+        "expected_gate_skip": "none",
+        "family": "pr-forge",
+        "gate_skip": false,
+        "gate_skip_reason": "",
+        "path": "tests/fm-pr-check-security.test.sh"
+      },
+      {
+        "duration_ms": 425288,
+        "exit": 0,
+        "expected_gate_skip": "none",
+        "family": "pr-forge",
+        "gate_skip": false,
+        "gate_skip_reason": "",
+        "path": "tests/fm-pr-merge.test.sh"
+      },
+      {
+        "duration_ms": 594,
+        "exit": 0,
+        "expected_gate_skip": "none",
+        "family": "pr-forge",
+        "gate_skip": false,
+        "gate_skip_reason": "",
+        "path": "tests/fm-pr-state.test.sh"
+      },
+      {
+        "duration_ms": 14150,
+        "exit": 0,
+        "expected_gate_skip": "none",
+        "family": "pure-contract-unit",
+        "gate_skip": false,
+        "gate_skip_reason": "",
+        "path": "tests/fm-dod-lib.test.sh"
+      },
+      {
+        "duration_ms": 8971,
+        "exit": 0,
+        "expected_gate_skip": "none",
+        "family": "pure-contract-unit",
+        "gate_skip": false,
+        "gate_skip_reason": "",
+        "path": "tests/fm-brief.test.sh"
+      },
+      {
+        "duration_ms": 33257,
+        "exit": 0,
+        "expected_gate_skip": "none",
+        "family": "pure-contract-unit",
+        "gate_skip": false,
+        "gate_skip_reason": "",
+        "path": "tests/fm-timeout-lib.test.sh"
+      }
+    ],
+    "selection": "scripts;jobs=1",
+    "started_at": "2026-11-06T17:55:11Z",
+    "summary": {
+      "duration_ms": 1006915,
+      "failed": 0,
+      "skipped_gate": 0,
+      "total": 8
+    }
+  },
+  "runner_verdict": "PROOF_EXIT=0; GREEN_EXIT=0",
+  "guest_cleanup": "Console records deleted ls-up3103-064. Final scratch inventory names a different guest; this Test turn started no child processes or guests.",
+  "limitations": [
+    "Archived fake-forge/unit evidence is not live execution in this Test turn and does not establish real forge behavior.",
+    "Red control restores only fm-pr-poll.sh and fm-watch.sh from bd239460 and demonstrates the legacy secondmate open-poll regression, not a failing-first proof of the entire original wrong-base issue.",
+    "The cited eight-suite selection does not execute fm-spawn-pool-base-freshen.test.sh or fm-control-relaunch.test.sh, so initial launch pinning and relaunch preservation are not established by this console.",
+    "No screenshot is applicable to this CLI evidence-only verification."
+  ]
+}

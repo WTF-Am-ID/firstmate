@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -eu
+export LC_ALL=C TZ=UTC
+mkdir -p /opt/src/node /opt/src/results /opt/src/proof-tmp
+tar -xJf /opt/src/node-v24.12.0-linux-x64.tar.xz -C /opt/src/node --strip-components=1
+export PATH=/opt/src/node/bin:/opt/src/linux-task-tools/node_modules/.bin:$PATH
+export TMPDIR=/opt/src/proof-tmp
+node --version
+tasks-axi --version
+git clone --quiet --branch fm/up-fm-3103 /opt/src/up3103-063.bundle /opt/src/green
+git clone --quiet --branch fm/up-fm-3103 /opt/src/up3103-063.bundle /opt/src/red
+candidate=de2717dcfc10f8947b81f1675286c26b4be1a884
+[ "$(git -C /opt/src/green rev-parse HEAD)" = "$candidate" ]
+git -C /opt/src/green diff --quiet
+git -C /opt/src/green ls-files --error-unmatch bin/fm-remote-secondmate-control.sh
+git -C /opt/src/red restore --source bd239460f76aa98b6666766900847a770465f545 --worktree -- bin/fm-pr-poll.sh bin/fm-watch.sh
+printf 'GREEN_HEAD=%s\nMAIN_PARENT=bf05a4fcd69b8bb27f261177eac4abb57f98aa1b\nRED_PRODUCT_MUTATION=bd239460f76aa98b6666766900847a770465f545\n' "$candidate"
+sha256sum /opt/src/up3103-063.bundle /opt/src/node-v24.12.0-linux-x64.tar.xz
+red_rc=0
+( cd /opt/src/red && bash bin/fm-test-run.sh --jobs 1 --per-script-timeout-secs 1500 --json /opt/src/results/red.json \
+    tests/fm-pr-check-security.test.sh ) > /opt/src/results/red.log 2>&1 || red_rc=$?
+printf 'RED_EXIT=%s\n' "$red_rc"
+cat /opt/src/results/red.log
+cat /opt/src/results/red.json
+if [ "$red_rc" = 0 ] || ! grep -Fq 'secondmate open poll produced a recovery wake' /opt/src/results/red.log; then
+  printf 'RED_CASE_NOT_ESTABLISHED\n'
+  exit 1
+fi
+green_rc=0
+( cd /opt/src/green && bash bin/fm-test-run.sh --jobs 1 --per-script-timeout-secs 1500 --json /opt/src/results/green.json \
+    tests/fm-crew-state.test.sh tests/fm-inactive-reconcile.test.sh tests/fm-pr-check-security.test.sh \
+    tests/fm-pr-merge.test.sh tests/fm-pr-state.test.sh tests/fm-dod-lib.test.sh tests/fm-brief.test.sh \
+    tests/fm-timeout-lib.test.sh ) > /opt/src/results/green.log 2>&1 || green_rc=$?
+printf 'GREEN_EXIT=%s\n' "$green_rc"
+cat /opt/src/results/green.log
+cat /opt/src/results/green.json
+exit "$green_rc"
