@@ -1,0 +1,51 @@
+Candidate: 8e8be8f14a5b24982a8fc95e65eb7a843abab6d6
+Base: 8b1618a49511d67b247f5f8091868b812bfcae2d
+Current-run result: no guest admitted; no product scenario executed.
+
+Preflight:
+CI_GATE idle runners=0 workers=0
+PENDING_CHECK=0
+Runner SHA256 a1e02205dfc1eb46e634fb03ff2e96a0882bf3bc11d5021e8841c6f18443e339 matched the trusted skill.
+
+Local/remote source archive SHA256 da89bc99e8f401d402261bb9ff936bb670714c391b03a97b3a9de505962ebdf7
+Local/remote guest script SHA256 89a431b07156588cfb9ecc60e17941cd3013d49dbb67dc7cbf0450cb680502bf
+Source archive contained a genuine exact-HEAD Git bundle and workspace-installed tasks-axi@0.2.6 dependencies.
+No product test ran on the Mac.
+
+Attempted command:
+ssh -o BatchMode=yes -o IdentitiesOnly=yes -i ~/.ssh/ci-box-agent fmagent@ci-box 'sudo bash ~/ls-proof-run.sh ls-up8155-01m6-test ~/up8155-01m6-source.tar.gz ~/up8155-01m6-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600'
+
+Observed admission state at 2026-11-06 00:40:22 UTC:
+    PID    PPID ELAPSED COMMAND
+ 762845  762844     746 sudo bash ~/ls-proof-run.sh ls-up8155-01m6-test ~/up8155-01m6-source.tar.gz ~/up8155-01m6-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 762847  762845     746 bash ~/ls-proof-run.sh ls-up8155-01m6-test ~/up8155-01m6-source.tar.gz ~/up8155-01m6-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 3600
+ 762858  762847     746 flock -w 3600 9
+NO_GUEST_CONSOLE
+
+After 746 measured seconds waiting, the phase budget no longer allowed admission plus the prepared focused execution and cleanup. Sent TERM only to this run's flock child, PID 762858.
+Runner exit: 75
+Terminated
+refused: another scratch guest run held the lock for 3600s; nothing launched
+
+The runner's 3600s refusal text is its configured limit, not elapsed time: this wait was deliberately interrupted after about 12.5 minutes.
+
+Post-stop checks:
+ps -p 762845,762847,762858 -o pid,ppid,args returned no process rows.
+NO_GUEST_CONSOLE
+sudo env INCUS_CONF=~/ls-ci-box/state/incus-client incus info ls-up8155-01m6-test --project ls-ci-scratch
+Error: Failed to fetch instance "ls-up8155-01m6-test" in project "ls-ci-scratch": Instance not found
+
+Cleanup:
+Remote own staging removal completed: OWN_STAGING_REMOVED.
+Local cleanup command was rejected before execution:
+rm -rf -- .test-phase-up8155; git status --short --untracked-files=normal; test ! -e .test-phase-up8155
+Rejection: rm -f style commands are not permitted. Use a safer approach
+No alternate deletion route was attempted. Local refused scratch retained as instructed:
+.test-phase-up8155/deps (608K)
+.test-phase-up8155/up8155-01m6-candidate.bundle (26,258,562 bytes)
+.test-phase-up8155/up8155-01m6-guest.sh (1,986 bytes)
+.test-phase-up8155/up8155-01m6-source.tar.gz (26,291,109 bytes)
+
+All five derived scenarios remain untested. The previous exact-candidate passing proof supplied in intent was not re-executed here and is not claimed as live coverage in this run.
+Next execution requires the protected CI-box guest slot to become free and sufficient phase time for the check. Local tests and concurrent guests were forbidden alternatives.
+
