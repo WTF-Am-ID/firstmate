@@ -1,0 +1,157 @@
+{
+  "candidate": "c5d17f7f49e800e3661525bc6f547d496a83455a",
+  "console_sha256": "11d62d0685dca434c794344dcee69032b07dea8f8efc7652412ee09ad7df10e8",
+  "executor": "Outer executor, before this Test phase. Test agent inspected captured evidence only.",
+  "captured_guest": "ls-up8212-live012, Ubuntu 24.04.5 LTS, ubuntu uid=1000",
+  "captured_observations": [
+    {
+      "scenario": "timeout",
+      "sweep": 0,
+      "now": "2026-09-16T08:00:00Z",
+      "wall_seconds": 5,
+      "read_order": [
+        "8"
+      ],
+      "oldest_owner": {
+        "url": "https://github.com/o/r/pull/8",
+        "checked_at": "2026-09-15T08:00:00Z",
+        "error": null,
+        "observation_state": "open"
+      },
+      "oldest_attempt": "2026-09-16T08:00:00Z",
+      "measured": {
+        "known": 3,
+        "checked": 0,
+        "complete": false
+      }
+    },
+    {
+      "scenario": "timeout",
+      "sweep": 1,
+      "now": "2026-09-16T08:05:00Z",
+      "wall_seconds": 0,
+      "read_order": [
+        "8",
+        "10"
+      ],
+      "oldest_owner": {
+        "url": "https://github.com/o/r/pull/8",
+        "checked_at": "2026-09-15T08:00:00Z",
+        "error": null,
+        "observation_state": "open"
+      },
+      "oldest_attempt": "2026-09-16T08:00:00Z",
+      "measured": {
+        "known": 3,
+        "checked": 1,
+        "complete": false
+      }
+    },
+    {
+      "scenario": "timeout",
+      "sweep": 2,
+      "now": "2026-09-16T08:10:00Z",
+      "wall_seconds": 0,
+      "read_order": [
+        "8",
+        "10",
+        "9"
+      ],
+      "oldest_owner": {
+        "url": "https://github.com/o/r/pull/8",
+        "checked_at": "2026-09-15T08:00:00Z",
+        "error": null,
+        "observation_state": "open"
+      },
+      "oldest_attempt": "2026-09-16T08:00:00Z",
+      "measured": {
+        "known": 3,
+        "checked": 2,
+        "complete": false
+      }
+    },
+    {
+      "scenario": "budget",
+      "sweep": 0,
+      "now": "2026-09-16T08:00:00Z",
+      "wall_seconds": 0,
+      "read_order": [
+        "8"
+      ],
+      "oldest_owner": {
+        "url": "https://github.com/o/r/pull/8",
+        "checked_at": "2026-09-15T08:00:00Z",
+        "error": null,
+        "observation_state": "open"
+      },
+      "oldest_attempt": "2026-09-16T08:00:00Z",
+      "measured": {
+        "known": 3,
+        "checked": 0,
+        "complete": false
+      }
+    },
+    {
+      "scenario": "budget",
+      "sweep": 1,
+      "now": "2026-09-16T08:05:00Z",
+      "wall_seconds": 0,
+      "read_order": [
+        "8",
+        "10"
+      ],
+      "oldest_owner": {
+        "url": "https://github.com/o/r/pull/8",
+        "checked_at": "2026-09-15T08:00:00Z",
+        "error": null,
+        "observation_state": "open"
+      },
+      "oldest_attempt": "2026-09-16T08:00:00Z",
+      "measured": {
+        "known": 3,
+        "checked": 1,
+        "complete": false
+      }
+    },
+    {
+      "scenario": "budget",
+      "sweep": 2,
+      "now": "2026-09-16T08:10:00Z",
+      "wall_seconds": 0,
+      "read_order": [
+        "8",
+        "10",
+        "9"
+      ],
+      "oldest_owner": {
+        "url": "https://github.com/o/r/pull/8",
+        "checked_at": "2026-09-15T08:00:00Z",
+        "error": null,
+        "observation_state": "open"
+      },
+      "oldest_attempt": "2026-09-16T08:00:00Z",
+      "measured": {
+        "known": 3,
+        "checked": 2,
+        "complete": false
+      }
+    }
+  ],
+  "captured_scenario_groups": [
+    "timeout read_order=\"8 10 9\" oldest_record_unchanged=true fresh_checked=2 known=3 complete=false wakes=0",
+    "budget read_order=\"8 10 9\" oldest_record_unchanged=true fresh_checked=2 known=3 complete=false wakes=0",
+    "missing-order-and-url-ties",
+    "shared-owners-and-terminal-settlement",
+    "rejected-and-new-owners",
+    "unsafe-scheduler-state"
+  ],
+  "captured_canonical_result": {
+    "command": "bash bin/fm-test-run.sh tests/fm-contributions.test.sh",
+    "exit": 0,
+    "duration_ms": 189763
+  },
+  "captured_teardown": "Console records deletion of ls-up8212-live012.",
+  "fresh_execution_this_phase": false,
+  "limitation": "Current host is Darwin. Required product execution is restricted to disposable Ubuntu 24.04 CI-box guests. Current workspace boundary forbids staging source and creating a remote guest. A local Linux replacement would violate the required CI-box environment. No product tests, remote writes, or pipeline controls were executed by this Test agent.",
+  "verdict": "inconclusive"
+}
