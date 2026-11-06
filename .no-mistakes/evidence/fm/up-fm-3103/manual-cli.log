@@ -1,0 +1,92 @@
+$ bash bin/fm-lab-home.sh create {run-worktree}/.tmp-pr-base-test/manual-home
+{run-worktree}/.tmp-pr-base-test/manual-home
+exit=0 elapsed_seconds=0.013
+
+$ git init -q -b main {run-worktree}/.tmp-pr-base-test/manual-home/projects/synthetic
+exit=0 elapsed_seconds=0.01
+
+$ git -C {run-worktree}/.tmp-pr-base-test/manual-home/projects/synthetic -c user.name=Validation -c user.email=validation@example.invalid commit -q --allow-empty -m synthetic local validation input
+exit=0 elapsed_seconds=0.014
+
+$ git -C {run-worktree}/.tmp-pr-base-test/manual-home/projects/synthetic branch release/integration
+exit=0 elapsed_seconds=0.009
+
+$ bash bin/fm-brief.sh default-brief synthetic --mode no-mistakes --project {run-worktree}/.tmp-pr-base-test/manual-home/projects/synthetic
+scaffolded: {run-worktree}/.tmp-pr-base-test/manual-home/data/default-brief/brief.md (ship, mode=no-mistakes; replace {TASK} and {FIRSTMATE_SPEC})
+exit=0 elapsed_seconds=0.131
+
+$ bash bin/fm-brief.sh named-brief synthetic --mode direct-PR --project {run-worktree}/.tmp-pr-base-test/manual-home/projects/synthetic --base-branch release/integration
+scaffolded: {run-worktree}/.tmp-pr-base-test/manual-home/data/named-brief/brief.md (ship, mode=direct-PR; replace {TASK} and {FIRSTMATE_SPEC})
+exit=0 elapsed_seconds=0.133
+
+$ bash bin/fm-brief.sh local-brief synthetic --mode local-only --project {run-worktree}/.tmp-pr-base-test/manual-home/projects/synthetic
+scaffolded: {run-worktree}/.tmp-pr-base-test/manual-home/data/local-brief/brief.md (ship, mode=local-only; replace {TASK} and {FIRSTMATE_SPEC})
+exit=0 elapsed_seconds=0.093
+
+$ bash bin/fm-pr-check.sh base-missing https://forge.invalid/synthetic/repo/pull/1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+exit=1 elapsed_seconds=0.111
+
+$ bash bin/fm-pr-merge.sh base-missing https://forge.invalid/synthetic/repo/pull/1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+exit=1 elapsed_seconds=0.335
+
+$ bash bin/fm-pr-check.sh base-empty https://forge.invalid/synthetic/repo/pull/1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+exit=1 elapsed_seconds=0.1
+
+$ bash bin/fm-pr-merge.sh base-empty https://forge.invalid/synthetic/repo/pull/1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+exit=1 elapsed_seconds=0.288
+
+$ bash bin/fm-pr-check.sh base-duplicate https://forge.invalid/synthetic/repo/pull/1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+exit=1 elapsed_seconds=0.097
+
+$ bash bin/fm-pr-merge.sh base-duplicate https://forge.invalid/synthetic/repo/pull/1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+exit=1 elapsed_seconds=0.269
+
+$ bash bin/fm-pr-check.sh base-invalid https://forge.invalid/synthetic/repo/pull/1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+exit=1 elapsed_seconds=0.096
+
+$ bash bin/fm-pr-merge.sh base-invalid https://forge.invalid/synthetic/repo/pull/1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+exit=1 elapsed_seconds=0.268
+
+$ bash bin/fm-pr-check.sh base-conflict https://forge.invalid/synthetic/repo/pull/1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+exit=1 elapsed_seconds=0.092
+
+$ bash bin/fm-pr-merge.sh base-conflict https://forge.invalid/synthetic/repo/pull/1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+exit=1 elapsed_seconds=0.26
+
+$ gh pr view https://forge.invalid/synthetic/repo/pull/1 --json baseRefName -q .baseRefName
+Post "https://forge.invalid/api/graphql": proxyconnect tcp: dial tcp 127.0.0.1:1: connect: connection refused
+exit=1 elapsed_seconds=0.025
+
+$ bash bin/fm-pr-check.sh base-unreadable https://forge.invalid/synthetic/repo/pull/1
+error: expected PR base release/integration, actual base unavailable
+exit=1 elapsed_seconds=0.119
+
+$ bash bin/fm-pr-merge.sh base-unreadable https://forge.invalid/synthetic/repo/pull/1
+error: expected PR base release/integration, actual base unavailable
+exit=1 elapsed_seconds=0.287
+
+$ bash bin/fm-pr-poll.sh --validated github https://forge.invalid/synthetic/repo/pull/1 forge.invalid synthetic/repo 1 release/integration {run-worktree}/.tmp-pr-base-test/manual-home/state/base-unreadable.meta
+exit=0 elapsed_seconds=0.03
+
+$ bash {run-worktree}/.tmp-pr-base-test/manual-home/state/legacy-default.check.sh
+task legacy-default merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+exit=0 elapsed_seconds=0.005
+
+$ bash {run-worktree}/.tmp-pr-base-test/manual-home/state/legacy-default.check.sh
+task legacy-default merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+exit=0 elapsed_seconds=0.005
+
+$ bash bin/fm-pr-poll.sh --retire-secondmate github https://forge.invalid/synthetic/repo/pull/1 forge.invalid synthetic/repo 1 {run-worktree}/.tmp-pr-base-test/manual-home/state/legacy-default.meta
+exit=0 elapsed_seconds=0.005
+
+{"result": "PASS", "note": "Real scaffold, registration, merge and standalone poll commands executed. Forge reads used real gh with synthetic credentials and an unreachable loopback proxy. No forge emulator or model process was started."}

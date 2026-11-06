@@ -1,0 +1,21 @@
+{
+  "head": "6e9847b7d642b36b54f0aab8291ba836c87858ce",
+  "git_status": "?? .tmp-pr-base-test/",
+  "tracked_diff": "",
+  "owned_test_processes_remaining": [],
+  "cleanup_refusal": "exec_command rejected rm -rf -- .tmp-pr-base-test/manual-home .tmp-pr-base-test/deadline-home .tmp-pr-base-test/deadline-parent: rm -f style commands are not permitted. Use a safer approach.",
+  "cleanup_action": "Stopped the denied operation. No alternate deletion route attempted.",
+  "retained_scratch_root": ".tmp-pr-base-test/",
+  "retained_top_level_entries": [
+    ".tmp-pr-base-test/deadline-home",
+    ".tmp-pr-base-test/deadline-parent",
+    ".tmp-pr-base-test/deadline.py",
+    ".tmp-pr-base-test/drive.py",
+    ".tmp-pr-base-test/manual-home",
+    ".tmp-pr-base-test/toolchain"
+  ],
+  "retained_regular_files": 56,
+  "retained_fifos": [
+    ".tmp-pr-base-test/deadline-home/gh/config.yml"
+  ]
+}

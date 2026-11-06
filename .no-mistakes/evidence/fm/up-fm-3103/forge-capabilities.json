@@ -1,0 +1,56 @@
+[
+  {
+    "tool": "gh",
+    "on_PATH": "/opt/homebrew/bin/gh"
+  },
+  {
+    "tool": "glab",
+    "on_PATH": null
+  },
+  {
+    "tool": "gerrit-axi",
+    "on_PATH": null
+  },
+  {
+    "tool": "tea",
+    "on_PATH": null
+  },
+  {
+    "tool": "docker",
+    "on_PATH": null
+  },
+  {
+    "tool": "podman",
+    "on_PATH": null
+  },
+  {
+    "command": [
+      "bash",
+      "bin/fm-pr-check.sh",
+      "base-unreadable",
+      "https://gitlab.invalid/group/repo/-/merge_requests/1"
+    ],
+    "exit": 1,
+    "output": "error: watching a GitLab merge request requires glab on PATH\n"
+  },
+  {
+    "command": [
+      "bash",
+      "bin/fm-pr-check.sh",
+      "base-unreadable",
+      "https://gerrit.invalid/c/project/+/1"
+    ],
+    "exit": 1,
+    "output": "error: watching a Gerrit change requires gerrit-axi on PATH\n"
+  },
+  {
+    "command": [
+      "bash",
+      "bin/fm-pr-check.sh",
+      "base-unreadable",
+      "https://forgejo.invalid/owner/repo/pulls/1"
+    ],
+    "exit": 1,
+    "output": "error: watching a Forgejo pull request requires tea and jq on PATH\n"
+  }
+]

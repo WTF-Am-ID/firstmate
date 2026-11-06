@@ -1,0 +1,85 @@
+[
+  {
+    "command": [
+      "bash",
+      "bin/fm-lab-home.sh",
+      "create",
+      "{run-worktree}/.tmp-pr-base-test/deadline-home"
+    ],
+    "exit": 0,
+    "duration_seconds": 0.012,
+    "output": "{run-worktree}/.tmp-pr-base-test/deadline-home\n"
+  },
+  {
+    "command": [
+      "bash",
+      "bin/fm-lab-home.sh",
+      "create",
+      "{run-worktree}/.tmp-pr-base-test/deadline-parent"
+    ],
+    "exit": 0,
+    "duration_seconds": 0.012,
+    "output": "{run-worktree}/.tmp-pr-base-test/deadline-parent\n"
+  },
+  {
+    "command": "real gh config FIFO control",
+    "pid": 90248,
+    "stalled_for_seconds": 0.7,
+    "exit": -15,
+    "output": ""
+  },
+  {
+    "command": [
+      "bash",
+      "bin/fm-inactive-reconcile.sh",
+      "report",
+      "a-stalled"
+    ],
+    "exit": 0,
+    "duration_seconds": 5.317,
+    "output": ""
+  },
+  {
+    "parent_channel_after_unreadable_report": ""
+  },
+  {
+    "command": [
+      "bash",
+      "bin/fm-inactive-reconcile.sh",
+      "scan"
+    ],
+    "exit": 0,
+    "duration_seconds": 2.562,
+    "output": ""
+  },
+  {
+    "command": [
+      "bash",
+      "bin/fm-inactive-reconcile.sh",
+      "scan"
+    ],
+    "exit": 0,
+    "duration_seconds": 3.384,
+    "output": ""
+  },
+  {
+    "parent_channel_after_scans": "failed [key=child-outcome-b-following-failed-c5990d16] [at=1793985706]: child b-following failed: synthetic child intentionally failed mode=direct-PR\n"
+  },
+  {
+    "command": [
+      "ps",
+      "-axo",
+      "pid=,ppid=,command="
+    ],
+    "exit": 0,
+    "duration_seconds": 0.068,
+    "output": ""
+  },
+  {
+    "remaining_state_locks": []
+  },
+  {
+    "result": "PASS",
+    "note": "Real reconciliation refused readiness on a stalled real gh read, bounded the scan and delivered the later synthetic failed child. No forge or model was substituted."
+  }
+]
