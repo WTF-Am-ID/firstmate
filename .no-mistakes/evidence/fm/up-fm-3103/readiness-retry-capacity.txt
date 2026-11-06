@@ -1,0 +1,10 @@
+Corrected readiness recheck for exact candidate 735c27118dae7bf535522342d1d879db2a98e618
+The first driver used fm-crew-state without a backend target and returned state: unknown, source: none, no backend target recorded. This was a fixture error, not a product failure.
+Corrected driver uses the real public fm-inactive-reconcile.sh report command and synthetic forge destination records. Its ready-count oracle reads actual parent-channel status output. The corrected driver did not execute.
+Verified source SHA256: d622cca7c25fc710c7a4215b36162fe873df6eeb1ec8bfb36dd5739b4f7a20b3
+Verified guest script SHA256: 27a562810104d823bff4f898e405932a32cacba07e3df4ee84509fbea2c8d47b
+Preflight: CI_GATE idle runners=0 workers=0; no ls-proof-pending marker.
+Command: sudo bash ~/ls-proof-run.sh ls-up3103-735-ready ~/up3103-readiness-source.tar.gz ~/up3103-readiness-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 0
+Exit: 75
+Output: refused: another scratch guest run held the lock for 0s; nothing launched
+All runner invocations have exited. First guest was deleted by its protected runner, which reported an empty scratch inventory at completion.

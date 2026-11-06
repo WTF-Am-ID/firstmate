@@ -1,0 +1,5 @@
+Exact candidate: 735c27118dae7bf535522342d1d879db2a98e618
+Preflight: runner SHA256 a1e02205dfc1eb46e634fb03ff2e96a0882bf3bc11d5021e8841c6f18443e339; CI_GATE idle runners=0 workers=0; no ls-proof-pending marker.
+Command: ssh -o BatchMode=yes -o IdentitiesOnly=yes -i ~/.ssh/ci-box-agent fmagent@ci-box sudo bash ~/ls-proof-run.sh ls-up3103-735-test ~/up3103-source.tar.gz ~/up3103-guest.sh --image ci-bench-202610201338 --as-user ubuntu --wait-ci 120
+Exit: 75
+Output: refused: another scratch guest run held the lock for 120s; nothing launched
