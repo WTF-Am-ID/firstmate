@@ -1,0 +1,154 @@
+{
+  "audit_kind": "Archived evidence verification only; no repository checks or product execution in this run",
+  "candidate": "5ce675c05a2f4d261b01690b47c7e979c40a703a",
+  "console_sha256": "3d2f81306399d2af94d1c12c6d619301f36d75a70d1ec59d6f3dc72ca8509849",
+  "console_bytes": 86662,
+  "receipt_members_verified": [
+    "request",
+    "status",
+    "stderr",
+    "stdout"
+  ],
+  "source_aware_lint_recorded_exit": 0,
+  "runner_recorded_exit": 0,
+  "suite_results": [
+    {
+      "duration_ms": 466551,
+      "exit": 0,
+      "expected_gate_skip": "none",
+      "family": "pure-contract-unit",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-captain-hold-lifecycle.test.sh"
+    },
+    {
+      "duration_ms": 125448,
+      "exit": 0,
+      "expected_gate_skip": "none",
+      "family": "watcher-wake-lock",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-inactive-reconcile.test.sh"
+    },
+    {
+      "duration_ms": 451039,
+      "exit": 0,
+      "expected_gate_skip": "none",
+      "family": "afk",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-supervision-host.test.sh"
+    },
+    {
+      "duration_ms": 81815,
+      "exit": 0,
+      "expected_gate_skip": "none",
+      "family": "pure-contract-unit",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-crew-state.test.sh"
+    },
+    {
+      "duration_ms": 309007,
+      "exit": 0,
+      "expected_gate_skip": "none",
+      "family": "pr-forge",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-pr-check-security.test.sh"
+    },
+    {
+      "duration_ms": 351055,
+      "exit": 0,
+      "expected_gate_skip": "none",
+      "family": "pr-forge",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-pr-merge.test.sh"
+    },
+    {
+      "duration_ms": 518,
+      "exit": 0,
+      "expected_gate_skip": "none",
+      "family": "pr-forge",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-pr-state.test.sh"
+    },
+    {
+      "duration_ms": 12836,
+      "exit": 0,
+      "expected_gate_skip": "none",
+      "family": "pure-contract-unit",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-dod-lib.test.sh"
+    },
+    {
+      "duration_ms": 8247,
+      "exit": 0,
+      "expected_gate_skip": "none",
+      "family": "pure-contract-unit",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-brief.test.sh"
+    },
+    {
+      "duration_ms": 33192,
+      "exit": 0,
+      "expected_gate_skip": "none",
+      "family": "pure-contract-unit",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-timeout-lib.test.sh"
+    }
+  ],
+  "runner_summary": {
+    "duration_ms": 1839878,
+    "failed": 0,
+    "skipped_gate": 0,
+    "total": 10
+  },
+  "backend_specific_skips": [
+    {
+      "line": 97,
+      "text": "ok - skipped on markdown-only tasks-axi: verify against a beads-migrated hold"
+    },
+    {
+      "line": 98,
+      "text": "ok - skipped on markdown-only tasks-axi: verify against a prefix-migrated hold"
+    },
+    {
+      "line": 99,
+      "text": "ok - skipped on markdown-only tasks-axi: prefer a marker-noted row over a prefix namesake"
+    },
+    {
+      "line": 100,
+      "text": "ok - skipped on markdown-only tasks-axi: complete against a beads-migrated hold"
+    },
+    {
+      "line": 101,
+      "text": "ok - skipped on markdown-only tasks-axi: verify an unresolvable beads legacy id"
+    },
+    {
+      "line": 102,
+      "text": "ok - skipped on markdown-only tasks-axi: verify a derived pre-collapse key"
+    },
+    {
+      "line": 104,
+      "text": "ok - skipped on markdown-only tasks-axi: captain-hold create under due.required without types.custom"
+    }
+  ],
+  "cleanup_recorded": [
+    "=== deleted ls-up3103-066",
+    "=== scratch now: "
+  ],
+  "limits": [
+    "This run did not drive any product scenario live. The explicit Test-only direction prohibits tests, fixtures, probes, services and dependency installs.",
+    "The permitted console records GREEN_HEAD and MAIN_PARENT, but contains no clone command, clone transcript, git index inspection or explicit fresh-clone attestation. Fresh clone cannot be independently verified from this console and its completion receipt.",
+    "The permitted console contains green results only. It contains no failing-first lint control, old-head captain-hold failure, or paired main/PR host comparison. Those claims remain outside the permitted evidence audit.",
+    "skipped_gate=0 does not mean no individual skips. Seven markdown-only tasks-axi backend skips are recorded.",
+    "The console records source-aware lint success but does not print the invocation or explicit analyzed roots.",
+    "Archived fake-forge suites do not establish live forge behavior or current full upstream CI status."
+  ]
+}
