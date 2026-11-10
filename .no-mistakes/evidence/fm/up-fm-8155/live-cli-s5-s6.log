@@ -1,0 +1,93 @@
+{run-worktree}/.resolution-lab.KUDP23
+CANDIDATE=4fd08b6df7d753f357c47499d1b6828c5e059a39
+
+S5 reconciliation source binds evidence content across bracketed and copied paths
+reconcile-proof
+bound: local-proof -> (any)
+reconcile: reconcile-proof
+reconcile-requests: created=1 skipped=0
+fm-captain-hold: could not close reconciled captain-held task reconcile-proof
+REFUSAL_EXIT=1
+rm: {run-worktree}/.resolution-lab.KUDP23/state/reconcile-requests/reconcile-proof.request: Permission denied
+fm-captain-hold: could not retire the pending reconcile request for reconcile-proof
+REFUSAL_EXIT=1
+task:
+  id: reconcile-proof
+  title: Evidence proof
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "fm-hold-v1:Y2hvb3Nl"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: firstmate
+  priority: "-"
+  created: "-"
+  closed: 2026-11-10
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 53cca6e6c2460057c3995520ddb3cb8461e40d9c8422813ee496e0bdf3bf07d6\nResolution mode: reconciled\nSource kind: mechanical\nSource reference: fm-captain-hold reconcile close: sha256:53cca6e6c2460057c3995520ddb3cb8461e40d9c8422813ee496e0bdf3bf07d6\n\nReconciliation evidence:\nThe old route is no longer deployed."
+fm-captain-hold: task reconcile-proof records a different resolution; it cannot be reconciled again
+REFUSAL_EXIT=1
+reconciled: reconcile-proof
+S5 PASS
+
+S6 reserved close vocabulary and persisted source-free legacy replay remain compatible
+fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktree}/.resolution-lab.KUDP23
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the requested message WILL still be sent.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+fm-send: doorbell did not reach lab:fm-reserved; the steer is durably recorded at {run-worktree}/.resolution-lab.KUDP23/state/reserved.inbox/001.msg and the watcher will re-ring
+blocked [key=pending-reply-abcdef0123456789]: pending-reply-missed: task=reserved pending-reply-id=abcdef0123456789 request=ship it
+resolved [key=pending-reply-abcdef0123456789] [at=1794324311]: pending-reply-resolved: task=reserved pending-reply-id=abcdef0123456789 via=operator-resolve-key False e [source-kind=supervisor] [source=judgement:reserved]
+answer-user
+answered: answer-user
+ok: updated answer-user (body)
+task:
+  id: answer-user
+  title: Legacy replay setup
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "fm-hold-v1:Y2hvb3Nl"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: firstmate
+  priority: "-"
+  created: "-"
+  closed: 2026-11-10
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 7ef0cccad81ac1072176154afeab6a2f3efffdea074846d5508310674947c1f5\nResolution mode: answered\n\nCaptain decision:\nUse the north route.\n"
+help[1]:
+  - Run `tasks-axi show answer-user --full` to see the result
+answered: answer-user
+task:
+  id: answer-user
+  title: Legacy replay setup
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "fm-hold-v1:Y2hvb3Nl"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: firstmate
+  priority: "-"
+  created: "-"
+  closed: 2026-11-10
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 7ef0cccad81ac1072176154afeab6a2f3efffdea074846d5508310674947c1f5\nResolution mode: answered\n\nCaptain decision:\nUse the north route."
+S6 PASS
+
+ALL LIVE CLI SCENARIOS PASSED

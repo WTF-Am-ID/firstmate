@@ -1,0 +1,345 @@
+{run-worktree}/.resolution-lab.XDNZ5y
+CANDIDATE=4fd08b6df7d753f357c47499d1b6828c5e059a39
+
+S1 ordinary resolution attribution, synthetic CLI delivery with unavailable private terminal
+fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktree}/.resolution-lab.XDNZ5y
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the requested message WILL still be sent.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+fm-send: doorbell did not reach lab:fm-ordinary-user; the steer is durably recorded at {run-worktree}/.resolution-lab.XDNZ5y/state/ordinary-user.inbox/001.msg and the watcher will re-ring
+needs-decision [key=route]: choose route
+resolved [key=route] [at=1794324211]: answered: Use north [source-kind=user] [source=user:proof-message-7] [source-time=2026-11-04T15:23:07Z]
+schema=fm-task-inbox.v1
+at=2026-11-10T15:23:31Z
+body-terminator=1
+--
+Use north
+fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktree}/.resolution-lab.XDNZ5y
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+fm-send: doorbell did not reach lab:fm-ordinary-supervisor; the steer is durably recorded at {run-worktree}/.resolution-lab.XDNZ5y/state/ordinary-supervisor.inbox/001.msg and the watcher will re-ring
+needs-decision [key=route]: choose route
+resolved [key=route] [at=1794324211]: answered: Use north [source-kind=supervisor] [source=supervisor:proof-message-7]
+schema=fm-task-inbox.v1
+at=2026-11-10T15:23:31Z
+body-terminator=1
+--
+Use north
+fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktree}/.resolution-lab.XDNZ5y
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+fm-send: doorbell did not reach lab:fm-ordinary-mechanical; the steer is durably recorded at {run-worktree}/.resolution-lab.XDNZ5y/state/ordinary-mechanical.inbox/001.msg and the watcher will re-ring
+needs-decision [key=route]: choose route
+resolved [key=route] [at=1794324212]: answered: Use north [source-kind=mechanical] [source=mechanical:proof-message-7]
+schema=fm-task-inbox.v1
+at=2026-11-10T15:23:32Z
+body-terminator=1
+--
+Use north
+S1 PASS
+
+S2 refusals leave decision open and inbox absent, enqueue failure closes nothing
+fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktree}/.resolution-lab.XDNZ5y
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+error: --source-kind must be user, supervisor, or mechanical
+REFUSAL_EXIT=1
+fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktree}/.resolution-lab.XDNZ5y
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+error: a user source requires --source-time with the answering message UTC time
+REFUSAL_EXIT=1
+fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktree}/.resolution-lab.XDNZ5y
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+error: --source-time must be UTC YYYY-MM-DDTHH:MM:SSZ
+REFUSAL_EXIT=1
+fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktree}/.resolution-lab.XDNZ5y
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+error: --source requires a nonempty printable reference of at most 512 bytes without brackets
+REFUSAL_EXIT=1
+fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktree}/.resolution-lab.XDNZ5y
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+error: --resolve-key 'wrong-key': no open decision or blocker with that key in {run-worktree}/.resolution-lab.XDNZ5y/state/guarded.status, and no captain-held task 'wrong-key' or 'guarded-decision-wrong-key' still open (already closed or mistyped); nothing was sent.
+  open on guarded: route
+  resend, your message preserved:
+    FM_HOME={run-worktree}/.resolution-lab.XDNZ5y {run-worktree}/bin/fm-send.sh guarded --resolve-key '<key>' --source-kind supervisor --source judgement:8 Use\ north
+    FM_HOME={run-worktree}/.resolution-lab.XDNZ5y {run-worktree}/bin/fm-send.sh guarded Use\ north   # deliver without closing anything
+REFUSAL_EXIT=1
+fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktree}/.resolution-lab.XDNZ5y
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+mkdir: {run-worktree}/.resolution-lab.XDNZ5y/state/guarded.inbox: Not a directory
+error: steer not sent to guarded: its inbox record could not be written under {run-worktree}/.resolution-lab.XDNZ5y/state/guarded.inbox
+REFUSAL_EXIT=1
+needs-decision [key=route]: choose route
+S2 PASS
+
+S3 direct and shared answers preserve distinct authority labels and message time
+answer-user
+answered: answer-user
+task:
+  id: answer-user
+  title: Synthetic answer user
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "fm-hold-v1:Y2hvb3Nl"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: firstmate
+  priority: "-"
+  created: "-"
+  closed: 2026-11-10
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 7ef0cccad81ac1072176154afeab6a2f3efffdea074846d5508310674947c1f5\nResolution mode: answered\nSource kind: user\nSource reference: user:message-9\nSource message UTC: 2026-11-04T15:23:07Z\n\nCaptain decision:\nUse the north route."
+answers-user
+closed: answers-user
+answers: closed=1 skipped=0
+task:
+  id: answers-user
+  title: Synthetic answers user
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "fm-hold-v1:Y2hvb3Nl"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: firstmate
+  priority: "-"
+  created: "-"
+  closed: 2026-11-10
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 189ed76da81696f7a650e477c385530e03e9c1b7df30458f7003987a5f046cd6\nResolution mode: answered\nSource kind: user\nSource reference: user:message-9\nSource message UTC: 2026-11-04T15:23:07Z\n\nCaptain decision:\nCaptain answered this call through user:message-9.\nTask: answers-user\nAnswer: north"
+answer-supervisor
+answered: answer-supervisor
+task:
+  id: answer-supervisor
+  title: Synthetic answer supervisor
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "fm-hold-v1:Y2hvb3Nl"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: firstmate
+  priority: "-"
+  created: "-"
+  closed: 2026-11-10
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 7ef0cccad81ac1072176154afeab6a2f3efffdea074846d5508310674947c1f5\nResolution mode: answered\nSource kind: supervisor\nSource reference: supervisor:message-9\n\nResolution decision:\nUse the north route."
+answers-supervisor
+closed: answers-supervisor
+answers: closed=1 skipped=0
+task:
+  id: answers-supervisor
+  title: Synthetic answers supervisor
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "fm-hold-v1:Y2hvb3Nl"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: firstmate
+  priority: "-"
+  created: "-"
+  closed: 2026-11-10
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 70ec0fe34556b1bfdf00b49991f210f398d7591ae94aef9957b98dafb38c6337\nResolution mode: answered\nSource kind: supervisor\nSource reference: supervisor:message-9\n\nResolution decision:\nResolution supplied through supervisor:message-9.\nTask: answers-supervisor\nAnswer: north"
+answer-mechanical
+answered: answer-mechanical
+task:
+  id: answer-mechanical
+  title: Synthetic answer mechanical
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "fm-hold-v1:Y2hvb3Nl"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: firstmate
+  priority: "-"
+  created: "-"
+  closed: 2026-11-10
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 7ef0cccad81ac1072176154afeab6a2f3efffdea074846d5508310674947c1f5\nResolution mode: answered\nSource kind: mechanical\nSource reference: mechanical:message-9\n\nResolution decision:\nUse the north route."
+answers-mechanical
+closed: answers-mechanical
+answers: closed=1 skipped=0
+task:
+  id: answers-mechanical
+  title: Synthetic answers mechanical
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "fm-hold-v1:Y2hvb3Nl"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: firstmate
+  priority: "-"
+  created: "-"
+  closed: 2026-11-10
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: f09a31d304dc62105f40ea23d4e4721068755d2360498ae1af4f99cf5ff92f50\nResolution mode: answered\nSource kind: mechanical\nSource reference: mechanical:message-9\n\nResolution decision:\nResolution supplied through mechanical:message-9.\nTask: answers-mechanical\nAnswer: north"
+S3 PASS
+
+S4 interrupted fm-send closure produces a replayable recovery command
+retry-call
+fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktree}/.resolution-lab.XDNZ5y
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+error: the answer was delivered to lab:fm-delivery, but this captain-held task could not be closed: retry-call. Close it with: printf '%s' $'retry-call\tChoose "north"; retain $cash\t\n' | FM_HOME={run-worktree}/.resolution-lab.XDNZ5y {run-worktree}/bin/fm-captain-hold.sh answers --source-kind user --source message:quoted\ route\ 10 --source-time 2026-11-04T15:23:07Z --delivery-task delivery - do not resend the answer.
+REFUSAL_EXIT=1
+task:
+  id: retry-call
+  title: Interrupted close proof
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "fm-hold-v1:Y2hvb3Nl"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: firstmate
+  priority: "-"
+  created: 2026-11-10
+  closed: "-"
+  deps: none
+  links: none
+  body: "Captain hold set: 2026-11-10T15:23:53Z\nCaptain hold occurrence: 1\n\nResolution recorded by fm-captain-hold.\nDecision digest: 7a7e4cd790ce10dcfdf858199c735e1930e73dad5746cd5882748a782d779abd\nResolution mode: answered\nSource kind: user\nSource reference: message:quoted route 10\nSource message UTC: 2026-11-04T15:23:07Z\n\nCaptain decision:\nCaptain answered this call through message:quoted route 10.\nFirstmate answer sent to delivery.\nTask: retry-call\nAnswer: Choose \"north\"; retain $cash"
+fm-captain-hold: task retry-call records a different captain decision for this unfinished close
+REFUSAL_EXIT=1
+EXECUTING PRINTED RECOVERY: printf '%s' $'retry-call\tChoose "north"; retain $cash\t\n' | FM_HOME={run-worktree}/.resolution-lab.XDNZ5y {run-worktree}/bin/fm-captain-hold.sh answers --source-kind user --source message:quoted\ route\ 10 --source-time 2026-11-04T15:23:07Z --delivery-task delivery
+closed: retry-call
+answers: closed=1 skipped=0
+closed: retry-call
+answers: closed=1 skipped=0
+task:
+  id: retry-call
+  title: Interrupted close proof
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "fm-hold-v1:Y2hvb3Nl"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: firstmate
+  priority: "-"
+  created: "-"
+  closed: 2026-11-10
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 7a7e4cd790ce10dcfdf858199c735e1930e73dad5746cd5882748a782d779abd\nResolution mode: answered\nSource kind: user\nSource reference: message:quoted route 10\nSource message UTC: 2026-11-04T15:23:07Z\n\nCaptain decision:\nCaptain answered this call through message:quoted route 10.\nFirstmate answer sent to delivery.\nTask: retry-call\nAnswer: Choose \"north\"; retain $cash"
+S4 PASS
+
+{run-worktree}/.resolution-lab.KUDP23
+CANDIDATE=4fd08b6df7d753f357c47499d1b6828c5e059a39
+
+S5 reconciliation source binds evidence content across bracketed and copied paths
+reconcile-proof
+bound: local-proof -> (any)
+reconcile: reconcile-proof
+reconcile-requests: created=1 skipped=0
+fm-captain-hold: could not close reconciled captain-held task reconcile-proof
+REFUSAL_EXIT=1
+rm: {run-worktree}/.resolution-lab.KUDP23/state/reconcile-requests/reconcile-proof.request: Permission denied
+fm-captain-hold: could not retire the pending reconcile request for reconcile-proof
+REFUSAL_EXIT=1
+task:
+  id: reconcile-proof
+  title: Evidence proof
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "fm-hold-v1:Y2hvb3Nl"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: firstmate
+  priority: "-"
+  created: "-"
+  closed: 2026-11-10
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 53cca6e6c2460057c3995520ddb3cb8461e40d9c8422813ee496e0bdf3bf07d6\nResolution mode: reconciled\nSource kind: mechanical\nSource reference: fm-captain-hold reconcile close: sha256:53cca6e6c2460057c3995520ddb3cb8461e40d9c8422813ee496e0bdf3bf07d6\n\nReconciliation evidence:\nThe old route is no longer deployed."
+fm-captain-hold: task reconcile-proof records a different resolution; it cannot be reconciled again
+REFUSAL_EXIT=1
+reconciled: reconcile-proof
+S5 PASS
+
+S6 reserved close vocabulary and persisted source-free legacy replay remain compatible
+fm-gate-refuse: gate agent lifecycle permitted only against lab home {run-worktree}/.resolution-lab.KUDP23
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the requested message WILL still be sent.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+fm-send: doorbell did not reach lab:fm-reserved; the steer is durably recorded at {run-worktree}/.resolution-lab.KUDP23/state/reserved.inbox/001.msg and the watcher will re-ring
+blocked [key=pending-reply-abcdef0123456789]: pending-reply-missed: task=reserved pending-reply-id=abcdef0123456789 request=ship it
+resolved [key=pending-reply-abcdef0123456789] [at=1794324311]: pending-reply-resolved: task=reserved pending-reply-id=abcdef0123456789 via=operator-resolve-key False e [source-kind=supervisor] [source=judgement:reserved]
+answer-user
+answered: answer-user
+ok: updated answer-user (body)
+task:
+  id: answer-user
+  title: Legacy replay setup
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "fm-hold-v1:Y2hvb3Nl"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: firstmate
+  priority: "-"
+  created: "-"
+  closed: 2026-11-10
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 7ef0cccad81ac1072176154afeab6a2f3efffdea074846d5508310674947c1f5\nResolution mode: answered\n\nCaptain decision:\nUse the north route.\n"
+help[1]:
+  - Run `tasks-axi show answer-user --full` to see the result
+answered: answer-user
+task:
+  id: answer-user
+  title: Legacy replay setup
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "fm-hold-v1:Y2hvb3Nl"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: firstmate
+  priority: "-"
+  created: "-"
+  closed: 2026-11-10
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 7ef0cccad81ac1072176154afeab6a2f3efffdea074846d5508310674947c1f5\nResolution mode: answered\n\nCaptain decision:\nUse the north route."
+S6 PASS
+
+ALL LIVE CLI SCENARIOS PASSED
