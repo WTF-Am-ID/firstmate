@@ -1,0 +1,26 @@
+{run-worktree}/.tmp-up3103-test/lab
+
+Generate default-base no-mistakes brief
+scaffolded: {run-worktree}/.tmp-up3103-test/lab/data/default/brief.md (ship, mode=no-mistakes; replace {TASK} and {FIRSTMATE_SPEC})
+
+Generate named integration-base brief
+scaffolded: {run-worktree}/.tmp-up3103-test/lab/data/named/brief.md (ship, mode=direct-PR; replace {TASK} and {FIRSTMATE_SPEC})
+
+Generate local-only brief
+scaffolded: {run-worktree}/.tmp-up3103-test/lab/data/local/brief.md (ship, mode=local-only; replace {TASK} and {FIRSTMATE_SPEC})
+Generated brief contract: publishing modes require live destination verification inside Definition of done; named PR targets release/integration.
+
+Try the required private-socket Codex primary launch
+codex-cli 0.167.0
+error connecting to {run-worktree}/.tmp-up3103-test/lab/tmux/tmux-501/fm-lab (File name too long)
+Private-socket launch exit=1
+
+Create synthetic child and local parent homes
+
+Report a ready claim with missing expected destination and missing PR identity
+blocked [key=child-pr-base-child-2774d7aa5985a00529330f4614fea495] [at=1794348255]: task child merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+
+Retry that same claim to check one-time parent notice
+Traceback (most recent call last):
+  File "<stdin>", line 6, in <module>
+AssertionError
