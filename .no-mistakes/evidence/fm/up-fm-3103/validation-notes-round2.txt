@@ -1,0 +1,54 @@
+Candidate: 252ac44b0e659a38b5e274eb8ede65aab9a59359
+Base: 913bb7a7b6e68a107c2d0ee755ee29c6f9e7b208
+
+The canonical six-subject runner completed, exit 1. Security, brief, PR state,
+and PR health exited 0. Security's entire canonical GitLab case now passes,
+including the existing Perl-free and bounded-read assertions.
+Merge exited 1 at the known Forgejo combined-status unreadable fixture.
+Inactive-reconcile exited 1 at the accepted first-cadence allowance assertion.
+No timing repair, budget change, source repair or assertion change was made.
+Instruction 074 accepts T1 and the earlier incomplete-live-coverage result.
+These accepted limitations are disclosed, not raised as fresh findings.
+
+The existing baseline-merge-fixture.log and baseline-merge-fixture-timing.json
+were read and reused. That prior baseline selector exited 1 at the same
+Forgejo case. No baseline suite was rerun in this evidence turn. The older
+baseline-suites.log is partial, not a complete passing baseline. Supplied
+CI-box proof concerns a7161662 and was not independently rerun here.
+
+The selected-consumer runner completed, exit 0. Its cases are the unchanged
+canonical functions listed in selected-consumers-cases-round2.txt. Forge
+commands and terminal/harness endpoints in these tests are mocked. These
+results are supplementary and are not live forge or real Codex lifecycle proof.
+
+The real local product driver completed, exit 0. It drove fm-brief.sh and
+fm-inactive-reconcile.sh through default/named brief output, a missing-base
+legacy blocked notice across fresh processes, and unpublished moved-head
+refusal. local-product-round2.log and the two generated brief files show the
+actual output. No forge stubs were used by this driver.
+
+The prescribed real Codex primary launch was attempted in a worktree-local
+marked lab, with an explicitly sized tmux grid. It failed before Codex start:
+File name too long for the lab's private tmux socket. The supported short
+socket helper intentionally writes /tmp; that needs an exception to the
+workspace boundary. No alternative socket route or Herdr lifecycle was used.
+The earlier forge-emulator guard refusal was respected. No remote synthetic
+PRs, credential changes or retry through another tool/runtime occurred.
+
+Both runner sessions and the local driver sessions returned actual exit
+statuses. Final process checks found no process in main runner group 79906
+and no matching selected runner. The Codex primary never started. No server,
+watcher, browser, scheduled task or other background job remains from this turn.
+
+Tracked git status is clean. The only tracked change from a7161662 to this
+candidate is the authorized security-test cache-isolation hunk. No tracked
+files were edited in this evidence turn. CLI/generated Markdown is the user
+interface here; there is no rendered product UI to screenshot.
+
+Scratch retained under ignored .tmp-up3103-072/ per instruction 074 and the
+standing prior cleanup refusal. No scratch deletion was attempted. New paths:
+local-product-round2.sh, local-lab-round2/, primary-launch-round2.sh,
+primary-launch-round2/, round2-selected-fm-dod-lib.test.sh,
+round2-selected-fm-crew-state.test.sh, round2-selected-fm-control-relaunch.test.sh.
+The complete pre-existing and new scratch directory is 32 MB. Firstmate owns
+its later cleanup. Evidence files remain in the dedicated evidence directory.

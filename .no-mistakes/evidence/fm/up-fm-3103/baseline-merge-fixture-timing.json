@@ -1,0 +1,31 @@
+{
+  "families": [
+    {
+      "count": 1,
+      "duration_ms": 4943,
+      "failed": 1,
+      "name": "unclassified"
+    }
+  ],
+  "finished_at": "2026-11-10T19:45:42Z",
+  "run_id": "fm-test-run-1794339937143-88519",
+  "scripts": [
+    {
+      "duration_ms": 4943,
+      "exit": 1,
+      "expected_gate_skip": "none",
+      "family": "unclassified",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": ".tmp-up3103-072/selected-baseline-forgejo.test.sh"
+    }
+  ],
+  "selection": "scripts;jobs=1",
+  "started_at": "2026-11-10T19:45:37Z",
+  "summary": {
+    "duration_ms": 5084,
+    "failed": 1,
+    "skipped_gate": 0,
+    "total": 1
+  }
+}

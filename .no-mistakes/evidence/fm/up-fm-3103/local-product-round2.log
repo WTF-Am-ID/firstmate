@@ -1,0 +1,25 @@
+{run-worktree}/.tmp-up3103-072/local-lab-round2
+Candidate: 252ac44b0e659a38b5e274eb8ede65aab9a59359
+
+S1: actual brief CLI, default and named destinations
+scaffolded: {run-worktree}/.tmp-up3103-072/local-lab-round2/data/default/brief.md (ship, mode=no-mistakes; replace {TASK} and {FIRSTMATE_SPEC})
+scaffolded: {run-worktree}/.tmp-up3103-072/local-lab-round2/data/named/brief.md (ship, mode=direct-PR; replace {TASK} and {FIRSTMATE_SPEC})
+scaffolded: {run-worktree}/.tmp-up3103-072/local-lab-round2/data/local/brief.md (ship, mode=local-only; replace {TASK} and {FIRSTMATE_SPEC})
+--- default: delivered Definition of done ---
+['', 'Delivery contract: mode=no-mistakes', 'Ship branch: fm/default', 'Before reporting ready, verify the live PR base against the task-owned expected destination and inspect the diff against that base for task-only changes. Refuse readiness when the expected or actual base is unavailable or differs.', 'The task is complete only when committed on your branch.', 'When you believe it is complete, append `done [at=<epoch>]: {summary}` to the status file and stop.', 'Firstmate will then instruct you to run /no-mistakes to validate and ship a PR.', 'That first `done:` is the handoff that starts the pipeline, which owns the push; it is not a request to push from this copy.', '']
+--- named: delivered Definition of done ---
+['', 'Delivery contract: mode=direct-PR', 'Ship branch: fm/named', 'Before reporting ready, verify the live PR base against the task-owned expected destination and inspect the diff against that base for task-only changes. Refuse readiness when the expected or actual base is unavailable or differs.', 'This task ships **direct-PR**: you raise the PR yourself, without the no-mistakes pipeline.', 'The task is complete only when committed on your branch.', 'When it is implemented and committed, push your branch and open a PR with `gh-axi` that is ready for review, not a draft, against the base branch `release/integration` (`--base release/integration`), not the repository default.', 'Before you report done, read the PR back from the forge and confirm it is not a draft (`gh-axi pr view <number>` must print `draft: no`, where <number> is the PR number from your PR URL); if it is a draft, mark it ready with `gh-axi pr ready <number>`.', 'A draft cannot be merged, so a done report on one leaves the merge unasked.']
+--- local: delivered Definition of done ---
+['', 'Delivery contract: mode=local-only', 'Ship branch: fm/local', 'This task ships **local-only**: no remote, no PR, no pipeline.', 'The task is complete only when committed on your branch `fm/local`. Do NOT push, do NOT open a PR, do NOT merge.', "A `done:` is accepted when the named head is on this project's shared local branch, not only on a detached copy; the check tests that head, not merely that a branch moved.", 'Keep your branch a clean fast-forward onto the current default branch - if `main` has advanced, rebase onto it so the eventual merge stays a fast-forward.', 'When it is implemented and committed, append `done [at=<epoch>]: ready in branch fm/local` to the status file and stop.', 'The configured merge authority approves the ready branch, then firstmate merges it into local `main` through the guarded fast-forward path.']
+
+S5: real reconciliation CLI, missing destination, repeated fresh processes
+Parent channel after two report processes:
+blocked [key=child-pr-base-child-27e163f5c38c6363aacacf0121dc883c] [at=1794341235]: task child merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+One blocked parent event, one delivery marker, no ready/merged terminal receipt.
+
+S6: moved local head must not produce a ready parent outcome
+Unpublished moved head produced no ready event and no terminal receipt.
+Parent channel remains:
+blocked [key=child-pr-base-child-27e163f5c38c6363aacacf0121dc883c] [at=1794341235]: task child merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+
+All local product CLI checks completed. Lab records retained without processes under .tmp-up3103-072/local-lab-round2 per instruction 074.

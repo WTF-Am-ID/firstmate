@@ -19,17 +19,17 @@ You are in a disposable git worktree of synthetic, at a detached HEAD on a clean
 The path check is authoritative: `git rev-parse --git-dir` and `git rev-parse --git-common-dir` can help inspect the repo, but they do not prove you are outside the primary checkout.
 If the top-level path is the primary checkout or not the worktree you were launched in, STOP - do not branch or commit here - append `blocked [at=<epoch>]: launched in primary checkout, not an isolated worktree` to the status file and stop.
 
-1. First action: create your branch: `git checkout -b fm/default-brief --`
+1. First action: create your branch: `git checkout -b fm/default --`
 2. Run `no-mistakes doctor`; if it reports the repo is not initialized here, run `no-mistakes init`.
 
 # Rules
 1. Never push to the default branch. Never merge a PR.
-2. Keep project edits inside this worktree; keep proof and scratch output outside it, under `{run-worktree}/.tmp-pr-base-test/manual-home/data/default-brief/` or a temporary directory.
+2. Keep project edits inside this worktree; keep proof and scratch output outside it, under `{run-worktree}/.tmp-up3103-072/local-lab/data/default/` or a temporary directory.
    Outside the worktree, write only that task material and the status and steering-inbox records authorized below.
    Leave the worktree clean before reporting done.
 3. Use gh-axi for GitHub operations and chrome-devtools-axi for browser operations.
 4. Report status by appending one line:
-   `echo "{state} [at=<epoch>]: {one short line}" >> '{run-worktree}/.tmp-pr-base-test/manual-home/state/default-brief.status' && { [ ! -e '{run-worktree}/.tmp-pr-base-test/manual-home/config/fleet-ledger' ] || '{run-worktree}/bin/fm-fleet-ledger.sh' appended '{run-worktree}/.tmp-pr-base-test/manual-home/config' '{run-worktree}/.tmp-pr-base-test/manual-home/state/default-brief.status' >/dev/null 2>&1 || true; }`
+   `echo "{state} [at=<epoch>]: {one short line}" >> '{run-worktree}/.tmp-up3103-072/local-lab/state/default.status' && { [ ! -e '{run-worktree}/.tmp-up3103-072/local-lab/config/fleet-ledger' ] || '{run-worktree}/bin/fm-fleet-ledger.sh' appended '{run-worktree}/.tmp-up3103-072/local-lab/config' '{run-worktree}/.tmp-up3103-072/local-lab/state/default.status' >/dev/null 2>&1 || true; }`
    States: working, needs-decision, blocked, paused, done, failed.
    Substitute `<epoch>` with the current Unix time in seconds - run `date +%s` and write the number it printed; a stamp that is not plain digits records no time at all.
    Each append wakes firstmate, so report sparingly: only phase changes a supervisor
@@ -53,8 +53,8 @@ If the top-level path is the primary checkout or not the worktree you were launc
 5. If you hit the same obstacle twice, append `blocked [at=<epoch>]: {why}` and stop; firstmate will help.
 6. If a decision belongs above the implementation worker (product choices, destructive actions),
    append `needs-decision [at=<epoch>]: {summary of options}` and stop. Firstmate will reply with the decision.
-   For a no-mistakes ask-user gate specifically, escalate all ask-user findings as one event plus one snapshot file, using that same shape even when the gate holds only a single ask-user finding: write only the ask-user findings, verbatim and unparaphrased (id, severity, file, line, description, authority), to `{run-worktree}/.tmp-pr-base-test/manual-home/data/default-brief/nm-<run>-findings.txt`, then report the gate with
-   `needs-decision [at=<epoch>] [key=nm-<run>-<step>]: ask-user findings=<id1>,<id2>,... file={run-worktree}/.tmp-pr-base-test/manual-home/data/default-brief/nm-<run>-findings.txt`
+   For a no-mistakes ask-user gate specifically, escalate all ask-user findings as one event plus one snapshot file, using that same shape even when the gate holds only a single ask-user finding: write only the ask-user findings, verbatim and unparaphrased (id, severity, file, line, description, authority), to `{run-worktree}/.tmp-up3103-072/local-lab/data/default/nm-<run>-findings.txt`, then report the gate with
+   `needs-decision [at=<epoch>] [key=nm-<run>-<step>]: ask-user findings=<id1>,<id2>,... file={run-worktree}/.tmp-up3103-072/local-lab/data/default/nm-<run>-findings.txt`
    naming every ask-user finding id from that gate. The status line only points at the file; it never restates or summarizes a finding's content.
    A decision or blocker you opened stays open until a `resolved` line carrying its exact key lands; a later `done:` or `working:` line never closes it, even when the answer is what started that work.
    Firstmate's reply normally writes that closing line at answer time; when a blocker or wait clears WITHOUT a firstmate reply, append `resolved [at=<epoch>]: {how it cleared}` yourself (same `[key=<slug>]` if you opened it with one) as you resume.
@@ -85,8 +85,8 @@ If the top-level path is the primary checkout or not the worktree you were launc
    Pass this rule to every sub-agent you launch.
 
 # Firstmate instruction inbox
-Firstmate steers you through durable message files in '{run-worktree}/.tmp-pr-base-test/manual-home/state/default-brief.inbox'.
-When a terminal message says an instruction is waiting there - and at any natural checkpoint when you are unsure - list them with `find '{run-worktree}/.tmp-pr-base-test/manual-home/state/default-brief.inbox' -maxdepth 1 -name '*.msg' 2>/dev/null | sort -V`, read the complete contents of each record (including its final line even when it is not newline-terminated) and act on each message in numeric order, then acknowledge each handled message by moving it: `mv '{run-worktree}/.tmp-pr-base-test/manual-home/state/default-brief.inbox'/NNN.msg '{run-worktree}/.tmp-pr-base-test/manual-home/state/default-brief.inbox'/handled/`.
+Firstmate steers you through durable message files in '{run-worktree}/.tmp-up3103-072/local-lab/state/default.inbox'.
+When a terminal message says an instruction is waiting there - and at any natural checkpoint when you are unsure - list them with `find '{run-worktree}/.tmp-up3103-072/local-lab/state/default.inbox' -maxdepth 1 -name '*.msg' 2>/dev/null | sort -V`, read the complete contents of each record (including its final line even when it is not newline-terminated) and act on each message in numeric order, then acknowledge each handled message by moving it: `mv '{run-worktree}/.tmp-up3103-072/local-lab/state/default.inbox'/NNN.msg '{run-worktree}/.tmp-up3103-072/local-lab/state/default.inbox'/handled/`.
 Prefer the format-aware `fm_task_inbox_body` reader from `bin/fm-task-inbox-lib.sh` when it is available. If you read manually, a header line `body-terminator=1` means the writer added exactly one synthetic final newline to terminate the record file; that marked newline is not part of the logical message body, so remove only it and preserve any intentional trailing newlines. Legacy records without that marker may end without a newline; read them through the file end.
 The move IS the acknowledgement: without it firstmate rings again and eventually treats you as stuck. An empty or absent inbox needs no action.
 
@@ -94,10 +94,10 @@ The move IS the acknowledgement: without it firstmate rings again and eventually
 A project's `AGENTS.md` or `CLAUDE.md` is loaded into every agent session in that project, so edit it only to correct information that is factually wrong - including information your own change made wrong - and never to add knowledge because it is missing.
 A correction edits only the wrong text: do not run `{run-worktree}/bin/fm-ensure-agents-md.sh`, create either file, or add sections, headings, or pointers alongside it.
 
-Before reporting ready, verify the live PR base against the task-owned expected destination and inspect the diff against that base for task-only changes. Refuse readiness when the expected or actual base is unavailable or differs.
 # Definition of done
 Delivery contract: mode=no-mistakes
-Ship branch: fm/default-brief
+Ship branch: fm/default
+Before reporting ready, verify the live PR base against the task-owned expected destination and inspect the diff against that base for task-only changes. Refuse readiness when the expected or actual base is unavailable or differs.
 The task is complete only when committed on your branch.
 When you believe it is complete, append `done [at=<epoch>]: {summary}` to the status file and stop.
 Firstmate will then instruct you to run /no-mistakes to validate and ship a PR.

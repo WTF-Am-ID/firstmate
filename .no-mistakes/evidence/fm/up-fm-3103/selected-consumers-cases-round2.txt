@@ -1,0 +1,23 @@
+Run through bin/fm-test-run.sh, using selected copies of canonical functions.
+Only top-level invocations/helper import paths were replaced. Assertions and
+fixture logic are unchanged. All six selected files exited 0.
+
+fm-dod-lib:
+ test_readiness_destination_gate_covers_every_accepted_form
+ test_moved_branch_without_named_head_is_refused
+ test_promotion_keeps_the_recorded_base_branch
+ test_promotion_default_base_matches_delivery_mode
+fm-crew-state:
+ test_ready_claim_sources_require_destination
+fm-control-relaunch:
+ test_relaunch_refuses_corrupt_expected_destination
+ test_same_harness_relaunch_keeps_identity_and_reuses_the_endpoint
+fm-spawn-pool-base-freshen:
+ test_non_main_default_branch_refreshes_before_branching
+ test_named_base_branch_starts_from_that_branch
+fm-pr-check-security:
+ test_forgejo_merge_watch
+ test_gerrit_merge_watch
+
+Evidence: selected-consumers-round2.log, selected-consumers-timing-round2.json.
+These fake-forge/session-provider cases are not live product scenarios.

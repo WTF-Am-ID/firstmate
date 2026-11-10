@@ -1,0 +1,69 @@
+Candidate: a716166218f2f7ce6d0bc76eb33dc92615a2745b
+Baseline: 913bb7a7b6e68a107c2d0ee755ee29c6f9e7b208
+
+Live local product evidence:
+local-product.log records the real fm-brief.sh and fm-inactive-reconcile.sh
+interfaces against disposable synthetic state, without fake forge commands.
+The lab was created under the worktree and removed by the driver's EXIT trap.
+default-brief.md and named-brief.md are the actual generated worker-facing output.
+
+Forge limitation:
+The forge checks use the repository's existing fake forge CLIs. They are not
+live forge proof. No synthetic remote PRs were created or mutated. No live
+forge emulator was attempted. The supplied verification record reports that
+the prior emulator setup was command-guard refused. That path was not retried.
+No live Herdr or other fleet lifecycle actions were used.
+
+Baseline comparison:
+baseline-suites.log is a PARTIAL baseline run. Its GitLab merge-watch case,
+including the no-Perl fixture assertion, passed. The remaining unrelated
+baseline cases were stopped with SIGTERM, exit 143, to preserve this phase's
+wall-clock budget. Do not read this as a passing complete baseline suite.
+baseline-merge-fixture.log is a completed targeted baseline execution of
+test_forgejo_url_resolves_and_merges. It reproduces the candidate's Forgejo
+merge-fixture failure, exit 1. This baseline was extracted from git archive
+into a disposable directory under the worktree, not another operator checkout.
+
+Temporary selectors:
+The selector driver preserves original test functions and assertions,
+replacing only their top-level invocation lists and helper import locations.
+The selected base-binding log retains the original script's unconditional
+footer before the selected cases. That footer does not mean the complete
+spawn suite ran. Only the two explicitly selected cases were executed.
+
+Guard refusals:
+A read-only diagnostic using bash -c to inspect command lookup was refused by
+PreToolUse: "BLOCKED: Indirect command execution not allowed". That diagnostic
+was stopped and was not retried through another tool or runtime. The cause
+of the candidate-only no-Perl fixture failure remains unconfirmed.
+
+The final scratch-removal command was rejected: "rm -f style commands are not
+permitted. Use a safer approach". No alternate cleanup route was attempted.
+The ignored .tmp-up3103-072/ directory remains for the outer executor, including
+the baseline archive, local driver, selector generator and generated selectors.
+The local-lab directory had already been removed successfully by its driver.
+
+Changes:
+No tracked source or test files were changed. All intentional worktree writes
+were confined to .tmp-up3103-072/. Evidence remains in this directory.
+
+Cadence result:
+The candidate's canonical Mac inactive-reconcile suite exited 1 at the unchanged
+first-cadence-reader allowance assertion, tests/fm-inactive-reconcile.test.sh:826.
+It printed "the forced first cadence visit inherited less than a full second
+of real budget". No exact reader-entry milliseconds were printed. No timing
+instrumentation or repair was added, and no budget or assertion was changed.
+The user supplied separate exact-head CI-box 3/3 evidence. That remote proof
+was not independently executed during this Test phase.
+
+Completed phase results:
+The candidate eight-subject runner completed with exit 1. Security and inactive
+reconciliation failed as described above. Merge failed on the independently
+reproduced baseline Forgejo fixture limitation. PR state, PR health, brief,
+crew-state and DoD suites completed with exit 0.
+The selected Forgejo/Gerrit poll cases and default/named-base spawn cases
+completed with exit 0. The real local product driver completed with exit 0.
+All started command sessions were awaited or explicitly stopped. The stopped
+baseline process group and completed candidate process group were absent at
+the final process check, and no writer retained the candidate suite log.
+The retained ignored scratch directory is 30 MB. Cleanup remains guard-blocked.
