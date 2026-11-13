@@ -1,0 +1,13 @@
+Candidate: d3f808b79f0591dbb28994dddf47a25abe19eac5
+
+Live checks executed the real fm-brief.sh, fm-pr-check.sh and saved fm-pr-poll.sh CLI interfaces in a marked disposable home under the worktree. Inputs were synthetic. Restricted PATH contained symlinks to real utilities, with no fake forge CLI. No forge endpoint or operator data was accessed.
+
+Initial driver stopped after successful brief generation because the isolated PATH omitted mkdir. Added real utility symlinks and resumed the independent registration/refusal and restart scenarios. The resumed driver exited 0. The initial exit 1 is setup evidence, not a product failure.
+
+The author-supplied plan records a previous disposable forge API-emulator setup refusal: BLOCKED: System service modification not allowed. Its box and Mac passing results are supplied evidence only, not checks executed or independently verified in this turn. This turn did not retry that refused setup or use an alternate route. No real-forge mutation, credential change, fake client, toolchain install, broad suite, floor repetition, lint or pipeline-control operation was run.
+
+Forge registration for matching/mismatched destinations, retarget/readiness behavior and merge-time enforcement across supported forges remain untested live. gh is on PATH. glab, tea and gerrit-axi are absent. A permitted disposable forge environment with real authenticated clients and synthetic PR/MR/change records is needed for those proofs. Fake-forge closure tests cannot substitute for that live evidence.
+
+Cleanup command was rejected before execution: rm -f style commands are not permitted. Use a safer approach. No deletion retry or alternate cleanup route was attempted. Own retained scratch is .phase-test/3103-live/ (136 KB), containing drive.sh, resume.sh and lab/. This ignored fixture contains only synthetic records, generated instructions, copies of the standalone poll, and utility symlinks. No dependencies were installed. No background process, server, primary, watcher or scheduled task was started.
+
+CLI/instruction-only evidence. No rendered UI was changed or exercised, so screenshots do not apply.

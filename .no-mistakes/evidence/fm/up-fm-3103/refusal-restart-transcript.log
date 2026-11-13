@@ -1,0 +1,37 @@
+
+S2: invalid or unavailable task-owned destination rejects registration and cannot publish readiness
+shape=missing exit=1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+shape=empty exit=1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+shape=duplicate exit=1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+shape=conflict exit=1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+shape=malformed exit=1
+error: expected PR base is unavailable or inconsistent in task metadata. The supervising firstmate must recover the originally authorized destination from task-owned launch/brief evidence, never from the current PR or current default branch. Source bin/fm-wake-lib.sh and use fm_meta_lock_path with fm_lock_acquire_wait to hold the task metadata lock while recording exactly one valid expected_base=<branch> in state/<id>.meta, keeping any existing base_branch consistent. Release the lock with fm_lock_release, then rerun bin/fm-pr-check.sh <id> <PR-URL>.
+shape=live-base-unreadable exit=1
+error: expected PR base release/3103, actual base unavailable
+
+S3: restarted saved poll reports legacy destination recovery and GitLab jq recovery
+legacy restart=1
+task legacy merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+legacy restart=2
+task legacy merge/readiness refused: expected PR base unavailable. Follow bin/fm-pr-check.sh recovery steps.
+legacy after delivery receipt: no repeated notice and no merged claim
+GitLab record=base_branch restart=1
+task gitlab merge/readiness refused: GitLab destination proof unavailable without jq; install jq, then re-arm the watch. Follow bin/fm-pr-check.sh recovery steps.
+GitLab record=base_branch restart=2
+task gitlab merge/readiness refused: GitLab destination proof unavailable without jq; install jq, then re-arm the watch. Follow bin/fm-pr-check.sh recovery steps.
+GitLab record=expected_base restart=1
+task gitlab merge/readiness refused: GitLab destination proof unavailable without jq; install jq, then re-arm the watch. Follow bin/fm-pr-check.sh recovery steps.
+GitLab record=expected_base restart=2
+task gitlab merge/readiness refused: GitLab destination proof unavailable without jq; install jq, then re-arm the watch. Follow bin/fm-pr-check.sh recovery steps.
+GitLab after delivery receipt: no repeated notice and no merged claim
+
+S4-S6 forge-dependent live proof unavailable: prior emulator setup refusal retained, no retry or alternate route attempted.
+gh available: /opt/homebrew/bin/gh
+glab absent from PATH
+tea absent from PATH
+gerrit-axi absent from PATH
+No forge endpoint called. No fake forge executable used. No background child started.
