@@ -1,0 +1,1496 @@
+[
+  {
+    "synthetic_home": "live-budget",
+    "files": {
+      "forge/order": "8\n10\n9\n",
+      "forge/calls": "api repos/o/r/pulls/9\napi repos/o/r/pulls/9\napi repos/o/r/issues/10/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/10/reviews?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r/pulls/10/comments?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r\npr view https://github.com/o/r/pull/10 --json headRefOid,reviewDecision\napi repos/o/r/pulls/9\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r\napi repos/o/r/pulls/9/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/9/reviews?per_page=100 --paginate --slurp\napi repos/o/r/issues/9/comments?per_page=100 --paginate --slurp\npr view https://github.com/o/r/pull/9 --json headRefOid,reviewDecision\n",
+      "forge/clock": 1112,
+      "state/contributions-poll.json": {
+        "schema": "fm-contributions-poll.v1",
+        "attempts": {
+          "https://github.com/o/r/pull/8": "2026-09-16T08:00:00Z",
+          "https://github.com/o/r/pull/10": "2026-09-16T08:05:00Z",
+          "https://github.com/o/r/pull/9": "2026-09-16T08:10:00Z"
+        }
+      },
+      "data/third/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "third",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/10",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:05:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "data/second/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "second",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/9",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:10:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "data/delivery/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-15T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "review_decision": "APPROVED",
+              "can_merge": false,
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "reviews": [],
+              "events": []
+            }
+          }
+        ]
+      },
+      "poll-1.stdout": "",
+      "poll-2.stdout": "",
+      "poll-0.stdout": "",
+      "oldest-before.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-15T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "review_decision": "APPROVED",
+              "can_merge": false,
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "reviews": [],
+              "events": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "synthetic_home": "live-timeout",
+    "files": {
+      "forge/order": "8\n10\n9\n",
+      "forge/calls": "api repos/o/r/pulls/8\napi repos/o/r/pulls/10\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r/pulls/10/reviews?per_page=100 --paginate --slurp\napi repos/o/r/issues/10/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/10/comments?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r\npr view https://github.com/o/r/pull/10 --json headRefOid,reviewDecision\napi repos/o/r/pulls/9\napi repos/o/r/issues/9/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/9/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/9/reviews?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r\npr view https://github.com/o/r/pull/9 --json headRefOid,reviewDecision\n",
+      "forge/clock": 1018,
+      "state/contributions-poll.json": {
+        "schema": "fm-contributions-poll.v1",
+        "attempts": {
+          "https://github.com/o/r/pull/8": "2026-09-16T08:00:00Z",
+          "https://github.com/o/r/pull/10": "2026-09-16T08:05:00Z",
+          "https://github.com/o/r/pull/9": "2026-09-16T08:10:00Z"
+        }
+      },
+      "data/third/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "third",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/10",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:05:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "data/second/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "second",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/9",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:10:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "data/delivery/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-15T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "review_decision": "APPROVED",
+              "can_merge": false,
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "reviews": [],
+              "events": []
+            }
+          }
+        ]
+      },
+      "poll-1.stdout": "",
+      "poll-2.stdout": "",
+      "poll-0.stdout": "",
+      "oldest-before.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-15T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "review_decision": "APPROVED",
+              "can_merge": false,
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "reviews": [],
+              "events": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "synthetic_home": "oldest-observations",
+    "files": {
+      "forge/order": "11\n12\n8\n10\n9\n11\n",
+      "forge/calls": "api repos/o/r/pulls/9\napi repos/o/r/issues/11/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/11/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/11/reviews?per_page=100 --paginate --slurp\napi repos/o/r\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\npr view https://github.com/o/r/pull/11 --json headRefOid,reviewDecision\napi repos/o/r/pulls/9\napi repos/o/r/pulls/12/reviews?per_page=100 --paginate --slurp\napi repos/o/r/issues/12/comments?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r/pulls/12/comments?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r\npr view https://github.com/o/r/pull/12 --json headRefOid,reviewDecision\napi repos/o/r/pulls/9\napi repos/o/r/pulls/8/reviews?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r/issues/8/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/8/comments?per_page=100 --paginate --slurp\napi repos/o/r\npr view https://github.com/o/r/pull/8 --json headRefOid,reviewDecision\napi repos/o/r/pulls/9\napi repos/o/r/pulls/10/reviews?per_page=100 --paginate --slurp\napi repos/o/r/issues/10/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/10/comments?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\npr view https://github.com/o/r/pull/10 --json headRefOid,reviewDecision\napi repos/o/r/pulls/9\napi repos/o/r/issues/9/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/9/comments?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r\napi repos/o/r/pulls/9/reviews?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\npr view https://github.com/o/r/pull/9 --json headRefOid,reviewDecision\napi repos/o/r/pulls/9\napi repos/o/r/issues/11/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/11/reviews?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r/pulls/11/comments?per_page=100 --paginate --slurp\napi repos/o/r\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\npr view https://github.com/o/r/pull/11 --json headRefOid,reviewDecision\n",
+      "forge/clock": 1018,
+      "state/contributions-poll.json": {
+        "schema": "fm-contributions-poll.v1",
+        "attempts": {
+          "https://github.com/o/r/pull/11": "2026-09-16T08:10:00Z",
+          "https://github.com/o/r/pull/12": "2026-09-16T08:00:00Z",
+          "https://github.com/o/r/pull/8": "2026-09-16T08:05:00Z",
+          "https://github.com/o/r/pull/10": "2026-09-16T08:05:00Z",
+          "https://github.com/o/r/pull/9": "2026-09-16T08:10:00Z"
+        }
+      },
+      "data/third/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "third",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/10",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:05:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "data/second/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "second",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/9",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:10:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "data/fourth/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "fourth",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/11",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:10:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "data/settled/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "settled",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/90",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "merged",
+              "draft": false,
+              "mergeable": "mergeable",
+              "review_decision": "APPROVED",
+              "can_merge": false,
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "reviews": [],
+              "events": []
+            }
+          }
+        ]
+      },
+      "data/late-terminal/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "late-terminal",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/90",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "merged",
+              "draft": false,
+              "mergeable": "mergeable",
+              "review_decision": "APPROVED",
+              "can_merge": false,
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "reviews": [],
+              "events": []
+            },
+            "notified": []
+          }
+        ]
+      },
+      "data/duplicate/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "duplicate",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:05:00Z",
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            },
+            "verdict": null,
+            "seen": [],
+            "pending": [],
+            "notified": [],
+            "error": null
+          }
+        ]
+      },
+      "data/fifth/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "fifth",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/12",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "data/delivery/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:05:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "synthetic_home": "scheduler-created-owner",
+    "files": {
+      "forge/calls": "api repos/o/r/pulls/10\napi repos/o/r/issues/10/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/10/comments?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r/pulls/10/reviews?per_page=100 --paginate --slurp\napi repos/o/r\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\npr view https://github.com/o/r/pull/10 --json headRefOid,reviewDecision\napi repos/o/r/pulls/8\n",
+      "forge/clock": 1000,
+      "state/contributions-poll.json": {
+        "schema": "fm-contributions-poll.v1",
+        "attempts": {
+          "https://github.com/o/r/pull/10": "2026-09-16T08:00:00Z",
+          "https://github.com/o/r/pull/8": "2026-09-16T08:00:00Z"
+        }
+      },
+      "data/delivery/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/10",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            },
+            "verdict": null,
+            "seen": [],
+            "pending": [],
+            "notified": [],
+            "error": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "synthetic_home": "scheduler-rejected-owner",
+    "files": {
+      "forge/order": "10\n11\n12\n13\n9\n10\n",
+      "forge/calls": "api repos/o/r/pulls/9\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r/issues/10/comments?per_page=100 --paginate --slurp\napi repos/o/r\napi repos/o/r/pulls/10/reviews?per_page=100 --paginate --slurp\napi repos/o/r/pulls/10/comments?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\npr view https://github.com/o/r/pull/10 --json headRefOid,reviewDecision\napi repos/o/r/pulls/9\napi repos/o/r/pulls/11/comments?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r/issues/11/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/11/reviews?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r\npr view https://github.com/o/r/pull/11 --json headRefOid,reviewDecision\napi repos/o/r/pulls/9\napi repos/o/r/pulls/12/comments?per_page=100 --paginate --slurp\napi repos/o/r/issues/12/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/12/reviews?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\npr view https://github.com/o/r/pull/12 --json headRefOid,reviewDecision\napi repos/o/r/pulls/9\napi repos/o/r/issues/13/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/13/reviews?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r/pulls/13/comments?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r\npr view https://github.com/o/r/pull/13 --json headRefOid,reviewDecision\napi repos/o/r/pulls/9\napi repos/o/r/issues/9/comments?per_page=100 --paginate --slurp\napi repos/o/r\napi repos/o/r/pulls/9/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/9/reviews?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\npr view https://github.com/o/r/pull/9 --json headRefOid,reviewDecision\napi repos/o/r/pulls/9\napi repos/o/r/issues/10/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/10/reviews?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r/pulls/10/comments?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r\npr view https://github.com/o/r/pull/10 --json headRefOid,reviewDecision\n",
+      "forge/clock": 1018,
+      "state/contributions-poll.json": {
+        "schema": "fm-contributions-poll.v1",
+        "attempts": {
+          "https://github.com/o/r/pull/10": "2026-09-16T08:10:00Z",
+          "https://github.com/o/r/pull/11": "2026-09-16T08:00:00Z",
+          "https://github.com/o/r/pull/12": "2026-09-16T08:05:00Z",
+          "https://github.com/o/r/pull/13": "2026-09-16T08:05:00Z",
+          "https://github.com/o/r/pull/9": "2026-09-16T08:10:00Z"
+        }
+      },
+      "data/task9/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "task9",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/9",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:10:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "data/task11/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "task11",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/11",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "data/task10/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "task10",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/10",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:10:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "data/delivery/contributions.json": "{broken\n",
+      "data/task12/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "task12",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/12",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:05:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "data/task13/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "task13",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/13",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:05:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "malformed-prior.json": "{broken\n"
+    }
+  },
+  {
+    "synthetic_home": "scheduler-symlink",
+    "files": {
+      "state/contributions-poll.json": {
+        "symlink": "{run-worktree}/.phase-test/up8212-live/tmp/fm-contributions.e2Hm1A/scheduler-symlink/target.json"
+      },
+      "data/delivery/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "review_decision": "APPROVED",
+              "can_merge": false,
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "reviews": [],
+              "events": []
+            }
+          }
+        ]
+      },
+      "target.json": "untouched\n",
+      "target-prior.json": "untouched\n"
+    }
+  },
+  {
+    "synthetic_home": "shared-once-fail",
+    "files": {
+      "forge/calls": "api repos/o/r/pulls/8\napi repos/o/r/pulls/8/comments?per_page=100 --paginate --slurp\napi repos/o/r/issues/8/comments?per_page=100 --paginate --slurp\napi repos/o/r/pulls/8/reviews?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r/pulls/8/reviews?per_page=100 --paginate --slurp\n",
+      "state/contributions-poll.json": {
+        "schema": "fm-contributions-poll.v1",
+        "attempts": {
+          "https://github.com/o/r/pull/8": "2026-09-16T08:00:00Z"
+        }
+      },
+      "data/duplicate/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "duplicate",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "observation": null,
+            "verdict": null,
+            "seen": [],
+            "pending": [],
+            "notified": [],
+            "error": "forge observation unavailable: reviews read exited 1 with 20s of budget left: gh: Internal Server Error (HTTP 500)"
+          }
+        ]
+      },
+      "data/delivery/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": "forge observation unavailable: reviews read exited 1 with 20s of budget left: gh: Internal Server Error (HTTP 500)",
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "review_decision": "APPROVED",
+              "can_merge": false,
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "reviews": [],
+              "events": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "synthetic_home": "shared-once-head",
+    "files": {
+      "forge/calls": "api repos/o/r/pulls/8\napi repos/o/r/pulls/8/comments?per_page=100 --paginate --slurp\napi repos/o/r/issues/8/comments?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r/pulls/8/reviews?per_page=100 --paginate --slurp\napi repos/o/r\npr view https://github.com/o/r/pull/8 --json headRefOid,reviewDecision\n",
+      "state/contributions-poll.json": {
+        "schema": "fm-contributions-poll.v1",
+        "attempts": {
+          "https://github.com/o/r/pull/8": "2026-09-16T08:00:00Z"
+        }
+      },
+      "data/duplicate/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "duplicate",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "observation": null,
+            "verdict": null,
+            "seen": [],
+            "pending": [],
+            "notified": [],
+            "error": "forge observation unavailable: head changed during observation"
+          }
+        ]
+      },
+      "data/delivery/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": "forge observation unavailable: head changed during observation",
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "review_decision": "APPROVED",
+              "can_merge": false,
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "reviews": [],
+              "events": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "synthetic_home": "shared-once-headless",
+    "files": {
+      "forge/calls": "api repos/o/r/pulls/8\napi repos/o/r/issues/8/comments?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r/pulls/8/reviews?per_page=100 --paginate --slurp\napi repos/o/r/pulls/8/comments?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\napi repos/o/r\npr view https://github.com/o/r/pull/8 --json headRefOid,reviewDecision\n",
+      "state/contributions-poll.json": {
+        "schema": "fm-contributions-poll.v1",
+        "attempts": {
+          "https://github.com/o/r/pull/8": "2026-09-16T08:00:00Z"
+        }
+      },
+      "data/duplicate/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "duplicate",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "observation": null,
+            "verdict": null,
+            "seen": [],
+            "pending": [],
+            "notified": [],
+            "error": "forge observation unavailable: head read named no head commit"
+          }
+        ]
+      },
+      "data/delivery/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": "forge observation unavailable: head read named no head commit",
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "review_decision": "APPROVED",
+              "can_merge": false,
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "reviews": [],
+              "events": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "synthetic_home": "shared-once-ok",
+    "files": {
+      "forge/calls": "api repos/o/r/pulls/8\napi repos/o/r/pulls/8/reviews?per_page=100 --paginate --slurp\napi repos/o/r/pulls/8/comments?per_page=100 --paginate --slurp\napi repos/o/r/issues/8/comments?per_page=100 --paginate --slurp\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/check-runs?filter=all&per_page=100 --paginate --slurp\napi repos/o/r\napi repos/o/r/commits/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/statuses?per_page=100 --paginate --slurp\npr view https://github.com/o/r/pull/8 --json headRefOid,reviewDecision\n",
+      "state/contributions-poll.json": {
+        "schema": "fm-contributions-poll.v1",
+        "attempts": {
+          "https://github.com/o/r/pull/8": "2026-09-16T08:00:00Z"
+        }
+      },
+      "data/duplicate/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "duplicate",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            },
+            "verdict": null,
+            "seen": [],
+            "pending": [],
+            "notified": [],
+            "error": null
+          }
+        ]
+      },
+      "data/delivery/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "open",
+              "draft": false,
+              "mergeable": "mergeable",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "synthetic_home": "terminal-closed",
+    "files": {
+      "forge/calls": "",
+      "state/contributions-poll.json": {
+        "schema": "fm-contributions-poll.v1",
+        "attempts": {
+          "https://github.com/o/r/pull/8": "2026-09-16T08:00:00Z"
+        }
+      },
+      "data/delivery/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "closed",
+              "draft": false,
+              "mergeable": "unknown",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "prior.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "closed",
+              "draft": false,
+              "mergeable": "unknown",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "synthetic_home": "terminal-late-owner",
+    "files": {
+      "forge/calls": "",
+      "state/contributions-poll.json": {
+        "schema": "fm-contributions-poll.v1",
+        "attempts": {
+          "https://github.com/o/r/pull/8": "2026-09-16T08:00:00Z"
+        }
+      },
+      "data/duplicate/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "duplicate",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "merged",
+              "draft": false,
+              "mergeable": "unknown",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            },
+            "notified": []
+          }
+        ]
+      },
+      "data/delivery/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "merged",
+              "draft": false,
+              "mergeable": "unknown",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "final.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "merged",
+              "draft": false,
+              "mergeable": "unknown",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "synthetic_home": "terminal-legacy-error",
+    "files": {
+      "data/delivery/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "merged",
+              "draft": false,
+              "mergeable": "mergeable",
+              "review_decision": "APPROVED",
+              "can_merge": false,
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "reviews": [],
+              "events": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "synthetic_home": "terminal-merged",
+    "files": {
+      "forge/calls": "",
+      "state/contributions-poll.json": {
+        "schema": "fm-contributions-poll.v1",
+        "attempts": {
+          "https://github.com/o/r/pull/8": "2026-09-16T08:00:00Z"
+        }
+      },
+      "data/delivery/contributions.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "merged",
+              "draft": false,
+              "mergeable": "unknown",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      },
+      "prior.json": {
+        "schema": "fm-contributions.v1",
+        "task": "delivery",
+        "records": [
+          {
+            "url": "https://github.com/o/r/pull/8",
+            "kind": "pr",
+            "checked_at": "2026-09-16T08:00:00Z",
+            "error": null,
+            "pending": [],
+            "seen": [],
+            "verdict": null,
+            "observation": {
+              "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "state": "merged",
+              "draft": false,
+              "mergeable": "unknown",
+              "can_merge": false,
+              "review_decision": "APPROVED",
+              "reviews": [],
+              "checks": [
+                {
+                  "name": "test",
+                  "id": 1,
+                  "status": "completed",
+                  "conclusion": "success",
+                  "started_at": "2026-09-16T08:00:00Z"
+                }
+              ],
+              "events": [],
+              "absent_checks": []
+            }
+          }
+        ]
+      }
+    }
+  }
+]

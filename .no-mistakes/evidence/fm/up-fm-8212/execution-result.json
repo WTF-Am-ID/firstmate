@@ -1,0 +1,20 @@
+{
+  "candidate": "61fe82707e0f5fab1922efdc8fef8dff9cf781a9",
+  "worktree": "{run-worktree}",
+  "platform": "Darwin",
+  "command": "bash -o pipefail -c 'bash .phase-test/drive-live.sh \"$PWD\" \"$1\" 2>&1 | tee \"$1/live-transcript.txt\"' _ ~/.no-mistakes-upstream-codex/evidence/01M7AS55V7VE8T9FEEBA4WBEWJ",
+  "exit_status": 0,
+  "scenario_markers": [
+    "LIVE_SCENARIO_PASS timeout read_order=\"8 10 9\" oldest_record_unchanged=true fresh_checked=2 known=3 complete=false wakes=0",
+    "LIVE_SCENARIO_PASS budget read_order=\"8 10 9\" oldest_record_unchanged=true fresh_checked=2 known=3 complete=false wakes=0",
+    "LIVE_SCENARIO_PASS missing-order-and-url-ties",
+    "LIVE_SCENARIO_PASS shared-owners-and-terminal-settlement",
+    "LIVE_SCENARIO_PASS rejected-and-new-owners",
+    "LIVE_SCENARIO_PASS unsafe-scheduler-state"
+  ],
+  "result": "LIVE_LAB_RESULT go scenarios=6",
+  "remaining_lab_processes": [],
+  "prior_ubuntu_proof_sha256_verified": "01b8e5b6c94ad6ba6c688683c0c02396f95663222bc8699259b84bee89b953e2",
+  "prior_ubuntu_proof_rerun_in_this_phase": false,
+  "diagnostic": "Injected null head produced the existing jq diagnostic and expected persisted head-read error for both owners."
+}

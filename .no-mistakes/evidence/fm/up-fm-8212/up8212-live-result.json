@@ -1,0 +1,199 @@
+{
+  "tested_head_sha": "61fe82707e0f5fab1922efdc8fef8dff9cf781a9",
+  "worktree": "{run-worktree}",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "command": "bash -o pipefail -c 'bash \"$1\" \"$2\" 2>&1 | tee \"$3\"' _ .phase-test/up8212-live-scenarios.sh \"$PWD\" .phase-test/up8212-live-transcript.txt",
+  "exit_status": 0,
+  "scenarios": [
+    {
+      "name": "timeout",
+      "result": "pass",
+      "live": true
+    },
+    {
+      "name": "budget",
+      "result": "pass",
+      "live": true
+    },
+    {
+      "name": "missing-order-and-url-ties",
+      "result": "pass",
+      "live": true
+    },
+    {
+      "name": "shared-owners-and-terminal-settlement",
+      "result": "pass",
+      "live": true
+    },
+    {
+      "name": "rejected-and-new-owners",
+      "result": "pass",
+      "live": true
+    },
+    {
+      "name": "unsafe-scheduler-state",
+      "result": "pass",
+      "live": true
+    }
+  ],
+  "pass_markers": [
+    "LIVE_SCENARIO_PASS timeout read_order=\"8 10 9\" oldest_record_unchanged=true fresh_checked=2 known=3 complete=false wakes=0",
+    "LIVE_SCENARIO_PASS budget read_order=\"8 10 9\" oldest_record_unchanged=true fresh_checked=2 known=3 complete=false wakes=0",
+    "LIVE_SCENARIO_PASS missing-order-and-url-ties",
+    "LIVE_SCENARIO_PASS shared-owners-and-terminal-settlement",
+    "LIVE_SCENARIO_PASS rejected-and-new-owners",
+    "LIVE_SCENARIO_PASS unsafe-scheduler-state"
+  ],
+  "per_sweep_state": [
+    {
+      "scenario": "timeout",
+      "sweep": 0,
+      "now": "2026-09-16T08:00:00Z",
+      "wall_seconds": 7,
+      "read_order": [
+        "8"
+      ],
+      "oldest_owner": {
+        "url": "https://github.com/o/r/pull/8",
+        "checked_at": "2026-09-15T08:00:00Z",
+        "error": null,
+        "observation_state": "open"
+      },
+      "oldest_attempt": "2026-09-16T08:00:00Z",
+      "measured": {
+        "known": 3,
+        "checked": 0,
+        "complete": false
+      }
+    },
+    {
+      "scenario": "timeout",
+      "sweep": 1,
+      "now": "2026-09-16T08:05:00Z",
+      "wall_seconds": 1,
+      "read_order": [
+        "8",
+        "10"
+      ],
+      "oldest_owner": {
+        "url": "https://github.com/o/r/pull/8",
+        "checked_at": "2026-09-15T08:00:00Z",
+        "error": null,
+        "observation_state": "open"
+      },
+      "oldest_attempt": "2026-09-16T08:00:00Z",
+      "measured": {
+        "known": 3,
+        "checked": 1,
+        "complete": false
+      }
+    },
+    {
+      "scenario": "timeout",
+      "sweep": 2,
+      "now": "2026-09-16T08:10:00Z",
+      "wall_seconds": 1,
+      "read_order": [
+        "8",
+        "10",
+        "9"
+      ],
+      "oldest_owner": {
+        "url": "https://github.com/o/r/pull/8",
+        "checked_at": "2026-09-15T08:00:00Z",
+        "error": null,
+        "observation_state": "open"
+      },
+      "oldest_attempt": "2026-09-16T08:00:00Z",
+      "measured": {
+        "known": 3,
+        "checked": 2,
+        "complete": false
+      }
+    },
+    {
+      "scenario": "budget",
+      "sweep": 0,
+      "now": "2026-09-16T08:00:00Z",
+      "wall_seconds": 1,
+      "read_order": [
+        "8"
+      ],
+      "oldest_owner": {
+        "url": "https://github.com/o/r/pull/8",
+        "checked_at": "2026-09-15T08:00:00Z",
+        "error": null,
+        "observation_state": "open"
+      },
+      "oldest_attempt": "2026-09-16T08:00:00Z",
+      "measured": {
+        "known": 3,
+        "checked": 0,
+        "complete": false
+      }
+    },
+    {
+      "scenario": "budget",
+      "sweep": 1,
+      "now": "2026-09-16T08:05:00Z",
+      "wall_seconds": 0,
+      "read_order": [
+        "8",
+        "10"
+      ],
+      "oldest_owner": {
+        "url": "https://github.com/o/r/pull/8",
+        "checked_at": "2026-09-15T08:00:00Z",
+        "error": null,
+        "observation_state": "open"
+      },
+      "oldest_attempt": "2026-09-16T08:00:00Z",
+      "measured": {
+        "known": 3,
+        "checked": 1,
+        "complete": false
+      }
+    },
+    {
+      "scenario": "budget",
+      "sweep": 2,
+      "now": "2026-09-16T08:10:00Z",
+      "wall_seconds": 1,
+      "read_order": [
+        "8",
+        "10",
+        "9"
+      ],
+      "oldest_owner": {
+        "url": "https://github.com/o/r/pull/8",
+        "checked_at": "2026-09-15T08:00:00Z",
+        "error": null,
+        "observation_state": "open"
+      },
+      "oldest_attempt": "2026-09-16T08:00:00Z",
+      "measured": {
+        "known": 3,
+        "checked": 2,
+        "complete": false
+      }
+    }
+  ],
+  "result_marker": "LIVE_LAB_RESULT go scenarios=6 candidate=61fe82707e0f5fab1922efdc8fef8dff9cf781a9",
+  "source_changes": false,
+  "notes": [
+    "Fresh Test-phase product invocations through existing synthetic forge fixtures.",
+    "A jq stderr diagnostic occurred in the existing shared-owner group. Its assertions passed and the original stderr remains in the complete transcript.",
+    "No full suite, linters, remote writes, Herdr lifecycle or pipeline-control commands were run.",
+    "Outer executor owns evidence publication and subsequent pipeline phases."
+  ],
+  "artifacts": [
+    {
+      "path": "~/.no-mistakes-upstream-codex/evidence/01M7AS55V7VE8T9FEEBA4WBEWJ/up8212-live-transcript.txt",
+      "sha256": "e0e46e81401849d2c1e701bb46603f9d3ad011c3b4533ada15b3a33866b4f72c"
+    },
+    {
+      "path": "~/.no-mistakes-upstream-codex/evidence/01M7AS55V7VE8T9FEEBA4WBEWJ/up8212-live-scenarios.sh",
+      "sha256": "cf78a1304735e143d443d4dec091b5bd2fa428142ef2ecc60d0b8970c73f9995"
+    }
+  ]
+}

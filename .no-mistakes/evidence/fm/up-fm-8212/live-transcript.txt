@@ -1,0 +1,42 @@
+LIVE_TEST_PHASE=required
+LIVE_CANDIDATE=61fe82707e0f5fab1922efdc8fef8dff9cf781a9
+LIVE_PLATFORM=Darwin
+LIVE_PRODUCT={run-worktree}/bin/fm-contributions.sh
+LIVE_SCRATCH={run-worktree}/.phase-test/up8212-live/tmp/up8212-evidence.PJRWSK
+LIVE_SCENARIO_BEGIN timeout FM_HOME={run-worktree}/.phase-test/up8212-live/tmp/fm-contributions.e2Hm1A/live-timeout
+LIVE_COMMAND scenario=timeout sweep=0 FM_CONTRIBUTIONS_NOW=2026-09-16T08:00:00Z bash {run-worktree}/bin/fm-contributions.sh poll
+{"scenario":"timeout","sweep":0,"now":"2026-09-16T08:00:00Z","wall_seconds":6,"read_order":["8"],"oldest_owner":{"url":"https://github.com/o/r/pull/8","checked_at":"2026-09-15T08:00:00Z","error":null,"observation_state":"open"},"oldest_attempt":"2026-09-16T08:00:00Z","measured":{"known":3,"checked":0,"complete":false}}
+LIVE_COMMAND scenario=timeout sweep=1 FM_CONTRIBUTIONS_NOW=2026-09-16T08:05:00Z bash {run-worktree}/bin/fm-contributions.sh poll
+{"scenario":"timeout","sweep":1,"now":"2026-09-16T08:05:00Z","wall_seconds":0,"read_order":["8","10"],"oldest_owner":{"url":"https://github.com/o/r/pull/8","checked_at":"2026-09-15T08:00:00Z","error":null,"observation_state":"open"},"oldest_attempt":"2026-09-16T08:00:00Z","measured":{"known":3,"checked":1,"complete":false}}
+LIVE_COMMAND scenario=timeout sweep=2 FM_CONTRIBUTIONS_NOW=2026-09-16T08:10:00Z bash {run-worktree}/bin/fm-contributions.sh poll
+{"scenario":"timeout","sweep":2,"now":"2026-09-16T08:10:00Z","wall_seconds":1,"read_order":["8","10","9"],"oldest_owner":{"url":"https://github.com/o/r/pull/8","checked_at":"2026-09-15T08:00:00Z","error":null,"observation_state":"open"},"oldest_attempt":"2026-09-16T08:00:00Z","measured":{"known":3,"checked":2,"complete":false}}
+LIVE_SCENARIO_PASS timeout read_order="8 10 9" oldest_record_unchanged=true fresh_checked=2 known=3 complete=false wakes=0
+LIVE_SCENARIO_BEGIN budget FM_HOME={run-worktree}/.phase-test/up8212-live/tmp/fm-contributions.e2Hm1A/live-budget
+LIVE_COMMAND scenario=budget sweep=0 FM_CONTRIBUTIONS_NOW=2026-09-16T08:00:00Z bash {run-worktree}/bin/fm-contributions.sh poll
+{"scenario":"budget","sweep":0,"now":"2026-09-16T08:00:00Z","wall_seconds":1,"read_order":["8"],"oldest_owner":{"url":"https://github.com/o/r/pull/8","checked_at":"2026-09-15T08:00:00Z","error":null,"observation_state":"open"},"oldest_attempt":"2026-09-16T08:00:00Z","measured":{"known":3,"checked":0,"complete":false}}
+LIVE_COMMAND scenario=budget sweep=1 FM_CONTRIBUTIONS_NOW=2026-09-16T08:05:00Z bash {run-worktree}/bin/fm-contributions.sh poll
+{"scenario":"budget","sweep":1,"now":"2026-09-16T08:05:00Z","wall_seconds":1,"read_order":["8","10"],"oldest_owner":{"url":"https://github.com/o/r/pull/8","checked_at":"2026-09-15T08:00:00Z","error":null,"observation_state":"open"},"oldest_attempt":"2026-09-16T08:00:00Z","measured":{"known":3,"checked":1,"complete":false}}
+LIVE_COMMAND scenario=budget sweep=2 FM_CONTRIBUTIONS_NOW=2026-09-16T08:10:00Z bash {run-worktree}/bin/fm-contributions.sh poll
+{"scenario":"budget","sweep":2,"now":"2026-09-16T08:10:00Z","wall_seconds":0,"read_order":["8","10","9"],"oldest_owner":{"url":"https://github.com/o/r/pull/8","checked_at":"2026-09-15T08:00:00Z","error":null,"observation_state":"open"},"oldest_attempt":"2026-09-16T08:00:00Z","measured":{"known":3,"checked":2,"complete":false}}
+LIVE_SCENARIO_PASS budget read_order="8 10 9" oldest_record_unchanged=true fresh_checked=2 known=3 complete=false wakes=0
+LIVE_SCENARIO_BEGIN missing-order-and-url-ties
+ok - five due URLs rotate within ceil(5/2) sweeps, oldest first with URL ties and one attempt per URL
+LIVE_SCENARIO_PASS missing-order-and-url-ties
+LIVE_SCENARIO_BEGIN shared-owners-and-terminal-settlement
+jq: error (at {run-worktree}/.phase-test/up8212-live/tmp/fm-contributions.pcqPaS/after.json:1): null (null) cannot be matched, as it is not a string
+ok - a URL owned by two tasks is observed once and every owner receives the result
+ok - a merged or closed contribution settles once, is not re-read, and never wakes again
+ok - a late owner inherits a terminal observation without a forge read or wake
+LIVE_SCENARIO_PASS shared-owners-and-terminal-settlement
+LIVE_SCENARIO_BEGIN rejected-and-new-owners
+ok - a rejected sole owner is not read and five eligible URLs rotate in three two-read sweeps
+ok - a newly created owner keeps its observation while a later refused URL updates only scheduler state
+LIVE_SCENARIO_PASS rejected-and-new-owners
+LIVE_SCENARIO_BEGIN unsafe-scheduler-state
+ok - unsafe scheduler state is refused before forge reads or writes
+LIVE_SCENARIO_PASS unsafe-scheduler-state
+LIVE_LAB_RESULT go scenarios=6 candidate=61fe82707e0f5fab1922efdc8fef8dff9cf781a9
+LIVE_PRODUCT_STATE_ARTIFACT=~/.no-mistakes-upstream-codex/evidence/01M7AS55V7VE8T9FEEBA4WBEWJ/product-state.json
+LIVE_INVALID_SCHEDULER exit=1 output=fm-contributions: invalid contribution scheduler state
+LIVE_INVALID_SCHEDULER forge_reads=0 state_unchanged=true
+LIVE_EVIDENCE_COMPLETE candidate=61fe82707e0f5fab1922efdc8fef8dff9cf781a9
