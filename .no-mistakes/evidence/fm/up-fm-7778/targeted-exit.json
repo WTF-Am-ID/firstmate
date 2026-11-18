@@ -1,0 +1,1 @@
+{"command": ["bash", "bin/fm-test-run.sh", "--json", "~/.no-mistakes-upstream-codex/evidence/01M7PHC15BN5572CAJYN5R6F0G/targeted-tests.json", "tests/fm-backend-tmux-smoke.test.sh", "tests/fm-supervision-host-hook.test.sh"], "exit": 0}

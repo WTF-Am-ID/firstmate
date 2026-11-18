@@ -1,0 +1,13 @@
+Supplementary manual verification did not execute.
+
+The command attempted to author drive-tmux.sh and invoke it through Python's
+subprocess.run. Its intended checks were a baseline/candidate comparison of
+absent prefix and dotted targets, legacy fm-send selectors, exact live delivery,
+and live dotted-name delivery with a pane-ID positive control.
+
+PreToolUse rejected the command before execution:
+"BLOCKED: Indirect command execution not allowed."
+
+No alternate execution route was attempted. The previously started canonical
+targeted test run was independent and was allowed to continue separately.
+The supplementary baseline comparison and live dotted-name probe have no result.
