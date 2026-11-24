@@ -1,0 +1,301 @@
+{
+  "revision": "2565fca35e3d467d6a1ee8fa218046416140d524",
+  "samples": {
+    "exiting-1-exit": {
+      "console": "FM_TEST_BEGIN 2026-11-24T16:59:10Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none\n1..4\nok - A\nFM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D\nFM_TEST_END 2026-11-24T16:59:11Z tests/fm-brief.test.sh exit=7 duration_ms=1015 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D\nFM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=1153\nFM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=1015 failed=1\nFM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=1015\nfm-test-run: wrote timing artifact: {run-worktree}/.test-phase-9mp7lclz/fm-test-run-aborted.sl6P8a/exiting-1-exit.json\n",
+      "timing_json": {
+        "families": [
+          {
+            "count": 1,
+            "duration_ms": 1015,
+            "failed": 1,
+            "name": "pure-contract-unit"
+          }
+        ],
+        "finished_at": "2026-11-24T16:59:11Z",
+        "run_id": "fm-test-run-1795539550059-68078",
+        "scripts": [
+          {
+            "duration_ms": 1015,
+            "exit": 7,
+            "expected_gate_skip": "none",
+            "failed_invocation": "test_B",
+            "family": "pure-contract-unit",
+            "gate_skip": false,
+            "gate_skip_reason": "",
+            "path": "tests/fm-brief.test.sh",
+            "skipped_after_failure": 2,
+            "unexecuted_invocations": [
+              "test_C",
+              "test_D"
+            ]
+          }
+        ],
+        "selection": "scripts;jobs=1",
+        "started_at": "2026-11-24T16:59:10Z",
+        "summary": {
+          "duration_ms": 1153,
+          "failed": 1,
+          "skipped_gate": 0,
+          "total": 1
+        }
+      },
+      "invocation_side_effects": [
+        "A"
+      ],
+      "status_observed_by_suite_cleanup": 7
+    },
+    "direct-1-cleanup": {
+      "console": "FM_TEST_BEGIN 2026-11-24T16:59:32Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none\n1..4\nok - A\nok - B\nok - C\nok - D\nFM_TEST_COMPLETE\nFM_TEST_END 2026-11-24T16:59:33Z tests/fm-brief.test.sh exit=0 duration_ms=1016 gate_skip=false\nFM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=1167\nFM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=1016 failed=0\nFM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=1016\nfm-test-run: wrote timing artifact: {run-worktree}/.test-phase-9mp7lclz/fm-test-run-aborted.sl6P8a/direct-1-cleanup.json\n",
+      "timing_json": {
+        "families": [
+          {
+            "count": 1,
+            "duration_ms": 1016,
+            "failed": 0,
+            "name": "pure-contract-unit"
+          }
+        ],
+        "finished_at": "2026-11-24T16:59:33Z",
+        "run_id": "fm-test-run-1795539572302-11073",
+        "scripts": [
+          {
+            "duration_ms": 1016,
+            "exit": 0,
+            "expected_gate_skip": "none",
+            "failed_invocation": "",
+            "family": "pure-contract-unit",
+            "gate_skip": false,
+            "gate_skip_reason": "",
+            "path": "tests/fm-brief.test.sh",
+            "skipped_after_failure": 0,
+            "unexecuted_invocations": []
+          }
+        ],
+        "selection": "scripts;jobs=1",
+        "started_at": "2026-11-24T16:59:32Z",
+        "summary": {
+          "duration_ms": 1167,
+          "failed": 0,
+          "skipped_gate": 0,
+          "total": 1
+        }
+      },
+      "invocation_side_effects": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    "direct-2-errexit": {
+      "console": "FM_TEST_BEGIN 2026-11-24T16:59:36Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none\n1..4\nok - A\nFM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D\nFM_TEST_END 2026-11-24T16:59:37Z tests/fm-brief.test.sh exit=1 duration_ms=910 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D\nFM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=1170\nFM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=910 failed=1\nFM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=910\nfm-test-run: wrote timing artifact: {run-worktree}/.test-phase-9mp7lclz/fm-test-run-aborted.sl6P8a/direct-2-errexit.json\n",
+      "timing_json": {
+        "families": [
+          {
+            "count": 1,
+            "duration_ms": 910,
+            "failed": 1,
+            "name": "pure-contract-unit"
+          }
+        ],
+        "finished_at": "2026-11-24T16:59:37Z",
+        "run_id": "fm-test-run-1795539576221-13753",
+        "scripts": [
+          {
+            "duration_ms": 910,
+            "exit": 1,
+            "expected_gate_skip": "none",
+            "failed_invocation": "test_B",
+            "family": "pure-contract-unit",
+            "gate_skip": false,
+            "gate_skip_reason": "",
+            "path": "tests/fm-brief.test.sh",
+            "skipped_after_failure": 2,
+            "unexecuted_invocations": [
+              "test_C",
+              "test_D"
+            ]
+          }
+        ],
+        "selection": "scripts;jobs=2",
+        "started_at": "2026-11-24T16:59:36Z",
+        "summary": {
+          "duration_ms": 1170,
+          "failed": 1,
+          "skipped_gate": 0,
+          "total": 1
+        }
+      },
+      "invocation_side_effects": [
+        "A"
+      ]
+    },
+    "delegated-2-last": {
+      "console": "FM_TEST_BEGIN 2026-11-24T16:59:50Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none\n1..4\nok - A\nok - B\nok - C\nnot ok - D\nFM_TEST_ABORT failed=test_D skipped_after_failure=0 unexecuted=\nFM_TEST_END 2026-11-24T16:59:51Z tests/fm-brief.test.sh exit=1 duration_ms=798 gate_skip=false failed_invocation=test_D skipped_after_failure=0 unexecuted=\nFM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=1060\nFM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=798 failed=1\nFM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=798\nfm-test-run: wrote timing artifact: {run-worktree}/.test-phase-9mp7lclz/fm-test-run-aborted.sl6P8a/delegated-2-last.json\n",
+      "timing_json": {
+        "families": [
+          {
+            "count": 1,
+            "duration_ms": 798,
+            "failed": 1,
+            "name": "pure-contract-unit"
+          }
+        ],
+        "finished_at": "2026-11-24T16:59:51Z",
+        "run_id": "fm-test-run-1795539590149-30202",
+        "scripts": [
+          {
+            "duration_ms": 798,
+            "exit": 1,
+            "expected_gate_skip": "none",
+            "failed_invocation": "test_D",
+            "family": "pure-contract-unit",
+            "gate_skip": false,
+            "gate_skip_reason": "",
+            "path": "tests/fm-brief.test.sh",
+            "skipped_after_failure": 0,
+            "unexecuted_invocations": []
+          }
+        ],
+        "selection": "scripts;jobs=2",
+        "started_at": "2026-11-24T16:59:50Z",
+        "summary": {
+          "duration_ms": 1060,
+          "failed": 1,
+          "skipped_gate": 0,
+          "total": 1
+        }
+      },
+      "invocation_side_effects": [
+        "A",
+        "B",
+        "C"
+      ],
+      "status_observed_by_suite_cleanup": 1
+    },
+    "default-1-fail": {
+      "console": "FM_TEST_BEGIN 2026-11-24T16:59:55Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none\n1..4\nok - A\nnot ok - B\nFM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D\nFM_TEST_END 2026-11-24T16:59:56Z tests/fm-brief.test.sh exit=1 duration_ms=817 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D\nFM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=941\nFM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=817 failed=1\nFM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=817\nfm-test-run: wrote timing artifact: {run-worktree}/.test-phase-9mp7lclz/fm-test-run-aborted.sl6P8a/default-1-fail.json\n",
+      "timing_json": {
+        "families": [
+          {
+            "count": 1,
+            "duration_ms": 817,
+            "failed": 1,
+            "name": "pure-contract-unit"
+          }
+        ],
+        "finished_at": "2026-11-24T16:59:56Z",
+        "run_id": "fm-test-run-1795539595262-37467",
+        "scripts": [
+          {
+            "duration_ms": 817,
+            "exit": 1,
+            "expected_gate_skip": "none",
+            "failed_invocation": "test_B",
+            "family": "pure-contract-unit",
+            "gate_skip": false,
+            "gate_skip_reason": "",
+            "path": "tests/fm-brief.test.sh",
+            "skipped_after_failure": 2,
+            "unexecuted_invocations": [
+              "test_C",
+              "test_D"
+            ]
+          }
+        ],
+        "selection": "scripts;jobs=1",
+        "started_at": "2026-11-24T16:59:55Z",
+        "summary": {
+          "duration_ms": 941,
+          "failed": 1,
+          "skipped_gate": 0,
+          "total": 1
+        }
+      },
+      "invocation_side_effects": [
+        "A"
+      ]
+    },
+    "default-2-green": {
+      "console": "FM_TEST_BEGIN 2026-11-24T17:00:06Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none\n1..4\nok - A\nok - B\nok - C\nok - D\nFM_TEST_COMPLETE\nFM_TEST_END 2026-11-24T17:00:07Z tests/fm-brief.test.sh exit=0 duration_ms=819 gate_skip=false\nFM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=1075\nFM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=819 failed=0\nFM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=819\nfm-test-run: wrote timing artifact: {run-worktree}/.test-phase-9mp7lclz/fm-test-run-aborted.sl6P8a/default-2-green.json\n",
+      "timing_json": {
+        "families": [
+          {
+            "count": 1,
+            "duration_ms": 819,
+            "failed": 0,
+            "name": "pure-contract-unit"
+          }
+        ],
+        "finished_at": "2026-11-24T17:00:07Z",
+        "run_id": "fm-test-run-1795539606594-55077",
+        "scripts": [
+          {
+            "duration_ms": 819,
+            "exit": 0,
+            "expected_gate_skip": "none",
+            "failed_invocation": "",
+            "family": "pure-contract-unit",
+            "gate_skip": false,
+            "gate_skip_reason": "",
+            "path": "tests/fm-brief.test.sh",
+            "skipped_after_failure": 0,
+            "unexecuted_invocations": []
+          }
+        ],
+        "selection": "scripts;jobs=2",
+        "started_at": "2026-11-24T17:00:06Z",
+        "summary": {
+          "duration_ms": 1075,
+          "failed": 0,
+          "skipped_gate": 0,
+          "total": 1
+        }
+      },
+      "invocation_side_effects": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    "nested": {
+      "console": "FM_TEST_BEGIN 2026-11-24T17:00:09Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none\n1..2\nnot ok - nested fixture failed\nFM_TEST_ABORT failed=test_nested_failure skipped_after_failure=1 unexecuted=test_nested_pending\nFM_TEST_END 2026-11-24T17:00:09Z tests/fm-brief.test.sh exit=7 duration_ms=602 gate_skip=false\nFM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=766\nFM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=602 failed=1\nFM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=602\nfm-test-run: wrote timing artifact: {run-worktree}/.test-phase-9mp7lclz/fm-test-run-nested-abort.mVg4Ak/timing.json\n",
+      "timing_json": {
+        "families": [
+          {
+            "count": 1,
+            "duration_ms": 602,
+            "failed": 1,
+            "name": "pure-contract-unit"
+          }
+        ],
+        "finished_at": "2026-11-24T17:00:10Z",
+        "run_id": "fm-test-run-1795539609286-59681",
+        "scripts": [
+          {
+            "duration_ms": 602,
+            "exit": 7,
+            "expected_gate_skip": "none",
+            "failed_invocation": "",
+            "family": "pure-contract-unit",
+            "gate_skip": false,
+            "gate_skip_reason": "",
+            "path": "tests/fm-brief.test.sh",
+            "skipped_after_failure": 0,
+            "unexecuted_invocations": []
+          }
+        ],
+        "selection": "scripts;jobs=1",
+        "started_at": "2026-11-24T17:00:09Z",
+        "summary": {
+          "duration_ms": 766,
+          "failed": 1,
+          "skipped_gate": 0,
+          "total": 1
+        }
+      }
+    }
+  }
+}
