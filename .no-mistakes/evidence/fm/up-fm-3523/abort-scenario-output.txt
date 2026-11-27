@@ -1,0 +1,837 @@
+Product output from the synthetic suites in the focused macOS run.
+
+[default-1-cleanup]
+FM_TEST_BEGIN 2026-11-27T12:45:48Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:49Z tests/fm-brief.test.sh exit=0 duration_ms=358 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=419
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=358 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=358
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/default-1-cleanup.json
+Timing JSON script record: {"duration_ms": 358, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[default-1-errexit]
+FM_TEST_BEGIN 2026-11-27T12:45:47Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:47Z tests/fm-brief.test.sh exit=1 duration_ms=341 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=398
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=341 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=341
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/default-1-errexit.json
+Timing JSON script record: {"duration_ms": 341, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[default-1-exit]
+FM_TEST_BEGIN 2026-11-27T12:45:46Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:46Z tests/fm-brief.test.sh exit=7 duration_ms=339 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=397
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=339 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=339
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/default-1-exit.json
+Timing JSON script record: {"duration_ms": 339, "exit": 7, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[default-1-fail]
+FM_TEST_BEGIN 2026-11-27T12:45:46Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+not ok - B
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:47Z tests/fm-brief.test.sh exit=1 duration_ms=330 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=389
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=330 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=330
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/default-1-fail.json
+Timing JSON script record: {"duration_ms": 330, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[default-1-green]
+FM_TEST_BEGIN 2026-11-27T12:45:48Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:48Z tests/fm-brief.test.sh exit=0 duration_ms=346 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=405
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=346 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=346
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/default-1-green.json
+Timing JSON script record: {"duration_ms": 346, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[default-1-last]
+FM_TEST_BEGIN 2026-11-27T12:45:47Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+not ok - D
+FM_TEST_ABORT failed=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_END 2026-11-27T12:45:48Z tests/fm-brief.test.sh exit=1 duration_ms=327 gate_skip=false failed_invocation=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=388
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=327 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=327
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/default-1-last.json
+Timing JSON script record: {"duration_ms": 327, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_D", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[default-2-cleanup]
+FM_TEST_BEGIN 2026-11-27T12:45:51Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:52Z tests/fm-brief.test.sh exit=0 duration_ms=323 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=456
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=323 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=323
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/default-2-cleanup.json
+Timing JSON script record: {"duration_ms": 323, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[default-2-errexit]
+FM_TEST_BEGIN 2026-11-27T12:45:50Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:50Z tests/fm-brief.test.sh exit=1 duration_ms=304 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=480
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=304 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=304
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/default-2-errexit.json
+Timing JSON script record: {"duration_ms": 304, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[default-2-exit]
+FM_TEST_BEGIN 2026-11-27T12:45:49Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:49Z tests/fm-brief.test.sh exit=7 duration_ms=291 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=399
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=291 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=291
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/default-2-exit.json
+Timing JSON script record: {"duration_ms": 291, "exit": 7, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[default-2-fail]
+FM_TEST_BEGIN 2026-11-27T12:45:49Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+not ok - B
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:50Z tests/fm-brief.test.sh exit=1 duration_ms=303 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=425
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=303 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=303
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/default-2-fail.json
+Timing JSON script record: {"duration_ms": 303, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[default-2-green]
+FM_TEST_BEGIN 2026-11-27T12:45:51Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:51Z tests/fm-brief.test.sh exit=0 duration_ms=298 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=430
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=298 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=298
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/default-2-green.json
+Timing JSON script record: {"duration_ms": 298, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[default-2-last]
+FM_TEST_BEGIN 2026-11-27T12:45:50Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+not ok - D
+FM_TEST_ABORT failed=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_END 2026-11-27T12:45:51Z tests/fm-brief.test.sh exit=1 duration_ms=314 gate_skip=false failed_invocation=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=412
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=314 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=314
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/default-2-last.json
+Timing JSON script record: {"duration_ms": 314, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_D", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[delegated-1-cleanup]
+FM_TEST_BEGIN 2026-11-27T12:45:42Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:42Z tests/fm-brief.test.sh exit=0 duration_ms=339 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=398
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=339 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=339
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/delegated-1-cleanup.json
+Timing JSON script record: {"duration_ms": 339, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 0
+
+[delegated-1-errexit]
+FM_TEST_BEGIN 2026-11-27T12:45:41Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:41Z tests/fm-brief.test.sh exit=1 duration_ms=346 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=405
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=346 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=346
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/delegated-1-errexit.json
+Timing JSON script record: {"duration_ms": 346, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 1
+
+[delegated-1-exit]
+FM_TEST_BEGIN 2026-11-27T12:45:40Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:40Z tests/fm-brief.test.sh exit=7 duration_ms=338 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=398
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=338 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=338
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/delegated-1-exit.json
+Timing JSON script record: {"duration_ms": 338, "exit": 7, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 7
+
+[delegated-1-fail]
+FM_TEST_BEGIN 2026-11-27T12:45:40Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+not ok - B
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:40Z tests/fm-brief.test.sh exit=1 duration_ms=345 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=406
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=345 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=345
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/delegated-1-fail.json
+Timing JSON script record: {"duration_ms": 345, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 1
+
+[delegated-1-green]
+FM_TEST_BEGIN 2026-11-27T12:45:42Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:42Z tests/fm-brief.test.sh exit=0 duration_ms=347 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=405
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=347 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=347
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/delegated-1-green.json
+Timing JSON script record: {"duration_ms": 347, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 0
+
+[delegated-1-last]
+FM_TEST_BEGIN 2026-11-27T12:45:41Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+not ok - D
+FM_TEST_ABORT failed=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_END 2026-11-27T12:45:41Z tests/fm-brief.test.sh exit=1 duration_ms=324 gate_skip=false failed_invocation=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=389
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=324 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=324
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/delegated-1-last.json
+Timing JSON script record: {"duration_ms": 324, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_D", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 1
+
+[delegated-2-cleanup]
+FM_TEST_BEGIN 2026-11-27T12:45:45Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:46Z tests/fm-brief.test.sh exit=0 duration_ms=316 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=468
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=316 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=316
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/delegated-2-cleanup.json
+Timing JSON script record: {"duration_ms": 316, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 0
+
+[delegated-2-errexit]
+FM_TEST_BEGIN 2026-11-27T12:45:44Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:44Z tests/fm-brief.test.sh exit=1 duration_ms=320 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=431
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=320 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=320
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/delegated-2-errexit.json
+Timing JSON script record: {"duration_ms": 320, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 1
+
+[delegated-2-exit]
+FM_TEST_BEGIN 2026-11-27T12:45:43Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:43Z tests/fm-brief.test.sh exit=7 duration_ms=316 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=444
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=316 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=316
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/delegated-2-exit.json
+Timing JSON script record: {"duration_ms": 316, "exit": 7, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 7
+
+[delegated-2-fail]
+FM_TEST_BEGIN 2026-11-27T12:45:43Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+not ok - B
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:44Z tests/fm-brief.test.sh exit=1 duration_ms=320 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=478
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=320 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=320
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/delegated-2-fail.json
+Timing JSON script record: {"duration_ms": 320, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 1
+
+[delegated-2-green]
+FM_TEST_BEGIN 2026-11-27T12:45:45Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:45Z tests/fm-brief.test.sh exit=0 duration_ms=311 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=418
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=311 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=311
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/delegated-2-green.json
+Timing JSON script record: {"duration_ms": 311, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 0
+
+[delegated-2-last]
+FM_TEST_BEGIN 2026-11-27T12:45:44Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+not ok - D
+FM_TEST_ABORT failed=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_END 2026-11-27T12:45:45Z tests/fm-brief.test.sh exit=1 duration_ms=312 gate_skip=false failed_invocation=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=418
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=312 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=312
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/delegated-2-last.json
+Timing JSON script record: {"duration_ms": 312, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_D", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 1
+
+[direct-1-cleanup]
+FM_TEST_BEGIN 2026-11-27T12:45:36Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:36Z tests/fm-brief.test.sh exit=0 duration_ms=333 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=388
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=333 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=333
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/direct-1-cleanup.json
+Timing JSON script record: {"duration_ms": 333, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[direct-1-errexit]
+FM_TEST_BEGIN 2026-11-27T12:45:35Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:35Z tests/fm-brief.test.sh exit=1 duration_ms=327 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=381
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=327 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=327
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/direct-1-errexit.json
+Timing JSON script record: {"duration_ms": 327, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[direct-1-exit]
+FM_TEST_BEGIN 2026-11-27T12:45:34Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:34Z tests/fm-brief.test.sh exit=7 duration_ms=320 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=375
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=320 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=320
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/direct-1-exit.json
+Timing JSON script record: {"duration_ms": 320, "exit": 7, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[direct-1-fail]
+FM_TEST_BEGIN 2026-11-27T12:45:34Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+not ok - B
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:34Z tests/fm-brief.test.sh exit=1 duration_ms=327 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=380
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=327 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=327
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/direct-1-fail.json
+Timing JSON script record: {"duration_ms": 327, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[direct-1-green]
+FM_TEST_BEGIN 2026-11-27T12:45:35Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:36Z tests/fm-brief.test.sh exit=0 duration_ms=333 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=390
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=333 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=333
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/direct-1-green.json
+Timing JSON script record: {"duration_ms": 333, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[direct-1-last]
+FM_TEST_BEGIN 2026-11-27T12:45:35Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+not ok - D
+FM_TEST_ABORT failed=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_END 2026-11-27T12:45:35Z tests/fm-brief.test.sh exit=1 duration_ms=324 gate_skip=false failed_invocation=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=378
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=324 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=324
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/direct-1-last.json
+Timing JSON script record: {"duration_ms": 324, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_D", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[direct-2-cleanup]
+FM_TEST_BEGIN 2026-11-27T12:45:39Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:39Z tests/fm-brief.test.sh exit=0 duration_ms=310 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=458
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=310 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=310
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/direct-2-cleanup.json
+Timing JSON script record: {"duration_ms": 310, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[direct-2-errexit]
+FM_TEST_BEGIN 2026-11-27T12:45:38Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:38Z tests/fm-brief.test.sh exit=1 duration_ms=290 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=411
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=290 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=290
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/direct-2-errexit.json
+Timing JSON script record: {"duration_ms": 290, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[direct-2-exit]
+FM_TEST_BEGIN 2026-11-27T12:45:36Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:37Z tests/fm-brief.test.sh exit=7 duration_ms=279 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=443
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=279 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=279
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/direct-2-exit.json
+Timing JSON script record: {"duration_ms": 279, "exit": 7, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[direct-2-fail]
+FM_TEST_BEGIN 2026-11-27T12:45:37Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+not ok - B
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:37Z tests/fm-brief.test.sh exit=1 duration_ms=305 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=431
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=305 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=305
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/direct-2-fail.json
+Timing JSON script record: {"duration_ms": 305, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[direct-2-green]
+FM_TEST_BEGIN 2026-11-27T12:45:39Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:39Z tests/fm-brief.test.sh exit=0 duration_ms=291 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=440
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=291 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=291
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/direct-2-green.json
+Timing JSON script record: {"duration_ms": 291, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[direct-2-last]
+FM_TEST_BEGIN 2026-11-27T12:45:38Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+not ok - D
+FM_TEST_ABORT failed=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_END 2026-11-27T12:45:38Z tests/fm-brief.test.sh exit=1 duration_ms=313 gate_skip=false failed_invocation=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=426
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=313 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=313
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/direct-2-last.json
+Timing JSON script record: {"duration_ms": 313, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_D", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C
+Cleanup root removed: True
+Custom cleanup ran: False
+
+[exiting-1-cleanup]
+FM_TEST_BEGIN 2026-11-27T12:45:30Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:30Z tests/fm-brief.test.sh exit=0 duration_ms=358 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=419
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=358 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=358
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/exiting-1-cleanup.json
+Timing JSON script record: {"duration_ms": 358, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 0
+
+[exiting-1-errexit]
+FM_TEST_BEGIN 2026-11-27T12:45:28Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:29Z tests/fm-brief.test.sh exit=1 duration_ms=370 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=429
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=370 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=370
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/exiting-1-errexit.json
+Timing JSON script record: {"duration_ms": 370, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 1
+
+[exiting-1-exit]
+FM_TEST_BEGIN 2026-11-27T12:45:27Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:28Z tests/fm-brief.test.sh exit=7 duration_ms=340 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=398
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=340 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=340
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/exiting-1-exit.json
+Timing JSON script record: {"duration_ms": 340, "exit": 7, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 7
+
+[exiting-1-fail]
+FM_TEST_BEGIN 2026-11-27T12:45:28Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+not ok - B
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:28Z tests/fm-brief.test.sh exit=1 duration_ms=323 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=382
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=323 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=323
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/exiting-1-fail.json
+Timing JSON script record: {"duration_ms": 323, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 1
+
+[exiting-1-green]
+FM_TEST_BEGIN 2026-11-27T12:45:29Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:30Z tests/fm-brief.test.sh exit=0 duration_ms=341 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=401
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=341 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=341
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/exiting-1-green.json
+Timing JSON script record: {"duration_ms": 341, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 0
+
+[exiting-1-last]
+FM_TEST_BEGIN 2026-11-27T12:45:29Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+not ok - D
+FM_TEST_ABORT failed=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_END 2026-11-27T12:45:29Z tests/fm-brief.test.sh exit=1 duration_ms=346 gate_skip=false failed_invocation=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=403
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=346 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=346
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/exiting-1-last.json
+Timing JSON script record: {"duration_ms": 346, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_D", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 1
+
+[exiting-2-cleanup]
+FM_TEST_BEGIN 2026-11-27T12:45:33Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:33Z tests/fm-brief.test.sh exit=0 duration_ms=345 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=504
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=345 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=345
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/exiting-2-cleanup.json
+Timing JSON script record: {"duration_ms": 345, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 0
+
+[exiting-2-errexit]
+FM_TEST_BEGIN 2026-11-27T12:45:31Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:32Z tests/fm-brief.test.sh exit=1 duration_ms=312 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=497
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=312 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=312
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/exiting-2-errexit.json
+Timing JSON script record: {"duration_ms": 312, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 1
+
+[exiting-2-exit]
+FM_TEST_BEGIN 2026-11-27T12:45:30Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:31Z tests/fm-brief.test.sh exit=7 duration_ms=293 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=473
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=293 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=293
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/exiting-2-exit.json
+Timing JSON script record: {"duration_ms": 293, "exit": 7, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 7
+
+[exiting-2-fail]
+FM_TEST_BEGIN 2026-11-27T12:45:31Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+not ok - B
+FM_TEST_ABORT failed=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_END 2026-11-27T12:45:31Z tests/fm-brief.test.sh exit=1 duration_ms=314 gate_skip=false failed_invocation=test_B skipped_after_failure=2 unexecuted=test_C,test_D
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=461
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=314 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=314
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/exiting-2-fail.json
+Timing JSON script record: {"duration_ms": 314, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_B", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 2, "unexecuted_invocations": ["test_C", "test_D"]}
+Invocations with execution markers: A
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 1
+
+[exiting-2-green]
+FM_TEST_BEGIN 2026-11-27T12:45:33Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+ok - D
+FM_TEST_COMPLETE
+FM_TEST_END 2026-11-27T12:45:33Z tests/fm-brief.test.sh exit=0 duration_ms=305 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=406
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=305 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=305
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/exiting-2-green.json
+Timing JSON script record: {"duration_ms": 305, "exit": 0, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C D
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 0
+
+[exiting-2-last]
+FM_TEST_BEGIN 2026-11-27T12:45:32Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..4
+ok - A
+ok - B
+ok - C
+not ok - D
+FM_TEST_ABORT failed=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_END 2026-11-27T12:45:32Z tests/fm-brief.test.sh exit=1 duration_ms=289 gate_skip=false failed_invocation=test_D skipped_after_failure=0 unexecuted=
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=429
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=289 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=289
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-aborted.TQ3GCT/exiting-2-last.json
+Timing JSON script record: {"duration_ms": 289, "exit": 1, "expected_gate_skip": "none", "failed_invocation": "test_D", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}
+Invocations with execution markers: A B C
+Cleanup root removed: True
+Custom cleanup ran: True
+Status received by custom cleanup: 1
+
+[unregistered parent reprints a nested abort and exits 7]
+FM_TEST_BEGIN 2026-11-27T12:45:52Z tests/fm-brief.test.sh family=pure-contract-unit expected_gate_skip=none
+1..2
+not ok - nested fixture failed
+FM_TEST_ABORT failed=test_nested_failure skipped_after_failure=1 unexecuted=test_nested_pending
+FM_TEST_END 2026-11-27T12:45:52Z tests/fm-brief.test.sh exit=7 duration_ms=269 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=1 skipped_gate=0 duration_ms=330
+FM_TEST_SUMMARY_FAMILY family=pure-contract-unit count=1 duration_ms=269 failed=1
+FM_TEST_SLOWEST rank=1 script=tests/fm-brief.test.sh duration_ms=269
+fm-test-run: wrote timing artifact: {run-worktree}/.fm-focused-mac-01M8EDW6XNCCDSKNCNFVZZW19B/fm-test-run-nested-abort.z14stB/timing.json
+Timing JSON script record: {"duration_ms": 269, "exit": 7, "expected_gate_skip": "none", "failed_invocation": "", "family": "pure-contract-unit", "gate_skip": false, "gate_skip_reason": "", "path": "tests/fm-brief.test.sh", "skipped_after_failure": 0, "unexecuted_invocations": []}

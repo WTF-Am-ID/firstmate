@@ -1,0 +1,46 @@
+{
+  "families": [
+    {
+      "count": 2,
+      "duration_ms": 674754,
+      "failed": 0,
+      "name": "pure-contract-unit"
+    }
+  ],
+  "finished_at": "2026-11-27T12:56:42Z",
+  "run_id": "fm-test-run-1795783527452-91822",
+  "scripts": [
+    {
+      "duration_ms": 673875,
+      "exit": 0,
+      "expected_gate_skip": "none",
+      "failed_invocation": "",
+      "family": "pure-contract-unit",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-test-run.test.sh",
+      "skipped_after_failure": 0,
+      "unexecuted_invocations": []
+    },
+    {
+      "duration_ms": 879,
+      "exit": 0,
+      "expected_gate_skip": "none",
+      "failed_invocation": "",
+      "family": "pure-contract-unit",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-test-tap-verify.test.sh",
+      "skipped_after_failure": 0,
+      "unexecuted_invocations": []
+    }
+  ],
+  "selection": "scripts;jobs=1",
+  "started_at": "2026-11-27T12:45:27Z",
+  "summary": {
+    "duration_ms": 674846,
+    "failed": 0,
+    "skipped_gate": 0,
+    "total": 2
+  }
+}
